@@ -36,7 +36,7 @@ except DataSchemaError as exc:
 with st.sidebar:
     team_id = team_selector(analysis)
     st.caption(
-        f"Données jusqu'à la J{analysis.meta['derniere_journee']} · "
+        f"Données jusqu'à la J{analysis.meta['derniere_journee']}, "
         f"{analysis.meta['matchs_joues']} matchs joués sur {len(analysis.league.fixtures)}"
     )
 

@@ -1,3 +1,5 @@
+from html import escape
+
 import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
@@ -40,7 +42,7 @@ def _shrink_chart(ps, team_id: int) -> go.Figure:
             ),
             customdata=np.stack([d["joueur"], d["team_name"], d["n_notes"], d["note_prior"]], axis=1),
             showlegend=False,
-            hovertemplate="<b>%{customdata[0]}</b> · %{customdata[1]}<br>Moyenne MPG : %{x:.2f} sur %{customdata[2]} matchs"
+            hovertemplate="<b>%{customdata[0]}</b>, %{customdata[1]}<br>Moyenne MPG : %{x:.2f} sur %{customdata[2]} matchs"
             "<br>Moyenne PL (a priori) : %{customdata[3]:.2f}<br>Note rétrécie : %{y:.2f}<extra></extra>",
         )
     )
@@ -53,6 +55,20 @@ def _shrink_chart(ps, team_id: int) -> go.Figure:
     fig.update_xaxes(range=[lo, hi])
     fig.update_yaxes(range=[lo + 1, hi - 1])
     return fig
+
+
+def _top5_panel(ps, team_id: int) -> str:
+    blocks = []
+    for g in "GDMA":
+        top = ps[(ps["poste_groupe"] == g) & (ps["n_notes"] >= 2)].sort_values("note_retrecie", ascending=False).head(5)
+        rows = "".join(
+            f'<div class="p{" me" if r.team_id == team_id else ""}"><div style="min-width:0">'
+            f'<div class="who">{escape(r.joueur)}</div><div class="club">{escape(r.team_name)}</div></div>'
+            f'<div class="note">{r.note_retrecie:.2f}</div></div>'
+            for r in top.itertuples()
+        )
+        blocks.append(f'<div><div class="head">{LINE_LABELS[g]}</div>{rows}</div>')
+    return f'<div class="top5">{"".join(blocks)}</div>'
 
 
 def render(a: Analysis, team_id: int) -> None:
@@ -75,25 +91,25 @@ def render(a: Analysis, team_id: int) -> None:
                 "label": "Meilleure note rétrécie",
                 "value": best["joueur"],
                 "small": True,
-                "sub": f"{best['note_retrecie']:.2f} · {best['team_name']}",
+                "sub": f"{best['note_retrecie']:.2f}, {best['team_name']}",
             },
             {
                 "label": "Meilleur buteur de la ligue",
                 "value": scorer["joueur"],
                 "small": True,
-                "sub": f"{int(scorer['buts_reels'])} réels + {int(scorer['buts_mpg'])} MPG · {scorer['team_name']}",
+                "sub": f"{int(scorer['buts_reels'])} réels + {int(scorer['buts_mpg'])} MPG, {scorer['team_name']}",
             },
             {
                 "label": "Meilleur passeur PL",
                 "value": passer["joueur"],
                 "small": True,
-                "sub": f"{passer['passes_decisives_saison']:.0f} passes décisives · {passer['team_name']}",
+                "sub": f"{passer['passes_decisives_saison']:.0f} passes décisives, {passer['team_name']}",
             },
             {
                 "label": "Homme du match le plus souvent",
                 "value": mvp["joueur"],
                 "small": True,
-                "sub": f"{int(mvp['mvp_match'])} fois n°1 · {int(mvp['top3_match'])} fois dans le top 3",
+                "sub": f"{int(mvp['mvp_match'])} fois n°1, {int(mvp['top3_match'])} fois dans le top 3",
             },
         ]
     )
@@ -189,20 +205,7 @@ def render(a: Analysis, team_id: int) -> None:
     how(["shrinkage", "production_pl"], meta)
 
     section("Top 5 par poste", "Note rétrécie, au moins 2 matchs notés.")
-    cols = st.columns(4, gap="small")
-    for col, g in zip(cols, "GDMA"):
-        top = ps[(ps["poste_groupe"] == g) & (ps["n_notes"] >= 2)].sort_values("note_retrecie", ascending=False).head(5)
-        with col:
-            st.markdown(f"**{LINE_LABELS[g]}**")
-            st.dataframe(
-                top[["joueur", "team_name", "note_retrecie"]],
-                hide_index=True,
-                column_config={
-                    "joueur": "Joueur",
-                    "team_name": "Équipe",
-                    "note_retrecie": st.column_config.NumberColumn("Note", format="%.2f"),
-                },
-            )
+    st.html(_top5_panel(ps, team_id))
 
     left, right = st.columns([1.3, 1], gap="medium")
     with left:

@@ -3,7 +3,7 @@ from html import escape
 import streamlit as st
 
 from app import charts
-from app.components import fmt_m, fmt_pct, form_badges, hero, how, kpi_row, section
+from app.components import fmt_m, fmt_pct, form_badges, hero, how, kpi_row, rank_tone, section, stat_grid, table_height
 from mpg.analysis import Analysis, team_card
 
 
@@ -34,78 +34,70 @@ def render(a: Analysis, team_id: int) -> None:
     team = a.league.teams.set_index("team_id").loc[team_id]
     stand = a.standings.set_index("team_id").loc[team_id]
     hero(
-        f"Fiche équipe · coach {team['coach']}",
+        f"Fiche équipe, coach {team['coach']}",
         team["team_name"],
-        f"Président {escape(str(team['president']))} · stade « {escape(str(team['stade']))} » · "
-        f"forme {form_badges(stand['forme'])}",
+        f"Président {escape(str(team['president']))}, stade « {escape(str(team['stade']))} ». "
+        f"Forme {form_badges(stand['forme'])}",
     )
 
     kpi_row(
         [
-            {"label": "Classement", "value": f"{card['rang']}e", "sub": f"{card['pts']} pts · série {card['serie']}"},
+            {
+                "label": "Classement",
+                "value": f"{card['rang']}e",
+                "sub": f"{card['pts']} pts, série {card['serie']}",
+                "me": True,
+            },
             {
                 "label": "Budget payé",
                 "value": fmt_m(card["budget_paye"]),
-                "sub": f"rang mercato {card['rang_mercato']}e",
+                "sub": f"valeur actuelle {fmt_m(card['valeur_actuelle'])} ({card['ratio_valeur_prix']:.0%}), "
+                f"{fmt_pct(card['part_top3'])} sur les 3 plus gros achats",
             },
-            {
-                "label": "Valeur actuelle",
-                "value": fmt_m(card["valeur_actuelle"]),
-                "sub": f"{card['ratio_valeur_prix']:.0%} du prix payé (somme des cotes)",
-            },
-            {"label": "Part des 3 plus gros achats", "value": fmt_pct(card["part_top3"]), "sub": "du budget dépensé"},
             {
                 "label": "Niveau de l'effectif",
                 "value": f"{card['note_reelle_mediane']:.1f}",
-                "sub": f"note PL médiane · {card['note_mpg_moy']:.2f} en MPG",
+                "sub": f"note PL médiane, {card['note_mpg_moy']:.2f} en MPG",
             },
             {
                 "label": "Fiabilité",
                 "value": fmt_pct(card["disponibilite"]),
-                "sub": f"taux de jeu PL pondéré · {card['indisponibles']} indisponible(s)",
+                "sub": f"taux de jeu PL pondéré, {card['indisponibles']} indisponible(s)",
             },
         ]
     )
 
-    section("Profil", "Rang de l'équipe dans chaque dimension (1 = meilleur de la ligue).")
-    prof = _profile(a, team_id)
-    n = len(a.league.teams)
-    cols = [c for row in (prof[:5], prof[5:]) for c in st.columns(5)[: len(row)]]
-    for col, (label, r, sub) in zip(cols, prof):
-        tone = "#0CA30C" if r <= 3 else "#D03B3B" if r > n - 3 else "#94A3B8"
-        with col:
-            st.html(
-                f'<div class="kpi" style="min-height:96px"><div class="label">{label}</div>'
-                f'<div class="value" style="color:{tone}">{r}<span style="font-size:.9rem;color:#7C8AA0">/{n}</span>'
-                f'</div><div class="sub">{sub}</div></div>'
-            )
-    st.caption("Vert : top 3 · rouge : 3 derniers. Le rang est toujours écrit, la couleur n'est qu'un repère.")
+    section(
+        "Profil",
+        "Rang de l'équipe dans chaque dimension, 1 = meilleur de la ligue. Vert : top 3, rouge : 3 derniers.",
+    )
+    st.html(_profile_panel(_profile(a, team_id), len(a.league.teams)))
 
     _bonus_section(a, team_id, meta)
 
+    section("Match par match")
+    charts.show(charts.gw_points(a.team_match, team_id))
+    lines = a.lines.set_index("team_id").loc[team_id]
+    st.caption(
+        "Force par ligne (note brute) : "
+        + ", ".join(f"{lab} {lines[g]:.2f}" for g, lab in [("G", "G"), ("D", "D"), ("M", "M"), ("A", "A")])
+    )
+
     roster = a.player_value[a.player_value["team_id"] == team_id]
-    left, right = st.columns([1, 1.1], gap="medium")
-    with left:
-        charts.show(
-            charts.paired_bars(
-                roster,
-                "joueur",
-                "enchere",
-                "cote",
-                "Prix payé",
-                "Cote actuelle",
-                "Prix payé et cote actuelle, joueur par joueur",
-                "M€",
-            )
+    section("Prix payé et cote actuelle")
+    charts.show(
+        charts.paired_bars(
+            roster,
+            "joueur",
+            "enchere",
+            "cote",
+            "Prix payé",
+            "Cote actuelle",
+            "Prix payé et cote actuelle, joueur par joueur",
+            "M€",
         )
-        how("surpaiement", meta)
-    with right:
-        charts.show(charts.gw_points(a.team_match, team_id))
-        lines = a.lines.set_index("team_id").loc[team_id]
-        st.caption(
-            "Force par ligne (note brute) : "
-            + " · ".join(f"{lab} {lines[g]:.2f}" for g, lab in [("G", "G"), ("D", "D"), ("M", "M"), ("A", "A")])
-        )
+    )
+    how("surpaiement", meta)
 
     section("Effectif")
     st.dataframe(
@@ -156,28 +148,42 @@ def render(a: Analysis, team_id: int) -> None:
             "choisi_titulaire": st.column_config.NumberColumn("Titularisé (MPG)"),
             "residu_valeur": st.column_config.NumberColumn("Écart au prix", format="%+.2f"),
         },
-        height=38 * (len(roster) + 1) + 2,
+        height=table_height(len(roster)),
     )
     how(["residu_valeur", "fiabilite"], meta)
 
 
-def _bonus_tile(r) -> str:
+def _bonus_cell(r) -> str:
     total = max(r.dotation, r.utilises)
     dots = "".join(f'<span class="dot {"on" if i < r.restants else "off"}"></span>' for i in range(total))
     if r.utilises:
         detail = f"Utilisé : {escape(r.journees)}"
         if r.cibles and r.cibles != "—":
-            detail += f" · {escape(r.cibles)}"
+            detail += f", {escape(r.cibles)}"
     else:
         detail = "Pas encore utilisé"
-    warn = '<div class="sub" style="color:#FAB219">Absent de la dotation</div>' if r.hors_dotation else ""
+    warn = '<div class="sub warn">Absent de la dotation</div>' if r.hors_dotation else ""
     return (
-        f'<div class="kpi bonus{" empty" if r.restants <= 0 else ""}" role="group" '
+        f'<div class="stat{" empty" if r.restants <= 0 else ""}" role="group" '
         f'aria-label="{escape(r.bonus)} : {r.restants} restant(s) sur {r.dotation}">'
         f'<div class="label">{escape(r.bonus)}</div>'
         f'<div class="value">{max(r.restants, 0)}<span class="of">/{r.dotation}</span></div>'
         f'<div class="dots" aria-hidden="true">{dots}</div><div class="sub">{detail}</div>{warn}</div>'
     )
+
+
+def _profile_panel(prof: list[tuple[str, int, str]], n: int) -> str:
+    rungs = []
+    for label, r, hint in prof:
+        tone = rank_tone(r, n)
+        track = "".join(f'<i style="background:{tone}"></i>' if i == r else "<i></i>" for i in range(1, n + 1))
+        rungs.append(
+            f'<div class="rung" role="group" aria-label="{escape(label)} : {r}e sur {n}">'
+            f'<div><div class="name">{escape(label)}</div><div class="hint">{escape(hint)}</div></div>'
+            f'<div class="rank" style="color:{tone}">{r}<span>/{n}</span></div>'
+            f'<div class="track" aria-hidden="true">{track}</div></div>'
+        )
+    return f'<div class="panel"><div class="ladder">{"".join(rungs)}</div></div>'
 
 
 def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
@@ -196,7 +202,7 @@ def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
     league_left = br.groupby("team_id")["restants"].apply(lambda s: s.clip(lower=0).sum())
     rank = int(league_left.rank(ascending=False, method="min").loc[team_id])
     st.caption(
-        f"{left_total} bonus restants sur {total} pour {remaining_gw} journées à jouer · "
+        f"{left_total} bonus restants sur {total} pour {remaining_gw} journées à jouer, "
         f"{rank}e réserve de la ligue (médiane : {league_left.median():.0f}). Capitaine et bonus défensifs ne sont pas "
         "comptés : ils ne s'épuisent pas."
     )
@@ -205,12 +211,7 @@ def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
             "Certains bonus ont été utilisés plus souvent que la dotation ne le permet : vérifiez "
             "`data/bonus_stock.csv`."
         )
-    tiles = list(mine.itertuples())
-    for start in range(0, len(tiles), 4):
-        cols = st.columns(4)
-        for col, r in zip(cols, tiles[start : start + 4]):
-            with col:
-                st.html(_bonus_tile(r))
+    st.html(stat_grid([_bonus_cell(r) for r in mine.itertuples()], per_row=4))
 
     with st.expander("Bonus restants de toutes les équipes"):
         pivot = br.pivot(index="team_id", columns="bonus", values="restants")

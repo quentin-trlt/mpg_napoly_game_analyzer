@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import callout, fmt_pct, hero, how, kpi_row, prob_bar, section
+from app.components import callout, fixture_grid, fmt_pct, hero, how, kpi_row, prob_bar, section, table_height
 from app.state import get_forecast
 from mpg.analysis import Analysis
 from mpg.forecast.evaluation import calibration, rps_by_gameweek, scored_summary, season_moves
@@ -28,14 +28,14 @@ def _match_card(r: pd.Series, team_id: int) -> str:
         exact = f"{int(r['home_goals'])}-{int(r['away_goals'])}"
         exact_note = " · score exact trouvé" if exact == r["score_probable"] else ""
         result = (
-            f'<div class="row" style="margin-top:10px"><div class="score">{exact}</div>{badge}</div>'
+            f'<div class="row" style="margin-top:12px"><div class="score">{exact}</div>{badge}</div>'
             f'<div class="meta" style="margin-top:6px">On donnait {r["p_issue_reelle"]:.0%} à la '
             f"{ISSUES[int(r['issue'])]}. Score prédit : {escape(str(r['score_probable']))}{exact_note}.</div>"
         )
     return (
         f'<div class="fixture{" me" if me else ""}"><div class="team">{escape(r["home_team"])}</div>'
-        f'<div class="meta" style="margin:2px 0">contre</div><div class="team">{escape(r["away_team"])}</div>'
-        f"{prob_bar(r['p_dom'], r['p_nul'], r['p_ext'])}{result}</div>"
+        f'<div class="vs">contre</div><div class="team">{escape(r["away_team"])}</div>'
+        f'<div class="foot">{prob_bar(r["p_dom"], r["p_nul"], r["p_ext"])}{result}</div></div>'
     )
 
 
@@ -51,9 +51,7 @@ def _gameweek_review(fm: pd.DataFrame, team_id: int, meta: dict) -> None:
             "Ils seront notés automatiquement dès que les fichiers de <code>data/</code> contiendront cette journée."
         )
         day = ens[ens["gw"] == gw]
-        for col, (_, r) in zip(st.columns(len(day)), day.iterrows()):
-            with col:
-                st.html(_match_card(r, team_id))
+        fixture_grid([_match_card(r, team_id) for _, r in day.iterrows()], min(len(day), 5))
         return
 
     gw = st.selectbox("Journée", options=scored_gws[::-1], format_func=lambda g: f"Journée {g}", key="suivi_gw")
@@ -77,7 +75,7 @@ def _gameweek_review(fm: pd.DataFrame, team_id: int, meta: dict) -> None:
             {
                 "label": "RPS de la journée",
                 "value": f"{day['rps'].mean():.3f}",
-                "sub": (f"référence {rps_ref:.3f} · {gain:+.0%} " + ("de mieux" if gain > 0 else "de moins bien"))
+                "sub": (f"référence {rps_ref:.3f}, {gain:+.0%} " + ("de mieux" if gain > 0 else "de moins bien"))
                 if gain == gain
                 else "plus bas = meilleur",
             },
@@ -90,9 +88,7 @@ def _gameweek_review(fm: pd.DataFrame, team_id: int, meta: dict) -> None:
             },
         ]
     )
-    for col, (_, r) in zip(st.columns(len(day)), day.iterrows()):
-        with col:
-            st.html(_match_card(r, team_id))
+    fixture_grid([_match_card(r, team_id) for _, r in day.iterrows()], min(len(day), 5))
     if pending_gws:
         st.caption(f"Pronostics figés en attente de résultat : {', '.join(f'J{g}' for g in pending_gws)}.")
 
@@ -224,7 +220,7 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
         )
 
     latest = df[df[x_col] == df[x_col].max()].sort_values("rang_moy")
-    st.markdown(f"**Classement final prédit — {labels[df[x_col].max()].lower()}**")
+    st.markdown(f"**Classement final prédit, {labels[df[x_col].max()][0].lower()}{labels[df[x_col].max()][1:]}**")
     st.dataframe(
         latest.assign(rang_predit=range(1, len(latest) + 1))[
             ["rang_predit", "team_name", "pts_actuels", "pts_moy", "rang_moy", "p_titre", "p_podium", "p_dernier"]
@@ -240,7 +236,7 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
             "p_podium": st.column_config.ProgressColumn("Podium", min_value=0, max_value=1, format="percent"),
             "p_dernier": st.column_config.ProgressColumn("Dernier", min_value=0, max_value=1, format="percent"),
         },
-        height=38 * (len(latest) + 1) + 2,
+        height=table_height(len(latest)),
     )
 
     if mode == "fige":

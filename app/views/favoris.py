@@ -15,7 +15,7 @@ def _weights_ui() -> dict[str, float]:
     )
     if scenario != CUSTOM:
         w = SCENARIOS[scenario]
-        st.caption("Poids : " + " · ".join(f"{FEATURE_LABELS[k]} {v / sum(w.values()):.0%}" for k, v in w.items()))
+        st.caption("Poids : " + ", ".join(f"{FEATURE_LABELS[k]} {v / sum(w.values()):.0%}" for k, v in w.items()))
         return w
     st.caption("Choisissez les caractéristiques et leur poids relatif (les poids sont normalisés à 100 %).")
     chosen = st.multiselect(
@@ -88,24 +88,26 @@ def render(a: Analysis, team_id: int) -> None:
                 "sub": f"attendu {int(under['rang_attendu'])}e → {int(under['rang'])}e",
             },
             {
-                "label": f"{me['team_name']}",
+                "label": me["team_name"],
                 "value": f"{int(me['rang_attendu'])}e attendu",
-                "sub": f"{int(me['rang'])}e en vrai · entre {int(me['rang_min'])}e et {int(me['rang_max'])}e selon le scénario",
-            },
-            {
-                "label": "Pouvoir prédictif",
-                "value": f"ρ {corr.rho:+.2f}",
-                "sub": f"p = {corr.p_value:.2f} · n = {corr.n}",
+                "sub": f"{int(me['rang'])}e en vrai, entre {int(me['rang_min'])}e et {int(me['rang_max'])}e "
+                "selon le scénario",
+                "me": True,
             },
         ]
     )
+    power = (
+        f"Pouvoir prédictif du scénario : ρ = {corr.rho:+.2f} avec les points (p = {corr.p_value:.2f}, n = {corr.n})."
+    )
     if corr.p_value >= 0.05:
         callout(
-            f"Avec ce scénario, la force de l'effectif n'explique pas significativement le classement après "
-            f"{meta['derniere_journee']} journées (p = {corr.p_value:.2f}). À ce stade, les écarts relèvent "
-            "autant des absences et du hasard que de la qualité du mercato.",
+            f"{power} La force de l'effectif n'explique donc pas significativement le classement après "
+            f"{meta['derniere_journee']} journées. À ce stade, les écarts relèvent autant des absences et du hasard "
+            "que de la qualité du mercato.",
             warn=True,
         )
+    else:
+        callout(power)
 
     left, right = st.columns(2, gap="medium")
     with left:

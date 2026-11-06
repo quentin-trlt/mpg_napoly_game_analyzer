@@ -671,7 +671,12 @@ def gw_points(tm: pd.DataFrame, team_id: int) -> go.Figure:
         gridcolor="rgba(0,0,0,0)",
     )
     fig.update_yaxes(range=[3.5, max(7, d["note_moy"].max() + 0.6)], title="Note moyenne (bonus inclus)")
-    fig.update_layout(title="Match par match : note de l'équipe et résultat", height=360, showlegend=True)
+    fig.update_layout(
+        title="Match par match : note de l'équipe et résultat",
+        height=360,
+        showlegend=True,
+        bargap=0.6 if len(d) < 6 else 0.28,
+    )
     return fig
 
 

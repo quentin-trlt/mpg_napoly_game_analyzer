@@ -26,10 +26,12 @@ SEQUENTIAL = ["#16233A", "#1A3560", "#1C4A86", "#215FAA", "#2C74CF", "#3987E5"]
 DIVERGING = [[0.0, NEG], [0.5, NEUTRAL], [1.0, POS]]
 
 FONT = '"Fira Sans", system-ui, -apple-system, "Segoe UI", sans-serif'
+DISPLAY = '"Barlow Condensed", "Fira Sans Condensed", "Arial Narrow", sans-serif'
+ME_TINT = "#8DB8F0"
 
 CSS = f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&family=Fira+Code:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap');
 
 html, body, [data-testid="stAppViewContainer"], [data-testid="stSidebar"], button, input, textarea, select {{
     font-family: {FONT};
@@ -42,65 +44,117 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stSidebar"], butto
 }}
 [data-testid="stHeader"] {{ background: transparent; }}
 [data-testid="stSidebar"] {{ background: {SURFACE}; border-right: 1px solid {BORDER}; }}
-.block-container {{ padding-top: 2.2rem; padding-bottom: 4rem; max-width: 1400px; }}
+.block-container {{ padding-top: 2.2rem; padding-bottom: 5rem; max-width: 1320px; }}
 h1, h2, h3 {{ letter-spacing: -0.01em; }}
 h1 {{ font-weight: 700; }}
 h2 {{ font-size: 1.35rem !important; font-weight: 600; margin-top: 1.6rem !important; }}
-h3 {{ font-size: 1.05rem !important; font-weight: 600; color: {TEXT}; }}
+[data-testid="stMainBlockContainer"] h3 {{ font-family: {DISPLAY}; font-size: 1.55rem !important; font-weight: 600;
+    letter-spacing: .005em; color: {TEXT}; padding-top: 2.1rem; }}
+[data-testid="stExpander"] h3 {{ font-family: {FONT}; font-size: 1.05rem !important; padding-top: .6rem; }}
 
-.hero {{ margin-bottom: 1.2rem; }}
-.hero .eyebrow {{ color: {ACCENT}; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }}
-.hero .title {{ font-size: 2.1rem; font-weight: 700; line-height: 1.15; margin: .2rem 0 .35rem;
-    background: linear-gradient(90deg, {TEXT} 0%, #B7D3F6 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }}
-.hero .subtitle {{ color: {TEXT_2}; font-size: 1rem; max-width: 820px; line-height: 1.5; }}
+.hero {{ margin-bottom: 1.6rem; }}
+.hero .eyebrow {{ color: {ACCENT}; font-size: .9rem; font-weight: 600; }}
+.hero .title {{ font-family: {DISPLAY}; font-size: 2.9rem; font-weight: 700; line-height: 1.02; margin: .25rem 0 .55rem;
+    color: {TEXT}; letter-spacing: -.005em; }}
+.hero .subtitle {{ color: {TEXT_2}; font-size: 1rem; max-width: 72ch; line-height: 1.55; }}
 
-.kpi {{ background: {SURFACE}; border: 1px solid {BORDER}; border-radius: 14px; padding: 14px 16px 12px;
-    height: 100%; min-height: 112px; transition: border-color .2s ease, transform .2s ease; }}
-.kpi:hover {{ border-color: rgba(34,197,94,0.45); transform: translateY(-1px); }}
-.kpi .label {{ color: {TEXT_2}; font-size: .78rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }}
-.kpi .value {{ color: {TEXT}; font-size: 1.55rem; font-weight: 700; line-height: 1.25; margin-top: 4px;
-    overflow-wrap: anywhere; }}
-.kpi .value.small {{ font-size: 1.15rem; }}
-.kpi .sub {{ color: {MUTED}; font-size: .82rem; margin-top: 2px; line-height: 1.35; }}
-.kpi .accent {{ display: inline-block; width: 22px; height: 3px; border-radius: 2px; background: {ACCENT}; margin-bottom: 8px; }}
+.stats {{ --n: 4; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 1px; background: {BORDER};
+    border: 1px solid {BORDER}; border-radius: 14px; overflow: hidden; margin: .2rem 0 1.1rem; }}
+.stat {{ background: {SURFACE}; padding: 16px 20px 15px; min-width: 0; }}
+.stat .label {{ color: {TEXT_2}; font-size: .84rem; font-weight: 500; line-height: 1.3; }}
+.stat .value {{ font-family: {DISPLAY}; color: {TEXT}; font-size: 2.15rem; font-weight: 600; line-height: 1.05;
+    margin-top: 6px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }}
+.stat .value.small {{ font-size: 1.6rem; line-height: 1.1; }}
+.stat .value .of {{ font-size: 1.1rem; color: {MUTED}; font-weight: 500; margin-left: 2px; }}
+.stat .sub {{ color: {MUTED}; font-size: .82rem; margin-top: 5px; line-height: 1.4; }}
+.stat.me {{ box-shadow: inset 3px 0 0 {HIGHLIGHT}; background: linear-gradient(90deg, rgba(57,135,229,0.09), {SURFACE} 70%); }}
+.stat.me .label {{ color: {ME_TINT}; }}
+.stat.empty {{ opacity: .55; }}
+.stat .dots {{ display: flex; gap: 5px; margin: 8px 0 2px; }}
+.stat .dot {{ width: 9px; height: 9px; border-radius: 50%; }}
+.stat .dot.on {{ background: {ACCENT}; }}
+.stat .dot.off {{ border: 1.5px solid {AXIS}; }}
+.stat .warn {{ color: #FAB219; }}
 
-.chip {{ display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: .78rem; font-weight: 600;
-    border: 1px solid {BORDER}; background: {SURFACE_2}; color: {TEXT}; margin-right: 4px; white-space: nowrap; }}
-.res {{ display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 6px;
-    font-size: .74rem; font-weight: 700; color: #0B1120; margin-right: 3px; }}
+.panel {{ background: {SURFACE}; border: 1px solid {BORDER}; border-radius: 14px; padding: 4px 22px; margin: .2rem 0 .6rem; }}
+.ladder {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 36px; }}
+.rung {{ display: grid; grid-template-columns: 1fr auto; align-items: end; row-gap: 8px; padding: 14px 0 15px;
+    border-bottom: 1px solid {BORDER}; }}
+.ladder .rung:nth-last-child(-n+3) {{ border-bottom: none; }}
+.rung .name {{ color: {TEXT}; font-weight: 600; font-size: .92rem; }}
+.rung .hint {{ color: {MUTED}; font-size: .78rem; margin-top: 1px; }}
+.rung .rank {{ font-family: {DISPLAY}; font-size: 1.9rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }}
+.rung .rank span {{ font-size: 1rem; color: {MUTED}; font-weight: 500; }}
+.rung .track {{ grid-column: 1 / -1; display: flex; gap: 3px; }}
+.rung .track i {{ flex: 1; height: 5px; border-radius: 2px; background: {SURFACE_2}; }}
+
+.top5 {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: {BORDER};
+    border: 1px solid {BORDER}; border-radius: 14px; overflow: hidden; margin-bottom: 1rem; }}
+.top5 > div {{ background: {SURFACE}; padding: 14px 18px 10px; min-width: 0; }}
+.top5 .head {{ font-family: {DISPLAY}; font-size: 1.25rem; font-weight: 600; color: {TEXT}; margin-bottom: 4px; }}
+.top5 .p {{ display: grid; grid-template-columns: 1fr auto; column-gap: 10px; padding: 7px 0; border-top: 1px solid {BORDER}; }}
+.top5 .p:first-of-type {{ border-top: none; }}
+.top5 .who {{ color: {TEXT}; font-size: .9rem; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
+.top5 .club {{ color: {MUTED}; font-size: .78rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
+.top5 .note {{ font-family: {DISPLAY}; font-size: 1.3rem; font-weight: 600; color: {TEXT}; align-self: center;
+    font-variant-numeric: tabular-nums; }}
+.top5 .p.me .who {{ color: {ME_TINT}; }}
+
+.chip {{ display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: .76rem; font-weight: 600;
+    border: 1px solid {BORDER}; background: {SURFACE_2}; color: {TEXT_2}; margin: 0 4px 4px 0; white-space: nowrap; }}
+.res {{ display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 5px;
+    font-size: .7rem; font-weight: 700; color: #0B1120; margin-right: 3px; }}
 .res.V {{ background: {RESULT_COLORS["V"]}; color: #FFFFFF; }}
 .res.N {{ background: {RESULT_COLORS["N"]}; }}
 .res.D {{ background: {RESULT_COLORS["D"]}; color: #FFFFFF; }}
 
-.fixture {{ background: {SURFACE}; border: 1px solid {BORDER}; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; }}
-.fixture .row {{ display: flex; align-items: center; justify-content: space-between; gap: 8px; }}
-.fixture .team {{ font-weight: 600; color: {TEXT}; font-size: .95rem; }}
-.fixture .meta {{ color: {MUTED}; font-size: .8rem; }}
-.fixture .score {{ font-family: "Fira Code", monospace; font-weight: 600; font-size: 1.1rem; color: {TEXT}; }}
-.fixture.me {{ border-color: rgba(57,135,229,0.65); }}
+.fixtures {{ --cols: 5; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 12px; margin: .2rem 0 .8rem; }}
+.fixture {{ display: flex; flex-direction: column; background: {SURFACE}; border: 1px solid {BORDER}; border-radius: 14px;
+    padding: 14px 16px; min-width: 0; }}
+.fixture .row {{ display: flex; align-items: center; justify-content: space-between; gap: 10px; }}
+.fixture .team {{ font-weight: 600; color: {TEXT}; font-size: .95rem; line-height: 1.3; overflow-wrap: anywhere; }}
+.fixture .meta {{ color: {MUTED}; font-size: .8rem; line-height: 1.45; }}
+.fixture .vs {{ display: flex; align-items: center; gap: 8px; color: {MUTED}; font-size: .74rem; margin: 9px 0; }}
+.fixture .vs::before, .fixture .vs::after {{ content: ""; flex: 1; height: 1px; background: {BORDER}; }}
+.fixture .side + .side {{ margin-top: 2px; }}
+.fixture .form {{ margin-top: 6px; }}
+.fixture .foot {{ margin-top: auto; padding-top: 10px; }}
+.fixture .score {{ font-family: {DISPLAY}; font-weight: 700; font-size: 1.9rem; line-height: 1; color: {TEXT};
+    font-variant-numeric: tabular-nums; white-space: nowrap; }}
+.fixture.me {{ border-color: rgba(57,135,229,0.7); box-shadow: inset 0 3px 0 {HIGHLIGHT}; }}
+.fixture.result .row.top {{ align-items: flex-start; }}
+.fixture.result .scorers {{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }}
+.fixture.result .bonus {{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }}
+.fixture.result .right {{ text-align: right; }}
 
 .callout {{ border-left: 3px solid {ACCENT}; background: rgba(34,197,94,0.06); padding: 10px 14px; border-radius: 0 10px 10px 0;
     color: {TEXT}; font-size: .93rem; line-height: 1.5; margin: .4rem 0 1rem; }}
 .callout.warn {{ border-left-color: #FAB219; background: rgba(250,178,25,0.07); }}
 .muted {{ color: {MUTED}; font-size: .85rem; }}
-.pbar {{ display: flex; height: 26px; border-radius: 8px; overflow: hidden; margin: 10px 0 6px; gap: 2px; }}
-.pbar div {{ display: flex; align-items: center; justify-content: center; font-size: .78rem; font-weight: 700;
+.pbar {{ display: flex; height: 24px; border-radius: 7px; overflow: hidden; margin: 12px 0 5px; gap: 2px; }}
+.pbar div {{ display: flex; align-items: center; justify-content: center; font-size: .76rem; font-weight: 700;
     color: #FFFFFF; min-width: 26px; white-space: nowrap; }}
 .pbar .h {{ background: {SERIES[0]}; }}
 .pbar .d {{ background: #5A6B86; }}
 .pbar .a {{ background: {SERIES[1]}; }}
-.kpi.bonus .of {{ font-size: .95rem; color: {MUTED}; font-weight: 500; margin-left: 2px; }}
-.kpi.bonus.empty {{ opacity: .6; }}
-.kpi.bonus .dots {{ display: flex; gap: 5px; margin: 6px 0 4px; }}
-.kpi.bonus .dot {{ width: 10px; height: 10px; border-radius: 50%; }}
-.kpi.bonus .dot.on {{ background: {ACCENT}; }}
-.kpi.bonus .dot.off {{ border: 1.5px solid {AXIS}; }}
-.plegend {{ display: flex; justify-content: space-between; color: {MUTED}; font-size: .75rem; }}
+.plegend {{ display: flex; justify-content: space-between; color: {MUTED}; font-size: .74rem; }}
+
+@media (max-width: 1100px) {{
+    .stats, .fixtures {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+    .ladder {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+    .ladder .rung:nth-last-child(-n+3) {{ border-bottom: 1px solid {BORDER}; }}
+    .top5 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+}}
+@media (max-width: 640px) {{
+    .stats, .fixtures, .ladder, .top5 {{ grid-template-columns: minmax(0, 1fr); }}
+    .hero .title {{ font-size: 2.2rem; }}
+}}
 
 [data-testid="stExpander"] details {{ border: 1px solid {BORDER}; border-radius: 12px; background: rgba(19,28,46,0.6); }}
 [data-testid="stExpander"] summary p {{ color: {TEXT_2}; font-size: .88rem; }}
 [data-testid="stDataFrame"] {{ border: 1px solid {BORDER}; border-radius: 12px; overflow: hidden; }}
 [data-testid="stPlotlyChart"] {{ border: 1px solid {BORDER}; border-radius: 14px; overflow: hidden; }}
+[data-testid="stTabs"] [role="tab"] p {{ font-size: .92rem; font-weight: 500; }}
 button:focus-visible, [role="tab"]:focus-visible, [role="radio"]:focus-visible {{ outline: 2px solid {ACCENT} !important; outline-offset: 2px; }}
 @media (prefers-reduced-motion: reduce) {{ * {{ transition: none !important; }} }}
 </style>

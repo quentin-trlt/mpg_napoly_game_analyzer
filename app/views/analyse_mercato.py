@@ -4,7 +4,7 @@ from pathlib import Path
 import streamlit as st
 
 from app import charts
-from app.components import callout, hero, how, section
+from app.components import callout, hero, how, section, table_height
 from mpg.analysis import Analysis
 from mpg.mercato import ALT_WEIGHTS, COMPONENT_LABELS, DEFAULT_WEIGHTS, mercato_ranking
 
@@ -27,7 +27,7 @@ def _weights_ui() -> dict[str, float]:
     )
     if choice != CUSTOM:
         w = ALT_WEIGHTS[choice]
-        st.caption("Poids : " + " · ".join(f"{COMPONENT_LABELS[k]} {v / sum(w.values()):.0%}" for k, v in w.items()))
+        st.caption("Poids : " + ", ".join(f"{COMPONENT_LABELS[k]} {v / sum(w.values()):.0%}" for k, v in w.items()))
         return w
     cols = st.columns(len(COMPONENTS))
     weights = {}
@@ -115,7 +115,7 @@ def render(a: Analysis, team_id: int) -> None:
             "joueur_plus_cher": "Plus gros achat",
             "enchere_max": st.column_config.NumberColumn("Prix", format="%d M€"),
         },
-        height=38 * (len(table) + 1) + 2,
+        height=table_height(len(table)),
     )
     how("score_mercato", meta)
 

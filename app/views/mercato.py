@@ -1,7 +1,7 @@
 import streamlit as st
 
 from app import charts
-from app.components import fmt_m, hero, how, kpi_row, section
+from app.components import fmt_m, hero, how, kpi_row, section, table_height
 from mpg.analysis import Analysis
 
 PLAYER_COLS = {
@@ -43,19 +43,19 @@ def render(a: Analysis, team_id: int) -> None:
                 "label": "Plus gros achat",
                 "value": top["joueur"],
                 "small": True,
-                "sub": f"{fmt_m(top['enchere'])} · {top['team_name']} · cote {top['cote']:.0f}",
+                "sub": f"{fmt_m(top['enchere'])}, {top['team_name']}, cote {top['cote']:.0f}",
             },
             {
                 "label": "Meilleur rapport prix/rendement",
                 "value": steal["joueur"],
                 "small": True,
-                "sub": f"{fmt_m(steal['enchere'])} · {steal['team_name']} · {steal['residu_valeur']:+.2f} pt",
+                "sub": f"{fmt_m(steal['enchere'])}, {steal['team_name']}, {steal['residu_valeur']:+.2f} pt",
             },
             {
                 "label": "Plus grosse déception",
                 "value": flop["joueur"],
                 "small": True,
-                "sub": f"{fmt_m(flop['enchere'])} · {flop['team_name']} · {flop['residu_valeur']:+.2f} pt",
+                "sub": f"{fmt_m(flop['enchere'])}, {flop['team_name']}, {flop['residu_valeur']:+.2f} pt",
             },
             {
                 "label": "Infirmerie la plus chère",
@@ -82,7 +82,8 @@ def render(a: Analysis, team_id: int) -> None:
                 "× la cote (échelle log)",
                 log=True,
                 hover_fmt=".2f",
-            )
+            ),
+            height=480,
         )
         how("surpaiement", meta)
     with right:
@@ -96,75 +97,84 @@ def render(a: Analysis, team_id: int) -> None:
                 fmt=".2f",
                 ascending=True,
                 x_title="Gini (0 = budget réparti, 1 = tout sur un joueur)",
-            )
+            ),
+            height=480,
         )
         how("concentration", meta)
 
     section("Rendement par rapport au prix")
     charts.show(charts.price_note_facets(pv, team_id))
     how(["residu_valeur", "shrinkage"], meta)
-    left, right = st.columns(2, gap="medium")
     cols = ["joueur", "team_name", "poste", "enchere", "n_notes", "note_retrecie", "note_attendue", "residu_valeur"]
     rated = pv[pv["n_notes"] >= 2]
-    with left:
-        st.markdown("**Les bonnes affaires** (au moins 2 matchs notés)")
+    st.caption("Joueurs avec au moins 2 matchs notés.")
+    tab_good, tab_bad = st.tabs(["Les bonnes affaires", "Les déceptions"])
+    with tab_good:
         st.dataframe(
             rated.sort_values("residu_valeur", ascending=False).head(10)[cols],
             hide_index=True,
             column_config=PLAYER_COLS,
+            height=table_height(10),
         )
-    with right:
-        st.markdown("**Les déceptions** (au moins 2 matchs notés)")
-        st.dataframe(rated.sort_values("residu_valeur").head(10)[cols], hide_index=True, column_config=PLAYER_COLS)
+    with tab_bad:
+        st.dataframe(
+            rated.sort_values("residu_valeur").head(10)[cols],
+            hide_index=True,
+            column_config=PLAYER_COLS,
+            height=table_height(10),
+        )
 
     section("Fiabilité : a-t-on acheté des joueurs qui jouent ?")
-    left, right = st.columns(2, gap="medium")
-    with left:
-        charts.show(
-            charts.ranked_bars(
-                m.assign(d=m["disponibilite_ponderee"] * 100),
-                "d",
+    charts.show(
+        charts.ranked_bars(
+            m.assign(d=m["disponibilite_ponderee"] * 100),
+            "d",
+            "team_name",
+            team_id,
+            "Taux de jeu PL pondéré par l'enchère",
+            fmt=".0f",
+            x_title="%",
+        ),
+        height=380,
+    )
+    how("fiabilite", meta)
+    st.dataframe(
+        m.sort_values("part_budget_indisponible", ascending=False)[
+            [
                 "team_name",
-                team_id,
-                "Taux de jeu PL pondéré par l'enchère",
-                fmt=".0f",
-                x_title="%",
-            )
-        )
-        how("fiabilite", meta)
-    with right:
-        st.dataframe(
-            m.sort_values("part_budget_indisponible", ascending=False)[
-                [
-                    "team_name",
-                    "part_budget_titulaires_pl",
-                    "part_budget_indisponible",
-                    "nb_indisponibles",
-                    "nb_incertains_pl",
-                    "cartons_jaunes",
-                    "cartons_rouges",
-                ]
-            ],
-            hide_index=True,
-            column_config={
-                "team_name": "Équipe",
-                "part_budget_titulaires_pl": st.column_config.ProgressColumn(
-                    "Budget sur titulaires PL",
-                    min_value=0,
-                    max_value=1,
-                    format="percent",
-                    help="Part des enchères sur des joueurs titulaires dans au moins la moitié des matchs de leur club",
-                ),
-                "part_budget_indisponible": st.column_config.ProgressColumn(
-                    "Budget à l'infirmerie", min_value=0, max_value=1, format="percent"
-                ),
-                "nb_indisponibles": "Blessés / suspendus",
-                "nb_incertains_pl": "Incertains",
-                "cartons_jaunes": "Jaunes",
-                "cartons_rouges": "Rouges",
-            },
-        )
-        how("discipline", meta)
+                "part_budget_titulaires_pl",
+                "part_budget_indisponible",
+                "nb_indisponibles",
+                "nb_incertains_pl",
+                "cartons_jaunes",
+                "cartons_rouges",
+            ]
+        ],
+        hide_index=True,
+        column_config={
+            "team_name": "Équipe",
+            "part_budget_titulaires_pl": st.column_config.ProgressColumn(
+                "Sur titulaires PL",
+                min_value=0,
+                max_value=1,
+                format="percent",
+                help="Part des enchères sur des joueurs titulaires dans au moins la moitié des matchs de leur club",
+            ),
+            "part_budget_indisponible": st.column_config.ProgressColumn(
+                "À l'infirmerie",
+                min_value=0,
+                max_value=1,
+                format="percent",
+                help="Part du budget blessé ou suspendu",
+            ),
+            "nb_indisponibles": st.column_config.NumberColumn("Indispo.", width="small", help="Blessés ou suspendus"),
+            "nb_incertains_pl": st.column_config.NumberColumn("Incert.", width="small", help="Incertains en PL"),
+            "cartons_jaunes": st.column_config.NumberColumn("CJ", width="small", help="Cartons jaunes"),
+            "cartons_rouges": st.column_config.NumberColumn("CR", width="small", help="Cartons rouges"),
+        },
+        height=table_height(len(m)),
+    )
+    how("discipline", meta)
 
     section("Répartition par ligne et production")
     left, right = st.columns(2, gap="medium")
@@ -233,4 +243,5 @@ def render(a: Analysis, team_id: int) -> None:
             ),
             "enchere": st.column_config.NumberColumn("Enchères", format="%d M€"),
         },
+        height=table_height(len(clubs)),
     )

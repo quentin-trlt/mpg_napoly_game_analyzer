@@ -6,6 +6,11 @@ import streamlit as st
 from app.theme import RESULT_COLORS
 from mpg.glossary import explain
 
+ROW_PX = 35
+TONE_GOOD = "#0CA30C"
+TONE_BAD = "#D03B3B"
+TONE_MID = "#94A3B8"
+
 
 def hero(eyebrow: str, title: str, subtitle: str = "") -> None:
     sub = f'<div class="subtitle">{subtitle}</div>' if subtitle else ""
@@ -15,20 +20,36 @@ def hero(eyebrow: str, title: str, subtitle: str = "") -> None:
     )
 
 
-def kpi(label: str, value: str, sub: str = "", small: bool = False) -> None:
+def _stat(label: str, value: str, sub: str = "", small: bool = False, me: bool = False) -> str:
     cls = "value small" if small else "value"
     sub_html = f'<div class="sub">{escape(sub)}</div>' if sub else ""
-    st.html(
-        f'<div class="kpi"><div class="accent"></div><div class="label">{escape(label)}</div>'
+    return (
+        f'<div class="stat{" me" if me else ""}"><div class="label">{escape(label)}</div>'
         f'<div class="{cls}">{escape(value)}</div>{sub_html}</div>'
     )
 
 
 def kpi_row(items: list[dict]) -> None:
-    cols = st.columns(len(items))
-    for col, item in zip(cols, items):
-        with col:
-            kpi(**item)
+    cells = "".join(_stat(**item) for item in items)
+    st.html(f'<div class="stats" style="--n:{len(items)}">{cells}</div>')
+
+
+def stat_grid(cells: list[str], per_row: int = 4) -> str:
+    pad = (-len(cells)) % per_row
+    filler = '<div class="stat" aria-hidden="true"></div>' * pad
+    return f'<div class="stats" style="--n:{per_row}">{"".join(cells)}{filler}</div>'
+
+
+def fixture_grid(cards: list[str], cols: int) -> None:
+    st.html(f'<div class="fixtures" style="--cols:{cols}">{"".join(cards)}</div>')
+
+
+def rank_tone(rank: int, n: int) -> str:
+    return TONE_GOOD if rank <= 3 else TONE_BAD if rank > n - 3 else TONE_MID
+
+
+def table_height(n_rows: int) -> int:
+    return ROW_PX * (n_rows + 1) + 3
 
 
 def callout(text: str, warn: bool = False) -> None:
@@ -51,7 +72,7 @@ def result_color(r: str) -> str:
 
 
 def section(title: str, caption: str = "") -> None:
-    st.subheader(title)
+    st.subheader(title, anchor=False)
     if caption:
         st.caption(caption)
 
@@ -69,7 +90,7 @@ def fmt_signed(x: float, digits: int = 1) -> str:
 
 
 def names_list(names: list[str]) -> str:
-    return " · ".join(names)
+    return ", ".join(names)
 
 
 def no_data(msg: str = "Pas encore de données pour cette section.") -> None:

@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import hero, how, section
+from app.components import fixture_grid, hero, how, section
 from mpg.analysis import Analysis
 
 
@@ -14,7 +14,7 @@ def _match_card(row: pd.Series, away: pd.Series, goals: pd.DataFrame, team_id: i
     def scorers(tid: int) -> str:
         g = goals[goals["team_id"] == tid]
         if g.empty:
-            return '<span class="muted">—</span>'
+            return "—"
         labels = {"reel": "", "mpg": " (MPG)", "csc": " (CSC)", "rotaldo_csc": " (CSC Rotaldo)"}
         return "<br>".join(escape(f"{r.buteur_affiche}{labels.get(r.type_but, '')}") for r in g.itertuples())
 
@@ -23,23 +23,17 @@ def _match_card(row: pd.Series, away: pd.Series, goals: pd.DataFrame, team_id: i
             return ""
         return "".join(f'<span class="chip">{escape(b.strip())}</span>' for b in r["bonus_poses"].split(","))
 
-    return f"""
-    <div class="fixture{" me" if me else ""}">
-      <div class="row">
-        <div style="flex:1"><div class="team">{escape(row["team_name"])}</div>
-          <div class="meta">{escape(str(row["formation"]))} · note {row["note_moy"]:.2f}</div></div>
-        <div class="score">{int(row["bp"])} – {int(away["bp"])}</div>
-        <div style="flex:1;text-align:right"><div class="team">{escape(away["team_name"])}</div>
-          <div class="meta">note {away["note_moy"]:.2f} · {escape(str(away["formation"]))}</div></div>
-      </div>
-      <div class="row" style="margin-top:8px;align-items:flex-start">
-        <div class="meta" style="flex:1">{scorers(row["team_id"])}</div>
-        <div class="meta" style="flex:1;text-align:right">{scorers(away["team_id"])}</div>
-      </div>
-      <div class="row" style="margin-top:8px">
-        <div>{bonus(row)}</div><div style="text-align:right">{bonus(away)}</div>
-      </div>
-    </div>"""
+    return (
+        f'<div class="fixture result{" me" if me else ""}">'
+        f'<div class="row top"><div style="flex:1;min-width:0"><div class="team">{escape(row["team_name"])}</div>'
+        f'<div class="meta">{escape(str(row["formation"]))}, note {row["note_moy"]:.2f}</div></div>'
+        f'<div class="score">{int(row["bp"])} – {int(away["bp"])}</div>'
+        f'<div class="right" style="flex:1;min-width:0"><div class="team">{escape(away["team_name"])}</div>'
+        f'<div class="meta">note {away["note_moy"]:.2f}, {escape(str(away["formation"]))}</div></div></div>'
+        f'<div class="scorers"><div class="meta">{scorers(row["team_id"])}</div>'
+        f'<div class="meta right">{scorers(away["team_id"])}</div></div>'
+        f'<div class="foot bonus"><div>{bonus(row)}</div><div class="right">{bonus(away)}</div></div></div>'
+    )
 
 
 def render(a: Analysis, team_id: int) -> None:
@@ -58,32 +52,36 @@ def render(a: Analysis, team_id: int) -> None:
     day = tm[tm["gw"] == gw]
     home = day[day["domicile"]].sort_values("team_id")
     goals = a.league.goals
-    cols = st.columns(2, gap="medium")
-    for i, (_, h) in enumerate(home.iterrows()):
+    cards = []
+    for _, h in home.iterrows():
         aw = day[(day["match_id"] == h["match_id"]) & ~day["domicile"]].iloc[0]
-        with cols[i % 2]:
-            st.html(_match_card(h, aw, goals[goals["match_id"] == h["match_id"]], team_id))
+        cards.append(_match_card(h, aw, goals[goals["match_id"] == h["match_id"]], team_id))
+    fixture_grid(cards, 2)
 
-    section("Mon équipe match par match")
+    section(
+        f"{a.league.team_names[team_id]}, match par match",
+        "Couleur de la barre : vert victoire, jaune nul, rouge défaite. Le résultat est aussi écrit sous chaque barre.",
+    )
     charts.show(charts.gw_points(tm, team_id))
-    st.caption("Couleur de la barre : vert victoire, jaune nul, rouge défaite (le résultat est aussi écrit au-dessus).")
 
-    section("Calendrier restant")
+    section(
+        "Calendrier restant",
+        f"Difficulté pour chaque équipe, puis les prochains matchs de {a.league.team_names[team_id]}.",
+    )
     rem = a.remaining.merge(a.standings[["team_id", "team_name"]], on="team_id")
     left, right = st.columns([1, 1.2], gap="medium")
     with left:
-        charts.show(
-            charts.ranked_bars(
-                rem,
-                "force_adv_restante",
-                "team_name",
-                team_id,
-                "Difficulté du calendrier restant",
-                fmt="+.2f",
-                ascending=True,
-                x_title="Indice de force moyen des adversaires restants",
-            )
+        fig = charts.ranked_bars(
+            rem,
+            "force_adv_restante",
+            "team_name",
+            team_id,
+            "Difficulté du calendrier restant",
+            fmt="+.2f",
+            ascending=True,
+            x_title="Indice de force moyen des adversaires restants",
         )
+        charts.show(fig, height=470)
         how("indice_force", meta)
     with right:
         fx = a.league.fixtures
@@ -101,11 +99,10 @@ def render(a: Analysis, team_id: int) -> None:
         )
         todo["rang_adv"] = todo["opp_id"].map(rank)
         todo["force_adv"] = todo["opp_id"].map(force)
-        st.markdown(f"**Prochains matchs de {a.league.team_names[team_id]}**")
         st.dataframe(
             todo[["gw", "date", "lieu", "adversaire", "rang_adv", "force_adv"]],
             hide_index=True,
-            height=420,
+            height=470,
             column_config={
                 "gw": st.column_config.NumberColumn("J", format="J%d"),
                 "date": st.column_config.DateColumn("Date", format="DD/MM"),

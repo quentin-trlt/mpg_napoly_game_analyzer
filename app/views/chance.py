@@ -48,15 +48,15 @@ def render(a: Analysis, team_id: int) -> None:
             {
                 "label": me["team_name"],
                 "value": f"{fmt_signed(me['chance_totale'])} pts",
-                "sub": f"IC 90 % [{me['chance_ic90_bas']:+.1f} ; {me['chance_ic90_haut']:+.1f}] · calendrier "
-                f"{me['percentile_calendrier']:.0f}e pct",
-            },
-            {
-                "label": "Fiabilité de la règle de note",
-                "value": f"{meta['concordance_regle_note']:.0%}",
-                "sub": "des vrais résultats retrouvés par la note",
+                "sub": f"IC 90 % [{me['chance_ic90_bas']:+.1f} ; {me['chance_ic90_haut']:+.1f}], calendrier au "
+                f"{me['percentile_calendrier']:.0f}e percentile",
+                "me": True,
             },
         ]
+    )
+    st.caption(
+        f"La règle de note retrouve {meta['concordance_regle_note']:.0%} des vrais résultats : c'est la base de tous "
+        "les calculs de cette page."
     )
     how("petit_echantillon", meta, "À lire avant d'interpréter")
 
@@ -72,7 +72,8 @@ def render(a: Analysis, team_id: int) -> None:
                 low="chance_ic90_bas",
                 high="chance_ic90_haut",
                 x_title="Points",
-            )
+            ),
+            height=440,
         )
         how(["chance_decomposition", "bootstrap"], meta)
     with right:
@@ -83,7 +84,8 @@ def render(a: Analysis, team_id: int) -> None:
                 team_id,
                 "D'où vient la chance ?",
                 "Points",
-            )
+            ),
+            height=440,
         )
         st.caption(
             "Calendrier : avoir croisé ses adversaires un jour sans. Conversion : ce que la mécanique MPG "

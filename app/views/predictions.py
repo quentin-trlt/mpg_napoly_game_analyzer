@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import callout, fmt_pct, hero, how, kpi_row, prob_bar, section
+from app.components import callout, fixture_grid, fmt_pct, hero, how, kpi_row, prob_bar, section, table_height
 from app.state import data_signature, get_forecast
 from mpg.analysis import Analysis
 from mpg.forecast.evaluation import frozen_frames
@@ -19,18 +19,16 @@ def _next_gw(a: Analysis, fc: dict, team_id: int) -> None:
     mp = fc["baseline"].match_probs
     gw = int(mp["gw"].min())
     nxt = mp[mp["gw"] == gw]
-    section(f"Journée {gw} — les pronostics", "Probabilités de l'ensemble des trois modèles.")
-    cols = st.columns(len(nxt))
-    for col, (_, m) in zip(cols, nxt.iterrows()):
-        me = team_id in (m["home_team_id"], m["away_team_id"])
-        with col:
-            st.html(f"""<div class="fixture{" me" if me else ""}">
-              <div class="team">{escape(m["home_team"])}</div>
-              <div class="meta" style="margin:2px 0">contre</div>
-              <div class="team">{escape(m["away_team"])}</div>
-              {prob_bar(m["p_dom"], m["p_nul"], m["p_ext"])}
-              <div class="meta" style="margin-top:8px">Score le plus probable : <b>{m["score_probable"]}</b></div>
-            </div>""")
+    section(f"Journée {gw} : les pronostics", "Probabilités de l'ensemble des trois modèles.")
+    cards = [
+        f'<div class="fixture{" me" if team_id in (m["home_team_id"], m["away_team_id"]) else ""}">'
+        f'<div class="team">{escape(m["home_team"])}</div><div class="vs">contre</div>'
+        f'<div class="team">{escape(m["away_team"])}</div>'
+        f'<div class="foot">{prob_bar(m["p_dom"], m["p_nul"], m["p_ext"])}'
+        f'<div class="meta" style="margin-top:8px">Score le plus probable : <b>{m["score_probable"]}</b></div></div></div>'
+        for _, m in nxt.iterrows()
+    ]
+    fixture_grid(cards, min(len(cards), 5))
     with st.expander("Ce que dit chaque modèle"):
         by_model = fc["draws"].mean_probs()
         by_model = by_model[by_model["gw"] == gw]
@@ -69,7 +67,7 @@ def _season_table(sim, names: dict[int, str], team_id: int) -> None:
             "p_podium": st.column_config.ProgressColumn("Podium", min_value=0, max_value=1, format="percent"),
             "p_dernier": st.column_config.ProgressColumn("Dernier", min_value=0, max_value=1, format="percent"),
         },
-        height=38 * (len(s) + 1) + 2,
+        height=table_height(len(s)),
     )
 
 
@@ -160,7 +158,7 @@ def _what_if(a: Analysis, fc: dict, team_id: int) -> None:
     kpi_row(
         [
             {
-                "label": f"Titre — {me['team_name']}",
+                "label": f"Titre, {me['team_name']}",
                 "value": fmt_pct(me["titre_apres"]),
                 "sub": f"avant : {fmt_pct(me['titre_avant'])} ({me['delta_titre']:+.0f} pts de %)",
             },
@@ -176,7 +174,7 @@ def _what_if(a: Analysis, fc: dict, team_id: int) -> None:
             },
         ]
     )
-    left, right = st.columns([1, 1.2], gap="medium")
+    left, right = st.columns([1, 1.3], gap="medium")
     with left:
         charts.show(
             charts.diverging_bars(
@@ -205,18 +203,18 @@ def _what_if(a: Analysis, fc: dict, team_id: int) -> None:
             hide_index=True,
             column_config={
                 "team_name": "Équipe",
-                "titre_avant": st.column_config.NumberColumn("Titre avant", format="percent"),
+                "titre_avant": st.column_config.NumberColumn("Titre avant", format="percent", width="small"),
                 "titre_apres": st.column_config.ProgressColumn(
                     "Titre après", min_value=0, max_value=1, format="percent"
                 ),
-                "podium_avant": st.column_config.NumberColumn("Podium avant", format="percent"),
+                "podium_avant": st.column_config.NumberColumn("Podium avant", format="percent", width="small"),
                 "podium_apres": st.column_config.ProgressColumn(
                     "Podium après", min_value=0, max_value=1, format="percent"
                 ),
                 "dernier_apres": st.column_config.NumberColumn("Dernier après", format="percent"),
                 "pts_apres": st.column_config.NumberColumn("Pts attendus", format="%.1f"),
             },
-            height=38 * 11 + 2,
+            height=table_height(len(comp)),
         )
 
 
@@ -230,12 +228,16 @@ def _model_quality(a: Analysis, fc: dict, meta: dict) -> None:
             hide_index=True,
             column_config={
                 "modele": "Modèle",
-                "matchs": "Matchs",
-                "rps": st.column_config.NumberColumn("RPS ↓", format="%.3f"),
-                "log_loss": st.column_config.NumberColumn("Log-loss ↓", format="%.3f"),
-                "brier": st.column_config.NumberColumn("Brier ↓", format="%.3f"),
+                "matchs": st.column_config.NumberColumn("Matchs", width="small"),
+                "rps": st.column_config.NumberColumn("RPS ↓", format="%.3f", width="small"),
+                "log_loss": st.column_config.NumberColumn("Log-loss ↓", format="%.3f", width="small"),
+                "brier": st.column_config.NumberColumn("Brier ↓", format="%.3f", width="small"),
                 "proba_issue_reelle": st.column_config.ProgressColumn(
-                    "Proba. donnée au vrai résultat", min_value=0, max_value=1, format="percent"
+                    "Vrai résultat",
+                    min_value=0,
+                    max_value=1,
+                    format="percent",
+                    help="Probabilité moyenne donnée au résultat qui s'est produit",
                 ),
             },
         )
@@ -286,7 +288,7 @@ def _bonus_effect(fc: dict, team_id: int, meta: dict) -> None:
             "bonus à venir."
         )
         return
-    left, right = st.columns([1.1, 1], gap="medium")
+    left, right = st.columns(2, gap="medium")
     with left:
         charts.show(
             charts.diverging_bars(
@@ -305,11 +307,12 @@ def _bonus_effect(fc: dict, team_id: int, meta: dict) -> None:
             hide_index=True,
             column_config={
                 "team_name": "Équipe",
-                "restants": "Bonus restants",
-                "effet_pts": st.column_config.NumberColumn("Effet (pts)", format="%+.2f"),
-                "effet_titre": st.column_config.NumberColumn("Effet P(titre)", format="percent"),
-                "effet_dernier": st.column_config.NumberColumn("Effet P(dernier)", format="percent"),
+                "restants": st.column_config.NumberColumn("Restants", width="small"),
+                "effet_pts": st.column_config.NumberColumn("Pts", format="%+.2f", width="small"),
+                "effet_titre": st.column_config.NumberColumn("P(titre)", format="percent", width="small"),
+                "effet_dernier": st.column_config.NumberColumn("P(dernier)", format="percent", width="small"),
             },
+            height=table_height(len(be)),
         )
         st.caption(
             "Les probabilités des matchs et de fin de saison de cette page incluent déjà l'usage attendu des "
@@ -357,17 +360,19 @@ def render(a: Analysis, team_id: int) -> None:
                 "label": "Favori pour le titre",
                 "value": names[int(fav["team_id"])],
                 "small": True,
-                "sub": f"{fmt_pct(fav['p_titre'])} de chances · {fav['pts_moy']:.0f} pts attendus",
+                "sub": f"{fmt_pct(fav['p_titre'])} de chances, {fav['pts_moy']:.0f} pts attendus",
             },
             {
-                "label": f"Titre — {names[team_id]}",
+                "label": f"Titre, {names[team_id]}",
                 "value": fmt_pct(me["p_titre"]),
-                "sub": f"podium {fmt_pct(me['p_podium'])} · rang moyen {me['rang_moy']:.1f}",
+                "sub": f"podium {fmt_pct(me['p_podium'])}, rang moyen {me['rang_moy']:.1f}",
+                "me": True,
             },
             {
                 "label": "Points attendus",
                 "value": f"{me['pts_moy']:.0f}",
                 "sub": f"entre {me['pts_p05']:.0f} et {me['pts_p95']:.0f} (90 %)",
+                "me": True,
             },
             {
                 "label": "Le plus menacé",
@@ -375,17 +380,16 @@ def render(a: Analysis, team_id: int) -> None:
                 "small": True,
                 "sub": f"{fmt_pct(danger['p_dernier'])} de finir dernier",
             },
-            {
-                "label": "Matchs restants",
-                "value": str(remaining),
-                "sub": f"{remaining // 5} journées · {len(models)} modèles",
-            },
         ]
     )
 
     _next_gw(a, fc, team_id)
 
-    section("Fin de saison simulée")
+    section(
+        "Fin de saison simulée",
+        f"{remaining} matchs restants sur {remaining // 5} journées, {meta['n_saisons']} saisons simulées par "
+        f"{len(models)} modèles.",
+    )
     _season_table(sim, names, team_id)
     how(["simulation_saison", "ensemble"], meta)
     _bonus_effect(fc, team_id, meta)
@@ -393,7 +397,7 @@ def render(a: Analysis, team_id: int) -> None:
     with left:
         charts.show(charts.rank_heatmap(sim.rank_probs, names, sim.summary["team_id"].tolist()))
     with right:
-        charts.show(charts.final_points_box(sim, names, team_id))
+        charts.show(charts.final_points_box(sim, names, team_id), height=460)
     metric = st.segmented_control(
         "Courbe",
         options=["p_titre", "p_podium", "p_dernier"],

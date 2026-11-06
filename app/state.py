@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pandas as pd
 import streamlit as st
 
 from mpg.analysis import Analysis, run
@@ -55,9 +56,26 @@ def _forecast(signature: tuple, frozen_signature: tuple, data_dir: str) -> dict:
     fixtures = fixtures_after(a, a.league.last_gw)
     draws = ensemble_draws(build_context(a), fixtures, n_draws=4000) if not fixtures.empty else None
     bt = backtest(a)
+    baseline = simulate_season(a, draws) if draws is not None else None
+    bonus_effect = None
+    if draws is not None and draws.bonus_shift is not None:
+        raw = simulate_season(a, draws, use_bonus=False).summary.set_index("team_id")
+        adj = baseline.summary.set_index("team_id")
+        rest = a.bonus_remaining.groupby("team_id")["restants"].apply(lambda s: s.clip(lower=0).sum())
+        bonus_effect = pd.DataFrame(
+            {
+                "team_id": adj.index,
+                "team_name": adj.index.map(a.league.team_names),
+                "restants": rest.reindex(adj.index).fillna(0).astype(int).to_numpy(),
+                "effet_pts": (adj["pts_moy"] - raw["pts_moy"].reindex(adj.index)).to_numpy(),
+                "effet_titre": (adj["p_titre"] - raw["p_titre"].reindex(adj.index)).to_numpy(),
+                "effet_dernier": (adj["p_dernier"] - raw["p_dernier"].reindex(adj.index)).to_numpy(),
+            }
+        ).sort_values("effet_pts", ascending=False)
     return {
         "draws": draws,
-        "baseline": simulate_season(a, draws) if draws is not None else None,
+        "baseline": baseline,
+        "bonus_effect": bonus_effect,
         "history": title_odds_history(a),
         "backtest": bt,
         "backtest_summary": backtest_summary(bt),

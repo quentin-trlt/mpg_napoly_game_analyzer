@@ -75,7 +75,7 @@ def test_injured_player_never_plays_next_gameweek(ctx):
 def test_ensemble_is_mean_of_models(draws):
     models = [d for name, d in draws.by_model.items() if name != "Référence (fréquences)"]
     assert len(models) == 3
-    assert np.allclose(draws.ensemble, np.mean(models, axis=0))
+    assert np.allclose(draws.ensemble_raw, np.mean(models, axis=0))
 
 
 def test_season_simulation_is_consistent(analysis, draws):

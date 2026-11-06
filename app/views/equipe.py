@@ -81,6 +81,8 @@ def render(a: Analysis, team_id: int) -> None:
             )
     st.caption("Vert : top 3 · rouge : 3 derniers. Le rang est toujours écrit, la couleur n'est qu'un repère.")
 
+    _bonus_section(a, team_id, meta)
+
     roster = a.player_value[a.player_value["team_id"] == team_id]
     left, right = st.columns([1, 1.1], gap="medium")
     with left:
@@ -157,3 +159,70 @@ def render(a: Analysis, team_id: int) -> None:
         height=38 * (len(roster) + 1) + 2,
     )
     how(["residu_valeur", "fiabilite"], meta)
+
+
+def _bonus_tile(r) -> str:
+    total = max(r.dotation, r.utilises)
+    dots = "".join(f'<span class="dot {"on" if i < r.restants else "off"}"></span>' for i in range(total))
+    if r.utilises:
+        detail = f"Utilisé : {escape(r.journees)}"
+        if r.cibles and r.cibles != "—":
+            detail += f" · {escape(r.cibles)}"
+    else:
+        detail = "Pas encore utilisé"
+    warn = '<div class="sub" style="color:#FAB219">Absent de la dotation</div>' if r.hors_dotation else ""
+    return (
+        f'<div class="kpi bonus{" empty" if r.restants <= 0 else ""}" role="group" '
+        f'aria-label="{escape(r.bonus)} : {r.restants} restant(s) sur {r.dotation}">'
+        f'<div class="label">{escape(r.bonus)}</div>'
+        f'<div class="value">{max(r.restants, 0)}<span class="of">/{r.dotation}</span></div>'
+        f'<div class="dots" aria-hidden="true">{dots}</div><div class="sub">{detail}</div>{warn}</div>'
+    )
+
+
+def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
+    br = a.bonus_remaining
+    section("Bonus restants")
+    if br is None:
+        st.info(
+            "Ajoutez un fichier `data/bonus_stock.csv` (colonnes `bonus`, `quantite`) avec la dotation de début "
+            "de saison pour suivre les bonus restants."
+        )
+        return
+    mine = br[br["team_id"] == team_id]
+    left_total = int(mine["restants"].clip(lower=0).sum())
+    total = int(mine["dotation"].sum())
+    remaining_gw = a.league.n_gw - a.league.last_gw
+    league_left = br.groupby("team_id")["restants"].apply(lambda s: s.clip(lower=0).sum())
+    rank = int(league_left.rank(ascending=False, method="min").loc[team_id])
+    st.caption(
+        f"{left_total} bonus restants sur {total} pour {remaining_gw} journées à jouer · "
+        f"{rank}e réserve de la ligue (médiane : {league_left.median():.0f}). Capitaine et bonus défensifs ne sont pas "
+        "comptés : ils ne s'épuisent pas."
+    )
+    if (mine["restants"] < 0).any():
+        st.warning(
+            "Certains bonus ont été utilisés plus souvent que la dotation ne le permet : vérifiez "
+            "`data/bonus_stock.csv`."
+        )
+    tiles = list(mine.itertuples())
+    for start in range(0, len(tiles), 4):
+        cols = st.columns(4)
+        for col, r in zip(cols, tiles[start : start + 4]):
+            with col:
+                st.html(_bonus_tile(r))
+
+    with st.expander("Bonus restants de toutes les équipes"):
+        pivot = br.pivot(index="team_id", columns="bonus", values="restants")
+        pivot = pivot[[b for b in dict.fromkeys(br["bonus"]) if b in pivot.columns]]
+        pivot.insert(0, "Total", pivot.clip(lower=0).sum(axis=1))
+        pivot.insert(0, "Équipe", pivot.index.map(a.league.team_names))
+        st.dataframe(
+            pivot.sort_values("Total", ascending=False),
+            hide_index=True,
+            column_config={
+                "Total": st.column_config.ProgressColumn("Total", min_value=0, max_value=total, format="%d")
+            },
+        )
+        st.caption("Utile pour anticiper : un adversaire qui a encore son Suarez peut viser votre gardien.")
+    how("bonus_restants", meta)

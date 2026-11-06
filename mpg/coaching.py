@@ -1,3 +1,6 @@
+import re
+import unicodedata
+
 import pandas as pd
 
 KEYS = ["match_id", "team_id"]
@@ -152,3 +155,49 @@ def coaching_table(lu: pd.DataFrame, tm: pd.DataFrame, bonus: pd.DataFrame, subs
         ["remplacements_tactiques", "gain_tactique_total"]
     ].fillna(0)
     return out.sort_values("regret_moy").reset_index(drop=True)
+
+
+NOT_STOCKED = {"capitaine", "4 defenseurs", "5 defenseurs"}
+
+
+def bonus_key(name: str) -> str:
+    """Nom de bonus normalisé : sans accents, minuscules, sans article initial (« La valise » = « Valise »)."""
+    s = unicodedata.normalize("NFKD", str(name)).encode("ascii", "ignore").decode().lower().strip()
+    s = re.sub(r"^(la|le|les|l')\s*", "", s)
+    return re.sub(r"\s+", " ", s)
+
+
+def remaining_bonuses(bonus: pd.DataFrame, stock: pd.DataFrame, team_ids: list[int]) -> pd.DataFrame:
+    """Bonus restants par équipe : dotation − bonus posés (un bonus posé est consommé, même sans effet).
+
+    Les bonus posés absents de la dotation sont conservés avec une dotation nulle pour que l'écart soit visible.
+    """
+    used = bonus.assign(cle=bonus["bonus"].map(bonus_key))
+    used = used[~used["cle"].isin(NOT_STOCKED)]
+    st_ = stock.assign(cle=stock["bonus"].map(bonus_key))
+    names = dict(zip(st_["cle"], st_["bonus"]))
+    for cle, nom in zip(used["cle"], used["bonus"]):
+        names.setdefault(cle, nom)
+    dotation = dict(zip(st_["cle"], st_["quantite"]))
+
+    rows = []
+    for t in team_ids:
+        mine = used[used["team_id"] == t]
+        for cle, nom in names.items():
+            u = mine[mine["cle"] == cle].sort_values("gw")
+            rows.append(
+                {
+                    "team_id": t,
+                    "bonus": nom,
+                    "dotation": int(dotation.get(cle, 0)),
+                    "utilises": len(u),
+                    "journees": ", ".join(f"J{g}" for g in u["gw"]),
+                    "cibles": ", ".join(str(c) for c in u["cible_affiche"].fillna("—")),
+                }
+            )
+    out = pd.DataFrame(rows)
+    out["restants"] = out["dotation"] - out["utilises"]
+    out["hors_dotation"] = out["dotation"] == 0
+    order = {cle: i for i, cle in enumerate(st_["cle"])}
+    out["_o"] = out["bonus"].map(lambda b: order.get(bonus_key(b), len(order)))
+    return out.sort_values(["team_id", "_o"]).drop(columns="_o").reset_index(drop=True)

@@ -89,6 +89,12 @@ h3 {{ font-size: 1.05rem !important; font-weight: 600; color: {TEXT}; }}
 .pbar .h {{ background: {SERIES[0]}; }}
 .pbar .d {{ background: #5A6B86; }}
 .pbar .a {{ background: {SERIES[1]}; }}
+.kpi.bonus .of {{ font-size: .95rem; color: {MUTED}; font-weight: 500; margin-left: 2px; }}
+.kpi.bonus.empty {{ opacity: .6; }}
+.kpi.bonus .dots {{ display: flex; gap: 5px; margin: 6px 0 4px; }}
+.kpi.bonus .dot {{ width: 10px; height: 10px; border-radius: 50%; }}
+.kpi.bonus .dot.on {{ background: {ACCENT}; }}
+.kpi.bonus .dot.off {{ border: 1.5px solid {AXIS}; }}
 .plegend {{ display: flex; justify-content: space-between; color: {MUTED}; font-size: .75rem; }}
 
 [data-testid="stExpander"] details {{ border: 1px solid {BORDER}; border-radius: 12px; background: rgba(19,28,46,0.6); }}

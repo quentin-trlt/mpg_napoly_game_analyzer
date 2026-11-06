@@ -243,6 +243,12 @@ GLOSSARY: dict[str, str] = {
         "automatiquement : c'est la seule mesure de qualité sans biais, puisque le modèle ne pouvait pas connaître "
         "le résultat. Pensez à commiter le dossier : Streamlit Cloud ne conserve pas les fichiers écrits par l'app."
     ),
+    "bonus_restants": (
+        "**Bonus restants.** Dotation de début de saison (fichier `data/bonus_stock.csv`, identique pour toutes les "
+        "équipes) moins les bonus déjà posés, d'après `bonus.csv`. Un bonus posé compte comme utilisé même s'il n'a "
+        "eu aucun effet (joueur ciblé absent, par exemple). Le capitaine et les bonus à 4 ou 5 défenseurs ne sont pas "
+        "comptés : le premier se choisit à chaque match, les seconds dépendent de la formation."
+    ),
     "calibration": (
         "**Calibration.** On regroupe toutes les probabilités annoncées (3 par match) par tranche et on compare à la "
         "fréquence à laquelle l'issue s'est réellement produite. Un modèle bien calibré a ses points sur la diagonale : "

@@ -122,6 +122,7 @@ class League:
     typical_xi: pd.DataFrame
     scorers: pd.DataFrame
     leaderboards: pd.DataFrame
+    bonus_stock: pd.DataFrame | None = None
 
     @property
     def played(self) -> pd.DataFrame:
@@ -172,6 +173,20 @@ def _derive_player_columns(players: pd.DataFrame) -> pd.DataFrame:
     return p
 
 
+def _read_bonus_stock(data_dir: Path) -> pd.DataFrame | None:
+    """Dotation de bonus de début de saison (identique pour toutes les équipes). Fichier facultatif."""
+    path = data_dir / "bonus_stock.csv"
+    if not path.exists():
+        return None
+    stock = pd.read_csv(path)
+    missing = [c for c in ("bonus", "quantite") if c not in stock.columns]
+    if missing:
+        raise DataSchemaError(f"bonus_stock.csv : colonnes manquantes {missing}")
+    stock["bonus"] = stock["bonus"].astype(str).str.strip()
+    stock["quantite"] = pd.to_numeric(stock["quantite"], errors="raise").astype(int)
+    return stock
+
+
 def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
     data_dir = Path(data_dir)
     raw = {name: _read(data_dir, name) for name in REQUIRED_COLUMNS}
@@ -211,4 +226,5 @@ def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
         typical_xi=raw["typical_xi"],
         scorers=raw["mpg_scorers_ranking"],
         leaderboards=raw["player_leaderboards"],
+        bonus_stock=_read_bonus_stock(data_dir),
     )

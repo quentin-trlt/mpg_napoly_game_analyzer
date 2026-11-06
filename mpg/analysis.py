@@ -31,6 +31,7 @@ class Analysis:
     mercato_scenarios: pd.DataFrame
     clubs: pd.DataFrame
     remaining: pd.DataFrame
+    bonus_remaining: pd.DataFrame | None
     next_fixtures: pd.DataFrame
     lines: pd.DataFrame
     strength_scenarios: pd.DataFrame
@@ -88,6 +89,9 @@ def run(data_dir: Path | str = DEFAULT_DATA_DIR, n_sim: int = 10_000, seed: int 
         mercato_scenarios=scen,
         clubs=mercato.club_exposure(league.players),
         remaining=strength.remaining_schedule(league, fav),
+        bonus_remaining=coaching.remaining_bonuses(league.bonus, league.bonus_stock, sorted(names))
+        if league.bonus_stock is not None
+        else None,
         next_fixtures=standings.next_fixtures(league.fixtures, table, league.teams),
         lines=lines,
         strength_scenarios=scen_ranks,

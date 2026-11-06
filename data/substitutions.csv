@@ -1,0 +1,79 @@
+match_id,gw,team_id,titulaire_sortant,type,note_titulaire,remplacant_entre,note_remplacant
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,9,Gakpo,absence,,Janelt,4.5
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,8,Hinshelwood,absence,,Manzambi,7.0
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,2,James,absence,,Lacroix,6.0
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,2,Eze,absence,,Pedro Neto,6.0
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,2,Isak,absence,,Mbaye,5.0
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,5,Sesko,absence,,Bijol,3.5
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,3,Szoboszlai,absence,,Doku,7.5
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,3,García,remplacement_tactique,3.5,Wissa,3.5
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,4,Calvert-Lewin,remplacement_tactique,3.5,George,4.5
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,7,Ruggeri,remplacement_tactique,5.0,Mukiele,5.0
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,7,Bogle,remplacement_tactique,5.0,Davis,5.0
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,7,Igor Jesus,absence,,Fernández,5.0
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,6,Mosquera,absence,,Egan,4.5
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,6,Okafor,remplacement_tactique,4.0,Emersonn,4.5
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,1,Mykolenko,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,1,Tzolis,absence,,Iwobi,6.0
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,1,Havertz,remplacement_tactique,4.5,Jackson,6.5
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,0,Elanga,absence,,McGinn,5.5
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,5,Wilson,absence,,Rotaldo,2.0
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,5,Sesko,absence,,Rotaldo,2.0
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,5,Rashford,absence,,Rotaldo,2.0
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,5,Fofana,absence,,Rotaldo,2.0
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,9,Saka,remplacement_tactique,5.0,Anderson,5.5
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,9,Cherki,absence,,Janelt,4.5
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,9,Simms,absence,,Nketiah,4.5
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,6,Angulo,absence,,Sangaré,5.5
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,1,Gibbs-White,absence,,Iwobi,8.0
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,1,João Pedro,remplacement_tactique,5.0,Jackson,5.0
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,4,Meunier,absence,,Ajer,5.5
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,4,Mainoo,absence,,Kluivert,4.0
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,4,Kamada,remplacement_tactique,3.5,Tielemans,7.0
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,7,Bogle,remplacement_tactique,4.5,Mukiele,4.5
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,7,Sávio,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,7,Fernández,remplacement_tactique,5.0,Mac Allister,6.0
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,7,Kroupi,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_2_4_8_3,2,8,Dewsbury-Hall,remplacement_tactique,5.0,Manzambi,7.0
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,Mendy,absence,,Robertson,6.0
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,James,absence,,O'Reilly,5.0
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,Gyökeres,remplacement_tactique,4.0,Mbaye,5.0
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,9,Saka,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,9,Simms,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,0,Bruno Fernandes,absence,,Willock,5.0
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,2,Gusto,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,6,Fernandez-Pardo,absence,,Emersonn,4.5
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,3,Botman,absence,,Ampadu,5.0
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,3,Buendía,remplacement_tactique,4.5,Le Fée,5.0
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,5,Sesko,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,5,Rashford,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,5,Fofana,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,8,Maitland-Niles,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,8,Kalimuendo,absence,,Mateta,4.0
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,4,Boscagli,remplacement_tactique,3.5,Robinson,5.0
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,4,Tielemans,remplacement_tactique,3.5,Kamada,4.5
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,1,Branthwaite,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,1,João Pedro,absence,,Akpom,4.5
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,1,Havertz,remplacement_tactique,5.0,Jackson,8.0
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,7,Sávio,absence,,Davis,4.5
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,7,Strand Larsen,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,5,Sesko,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,5,Rashford,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,8,Kadioglu,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,8,Maitland-Niles,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,7,Mukiele,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,7,Sávio,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,7,Strand Larsen,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,2,Eze,absence,,O'Reilly,4.5
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,2,Isak,remplacement_tactique,4.5,Solanke,6.0
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,2,Gyökeres,remplacement_tactique,4.5,Mbaye,5.0
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,6,Fernandez-Pardo,absence,,Brobbey,4.0
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,6,Okafor,absence,,Emersonn,4.5
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,9,White,absence,,Williams,3.5
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,9,Saka,absence,,Anderson,5.0
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,9,Simms,absence,,Tel,6.0
+mpg_division_match_UNRUAZCC_1_1_4_4_4_1,4,4,Kostoulas,remplacement_tactique,4.5,George,6.0
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,0,Guéhi,absence,,Rotaldo,2.5
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,Botman,absence,,van de Ven,7.0
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,Thiaw,absence,,Ampadu,4.5
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,García,remplacement_tactique,4.0,Omar Marmoush,6.0

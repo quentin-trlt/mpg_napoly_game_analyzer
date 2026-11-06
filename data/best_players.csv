@@ -1,0 +1,61 @@
+match_id,gw,rang,joueur,note,stat1_libelle,stat1_valeur,stat2_libelle,stat2_valeur,stat3_libelle,stat3_valeur
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,1,Rayan Cherki,8.0,But,1,Dribble réussi,2,Duel gagné,6
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,2,Kiernan Dewsbury-Hall,7.5,But,1,Passe décisive,1,Dribble réussi,1
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,3,Diego Gómez,7.0,Dribble réussi,1,Interception,1,Duel gagné,12
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,1,Gianluigi Donnarumma,7.5,Arrêts,6,Parade en plongeant,4,Arrêt d'un tir de l'intérieur de la surface,2
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,2,Cole Palmer,7.5,Passe décisive,1,Interception,1,Duel gagné,6
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,3,Maxence Lacroix,6.0,Duel gagné,1,Interception,1,Ratio Passes Précises,90
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,1,Jérémy Doku,7.5,But,1,Tir tenté,2,Dribble réussi,5
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,2,Yéremy Pino,7.0,But,1,Duel gagné,3,Centre,2
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,3,Luka Vuskovic,7.0,Duel gagné,7,Tir tenté,2,Ratio Passes Précises,67
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,1,Morgan Rogers,8.0,But,1,Dribble réussi,3,Duel gagné,9
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,2,Antoine Semenyo,6.5,Dribble réussi,1,Duel gagné,1,Centre,3
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,3,Jørgen Strand Larsen,6.5,Tir tenté,3,Ratio Passes Précises,73,Nombre de ballon touché,33
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,1,João Pedro,8.0,But,2,Tir tenté,2,Ratio Passes Précises,76
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,2,Maxim De Cuyper,7.0,But,1,Interception,1,Duel gagné,1
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,3,Riccardo Calafiori,6.5,But,1,Duel gagné,4,Centre,2
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,1,Diego Gómez,7.5,But,1,Dribble réussi,3,Duel gagné,4
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,2,Virgil van Dijk,6.5,Duel gagné,6,Interception,1,Tir tenté,1
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,3,Lewis Dunk,6.5,Duel gagné,4,Interception,3,Ratio Passes Précises,92
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,1,Alex Iwobi,8.0,But,1,Dribble réussi,2,Duel gagné,2
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,2,Yasin Ayari,7.5,But,1,Duel gagné,2,Ratio Passes Précises,81
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,3,David Raya,6.0,Arrêts,2,Parade en plongeant,1,Centre capté,3
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,1,Erling Haaland,8.0,But,2,Tir tenté,5,Dribble réussi,1
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,2,Charalampos Kostoulas,7.5,But,1,Passe décisive,1,Tir tenté,4
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,3,Youri Tielemans,7.0,Passe décisive,1,Interception,1,Duel gagné,4
+mpg_division_match_UNRUAZCC_1_1_2_4_8_3,2,1,Johan Manzambi,7.0,But,1,Dribble réussi,2,Interception,1
+mpg_division_match_UNRUAZCC_1_1_2_4_8_3,2,2,Zion Suzuki,6.5,Arrêts,1,Parade en plongeant,1,Centre capté,5
+mpg_division_match_UNRUAZCC_1_1_2_4_8_3,2,3,Bart Verbruggen,6.0,Arrêts,1,Parade en plongeant,1,Arrêt d'un tir de l'intérieur de la surface,1
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,1,Pedro Neto,8.0,But,2,Duel gagné,4,Centre,2
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,Marcus Tavernier,7.5,But,1,Interception,1,Duel gagné,2
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,3,Maxim De Cuyper,7.0,Dribble réussi,1,Interception,1,Duel gagné,7
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,1,Marcus Tavernier,7.5,But,1,Duel gagné,2,Centre,2
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,2,John McGinn,7.0,Passe décisive,1,Dribble réussi,1,Duel gagné,5
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,3,Konstantinos Tzolakis,6.5,Arrêts,5,Parade en plongeant,2,Arrêt d'un tir de l'intérieur de la surface,4
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,1,Alexander Isak,7.0,But,1,Tir tenté,3,Nombre de ballon touché,20
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,2,Andy Robertson,6.0,Duel gagné,1,Interception,1,Centre,2
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,3,Viktor Gyökeres,6.0,Passe décisive,1,Nombre de ballon touché,17,Minutes jouées,68
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,1,Zion Suzuki,7.0,Arrêts,6,Parade en plongeant,5,Arrêt d'un tir de l'intérieur de la surface,5
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,2,Oscar Bobb,7.0,But,1,Dribble réussi,2,Duel gagné,2
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,3,Evanilson,7.0,But,1,Tir tenté,4,Dribble réussi,2
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,1,Gabriel Magalhães,7.5,But,1,Duel gagné,4,Interception,2
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,2,Bradley Barcola,7.0,Passe décisive,1,Dribble réussi,1,Interception,2
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,3,William Osula,7.0,But,1,Tir tenté,2,Nombre de ballon touché,14
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,1,Nicolas Jackson,8.0,But,2,Tir tenté,3,Dribble réussi,2
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,2,Ezri Konsa,7.5,But,1,Duel gagné,5,Tir tenté,2
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,3,Rayan,7.0,But,1,Dribble réussi,2,Interception,4
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,1,Bart Verbruggen,8.0,Arrêts,6,Parade en plongeant,3,Arrêt d'un tir de l'intérieur de la surface,6
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,2,Declan Rice,7.0,Passe décisive,1,Dribble réussi,1,Interception,1
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,3,Kiernan Dewsbury-Hall,7.0,Dribble réussi,2,Duel gagné,7,Centre,5
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,1,Jan Paul van Hecke,7.5,But,1,Duel gagné,4,Tir tenté,5
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,2,Morgan Rogers,7.5,But,1,Dribble réussi,2,Duel gagné,8
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,3,Cole Palmer,7.5,But,1,Dribble réussi,1,Interception,3
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,1,Yasin Ayari,7.0,But,1,Interception,3,Duel gagné,5
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,2,Igor Thiago,7.0,But,1,Tir tenté,2,Centre,1
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,3,Oliver McBurnie,7.0,But,1,Passe décisive,1,Tir tenté,2
+mpg_division_match_UNRUAZCC_1_1_4_4_4_1,4,1,Ezri Konsa,7.0,Duel gagné,8,Ratio Passes Précises,89,Nombre de ballon touché,50
+mpg_division_match_UNRUAZCC_1_1_4_4_4_1,4,2,Nicolas Jackson,7.0,But,1,Tir tenté,2,Dribble réussi,3
+mpg_division_match_UNRUAZCC_1_1_4_4_4_1,4,3,Senne Lammens,6.5,Arrêts,8,Parade en plongeant,3,Centre capté,1
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,1,Micky van de Ven,7.0,Duel gagné,6,Ratio Passes Précises,100,Nombre de ballon touché,132
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,2,Evanilson,7.0,But,1,Tir tenté,1,Dribble réussi,1
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,Caoimhín Kelleher,6.0,Arrêts,1,Parade en plongeant,1,Minutes jouées,90

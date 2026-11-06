@@ -1,0 +1,70 @@
+match_id,gw,team_id,side,bonus,effet,cible_affiche,icone
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,9,dom,Capitaine,+0.5pt,Cherki,captain_icon
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,8,ext,Capitaine,+0.5pt,Hinshelwood,captain_icon
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,8,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,2,dom,Capitaine,+0.5pt,Yalcouyé,captain_icon
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,5,ext,Capitaine,+0.5pt,Rice,captain_icon
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,2,dom,Zahia,+0.5pt,Titulaires,zahia_icon
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,5,ext,McDo+,+1pt,Rashford,mcdo_icon
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,3,dom,Capitaine,+0.5pt,Buendía,captain_icon
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,4,ext,Capitaine,+0.5pt,Barnes,captain_icon
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,3,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,3,dom,McDo+,+1pt,Pino,mcdo_icon
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,4,ext,McDo+,+1pt,Mainoo,mcdo_icon
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,7,dom,Capitaine,+0.5pt,Semenyo,captain_icon
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,6,ext,Capitaine,+0.5pt,Igor Thiago,captain_icon
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,1,dom,Capitaine,+0.5pt,João Pedro,captain_icon
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,0,ext,Capitaine,,,captain_icon
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,1,dom,5 défenseurs,+1pt,Déf. titulaires,5_def_icon
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,5,dom,Capitaine,,,captain_icon
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,9,ext,Capitaine,+0.5pt,Cherki,captain_icon
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,9,ext,Cheat Code 18-26,-0.5pt,Titulaires,orange_icon
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,6,dom,Capitaine,+0.5pt,Okafor,captain_icon
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,1,ext,Capitaine,+0.5pt,Gibbs-White,captain_icon
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,1,ext,5 défenseurs,+1pt,Déf. titulaires,5_def_icon
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,4,dom,Capitaine,+0.5pt,Matheus Cunha,captain_icon
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,7,ext,Capitaine,+0.5pt,Semenyo,captain_icon
+mpg_division_match_UNRUAZCC_1_1_2_4_8_3,2,8,dom,Capitaine,+0.5pt,Hinshelwood,captain_icon
+mpg_division_match_UNRUAZCC_1_1_2_4_8_3,2,3,ext,Capitaine,,,captain_icon
+mpg_division_match_UNRUAZCC_1_1_2_4_8_3,2,8,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_2_4_8_3,2,3,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,0,dom,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,ext,Capitaine,+0.5pt,Palmer,captain_icon
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,0,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,ext,Suarez,-1pt,Kelleher,suarez_icon
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,9,dom,Capitaine,,,captain_icon
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,0,ext,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,0,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,2,dom,Capitaine,+0.5pt,Palmer,captain_icon
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,6,ext,Capitaine,+0.5pt,Igor Thiago,captain_icon
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,2,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,3,dom,Capitaine,+0.5pt,Doku,captain_icon
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,5,ext,Capitaine,,,captain_icon
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,3,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,3,dom,McDo+,+1pt,Evanilson,mcdo_icon
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,8,dom,Capitaine,+0.5pt,Manzambi,captain_icon
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,4,ext,Capitaine,+0.5pt,Barnes,captain_icon
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,8,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,4,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,4,ext,Suarez,-1pt,Verbruggen,suarez_icon
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,1,dom,Capitaine,+0.5pt,Havertz,captain_icon
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,7,ext,Capitaine,+0.5pt,Rogers,captain_icon
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,1,dom,5 défenseurs,+1pt,Déf. titulaires,5_def_icon
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,7,ext,Suarez,-1pt,Sels,suarez_icon
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,5,dom,Capitaine,,,captain_icon
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,8,ext,Capitaine,+0.5pt,Barcola,captain_icon
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,8,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_4_1_5_8,4,8,ext,Suarez,-1pt,Pickford,suarez_icon
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,7,dom,Capitaine,,,captain_icon
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,2,ext,Capitaine,+0.5pt,Palmer,captain_icon
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,6,dom,Capitaine,+0.5pt,Igor Thiago,captain_icon
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,9,ext,Capitaine,+0.5pt,Cherki,captain_icon
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,6,dom,Suarez,-1pt,Tzolakis,suarez_icon
+mpg_division_match_UNRUAZCC_1_1_4_4_4_1,4,4,dom,Capitaine,+0.5pt,Kluivert,captain_icon
+mpg_division_match_UNRUAZCC_1_1_4_4_4_1,4,1,ext,Capitaine,+0.5pt,Gibbs-White,captain_icon
+mpg_division_match_UNRUAZCC_1_1_4_4_4_1,4,4,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,0,dom,Capitaine,+0.5pt,McGinn,captain_icon
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,ext,Capitaine,+0.5pt,Doku,captain_icon
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,ext,McDo+,+1pt,Bobb,mcdo_icon

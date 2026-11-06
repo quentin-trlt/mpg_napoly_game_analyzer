@@ -1,0 +1,83 @@
+match_id,gw,team_id,side,buteur_affiche,type_but,player_key
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,9,dom,R. Cherki,reel,rayan_cherki__man_city
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,9,dom,D. Gómez,mpg,diego_gomez__brighton
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,9,dom,M. Belloumi,reel,mohamed_belloumi__hull_city
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,9,dom,T. Barry,reel,thierno_barry__everton
+mpg_division_match_UNRUAZCC_1_1_1_1_9_8,1,8,ext,K. Dewsbury-Hall,reel,kiernan_dewsbury_hall__everton
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,2,dom,M. Yalcouyé,mpg,malick_yalcouye__brighton
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,2,dom,C. Palmer,mpg,cole_palmer__chelsea
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,2,dom,Pedro Neto,mpg,pedro_neto__chelsea
+mpg_division_match_UNRUAZCC_1_1_1_2_2_5,1,2,dom,V. Gyökeres,mpg,viktor_gyokeres__arsenal
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,3,dom,S. Botman,reel,sven_botman__newcastle
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,3,dom,T. Mitchell,mpg,tyrick_mitchell__crystal_palace
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,3,dom,J. Doku,reel,jeremy_doku__man_city
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,3,dom,Y. Pino,reel,yeremy_pino__crystal_palace
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,4,ext,D. Kamada,reel,daichi_kamada__crystal_palace
+mpg_division_match_UNRUAZCC_1_1_1_3_3_4,1,4,ext,E. Haaland,reel,erling_haaland__man_city
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,7,dom,M. Rogers,reel,morgan_rogers__chelsea
+mpg_division_match_UNRUAZCC_1_1_1_4_7_6,1,6,ext,J. Justin,reel,james_justin__leeds
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,1,dom,R. Calafiori,reel,riccardo_calafiori__arsenal
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,1,dom,João Pedro,reel,joao_pedro__chelsea
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,1,dom,João Pedro,reel,joao_pedro__chelsea
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,1,dom,N. Jackson,reel,nicolas_jackson__aston_villa
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,0,ext,M. De Cuyper,reel,maxim_de_cuyper__brighton
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,0,ext,B. Mbeumo,reel,bryan_mbeumo__man_united
+mpg_division_match_UNRUAZCC_1_1_1_5_1_0,1,0,ext,J. McGinn,reel,john_mcginn__aston_villa
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,9,ext,D. Gómez,reel,diego_gomez__brighton
+mpg_division_match_UNRUAZCC_1_1_2_1_5_9,2,9,ext,(CSC) Rotaldo,rotaldo_csc,
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,6,dom,Y. Ayari,reel,yasin_ayari__brighton
+mpg_division_match_UNRUAZCC_1_1_2_2_6_1,2,1,ext,A. Iwobi,reel,alex_iwobi__fulham
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,4,dom,K. Lewis-Potter,reel,keane_lewis_potter__brentford
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,4,dom,E. Haaland,reel,erling_haaland__man_city
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,4,dom,E. Haaland,reel,erling_haaland__man_city
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,4,dom,D. Calvert-Lewin,reel,dominic_calvert_lewin__leeds
+mpg_division_match_UNRUAZCC_1_1_2_3_4_7,2,4,dom,C. Kostoulas,reel,charalampos_kostoulas__brighton
+mpg_division_match_UNRUAZCC_1_1_2_4_8_3,2,8,dom,J. Manzambi,reel,johan_manzambi__aston_villa
+mpg_division_match_UNRUAZCC_1_1_2_4_8_3,2,8,dom,J. Hinshelwood,reel,jack_hinshelwood__brighton
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,0,dom,M. De Cuyper,mpg,maxim_de_cuyper__brighton
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,0,dom,M. Tavernier,reel,marcus_tavernier__bournemouth
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,0,dom,B. Mbeumo,reel,bryan_mbeumo__man_united
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,ext,Pedro Neto,reel,pedro_neto__chelsea
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,ext,Pedro Neto,reel,pedro_neto__chelsea
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,ext,C. Palmer,mpg,cole_palmer__chelsea
+mpg_division_match_UNRUAZCC_1_1_2_5_0_2,2,2,ext,A. Isak,reel,alexander_isak__liverpool
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,9,dom,M. Belloumi,mpg,mohamed_belloumi__hull_city
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,9,dom,O. McBurnie,reel,oliver_mcburnie__hull_city
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,9,dom,(CSC) P. Groß,csc,pascal_gro__brighton
+mpg_division_match_UNRUAZCC_1_1_3_1_9_0,3,0,ext,M. Tavernier,reel,marcus_tavernier__bournemouth
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,2,dom,A. Isak,reel,alexander_isak__liverpool
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,6,ext,N. Angulo,mpg,nilson_angulo__sunderland
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,6,ext,J. King,mpg,josh_king__fulham
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,6,ext,Igor Thiago,mpg,igor_thiago__brentford
+mpg_division_match_UNRUAZCC_1_1_3_2_2_6,3,6,ext,N. Okafor,mpg,noah_okafor__leeds
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,3,dom,J. Doku,mpg,jeremy_doku__man_city
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,3,dom,O. Bobb,reel,oscar_bobb__fulham
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,3,dom,Evanilson,reel,evanilson__bournemouth
+mpg_division_match_UNRUAZCC_1_1_3_3_3_5,3,3,dom,(CSC) Rotaldo,rotaldo_csc,
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,8,dom,Gabriel Magalhães,reel,gabriel_magalhaes__arsenal
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,8,dom,B. Barcola,mpg,bradley_barcola__liverpool
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,8,dom,W. Osula,reel,william_osula__newcastle
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,4,ext,H. Barnes,reel,harvey_barnes__newcastle
+mpg_division_match_UNRUAZCC_1_1_3_4_8_4,3,4,ext,E. Haaland,reel,erling_haaland__man_city
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,1,dom,E. Konsa,reel,ezri_konsa__arsenal
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,1,dom,Rayan,reel,rayan__bournemouth
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,1,dom,N. Jackson,reel,nicolas_jackson__aston_villa
+mpg_division_match_UNRUAZCC_1_1_3_5_1_7,3,1,dom,N. Jackson,reel,nicolas_jackson__aston_villa
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,7,dom,J. van Hecke,reel,jan_paul_van_hecke__tottenham
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,7,dom,M. Rogers,reel,morgan_rogers__chelsea
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,7,dom,J. Kroupi,mpg,junior_kroupi__bournemouth
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,2,ext,A. Robertson,mpg,andy_robertson__tottenham
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,2,ext,C. Palmer,reel,cole_palmer__chelsea
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,2,ext,D. Ouattara,mpg,dango_ouattara__brentford
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,2,ext,D. Solanke,mpg,dominic_solanke__tottenham
+mpg_division_match_UNRUAZCC_1_1_4_2_7_2,4,2,ext,(CSC) Rotaldo,rotaldo_csc,
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,6,dom,Y. Ayari,reel,yasin_ayari__brighton
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,6,dom,G. Xhaka,mpg,granit_xhaka__sunderland
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,6,dom,J. King,mpg,josh_king__fulham
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,6,dom,Igor Thiago,reel,igor_thiago__brentford
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,9,ext,T. Barry,reel,thierno_barry__everton
+mpg_division_match_UNRUAZCC_1_1_4_3_6_9,4,9,ext,O. McBurnie,reel,oliver_mcburnie__hull_city
+mpg_division_match_UNRUAZCC_1_1_4_4_4_1,4,1,ext,N. Jackson,reel,nicolas_jackson__aston_villa
+mpg_division_match_UNRUAZCC_1_1_4_4_4_1,4,1,ext,K. Havertz,reel,kai_havertz__arsenal
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,0,dom,(CSC) Z. Suzuki,csc,zion_suzuki__aston_villa
+mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,ext,Evanilson,reel,evanilson__bournemouth

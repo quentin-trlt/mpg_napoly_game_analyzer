@@ -1,0 +1,57 @@
+# Ligue MPG « Napoly Game » — export du 6 novembre 2026
+
+Premier League, 10 équipes, 18 journées. Les données s'arrêtent avant la J5 (matchs du 6 au 8 novembre) : 4 journées jouées, soit 20 matchs.
+
+## Clés de jointure
+
+- `team_id` (0 à 9) : identifiant MPG de l'équipe (`mpg_team_UNRUAZCC_1_1_<team_id>`). On le retrouve dans tous les fichiers.
+- `player_key` : `prenom_nom__club` normalisé (sans accents). Clé unique de `players.csv`. Elle est présente dans `lineups`, `goals`, `typical_xi`, `mpg_scorers_ranking` et `player_leaderboards`. Elle reste vide uniquement pour Rotaldo, le joueur fictif aligné quand un poste n'est pas pourvu.
+- `match_id` : identifiant MPG du match (`..._<journée>_<n°>_<équipe dom>_<équipe ext>`). Clé de `fixtures` pour les matchs joués.
+- `abrev` (teams) = `equipe_abrev` (classements de joueurs).
+
+```
+teams ─┬─< players ─┬─< lineups >── fixtures
+       │            ├─< goals    >── fixtures
+       │            └─< typical_xi
+       └─< fixtures (home_team_id / away_team_id) ─┬─< bonus
+                                                    ├─< substitutions
+                                                    └─< best_players
+```
+
+## Fichiers
+
+| Fichier | Grain | Contenu |
+|---|---|---|
+| `teams.csv` | 1 ligne par équipe | Coach, président, stade, classement (G/N/P, diff, pts, variation de rang, forme), valeur de l'effectif, moyennes du 11 type, rangs internes (attaque, défense, pire sélectionneur, rateaux, précieux), buts pour/contre (réels/MPG), Rotaldos alignés, bonus subis, effectif par poste, total des enchères et des cotes, budget restant |
+| `players.csv` | 1 ligne par joueur acheté (196) | Équipe MPG, club, poste, cote, prix d'enchère, puis les colonnes de l'onglet Data : note moyenne réelle, buts réels sur la saison, % de titularisations, 2 derniers résultats du club, date du prochain match |
+| `fixtures.csv` | 1 ligne par rencontre (90) | Calendrier complet J1 à J18 : date, heure, domicile/extérieur, score et formations pour les 20 matchs joués |
+| `lineups.csv` | 1 ligne par joueur et par match | Note (bonus inclus), capitaine, position sur le terrain, statut : titulaire, remplaçant entré, titulaire absent, remplacé tactiquement, remplaçant non entré, Rotaldo |
+| `substitutions.csv` | 1 ligne par remplacement | Titulaire sortant, remplaçant entré, type (absence ou remplacement tactique), notes |
+| `goals.csv` | 1 ligne par but | Buteur, type : `reel`, `mpg` (but accordé par MPG sur la note), `csc`, `rotaldo_csc` |
+| `bonus.csv` | 1 ligne par bonus posé | Équipe qui l'a posé, bonus (Capitaine, Suarez, McDo+, Zahia, 4/5 défenseurs…), effet, cible |
+| `best_players.csv` | 3 par match | Meilleurs joueurs du match avec leurs 3 stats mises en avant |
+| `typical_xi.csv` | 11 par équipe | 11 type affiché par MPG, note moyenne de chaque joueur, prochain adversaire de son club |
+| `mpg_scorers_ranking.csv` | 52 lignes | Classement des buteurs de la ligue (buts réels, buts MPG) |
+| `player_leaderboards.csv` | 43 lignes | Classements de l'onglet Joueurs : meilleur ratio prix/but, meilleurs G/D/M/A |
+
+## Points d'attention
+
+- **Deux notes différentes.** `note_avec_bonus` (lineups) est la note du match MPG, bonus inclus : sa moyenne par équipe retombe exactement sur la colonne « +B. » du site. `note_moy_reelle` (players) est la moyenne sur la saison réelle de Premier League.
+- **Valeur de l'effectif.** `valeur_effectif_meur` = somme des cotes + budget non dépensé. Seuls USPionvillePusitanos (5 M) et Tractou'pelle (25 M) n'ont pas dépensé tout leur budget. L'hypothèse d'un budget de 500 M vient des données, pas d'une règle lue sur le site.
+- **Rang dans `teams.csv`.** `forme` donne les résultats de la J1 à la J4 (V/N/D). `variation_rang` est la variation de place affichée sur le classement.
+- `flag_point_interrogation` = 1 pour les joueurs marqués d'un « ? » dans l'effectif (probablement incertains ou blessés).
+
+## Vérifications effectuées
+
+Ces 22 contrôles passent tous (`validate.py`) :
+
+- Scores = buts listés.
+- Classement G/N/P/pts/diff recalculé depuis les matchs = classement du site.
+- Buts réels/MPG par équipe = onglet Équipes.
+- Classement des buteurs = somme des buts des matchs.
+- Moyennes « +B. » recalculées depuis les compositions.
+- 11 joueurs alignés par équipe et par match.
+- Rotaldos alignés.
+- Cotes identiques entre fiches équipe et onglet Data.
+- Prix d'achat identiques avec les classements de joueurs.
+- Copie des matchs et de l'onglet Data contrôlée par somme de contrôle avec le navigateur.

@@ -277,6 +277,47 @@ def _model_quality(a: Analysis, fc: dict, meta: dict) -> None:
         how("pronostics_figes", meta)
 
 
+def _bonus_effect(fc: dict, team_id: int, meta: dict) -> None:
+    be = fc.get("bonus_effect")
+    section("Ce que valent les bonus restants")
+    if be is None:
+        st.caption(
+            "Dotation de bonus inconnue (fichier `data/bonus_stock.csv` absent) : les prévisions ignorent les "
+            "bonus à venir."
+        )
+        return
+    left, right = st.columns([1.1, 1], gap="medium")
+    with left:
+        charts.show(
+            charts.diverging_bars(
+                be,
+                "effet_pts",
+                "team_name",
+                team_id,
+                "Effet net des bonus restants sur les points attendus",
+                x_title="Points attendus en fin de saison",
+                fmt="+.2f",
+            )
+        )
+    with right:
+        st.dataframe(
+            be[["team_name", "restants", "effet_pts", "effet_titre", "effet_dernier"]],
+            hide_index=True,
+            column_config={
+                "team_name": "Équipe",
+                "restants": "Bonus restants",
+                "effet_pts": st.column_config.NumberColumn("Effet (pts)", format="%+.2f"),
+                "effet_titre": st.column_config.NumberColumn("Effet P(titre)", format="percent"),
+                "effet_dernier": st.column_config.NumberColumn("Effet P(dernier)", format="percent"),
+            },
+        )
+        st.caption(
+            "Les probabilités des matchs et de fin de saison de cette page incluent déjà l'usage attendu des "
+            "bonus restants."
+        )
+    how("bonus_prevision", meta)
+
+
 def render(a: Analysis, team_id: int) -> None:
     fc = get_forecast()
     names = a.league.team_names
@@ -302,6 +343,7 @@ def render(a: Analysis, team_id: int) -> None:
         "tau": poisson.tau,
         "rotaldo": struct.rotaldo_note,
         "sigma": struct.sigma_match,
+        "note_slope": struct.link.b,
     }
 
     s = sim.summary.set_index("team_id")
@@ -346,6 +388,7 @@ def render(a: Analysis, team_id: int) -> None:
     section("Fin de saison simulée")
     _season_table(sim, names, team_id)
     how(["simulation_saison", "ensemble"], meta)
+    _bonus_effect(fc, team_id, meta)
     left, right = st.columns(2, gap="medium")
     with left:
         charts.show(charts.rank_heatmap(sim.rank_probs, names, sim.summary["team_id"].tolist()))

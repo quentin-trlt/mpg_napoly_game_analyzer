@@ -15,6 +15,7 @@ from scipy import stats as sps
 from mpg.loader import GROUPES
 
 OUTCOMES = ("H", "D", "A")
+ELO_PER_LATENT = 400 / np.log(10)
 RESULT_TO_IDX = {"V": 0, "N": 1, "D": 2}
 
 
@@ -28,6 +29,26 @@ class Context:
     lineups: pd.DataFrame
     team_ids: list[int]
     upto_gw: int
+    bonus_remaining: pd.DataFrame | None = None
+    past_bonus: pd.DataFrame | None = None
+    formations: dict = field(default_factory=dict)
+    tactical_gain: dict = field(default_factory=dict)
+    start_share: float = 0.82
+    note_slope: float = 2.0
+    goal_note_slope: float = 0.5
+
+    def bonus_note(self, rows: pd.DataFrame) -> np.ndarray:
+        """Avantage de note net des bonus posés lors des matchs de `rows` (vue de team_id), 0 si inconnu."""
+        if self.past_bonus is None or rows.empty:
+            return np.zeros(len(rows))
+        m = rows[["match_id", "team_id"]].merge(self.past_bonus, on=["match_id", "team_id"], how="left")
+        return m["d_note"].fillna(0.0).to_numpy()
+
+    def cancelled_goals(self, rows: pd.DataFrame) -> np.ndarray:
+        if self.past_bonus is None or rows.empty:
+            return np.zeros(len(rows))
+        m = rows[["match_id", "team_id"]].merge(self.past_bonus, on=["match_id", "team_id"], how="left")
+        return m["buts_annules"].fillna(0).to_numpy(float)
 
     @property
     def home_rows(self) -> pd.DataFrame:
@@ -126,9 +147,11 @@ class EloModel:
     def fit(self, ctx: Context) -> "EloModel":
         r = {t: 1500.0 + self.prior_scale * float(ctx.strength.get(t, 0.0)) for t in ctx.team_ids}
         deltas, outs = [], []
-        for _, m in ctx.home_rows.sort_values("gw").iterrows():
+        rows = ctx.home_rows.sort_values("gw")
+        bonus_elo = ctx.bonus_note(rows) * ctx.note_slope * ELO_PER_LATENT
+        for (_, m), bonus_d in zip(rows.iterrows(), bonus_elo):
             h, a = int(m["team_id"]), int(m["opp_id"])
-            d = r[h] - r[a]
+            d = r[h] - r[a] + bonus_d
             deltas.append(d / 100.0)
             outs.append(RESULT_TO_IDX[m["resultat"]])
             expected = 1.0 / (1.0 + 10 ** (-d / 400))
@@ -193,18 +216,21 @@ class PoissonModel:
         sd = np.concatenate([[1.0, 0.3, 0.3, 0.3], np.full(2 * n_t, tau)])
         return mean, 1.0 / sd**2
 
-    def _map(self, x: np.ndarray, y: np.ndarray, tau: float, mu0: float) -> tuple[np.ndarray, np.ndarray, float]:
+    def _map(
+        self, x: np.ndarray, y: np.ndarray, tau: float, mu0: float, offset: np.ndarray | None = None
+    ) -> tuple[np.ndarray, np.ndarray, float]:
         m0, prec = self._prior(tau, mu0)
         theta = m0.copy()
+        off = np.zeros(len(y)) if offset is None else offset
         for _ in range(100):
-            lam = np.exp(x @ theta)
+            lam = np.exp(x @ theta + off)
             grad = x.T @ (y - lam) - prec * (theta - m0)
             hess = x.T @ (x * lam[:, None]) + np.diag(prec)
             step = np.linalg.solve(hess, grad)
             theta += step
             if np.max(np.abs(step)) < 1e-9:
                 break
-        lam = np.exp(x @ theta)
+        lam = np.exp(x @ theta + off)
         hess = x.T @ (x * lam[:, None]) + np.diag(prec)
         loglik = float((y * np.log(lam) - lam - special.gammaln(y + 1)).sum())
         logprior = float(
@@ -223,11 +249,14 @@ class PoissonModel:
         ai = rows["opp_id"].map(self.team_index).to_numpy()
         xh, xa = self._design(hi, ai)
         x = np.vstack([xh, xa])
+        away_rows = rows.assign(team_id=rows["opp_id"])
         y = np.concatenate([rows["bp"].to_numpy(float), rows["bc"].to_numpy(float)])
+        y = y + np.concatenate([ctx.cancelled_goals(rows), ctx.cancelled_goals(away_rows)])
+        offset = ctx.goal_note_slope * np.concatenate([ctx.bonus_note(rows), ctx.bonus_note(away_rows)])
         mu0 = np.log(max(y.mean(), 0.5)) if len(y) else np.log(2.0)
         best = None
         for tau in self.tau_grid:
-            theta, hess, lm = self._map(x, y, tau, mu0)
+            theta, hess, lm = self._map(x, y, tau, mu0, offset)
             if best is None or lm > best[3]:
                 best = (tau, theta, hess, lm)
         self.tau, self.theta, hess, _ = best

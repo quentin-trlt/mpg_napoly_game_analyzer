@@ -249,6 +249,19 @@ GLOSSARY: dict[str, str] = {
         "eu aucun effet (joueur ciblé absent, par exemple). Le capitaine et les bonus à 4 ou 5 défenseurs ne sont pas "
         "comptés : le premier se choisit à chaque match, les seconds dépendent de la formation."
     ),
+    "bonus_prevision": (
+        "**Les bonus dans les prévisions.** Chaque bonus restant est converti en avantage sur le match où il est posé : "
+        "les bonus de note (McDo+, Suarez, Zahia, Cheat Code, 424, Tonton Pat) passent par la pente note → résultat "
+        "estimée sur la ligue ({note_slope:.2f} par point de note moyenne), La valise à Nanard par la loi des scores du "
+        "modèle de Poisson (un but adverse en moins). Dans chaque saison simulée, les bonus restants d'une équipe sont "
+        "placés au hasard sur ses matchs restants, au plus un par match ; un Miroir renvoie le bonus adverse, ou est "
+        "perdu si l'adversaire n'en pose pas.\n\n"
+        "Les bonus déjà posés sont retirés de la force estimée par Elo et Poisson : une victoire obtenue grâce à un "
+        "Zahia ne fait plus passer l'équipe pour plus forte qu'elle n'est. L'effet net est la différence de points "
+        "attendus avec et sans bonus : c'est un avantage relatif, la somme sur la ligue est proche de zéro.\n\n"
+        "**Limites.** En vrai, les coachs gardent leurs bonus pour les matchs importants ; ici le placement est "
+        "aléatoire. L'effet offensif du 4-2-4 n'est pas modélisé."
+    ),
     "calibration": (
         "**Calibration.** On regroupe toutes les probabilités annoncées (3 par match) par tranche et on compare à la "
         "fréquence à laquelle l'issue s'est réellement produite. Un modèle bien calibré a ses points sur la diagonale : "

@@ -684,3 +684,177 @@ mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,ext,Bobb,oscar_bobb__fulham,MO,titul
 mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,ext,Omar Marmoush,omar_marmoush__tottenham,A,remplacant_entre,6.0,0,4,0
 mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,ext,Pino,yeremy_pino__crystal_palace,A,titulaire,5.0,0,4,2
 mpg_division_match_UNRUAZCC_1_1_4_5_0_3,4,3,ext,Evanilson,evanilson__bournemouth,A,titulaire,7.0,0,4,4
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,White,ben_white__arsenal,DC,titulaire_absent,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Belloumi,mohamed_belloumi__hull_city,MO,titulaire_absent,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,McBurnie,oliver_mcburnie__hull_city,A,titulaire_remplace_tactique,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Nketiah,eddie_nketiah__crystal_palace,A,remplacant_non_entre,5.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Saka,bukayo_saka__arsenal,MO,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Rúben Dias,ruben_dias__man_city,DC,remplacant_non_entre,3.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Benítez,walter_benitez__crystal_palace,G,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Fábio Carvalho,fabio_fabio_carvalho__brentford,MO,titulaire_absent,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Igor Jesus,igor_jesus__nottingham_forest,A,remplacant_non_entre,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Semenyo,antoine_semenyo__man_city,MO,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Sávio,savio__tottenham,MO,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Chilwell,ben_chilwell__crystal_palace,DL,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Ruggeri,matteo_ruggeri__aston_villa,DL,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Martínez,emiliano_martinez__chelsea,G,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Tzolakis,konstantinos_tzolakis__hull_city,G,titulaire,8.0,0,0,0
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Williams,neco_williams__nottingham_forest,DL,remplacant_entre,5.0,0,1,1
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Kayode,michael_kayode__brentford,DL,titulaire,4.5,0,1,2
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Jacquet,jeremy_jacquet__liverpool,DC,titulaire,6.5,0,1,3
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Cherki,rayan_cherki__man_city,MO,titulaire,6.0,1,2,1
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Gómez,diego_gomez__brighton,MO,titulaire,7.0,0,2,2
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Anderson,elliot_anderson__man_city,MD,titulaire,5.0,0,3,0
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Janelt,vitaly_janelt__brentford,MD,remplacant_entre,5.5,0,3,2
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Gakpo,cody_gakpo__liverpool,A,titulaire,5.5,0,4,1
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Barry,thierno_barry__everton,A,titulaire,8.0,0,4,2
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,9,dom,Tel,mathys_tel__tottenham,A,remplacant_entre,4.5,0,4,3
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Trafford,james_trafford__leeds,G,titulaire,8.0,0,0,0
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Davis,leif_davis__ipswich_town,DL,titulaire,4.5,0,1,1
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,van Hecke,jan_paul_van_hecke__tottenham,DC,titulaire,6.5,0,1,2
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Bogle,jayden_bogle__leeds,DL,titulaire,6.0,0,1,3
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Rogers,morgan_rogers__chelsea,MO,titulaire,5.5,1,2,1
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Mukiele,nordi_mukiele__sunderland,DL,remplacant_entre,5.0,0,2,2
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Mac Allister,alexis_mac_allister__liverpool,MO,titulaire,7.5,0,3,0
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Fernández,enzo_fernandez__man_city,MD,titulaire,3.5,0,3,2
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Strand Larsen,j_rgen_strand_larsen__crystal_palace,A,titulaire,4.5,0,4,1
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Kroupi,junior_kroupi__bournemouth,A,titulaire,5.0,0,4,2
+mpg_division_match_UNRUAZCC_1_1_5_1_9_7,5,7,ext,Delap,liam_delap__nottingham_forest,A,titulaire,8.5,0,4,3
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Lacroix,maxence_lacroix__chelsea,DC,titulaire_absent,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Gyökeres,viktor_gyokeres__arsenal,A,titulaire_remplace_tactique,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Solanke,dominic_solanke__tottenham,A,remplacant_non_entre,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Eze,eberechi_eze__arsenal,MO,remplacant_non_entre,5.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Gravenberch,ryan_gravenberch__liverpool,MD,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Gusto,malo_gusto__chelsea,DL,remplacant_non_entre,6.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Ellborg,melker_ellborg__sunderland,G,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Rayan,rayan__bournemouth,MO,titulaire_remplace_tactique,5.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Havertz,kai_havertz__arsenal,A,titulaire_remplace_tactique,4.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Lewis-Skelly,myles_lewis_skelly__arsenal,MD,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Adams,tyler_adams__bournemouth,MD,remplacant_non_entre,6.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Mykolenko,vitalii_mykolenko__everton,DL,remplacant_non_entre,7.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Collins,nathan_collins__brentford,DC,remplacant_non_entre,5.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,John Victor,john_victor__nottingham_forest,G,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Donnarumma,gianluigi_donnarumma__man_city,G,titulaire,3.5,0,0,0
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,O'Reilly,nico_o_reilly__man_city,DL,remplacant_entre,4.5,0,1,0
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Hume,trai_hume__sunderland,DL,titulaire,6.5,0,1,1
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Mendy,nobel_mendy__hull_city,DL,titulaire,5.5,0,1,2
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Robertson,andy_robertson__tottenham,DL,titulaire,5.0,0,1,3
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Pedro Neto,pedro_neto__chelsea,MO,titulaire,4.0,0,2,1
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Ouattara,dango_ouattara__brentford,MO,titulaire,5.5,0,2,2
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Yalcouyé,malick_yalcouye__brighton,MO,titulaire,5.0,0,3,0
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Palmer,cole_palmer__chelsea,MO,titulaire,5.5,1,3,2
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Mbaye,ibrahim_mbaye__aston_villa,A,remplacant_entre,4.5,0,4,1
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,2,dom,Isak,alexander_isak__liverpool,A,titulaire,6.5,0,4,2
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Sels,matz_sels__nottingham_forest,G,titulaire,5.5,0,0,0
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Tarkowski,james_tarkowski__everton,DC,titulaire,4.5,0,1,1
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Konsa,ezri_konsa__arsenal,DC,titulaire,6.5,0,1,2
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Calafiori,riccardo_calafiori__arsenal,DL,titulaire,5.5,0,1,3
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Goretzka,leon_goretzka__aston_villa,MD,remplacant_entre,5.5,0,2,1
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Gibbs-White,morgan_gibbs_white__nottingham_forest,MO,titulaire,6.0,0,2,2
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Iwobi,alex_iwobi__fulham,MO,titulaire,5.0,0,3,0
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Ødegaard,martin_degaard__arsenal,MO,titulaire,7.0,1,3,2
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Tzolis,christos_tzolis__arsenal,MO,titulaire,6.5,0,3,4
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Akpom,chuba_akpom__ipswich_town,A,remplacant_entre,4.0,0,4,1
+mpg_division_match_UNRUAZCC_1_1_5_2_2_1,5,1,ext,Jackson,nicolas_jackson__aston_villa,A,titulaire,6.0,0,4,2
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Fofana,malick_fofana__sunderland,A,titulaire_absent,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Richarlison,richarlison__tottenham,A,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Rashford,marcus_rashford__man_united,A,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Sesko,benjamin_sesko__man_united,A,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Ramsey,jacob_ramsey__newcastle,MO,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Bijol,jaka_bijol__leeds,DC,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Andersen,joachim_andersen__fulham,DC,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Calvert-Lewin,dominic_calvert_lewin__leeds,A,titulaire_remplace_tactique,5.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Kamada,daichi_kamada__crystal_palace,MO,remplacant_non_entre,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Tielemans,youri_tielemans__man_united,MD,remplacant_non_entre,6.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Robinson,antonee_robinson__fulham,DL,remplacant_non_entre,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Meunier,thomas_meunier__sunderland,DL,remplacant_non_entre,5.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Ajer,kristoffer_ajer__brentford,DC,remplacant_non_entre,5.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Darlow,karl_darlow__man_united,G,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Pickford,jordan_pickford__everton,G,titulaire,6.0,0,0,0
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,van Dijk,virgil_van_dijk__liverpool,DC,titulaire,7.0,0,1,0
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Muharemovic,tarik_muharemovic__leeds,DC,titulaire,7.0,0,1,1
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Dunk,lewis_dunk__brighton,DC,titulaire,6.5,0,1,2
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Maguire,harry_maguire__man_united,DC,titulaire,5.0,0,1,3
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Rice,declan_rice__arsenal,MD,titulaire,5.5,0,2,1
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Jensen,mathias_jensen__brentford,MD,titulaire,5.0,0,2,2
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Ndiaye,iliman_ndiaye__man_city,MO,titulaire,5.0,0,3,0
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Foden,phil_foden__man_city,MO,titulaire,5.5,1,3,2
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Wilson,harry_wilson__leeds,MO,titulaire,4.5,0,3,4
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,5,dom,Rotaldo,,,rotaldo,2.5,0,4,0
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Lammens,senne_lammens__man_united,G,titulaire,4.0,0,0,0
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Lewis-Potter,keane_lewis_potter__brentford,DL,titulaire,4.5,0,1,1
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Boscagli,olivier_boscagli__brighton,DL,titulaire,6.0,0,1,2
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Vuskovic,luka_vuskovic__brighton,DC,titulaire,6.5,0,1,3
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Barnes,harvey_barnes__newcastle,MO,titulaire,4.5,0,2,1
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Kluivert,justin_kluivert__bournemouth,MO,titulaire,4.5,0,2,2
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Matheus Cunha,matheus_cunha__man_united,MO,titulaire,6.5,0,3,0
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Mainoo,kobbie_mainoo__man_united,MD,titulaire,6.0,1,3,2
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Haaland,erling_haaland__man_city,A,titulaire,4.0,0,4,1
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,Kostoulas,charalampos_kostoulas__brighton,A,titulaire,5.5,0,4,2
+mpg_division_match_UNRUAZCC_1_1_5_3_5_4,5,4,ext,George,tyrique_george__everton,A,remplacant_entre,5.5,0,4,3
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Buendía,emiliano_buendia__aston_villa,MO,titulaire_absent,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,García,gonzalo_garcia__fulham,A,titulaire_remplace_tactique,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Pino,yeremy_pino__crystal_palace,A,remplacant_non_entre,5.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Muñoz,victor_munoz__liverpool,MO,remplacant_non_entre,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Ampadu,ethan_ampadu__leeds,DC,remplacant_non_entre,6.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Thiaw,malick_thiaw__newcastle,DC,remplacant_non_entre,5.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Suzuki,zion_suzuki__aston_villa,G,remplacant_non_entre,4.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Emersonn,emersonn__ipswich_town,A,titulaire_remplace_tactique,4.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Garner,james_garner__everton,MD,remplacant_non_entre,5.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Xhaka,granit_xhaka__sunderland,MD,remplacant_non_entre,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Sangaré,mamadou_sangare__brentford,MD,remplacant_non_entre,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Muñoz,daniel_munoz__nottingham_forest,DL,remplacant_non_entre,6.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Mosquera,cristhian_mosquera__arsenal,DC,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Arrizabalaga,kepa_arrizabalaga__arsenal,G,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Hornícek,lukas_hornicek__newcastle,G,titulaire,6.0,0,0,0
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Gvardiol,josko_gvardiol__man_city,DC,titulaire,3.0,0,1,1
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Mitchell,tyrick_mitchell__crystal_palace,DL,titulaire,4.0,0,1,2
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,van de Ven,micky_van_de_ven__tottenham,DC,titulaire,4.0,0,1,3
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Doku,jeremy_doku__man_city,MO,titulaire,4.0,1,2,1
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Bobb,oscar_bobb__fulham,MO,titulaire,5.5,0,2,2
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Le Fée,enzo_le_fee__sunderland,MO,remplacant_entre,7.0,0,3,0
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Szoboszlai,dominik_szoboszlai__liverpool,MO,titulaire,7.5,0,3,2
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Wissa,yoane_wissa__newcastle,A,remplacant_entre,5.0,0,4,1
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Omar Marmoush,omar_marmoush__tottenham,A,titulaire,4.0,0,4,2
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,3,dom,Evanilson,evanilson__bournemouth,A,titulaire,7.0,0,4,3
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Raya,david_raya__arsenal,G,titulaire,5.0,0,0,0
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Justin,james_justin__leeds,DL,titulaire,5.5,0,1,1
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Egan,john_egan__hull_city,DC,titulaire,6.0,0,1,2
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Truffert,adrien_truffert__bournemouth,DL,titulaire,5.5,0,1,3
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Angulo,nilson_angulo__sunderland,MO,titulaire,4.5,0,2,1
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Florentino,florentino__ipswich_town,MD,titulaire,4.5,0,2,2
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Ayari,yasin_ayari__brighton,MO,titulaire,7.0,1,3,0
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,King,josh_king__fulham,MO,titulaire,5.0,0,3,2
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Igor Thiago,igor_thiago__brentford,A,titulaire,2.5,0,4,1
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Brobbey,brian_brobbey__sunderland,A,titulaire,5.0,0,4,2
+mpg_division_match_UNRUAZCC_1_1_5_4_3_6,5,6,ext,Fernandez-Pardo,matias_fernandez_pardo__newcastle,A,remplacant_entre,4.5,0,4,3
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Kadioglu,ferdi_kadioglu__brighton,DL,titulaire_absent,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Maitland-Niles,ainsley_maitland_niles__everton,DL,titulaire_absent,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Kalimuendo,arnaud_kalimuendo__nottingham_forest,A,titulaire_absent,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Madjo,brian_madjo__aston_villa,A,remplacant_non_entre,4.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Willock,joe_willock__newcastle,MO,remplacant_non_entre,5.0,0,,
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,O'Riley,matt_o_riley__brighton,MD,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Hall,lewis_hall__newcastle,DL,remplacant_non_entre,5.5,0,,
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Bradley,conor_bradley__liverpool,DL,remplacant_non_entre,,0,,
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Verbruggen,bart_verbruggen__brighton,G,titulaire,6.0,0,0,0
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Rotaldo,,,rotaldo,2.5,0,1,0
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Ajayi,semi_ajayi__hull_city,DC,titulaire,7.5,0,1,1
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Gabriel Magalhães,gabriel_magalhaes__arsenal,DC,titulaire,6.0,0,1,2
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Rotaldo,,,rotaldo,2.5,0,1,3
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Dewsbury-Hall,kiernan_dewsbury_hall__everton,MO,titulaire,6.5,0,2,0
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Manzambi,johan_manzambi__aston_villa,MO,titulaire,7.0,0,3,1
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Hinshelwood,jack_hinshelwood__brighton,MO,titulaire,5.0,0,3,3
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Barcola,bradley_barcola__liverpool,A,titulaire,6.0,0,4,0
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Rotaldo,,,rotaldo,2.5,0,4,2
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,8,dom,Osula,william_osula__newcastle,A,titulaire,4.5,0,4,4
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Kelleher,caoimhin_kelleher__brentford,G,titulaire,6.0,0,0,0
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Guéhi,marc_guehi__man_city,DC,titulaire,4.5,0,1,1
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,De Cuyper,maxim_de_cuyper__brighton,DL,titulaire,6.0,0,1,2
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Giles,ryan_giles__hull_city,DL,titulaire,5.5,0,1,3
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Tavernier,marcus_tavernier__bournemouth,MO,titulaire,6.0,0,2,1
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Groß,pascal_gro__brighton,MO,titulaire,7.5,1,2,2
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Bruno Fernandes,bruno_fernandes__man_united,MO,titulaire,7.5,0,3,0
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,McGinn,john_mcginn__aston_villa,MO,titulaire,8.0,0,3,2
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Schade,kevin_schade__brentford,A,titulaire,4.0,0,4,1
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Mbeumo,bryan_mbeumo__man_united,A,titulaire,4.0,0,4,2
+mpg_division_match_UNRUAZCC_1_1_5_5_8_0,5,0,ext,Elanga,anthony_elanga__newcastle,A,titulaire,4.5,0,4,3

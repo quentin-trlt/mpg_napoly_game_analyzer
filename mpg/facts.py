@@ -6,6 +6,7 @@ from mpg.loader import COACH_PICKS, ON_PITCH, League
 POINTS = {"V": 3, "N": 1, "D": 0}
 TARGETED_BONUS = {"Capitaine", "McDo+"}
 OPPONENT_BONUS = {"Suarez"}
+OPPONENT_FIELD_BONUS = {"Cheat Code 18-26"}
 DEFENCE_BONUS = {"4 défenseurs", "5 défenseurs"}
 TEAM_BONUS = {"Zahia"}
 
@@ -51,9 +52,9 @@ def team_fixtures(league: League) -> pd.DataFrame:
 def lineups_enriched(league: League) -> pd.DataFrame:
     """Compositions avec groupe de poste, adversaire, bonus attribué à chaque joueur et note brute estimée.
 
-    La note brute retire les bonus nominatifs (Capitaine, McDo+), le Suarez subi, les bonus défensifs
-    (titulaires défenseurs) et Zahia (titulaires). Les bonus dont la cible n'est pas identifiable
-    (ex. Cheat Code) ne sont pas retirés.
+    La note brute retire les bonus nominatifs (Capitaine, McDo+), le Suarez subi, le Cheat Code subi (joueurs
+    de champ adverses sur le terrain, Rotaldos exclus), les bonus défensifs (titulaires défenseurs) et Zahia
+    (titulaires). Les bonus sans effet de note (Tonton Pat) sont ignorés.
     """
     lu = league.lineups.copy()
     opp = team_fixtures(league)[["match_id", "team_id", "opp_id"]]
@@ -70,6 +71,9 @@ def lineups_enriched(league: League) -> pd.DataFrame:
             mask = own & on_pitch & (lu["joueur_affiche"] == b.cible_affiche)
         elif b.bonus in OPPONENT_BONUS:
             mask = same_match & (lu["team_id"] != b.team_id) & on_pitch & (lu["joueur_affiche"] == b.cible_affiche)
+        elif b.bonus in OPPONENT_FIELD_BONUS:
+            field = (lu["statut"] != "rotaldo") & (lu["poste_groupe"] != "G")
+            mask = same_match & (lu["team_id"] != b.team_id) & on_pitch & field
         elif b.bonus in DEFENCE_BONUS:
             mask = own & (lu["statut"] == "titulaire") & (lu["poste_groupe"] == "D")
         elif b.bonus in TEAM_BONUS:
@@ -86,15 +90,16 @@ def lineups_enriched(league: League) -> pd.DataFrame:
 
 
 def _goal_counts(league: League) -> pd.DataFrame:
-    g = league.goals.assign(type_but=league.goals["type_but"].replace({"rotaldo_csc": "csc"}))
+    goals = league.scored_goals
+    g = goals.assign(type_but=goals["type_but"].replace({"rotaldo_csc": "csc"}))
     counts = g.groupby(["match_id", "team_id", "type_but"]).size().unstack(fill_value=0)
     for col in ("reel", "mpg", "csc"):
         if col not in counts:
             counts[col] = 0
     counts = counts[["reel", "mpg", "csc"]].add_prefix("bp_").reset_index()
     rotaldo = (
-        (league.goals["type_but"] == "rotaldo_csc")
-        .groupby([league.goals["match_id"], league.goals["team_id"]])
+        (goals["type_but"] == "rotaldo_csc")
+        .groupby([goals["match_id"], goals["team_id"]])
         .sum()
         .rename("bp_rotaldo_csc")
         .reset_index()

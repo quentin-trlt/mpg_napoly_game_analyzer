@@ -19,11 +19,11 @@ gw,date,home_team_id,away_team_id,home_goals,away_goals,heure,statut,match_id,ho
 4,,5,8,0,0,,joue,mpg_division_match_UNRUAZCC_1_1_4_1_5_8,3-4-3,4-3-3,ЦСКА,ThoFessé,N
 4,,6,9,4,2,,joue,mpg_division_match_UNRUAZCC_1_1_4_3_6_9,3-4-3,3-4-3,FC 69latrik,USPionvillePusitanos,V
 4,2026-10-31,7,2,3,5,,joue,mpg_division_match_UNRUAZCC_1_1_4_2_7_2,3-4-3,3-5-2,équipe de football,Tractou'pelle,D
-5,2026-11-06,2,1,,,21:00,a_venir,,,,Tractou'pelle,Nouvelle Energie,
-5,2026-11-06,3,6,,,21:00,a_venir,,,,Pictor FC,FC 69latrik,
-5,2026-11-06,5,4,,,21:00,a_venir,,,,ЦСКА,FC CP,
-5,2026-11-06,8,0,,,21:00,a_venir,,,,ThoFessé,Fc ratpi,
-5,2026-11-06,9,7,,,21:00,a_venir,,,,USPionvillePusitanos,équipe de football,
+5,2026-11-06,2,1,1,4,21:00,joue,mpg_division_match_UNRUAZCC_1_1_5_2_2_1,4-4-2,3-5-2,Tractou'pelle,Nouvelle Energie,D
+5,2026-11-06,3,6,3,0,21:00,joue,mpg_division_match_UNRUAZCC_1_1_5_4_3_6,3-4-3,3-4-3,Pictor FC,FC 69latrik,V
+5,2026-11-06,5,4,0,0,21:00,joue,mpg_division_match_UNRUAZCC_1_1_5_3_5_4,4-5-1,3-4-3,ЦСКА,FC CP,N
+5,2026-11-06,8,0,1,4,21:00,joue,mpg_division_match_UNRUAZCC_1_1_5_5_8_0,4-3-3,3-4-3,ThoFessé,Fc ratpi,D
+5,2026-11-06,9,7,4,2,21:00,joue,mpg_division_match_UNRUAZCC_1_1_5_1_9_7,3-4-3,3-4-3,USPionvillePusitanos,équipe de football,V
 6,2026-11-21,0,5,,,13:30,a_venir,,,,Fc ratpi,ЦСКА,
 6,2026-11-21,1,9,,,13:30,a_venir,,,,Nouvelle Energie,USPionvillePusitanos,
 6,2026-11-21,4,2,,,13:30,a_venir,,,,FC CP,Tractou'pelle,

@@ -15,8 +15,10 @@ def _match_card(row: pd.Series, away: pd.Series, goals: pd.DataFrame, team_id: i
         g = goals[goals["team_id"] == tid]
         if g.empty:
             return "—"
-        labels = {"reel": "", "mpg": " (MPG)", "csc": " (CSC)", "rotaldo_csc": " (CSC Rotaldo)"}
-        return "<br>".join(escape(f"{r.buteur_affiche}{labels.get(r.type_but, '')}") for r in g.itertuples())
+        labels = {"reel": "", "mpg": " (MPG)", "csc": " (CSC)", "rotaldo_csc": " (CSC Rotaldo)", "bloque": " (bloqué)"}
+        return "<br>".join(
+            escape(f"{r.buteur_affiche.removeprefix('(Bloqué) ')}{labels.get(r.type_but, '')}") for r in g.itertuples()
+        )
 
     def bonus(r: pd.Series) -> str:
         if not r["bonus_poses"]:

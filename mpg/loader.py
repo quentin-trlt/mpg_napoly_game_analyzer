@@ -10,6 +10,10 @@ GROUPES = ["G", "D", "M", "A"]
 
 ON_PITCH = ("titulaire", "remplacant_entre", "rotaldo")
 COACH_PICKS = ("titulaire", "titulaire_absent", "titulaire_remplace_tactique")
+GOAL_TYPES = ("reel", "mpg", "csc", "rotaldo_csc", "bloque")
+PL_GOAL_TYPES = ("but", "penalty", "csc", "annule_var")
+PL_COUNTED = ("but", "penalty")
+PL_STATUSES = ("joue", "a_venir", "en_cours")
 
 REQUIRED_COLUMNS: dict[str, list[str]] = {
     "teams": [
@@ -104,6 +108,34 @@ OPTIONAL_PLAYER_COLUMNS = [
 ]
 UNAVAILABLE = ("blesse", "suspendu")
 
+OPTIONAL_FILES: dict[str, list[str]] = {
+    "club_results": [
+        "pl_match_id",
+        "pl_gw",
+        "date",
+        "home_club",
+        "away_club",
+        "home_club_short",
+        "away_club_short",
+        "home_score",
+        "away_score",
+        "statut",
+    ],
+    "pl_goals": [
+        "pl_match_id",
+        "pl_gw",
+        "date",
+        "club",
+        "side",
+        "type_but",
+        "minute",
+        "buteur_nom",
+        "passeur_nom",
+        "buteur_player_key",
+        "passeur_player_key",
+    ],
+}
+
 
 class DataSchemaError(ValueError):
     pass
@@ -123,10 +155,17 @@ class League:
     scorers: pd.DataFrame
     leaderboards: pd.DataFrame
     bonus_stock: pd.DataFrame | None = None
+    club_results: pd.DataFrame | None = None
+    pl_goals: pd.DataFrame | None = None
 
     @property
     def played(self) -> pd.DataFrame:
         return self.fixtures[self.fixtures["statut"] == "joue"]
+
+    @property
+    def scored_goals(self) -> pd.DataFrame:
+        """Buts qui comptent au score : sans les buts bloqués, affichés par MPG mais annulés."""
+        return self.goals[self.goals["type_but"] != "bloque"]
 
     @property
     def last_gw(self) -> int:
@@ -135,6 +174,13 @@ class League:
     @property
     def n_gw(self) -> int:
         return int(self.fixtures["gw"].max())
+
+    @property
+    def pl_last_gw(self) -> int:
+        if self.club_results is None:
+            return 0
+        done = self.club_results.loc[self.club_results["statut"] == "joue", "pl_gw"]
+        return int(done.max()) if not done.empty else 0
 
     @property
     def team_names(self) -> dict[int, str]:
@@ -187,6 +233,44 @@ def _read_bonus_stock(data_dir: Path) -> pd.DataFrame | None:
     return stock
 
 
+def _read_optional(data_dir: Path, name: str) -> pd.DataFrame | None:
+    path = data_dir / f"{name}.csv"
+    if not path.exists():
+        return None
+    df = pd.read_csv(path)
+    missing = [c for c in OPTIONAL_FILES[name] if c not in df.columns]
+    if missing:
+        raise DataSchemaError(f"{path.name} : colonnes manquantes {missing}")
+    return df
+
+
+def _check_values(df: pd.DataFrame, col: str, allowed: tuple[str, ...], file: str) -> None:
+    unknown = set(df[col].dropna()) - set(allowed)
+    if unknown:
+        raise DataSchemaError(f"{file} : valeurs inconnues de {col} {sorted(unknown)}")
+
+
+def _read_club_results(data_dir: Path) -> pd.DataFrame | None:
+    """Calendrier et résultats complets de Premier League, une ligne par match (scores vides si non joué)."""
+    df = _read_optional(data_dir, "club_results")
+    if df is None:
+        return None
+    _check_values(df, "statut", PL_STATUSES, "club_results.csv")
+    df["date"] = pd.to_datetime(df["date"], utc=True)
+    df[["home_score", "away_score"]] = df[["home_score", "away_score"]].astype("Int64")
+    return df.sort_values(["date", "pl_match_id"]).reset_index(drop=True)
+
+
+def _read_pl_goals(data_dir: Path) -> pd.DataFrame | None:
+    """Buts de Premier League. Un csc est rangé du côté du club qui en profite ; annule_var ne compte pas."""
+    df = _read_optional(data_dir, "pl_goals")
+    if df is None:
+        return None
+    _check_values(df, "type_but", PL_GOAL_TYPES, "pl_goals.csv")
+    df["date"] = pd.to_datetime(df["date"], utc=True)
+    return df
+
+
 def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
     data_dir = Path(data_dir)
     raw = {name: _read(data_dir, name) for name in REQUIRED_COLUMNS}
@@ -211,6 +295,8 @@ def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
     if unknown:
         raise DataSchemaError(f"lineups.csv : statuts inconnus {sorted(unknown)}")
 
+    _check_values(raw["goals"], "type_but", GOAL_TYPES, "goals.csv")
+
     bonus = raw["bonus"].copy()
     bonus["effet_pts"] = pd.to_numeric(bonus["effet"].str.replace("pt", "", regex=False), errors="coerce")
 
@@ -227,4 +313,6 @@ def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
         scorers=raw["mpg_scorers_ranking"],
         leaderboards=raw["player_leaderboards"],
         bonus_stock=_read_bonus_stock(data_dir),
+        club_results=_read_club_results(data_dir),
+        pl_goals=_read_pl_goals(data_dir),
     )

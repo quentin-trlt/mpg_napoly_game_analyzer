@@ -1,197 +1,197 @@
-team_id,joueur,club,poste_groupe,cote,enchere,flag_point_interrogation,player_key,nom_data,note_moy_reelle,buts_reels_saison,poste,pct_titularisations,club_resultat_j8,club_resultat_j9,club_prochain_match,passes_decisives_saison,cartons_jaunes,cartons_rouges,matchs_club,matchs_joues,matchs_titulaire,points_mpg_moy,statut_performance
-0,Caoimhín Kelleher,Brentford,G,18.0,20.0,0,caoimhin_kelleher__brentford,C. Kelleher,5.9,0,G,100.0,1 - 1,2 - 0,08/11,0,0,0,9,9,9,5.8,ok
-0,Alex Cairns,Leeds,G,3.0,3.0,0,alex_cairns__leeds,A. Cairns,,0,G,0.0,0 - 0,2 - 0,07/11,0,0,0,9,0,0,,ok
-0,Maxim De Cuyper,Brighton,D,17.0,30.0,0,maxim_de_cuyper__brighton,M. De Cuyper,6.3,2,DL,100.0,2 - 0,0 - 1,08/11,3,3,0,9,9,9,6.0,ok
-0,Lewis Hall,Newcastle,D,14.0,27.0,0,lewis_hall__newcastle,L. Hall,4.9,1,DL,100.0,0 - 2,0 - 1,07/11,1,1,0,9,9,9,5.82,ok
-0,Marc Guéhi,Man. City,D,20.0,24.0,0,marc_guehi__man_city,M. Guéhi,5.5,1,DC,89.0,2 - 1,0 - 1,07/11,1,1,0,9,8,8,6.04,ok
-0,Ryan Giles,Hull City,D,14.0,14.0,0,ryan_giles__hull_city,R. Giles,5.1,0,DL,89.0,1 - 1,2 - 2,07/11,1,1,0,9,9,8,4.84,ok
-0,Jannik Schuster,Brentford,D,9.0,5.0,0,jannik_schuster__brentford,J. Schuster,6.0,0,DC,33.0,1 - 1,2 - 0,08/11,1,0,0,9,4,3,6.03,ok
-0,Conor Bradley,Liverpool,D,1.0,1.0,0,conor_bradley__liverpool,C. Bradley,,0,DL,0.0,2 - 0,0 - 1,08/11,,,,9,,,,blesse
-0,Bruno Fernandes,Man. United,M,29.0,100.0,0,bruno_fernandes__man_united,Bruno Fernandes,5.7,3,MO,89.0,0 - 3,2 - 0,08/11,1,2,0,9,8,8,5.48,ok
-0,Pascal Groß,Brighton,M,21.0,46.0,0,pascal_gro__brighton,P. Groß,6.1,3,MO,100.0,2 - 0,0 - 1,08/11,4,4,0,9,9,9,5.79,ok
-0,Marcus Tavernier,Bournemouth,M,24.0,36.0,0,marcus_tavernier__bournemouth,M. Tavernier,6.1,5,MO,100.0,0 - 3,2 - 0,08/11,0,3,0,9,9,9,5.73,ok
-0,John McGinn,Aston Villa,M,10.0,22.0,0,john_mcginn__aston_villa,J. McGinn,5.2,1,MO,89.0,2 - 1,1 - 1,08/11,3,2,0,9,9,8,5.15,ok
-0,Joe Willock,Newcastle,M,11.0,14.0,0,joe_willock__newcastle,J. Willock,5.3,2,MO,78.0,0 - 2,0 - 1,07/11,0,0,0,9,9,7,4.98,ok
-0,Matt O'Riley,Brighton,M,4.0,1.0,0,matt_o_riley__brighton,M. O'Riley,5.0,0,MD,0.0,2 - 0,0 - 1,08/11,0,0,0,9,2,0,4.38,ok
-0,Bryan Mbeumo,Man. United,A,21.0,69.0,0,bryan_mbeumo__man_united,B. Mbeumo,5.6,4,A,100.0,0 - 3,2 - 0,08/11,0,2,0,9,9,9,5.37,ok
-0,Anthony Elanga,Newcastle,A,11.0,48.0,0,anthony_elanga__newcastle,A. Elanga,5.5,2,A,44.0,0 - 2,0 - 1,07/11,0,1,0,9,5,4,4.91,ok
-0,Kevin Schade,Brentford,A,22.0,37.0,0,kevin_schade__brentford,K. Schade,5.7,3,A,89.0,1 - 1,2 - 0,08/11,0,1,0,9,9,8,5.2,ok
-0,Hugo Ekitiké,Liverpool,A,1.0,2.0,0,hugo_ekitike__liverpool,H. Ekitiké,,0,A,0.0,2 - 0,0 - 1,08/11,,,,9,,,,blesse
-0,Brian Madjo,Aston Villa,A,1.0,1.0,0,brian_madjo__aston_villa,B. Madjo,4.5,0,A,0.0,2 - 1,1 - 1,08/11,0,1,0,9,1,0,4.25,blesse
-1,Matz Sels,Nottingham Forest,G,13.0,25.0,0,matz_sels__nottingham_forest,M. Sels,4.8,0,G,100.0,1 - 1,2 - 0,07/11,0,0,0,9,9,9,5.14,ok
-1,John Victor,Nottingham Forest,G,7.0,10.0,0,john_victor__nottingham_forest,John Victor,,0,G,0.0,1 - 1,2 - 0,07/11,0,0,0,9,0,0,,ok
-1,Ezri Konsa,Arsenal,D,11.0,32.0,0,ezri_konsa__arsenal,E. Konsa,5.7,1,DC,78.0,2 - 0,0 - 1,07/11,0,0,0,9,8,7,5.94,ok
-1,James Tarkowski,Everton,D,19.0,28.0,0,james_tarkowski__everton,J. Tarkowski,5.7,1,DC,100.0,2 - 0,0 - 1,06/11,1,2,0,9,9,9,5.92,ok
-1,Riccardo Calafiori,Arsenal,D,13.0,24.0,0,riccardo_calafiori__arsenal,R. Calafiori,5.3,1,DL,89.0,2 - 0,0 - 1,07/11,2,0,0,9,9,8,5.64,ok
-1,Nathan Collins,Brentford,D,12.0,24.0,0,nathan_collins__brentford,N. Collins,5.7,0,DC,33.0,1 - 1,2 - 0,08/11,0,1,0,9,3,3,5.56,blesse
-1,Jarrad Branthwaite,Everton,D,12.0,16.0,0,jarrad_branthwaite__everton,J. Branthwaite,5.4,0,DC,89.0,2 - 0,0 - 1,06/11,0,0,0,9,8,8,5.79,ok
-1,Vitalii Mykolenko,Everton,D,12.0,16.0,0,vitalii_mykolenko__everton,V. Mykolenko,5.2,0,DL,89.0,2 - 0,0 - 1,06/11,0,2,0,9,8,8,5.49,ok
-1,Dan Ballard,Sunderland,D,10.0,10.0,0,dan_ballard__sunderland,D. Ballard,4.5,0,DC,56.0,0 - 0,3 - 1,08/11,0,2,0,9,5,5,5.15,ok
-1,Morgan Gibbs-White,Nottingham Forest,M,25.0,41.0,0,morgan_gibbs_white__nottingham_forest,M. Gibbs-White,5.6,1,MO,89.0,1 - 1,2 - 0,07/11,2,0,0,9,8,8,5.37,ok
-1,Martin Ødegaard,Arsenal,M,15.0,28.0,0,martin_degaard__arsenal,M. Ødegaard,5.7,2,MO,100.0,2 - 0,0 - 1,07/11,0,1,0,9,9,9,5.83,ok
-1,Rayan,Bournemouth,M,13.0,28.0,0,rayan__bournemouth,Rayan,5.2,1,MO,100.0,0 - 3,2 - 0,08/11,0,0,0,9,9,9,4.48,ok
-1,Christos Tzolis,Arsenal,M,12.0,27.0,0,christos_tzolis__arsenal,C. Tzolis,5.6,0,MO,67.0,2 - 0,0 - 1,07/11,1,2,0,9,6,6,5.01,ok
-1,Tyler Adams,Bournemouth,M,11.0,22.0,0,tyler_adams__bournemouth,T. Adams,5.2,0,MD,78.0,0 - 3,2 - 0,08/11,0,3,0,9,9,7,5.02,ok
-1,Myles Lewis-Skelly,Arsenal,M,9.0,22.0,0,myles_lewis_skelly__arsenal,M. Lewis-Skelly,5.1,0,MD,67.0,2 - 0,0 - 1,07/11,0,2,0,9,7,6,5.17,ok
-1,Alex Iwobi,Fulham,M,13.0,13.0,0,alex_iwobi__fulham,A. Iwobi,5.9,1,MO,100.0,0 - 1,1 - 1,07/11,0,0,0,9,9,9,5.69,ok
-1,Leon Goretzka,Aston Villa,M,5.0,5.0,0,leon_goretzka__aston_villa,L. Goretzka,5.0,0,MD,14.0,2 - 1,1 - 1,08/11,0,0,0,7,3,1,4.51,blesse
-1,João Pedro,Chelsea,A,30.0,71.0,1,joao_pedro__chelsea,João Pedro,6.3,5,A,67.0,0 - 2,2 - 0,08/11,3,1,0,9,6,6,6.55,incertain
-1,Kai Havertz,Arsenal,A,14.0,30.0,0,kai_havertz__arsenal,K. Havertz,5.1,3,A,89.0,2 - 0,0 - 1,07/11,0,1,0,9,9,8,5.12,ok
-1,Nicolas Jackson,Aston Villa,A,8.0,18.0,0,nicolas_jackson__aston_villa,N. Jackson,5.8,5,A,80.0,2 - 1,1 - 1,08/11,0,2,0,10,8,8,5.78,ok
-1,Chuba Akpom,Ipswich Town,A,8.0,10.0,0,chuba_akpom__ipswich_town,C. Akpom,4.8,1,A,0.0,1 - 1,2 - 2,08/11,0,0,0,9,6,0,4.67,ok
-3,Lukás Hornícek,Newcastle,G,14.0,25.0,0,lukas_hornicek__newcastle,L. Hornícek,5.3,0,G,100.0,0 - 2,0 - 1,07/11,0,1,0,9,9,9,5.36,ok
-3,Zion Suzuki,Aston Villa,G,16.0,24.0,0,zion_suzuki__aston_villa,Z. Suzuki,5.8,0,G,89.0,2 - 1,1 - 1,08/11,0,0,0,9,8,8,6.08,ok
-3,Malick Thiaw,Newcastle,D,13.0,22.0,0,malick_thiaw__newcastle,M. Thiaw,4.6,0,DC,78.0,0 - 2,0 - 1,07/11,0,1,0,9,8,7,4.96,ok
-3,Josko Gvardiol,Man. City,D,13.0,20.0,0,josko_gvardiol__man_city,J. Gvardiol,5.3,1,DC,78.0,2 - 1,0 - 1,07/11,3,2,0,9,9,7,6.12,ok
-3,Micky van de Ven,Tottenham,D,10.0,18.0,0,micky_van_de_ven__tottenham,M. van de Ven,5.4,0,DC,78.0,0 - 2,2 - 0,07/11,0,2,0,9,8,7,6.25,ok
-3,Sven Botman,Newcastle,D,10.0,17.0,0,sven_botman__newcastle,S. Botman,5.0,1,DC,78.0,0 - 2,0 - 1,07/11,0,2,0,9,7,7,5.42,ok
-3,Matty Cash,Aston Villa,D,9.0,17.0,0,matty_cash__aston_villa,M. Cash,4.5,0,DL,78.0,2 - 1,1 - 1,08/11,0,5,0,9,8,7,5.27,ok
-3,Tyrick Mitchell,Crystal Palace,D,13.0,13.0,0,tyrick_mitchell__crystal_palace,T. Mitchell,4.6,2,DL,100.0,0 - 2,2 - 0,08/11,0,0,0,9,9,9,5.25,ok
-3,Ethan Ampadu,Leeds,D,12.0,12.0,0,ethan_ampadu__leeds,E. Ampadu,5.1,0,DC,100.0,0 - 0,2 - 0,07/11,0,4,0,9,9,9,5.26,ok
-3,Dominik Szoboszlai,Liverpool,M,20.0,46.0,0,dominik_szoboszlai__liverpool,D. Szoboszlai,5.6,1,MO,67.0,2 - 0,0 - 1,08/11,0,1,0,9,7,6,5.34,ok
-3,Jérémy Doku,Man. City,M,11.0,28.0,1,jeremy_doku__man_city,J. Doku,6.1,1,MO,33.0,2 - 1,0 - 1,07/11,1,0,0,9,5,3,6.64,incertain
-3,Quinten Timber,Crystal Palace,M,11.0,25.0,0,quinten_timber__crystal_palace,Q. Timber,5.1,0,MO,71.0,0 - 2,2 - 0,08/11,1,0,0,7,5,5,4.98,ok
-3,Enzo Le Fée,Sunderland,M,16.0,21.0,0,enzo_le_fee__sunderland,E. Le Fée,5.6,2,MO,100.0,0 - 0,3 - 1,08/11,1,0,0,9,9,9,5.16,ok
-3,Emiliano Buendía,Aston Villa,M,13.0,21.0,0,emiliano_buendia__aston_villa,E. Buendía,5.1,1,MO,78.0,2 - 1,1 - 1,08/11,0,2,0,9,9,7,4.78,ok
-3,Víctor Muñoz,Liverpool,M,11.0,21.0,0,victor_munoz__liverpool,V. Muñoz,5.2,2,MO,56.0,2 - 0,0 - 1,08/11,0,1,0,9,8,5,4.98,ok
-3,Oscar Bobb,Fulham,M,10.0,14.0,0,oscar_bobb__fulham,O. Bobb,5.5,1,MO,100.0,0 - 1,1 - 1,07/11,0,0,0,9,9,9,5.08,ok
-3,Evanilson,Bournemouth,A,11.0,36.0,0,evanilson__bournemouth,Evanilson,6.1,4,A,100.0,0 - 3,2 - 0,08/11,4,1,0,9,9,9,6.03,ok
-3,Gonzalo García,Fulham,A,14.0,32.0,0,gonzalo_garcia__fulham,G. García,4.6,1,A,100.0,0 - 1,1 - 1,07/11,0,0,0,9,9,9,4.65,ok
-3,Yoane Wissa,Newcastle,A,10.0,31.0,0,yoane_wissa__newcastle,Y. Wissa,4.6,1,A,78.0,0 - 2,0 - 1,07/11,1,3,0,9,9,7,4.6,ok
-3,Omar Marmoush,Tottenham,A,8.0,29.0,0,omar_marmoush__tottenham,Omar Marmoush,5.0,1,A,78.0,0 - 2,2 - 0,07/11,0,0,0,9,8,7,4.95,ok
-3,Yéremy Pino,Crystal Palace,A,13.0,28.0,0,yeremy_pino__crystal_palace,Y. Pino,5.4,1,A,89.0,0 - 2,2 - 0,08/11,0,3,0,9,9,8,4.99,ok
-4,Senne Lammens,Man. United,G,15.0,33.0,0,senne_lammens__man_united,S. Lammens,5.1,0,G,100.0,0 - 3,2 - 0,08/11,0,0,0,9,9,9,5.15,ok
-4,Michael Zetterer,Leeds,G,7.0,7.0,0,michael_zetterer__leeds,M. Zetterer,,0,G,0.0,0 - 0,2 - 0,07/11,0,0,0,7,0,0,,ok
-4,Karl Darlow,Man. United,G,7.0,7.0,0,karl_darlow__man_united,K. Darlow,,0,G,0.0,0 - 3,2 - 0,08/11,0,0,0,9,0,0,,ok
-4,Keane Lewis-Potter,Brentford,D,14.0,21.0,0,keane_lewis_potter__brentford,K. Lewis-Potter,5.3,2,DL,100.0,1 - 1,2 - 0,08/11,1,0,0,9,9,9,5.49,ok
-4,Kristoffer Ajer,Brentford,D,13.0,17.0,0,kristoffer_ajer__brentford,K. Ajer,5.7,1,DC,100.0,1 - 1,2 - 0,08/11,0,2,0,9,9,9,5.76,ok
-4,Olivier Boscagli,Brighton,D,10.0,17.0,0,olivier_boscagli__brighton,O. Boscagli,5.3,0,DL,100.0,2 - 0,0 - 1,08/11,1,3,0,9,9,9,5.42,ok
-4,Thomas Meunier,Sunderland,D,10.0,16.0,0,thomas_meunier__sunderland,T. Meunier,5.0,0,DL,67.0,0 - 0,3 - 1,08/11,1,0,0,9,7,6,4.8,ok
-4,Luka Vuskovic,Brighton,D,11.0,11.0,0,luka_vuskovic__brighton,L. Vuskovic,5.7,1,DC,100.0,2 - 0,0 - 1,08/11,0,0,0,9,9,9,6.35,ok
-4,Antonee Robinson,Fulham,D,9.0,9.0,0,antonee_robinson__fulham,A. Robinson,4.7,0,DL,89.0,0 - 1,1 - 1,07/11,0,1,0,9,8,8,5.29,ok
-4,Harvey Barnes,Newcastle,M,17.0,32.0,0,harvey_barnes__newcastle,H. Barnes,5.6,2,MO,100.0,0 - 2,0 - 1,07/11,2,0,0,9,9,9,5.24,ok
-4,Justin Kluivert,Bournemouth,M,13.0,32.0,0,justin_kluivert__bournemouth,J. Kluivert,5.6,1,MO,67.0,0 - 3,2 - 0,08/11,2,1,0,9,7,6,5.37,ok
-4,Matheus Cunha,Man. United,M,19.0,23.0,0,matheus_cunha__man_united,Matheus Cunha,5.3,1,MO,78.0,0 - 3,2 - 0,08/11,2,0,0,9,9,7,5.42,ok
-4,Daichi Kamada,Crystal Palace,M,10.0,22.0,0,daichi_kamada__crystal_palace,D. Kamada,5.1,1,MO,100.0,0 - 2,2 - 0,08/11,3,2,0,9,9,9,5.12,ok
-4,Kobbie Mainoo,Man. United,M,15.0,17.0,0,kobbie_mainoo__man_united,K. Mainoo,5.6,0,MD,56.0,0 - 3,2 - 0,08/11,1,1,0,9,7,5,5.79,ok
-4,Youri Tielemans,Man. United,M,12.0,17.0,0,youri_tielemans__man_united,Y. Tielemans,5.4,0,MD,89.0,0 - 3,2 - 0,08/11,1,1,0,9,8,8,5.41,ok
-4,Erling Haaland,Man. City,A,42.0,127.0,0,erling_haaland__man_city,E. Haaland,6.3,9,A,100.0,2 - 1,0 - 1,07/11,0,0,0,9,9,9,6.27,ok
-4,Dominic Calvert-Lewin,Leeds,A,26.0,37.0,0,dominic_calvert_lewin__leeds,D. Calvert-Lewin,4.9,4,A,100.0,0 - 0,2 - 0,07/11,0,3,0,9,9,9,4.84,ok
-4,Charalampos Kostoulas,Brighton,A,11.0,32.0,0,charalampos_kostoulas__brighton,C. Kostoulas,5.5,3,A,89.0,2 - 0,0 - 1,08/11,2,1,0,9,9,8,5.72,ok
-4,Tyrique George,Everton,A,11.0,23.0,0,tyrique_george__everton,T. George,5.4,1,A,67.0,2 - 0,0 - 1,06/11,0,1,0,9,9,6,4.86,ok
-5,Jordan Pickford,Everton,G,16.0,41.0,0,jordan_pickford__everton,J. Pickford,5.5,0,G,100.0,2 - 0,0 - 1,06/11,0,0,0,9,9,9,5.62,ok
-5,Gerónimo Rulli,Man. City,G,7.0,9.0,0,geronimo_rulli__man_city,G. Rulli,,0,G,0.0,2 - 1,0 - 1,07/11,0,0,0,9,0,0,,ok
-5,Harry Maguire,Man. United,D,11.0,47.0,0,harry_maguire__man_united,H. Maguire,4.8,0,DC,100.0,0 - 3,2 - 0,08/11,0,4,0,9,9,9,5.23,ok
-5,Virgil van Dijk,Liverpool,D,18.0,38.0,0,virgil_van_dijk__liverpool,V. van Dijk,5.5,0,DC,100.0,2 - 0,0 - 1,08/11,0,3,0,9,9,9,6.17,ok
-5,Tarik Muharemovic,Leeds,D,13.0,13.0,0,tarik_muharemovic__leeds,T. Muharemovic,5.4,0,DC,100.0,0 - 0,2 - 0,07/11,2,1,0,9,9,9,5.97,ok
-5,Jaka Bijol,Leeds,D,11.0,13.0,0,jaka_bijol__leeds,J. Bijol,5.7,0,DC,33.0,0 - 0,2 - 0,07/11,0,0,0,9,5,3,5.29,ok
-5,Lewis Dunk,Brighton,D,13.0,10.0,0,lewis_dunk__brighton,L. Dunk,5.4,1,DC,78.0,2 - 0,0 - 1,08/11,0,1,0,9,8,7,6.02,ok
-5,Joachim Andersen,Fulham,D,9.0,8.0,0,joachim_andersen__fulham,J. Andersen,4.5,0,DC,22.0,0 - 1,1 - 1,07/11,0,1,0,9,3,2,5.15,ok
-5,Declan Rice,Arsenal,M,23.0,52.0,0,declan_rice__arsenal,D. Rice,5.7,0,MD,100.0,2 - 0,0 - 1,07/11,5,1,0,9,9,9,6.19,ok
-5,Phil Foden,Man. City,M,16.0,41.0,0,phil_foden__man_city,P. Foden,5.5,1,MO,44.0,2 - 1,0 - 1,07/11,2,1,1,9,7,4,5.19,suspendu
-5,Jacob Ramsey,Newcastle,M,13.0,37.0,1,jacob_ramsey__newcastle,J. Ramsey,5.0,1,MO,0.0,0 - 2,0 - 1,07/11,0,1,1,9,5,0,4.79,incertain
-5,Iliman Ndiaye,Man. City,M,16.0,22.0,0,iliman_ndiaye__man_city,I. Ndiaye,5.6,0,MO,89.0,2 - 1,0 - 1,07/11,3,0,0,9,9,8,5.68,ok
-5,Harry Wilson,Leeds,M,14.0,18.0,0,harry_wilson__leeds,H. Wilson,4.8,0,MO,33.0,0 - 0,2 - 0,07/11,0,1,0,9,7,3,4.49,blesse
-5,Mathias Jensen,Brentford,M,8.0,15.0,0,mathias_jensen__brentford,M. Jensen,5.5,0,MD,44.0,1 - 1,2 - 0,08/11,0,0,0,9,5,4,5.2,blesse
-5,Marcus Rashford,Man. United,A,15.0,45.0,0,marcus_rashford__man_united,M. Rashford,5.1,0,A,44.0,0 - 3,2 - 0,08/11,0,0,0,9,6,4,4.72,ok
-5,Richarlison,Tottenham,A,11.0,45.0,0,richarlison__tottenham,Richarlison,3.0,0,A,11.0,0 - 2,2 - 0,07/11,0,0,0,9,1,1,3.77,ok
-5,Malick Fofana,Sunderland,A,11.0,26.0,0,malick_fofana__sunderland,M. Fofana,4.5,0,A,0.0,0 - 0,3 - 1,08/11,0,0,0,7,5,0,4.37,ok
-5,Benjamin Sesko,Man. United,A,16.0,20.0,0,benjamin_sesko__man_united,B. Sesko,4.9,1,A,0.0,0 - 3,2 - 0,08/11,0,0,0,9,4,0,4.54,ok
-6,David Raya,Arsenal,G,16.0,41.0,0,david_raya__arsenal,D. Raya,5.8,0,G,100.0,2 - 0,0 - 1,07/11,0,1,0,9,9,9,6.1,ok
-6,Kepa Arrizabalaga,Arsenal,G,7.0,9.0,0,kepa_arrizabalaga__arsenal,K. Arrizabalaga,,0,G,0.0,2 - 0,0 - 1,07/11,0,0,0,9,0,0,,ok
-6,Mark Travers,Everton,G,7.0,8.0,0,mark_travers__everton,M. Travers,,0,G,0.0,2 - 0,0 - 1,06/11,0,0,0,9,0,0,,ok
-6,James Justin,Leeds,D,16.0,49.0,0,james_justin__leeds,J. Justin,5.7,1,DL,100.0,0 - 0,2 - 0,07/11,1,1,0,9,9,9,5.27,ok
-6,Daniel Muñoz,Nottingham Forest,D,12.0,19.0,0,daniel_munoz__nottingham_forest,D. Muñoz,4.6,0,DL,67.0,1 - 1,2 - 0,07/11,1,1,0,9,8,6,5.21,ok
-6,Cristhian Mosquera,Arsenal,D,10.0,17.0,0,cristhian_mosquera__arsenal,C. Mosquera,5.5,0,DC,22.0,2 - 0,0 - 1,07/11,0,0,0,9,2,2,5.89,ok
-6,Adrien Truffert,Bournemouth,D,11.0,16.0,0,adrien_truffert__bournemouth,A. Truffert,4.9,0,DL,100.0,0 - 3,2 - 0,08/11,1,2,0,9,9,9,5.42,ok
-6,John Egan,Hull City,D,10.0,8.0,0,john_egan__hull_city,J. Egan,5.3,0,DC,100.0,1 - 1,2 - 2,07/11,0,1,0,9,9,9,5.39,ok
-6,Jacob Greaves,Ipswich Town,D,8.0,8.0,0,jacob_greaves__ipswich_town,J. Greaves,4.1,0,DC,56.0,1 - 1,2 - 2,08/11,0,2,0,9,5,5,4.46,ok
-6,James Garner,Everton,M,16.0,51.0,0,james_garner__everton,J. Garner,5.4,0,MD,89.0,2 - 0,0 - 1,06/11,0,3,0,9,9,8,5.26,ok
-6,Yasin Ayari,Brighton,M,13.0,51.0,0,yasin_ayari__brighton,Y. Ayari,6.1,3,MO,89.0,2 - 0,0 - 1,08/11,0,1,0,9,8,8,5.49,ok
-6,Granit Xhaka,Sunderland,M,12.0,51.0,0,granit_xhaka__sunderland,G. Xhaka,5.4,0,MD,100.0,0 - 0,3 - 1,08/11,0,2,0,9,9,9,5.36,ok
-6,Nilson Angulo,Sunderland,M,9.0,18.0,0,nilson_angulo__sunderland,N. Angulo,5.1,1,MO,89.0,0 - 0,3 - 1,08/11,1,1,0,9,8,8,4.39,ok
-6,Mamadou Sangaré,Brentford,M,11.0,13.0,0,mamadou_sangare__brentford,M. Sangaré,5.6,0,MD,67.0,1 - 1,2 - 0,08/11,1,2,0,9,9,6,5.28,ok
-6,Josh King,Fulham,M,13.0,10.0,0,josh_king__fulham,J. King,5.7,2,MO,100.0,0 - 1,1 - 1,07/11,1,3,0,9,9,9,5.32,ok
-6,Florentino,Ipswich Town,M,6.0,5.0,0,florentino__ipswich_town,Florentino,4.8,1,MD,44.0,1 - 1,2 - 2,08/11,0,0,0,9,6,4,4.87,ok
-6,Noah Okafor,Leeds,A,14.0,51.0,0,noah_okafor__leeds,N. Okafor,4.9,1,A,67.0,0 - 0,2 - 0,07/11,0,0,0,9,8,6,4.84,ok
-6,Igor Thiago,Brentford,A,23.0,40.0,0,igor_thiago__brentford,Igor Thiago,5.1,2,A,100.0,1 - 1,2 - 0,08/11,2,4,0,9,9,9,5.34,ok
-6,Brian Brobbey,Sunderland,A,16.0,13.0,0,brian_brobbey__sunderland,B. Brobbey,5.0,3,A,78.0,0 - 0,3 - 1,08/11,0,1,0,9,7,7,4.98,ok
-6,Emersonn,Ipswich Town,A,13.0,11.0,0,emersonn__ipswich_town,Emersonn,4.8,2,A,100.0,1 - 1,2 - 2,08/11,1,0,0,9,9,9,4.87,ok
-6,Matias Fernandez-Pardo,Newcastle,A,9.0,11.0,0,matias_fernandez_pardo__newcastle,M. Fernandez-Pardo,4.5,0,A,57.0,0 - 2,0 - 1,07/11,0,0,0,7,5,4,4.32,ok
-7,James Trafford,Leeds,G,15.0,31.0,0,james_trafford__leeds,J. Trafford,5.9,0,G,100.0,0 - 0,2 - 0,07/11,0,0,0,9,9,9,5.81,ok
-7,Emiliano Martínez,Chelsea,G,15.0,15.0,0,emiliano_martinez__chelsea,E. Martínez,5.7,0,G,60.0,0 - 2,2 - 0,08/11,0,0,0,10,6,6,5.7,ok
-7,Jan Paul van Hecke,Tottenham,D,14.0,32.0,0,jan_paul_van_hecke__tottenham,J. van Hecke,5.4,2,DC,100.0,0 - 2,2 - 0,07/11,0,2,0,9,9,9,6.19,ok
-7,Leif Davis,Ipswich Town,D,15.0,23.0,0,leif_davis__ipswich_town,L. Davis,4.9,2,DL,100.0,1 - 1,2 - 2,08/11,1,2,0,9,9,9,5.32,ok
-7,Jayden Bogle,Leeds,D,13.0,21.0,0,jayden_bogle__leeds,J. Bogle,5.1,1,DL,100.0,0 - 0,2 - 0,07/11,0,3,0,9,9,9,5.16,ok
-7,Matteo Ruggeri,Aston Villa,D,10.0,16.0,0,matteo_ruggeri__aston_villa,M. Ruggeri,5.1,0,DL,22.0,2 - 1,1 - 1,08/11,0,0,0,9,4,2,5.2,ok
-7,Nordi Mukiele,Sunderland,D,11.0,13.0,0,nordi_mukiele__sunderland,N. Mukiele,5.0,0,DL,78.0,0 - 0,3 - 1,08/11,0,1,0,9,7,7,5.53,ok
-7,Ben Chilwell,Crystal Palace,D,8.0,9.0,0,ben_chilwell__crystal_palace,B. Chilwell,5.8,1,DL,0.0,0 - 2,2 - 0,08/11,0,0,0,7,2,0,5.63,ok
-7,Antoine Semenyo,Man. City,M,31.0,66.0,0,antoine_semenyo__man_city,A. Semenyo,5.9,2,MO,67.0,2 - 1,0 - 1,07/11,3,0,0,9,7,6,6.1,ok
-7,Morgan Rogers,Chelsea,M,25.0,56.0,0,morgan_rogers__chelsea,M. Rogers,6.3,5,MO,100.0,0 - 2,2 - 0,08/11,1,3,0,9,9,9,5.91,ok
-7,Alexis Mac Allister,Liverpool,M,13.0,41.0,0,alexis_mac_allister__liverpool,A. Mac Allister,5.2,0,MO,78.0,2 - 0,0 - 1,08/11,0,3,0,9,9,7,5.16,ok
-7,Enzo Fernández,Man. City,M,24.0,31.0,0,enzo_fernandez__man_city,E. Fernández,5.4,1,MD,67.0,2 - 1,0 - 1,07/11,0,1,0,9,8,6,5.29,ok
-7,Fabio Fábio Carvalho,Brentford,M,5.0,5.0,0,fabio_fabio_carvalho__brentford,F. Fábio Carvalho,6.0,1,MO,0.0,1 - 1,2 - 0,08/11,0,0,0,9,1,0,5.59,ok
-7,Sávio,Tottenham,M,8.0,4.0,0,savio__tottenham,Sávio,6.0,0,MO,44.0,0 - 2,2 - 0,07/11,0,0,0,9,4,4,5.07,ok
-7,Jørgen Strand Larsen,Crystal Palace,A,14.0,43.0,0,j_rgen_strand_larsen__crystal_palace,J. Strand Larsen,4.9,1,A,56.0,0 - 2,2 - 0,08/11,0,0,0,9,7,5,4.9,ok
-7,Liam Delap,Nottingham Forest,A,10.0,42.0,0,liam_delap__nottingham_forest,L. Delap,4.4,1,A,78.0,1 - 1,2 - 0,07/11,0,2,0,9,8,7,4.64,ok
-7,Igor Jesus,Nottingham Forest,A,13.0,36.0,0,igor_jesus__nottingham_forest,Igor Jesus,4.8,1,A,22.0,1 - 1,2 - 0,07/11,0,1,0,9,5,2,4.99,ok
-7,Junior Kroupi,Bournemouth,A,10.0,16.0,0,junior_kroupi__bournemouth,J. Kroupi,5.3,0,A,0.0,0 - 3,2 - 0,08/11,1,0,0,9,2,0,5.14,blesse
-8,Alisson Becker,Liverpool,G,17.0,37.0,0,alisson_becker__liverpool,Alisson Becker,5.2,0,G,100.0,2 - 0,0 - 1,08/11,0,1,0,9,9,9,5.16,ok
-8,Bart Verbruggen,Brighton,G,17.0,14.0,0,bart_verbruggen__brighton,B. Verbruggen,6.0,0,G,100.0,2 - 0,0 - 1,08/11,0,0,0,9,9,9,5.79,ok
-8,Luke Shaw,Man. United,D,9.0,31.0,0,luke_shaw__man_united,L. Shaw,4.8,0,DL,56.0,0 - 3,2 - 0,08/11,1,2,0,9,5,5,5.64,ok
-8,Gabriel Magalhães,Arsenal,D,21.0,28.0,0,gabriel_magalhaes__arsenal,Gabriel Magalhães,5.6,1,DC,100.0,2 - 0,0 - 1,07/11,0,2,0,9,9,9,5.91,ok
-8,Semi Ajayi,Hull City,D,11.0,27.0,0,semi_ajayi__hull_city,S. Ajayi,5.1,1,DC,100.0,1 - 1,2 - 2,07/11,0,2,0,9,9,9,5.15,ok
-8,Ferdi Kadioglu,Brighton,D,12.0,12.0,0,ferdi_kadioglu__brighton,F. Kadioglu,5.4,0,DL,78.0,2 - 0,0 - 1,08/11,0,1,0,9,7,7,5.46,ok
-8,Ainsley Maitland-Niles,Everton,D,11.0,8.0,0,ainsley_maitland_niles__everton,A. Maitland-Niles,5.2,1,DL,57.0,2 - 0,0 - 1,06/11,1,0,0,7,5,4,5.24,ok
-8,William Saliba,Arsenal,D,1.0,5.0,0,william_saliba__arsenal,W. Saliba,,0,DC,0.0,2 - 0,0 - 1,07/11,,,,9,,,,blesse
-8,Florian Wirtz,Liverpool,M,16.0,41.0,0,florian_wirtz__liverpool,F. Wirtz,5.4,0,MO,100.0,2 - 0,0 - 1,08/11,2,1,0,9,9,9,5.53,ok
-8,Kiernan Dewsbury-Hall,Everton,M,20.0,39.0,0,kiernan_dewsbury_hall__everton,K. Dewsbury-Hall,6.0,2,MO,100.0,2 - 0,0 - 1,06/11,1,1,0,9,9,9,5.77,ok
-8,Alex Scott,Bournemouth,M,16.0,34.0,0,alex_scott__bournemouth,A. Scott,5.7,1,MD,56.0,0 - 3,2 - 0,08/11,0,1,0,9,5,5,5.65,ok
-8,Bruno Guimarães,Arsenal,M,15.0,32.0,0,bruno_guimaraes__arsenal,Bruno Guimarães,5.5,2,MD,33.0,2 - 0,0 - 1,07/11,0,0,0,9,7,3,5.49,ok
-8,Johan Manzambi,Aston Villa,M,9.0,29.0,0,johan_manzambi__aston_villa,J. Manzambi,6.3,2,MO,56.0,2 - 1,1 - 1,08/11,3,1,0,9,6,5,6.09,ok
-8,Jack Hinshelwood,Brighton,M,12.0,19.0,0,jack_hinshelwood__brighton,J. Hinshelwood,5.9,3,MO,11.0,2 - 0,0 - 1,08/11,0,0,0,9,4,1,5.54,blesse
-8,William Osula,Newcastle,A,10.0,40.0,1,william_osula__newcastle,W. Osula,5.1,1,A,33.0,0 - 2,0 - 1,07/11,1,1,0,9,5,3,4.88,incertain
-8,Jean-Philippe Mateta,Crystal Palace,A,11.0,37.0,0,jean_philippe_mateta__crystal_palace,J. Mateta,3.8,0,A,33.0,0 - 2,2 - 0,08/11,0,0,1,9,4,3,3.45,blesse
-8,Arnaud Kalimuendo,Nottingham Forest,A,3.0,36.0,0,arnaud_kalimuendo__nottingham_forest,A. Kalimuendo,4.5,0,A,0.0,1 - 1,2 - 0,07/11,0,0,0,9,4,0,4.11,ok
-8,Bradley Barcola,Liverpool,A,15.0,31.0,0,bradley_barcola__liverpool,B. Barcola,5.3,0,A,86.0,2 - 0,0 - 1,08/11,2,2,0,7,7,6,4.89,ok
-9,Walter Benítez,Crystal Palace,G,10.0,20.0,0,walter_benitez__crystal_palace,W. Benítez,4.7,0,G,56.0,0 - 2,2 - 0,08/11,0,0,0,9,5,5,4.8,ok
-9,Konstantinos Tzolakis,Hull City,G,17.0,16.0,0,konstantinos_tzolakis__hull_city,K. Tzolakis,5.9,0,G,100.0,1 - 1,2 - 2,07/11,0,1,0,9,9,9,5.95,ok
-9,Michael Kayode,Brentford,D,15.0,27.0,0,michael_kayode__brentford,M. Kayode,5.2,1,DL,89.0,1 - 1,2 - 0,08/11,0,2,0,9,9,8,5.29,ok
-9,Jérémy Jacquet,Liverpool,D,14.0,27.0,0,jeremy_jacquet__liverpool,J. Jacquet,5.2,0,DC,100.0,2 - 0,0 - 1,08/11,0,2,0,9,9,9,5.49,ok
-9,Neco Williams,Nottingham Forest,D,13.0,27.0,0,neco_williams__nottingham_forest,N. Williams,5.0,1,DL,100.0,1 - 1,2 - 0,07/11,0,1,0,9,9,9,5.44,ok
-9,Ben White,Arsenal,D,7.0,22.0,0,ben_white__arsenal,B. White,5.8,0,DC,78.0,2 - 0,0 - 1,07/11,3,0,0,9,7,7,6.13,ok
-9,Rúben Dias,Man. City,D,17.0,17.0,0,ruben_dias__man_city,Rúben Dias,5.0,0,DC,100.0,2 - 1,0 - 1,07/11,0,0,0,9,9,9,5.8,ok
-9,Piero Hincapié,Arsenal,D,9.0,14.0,0,piero_hincapie__arsenal,P. Hincapié,5.0,0,DC,0.0,2 - 0,0 - 1,07/11,0,0,0,9,4,0,4.76,ok
-9,Ola Aina,Nottingham Forest,D,9.0,9.0,0,ola_aina__nottingham_forest,O. Aina,4.5,0,DL,67.0,1 - 1,2 - 0,07/11,0,3,0,9,6,6,4.78,ok
-9,Rayan Cherki,Man. City,M,24.0,67.0,0,rayan_cherki__man_city,R. Cherki,6.3,4,MO,67.0,2 - 1,0 - 1,07/11,2,2,0,9,8,6,6.48,ok
-9,Bukayo Saka,Arsenal,M,25.0,58.0,0,bukayo_saka__arsenal,B. Saka,6.1,3,MO,78.0,2 - 0,0 - 1,07/11,0,0,0,9,7,7,5.68,ok
-9,Elliot Anderson,Man. City,M,17.0,38.0,0,elliot_anderson__man_city,E. Anderson,5.7,0,MD,89.0,2 - 1,0 - 1,07/11,1,2,0,9,9,8,6.05,ok
-9,Diego Gómez,Brighton,M,19.0,23.0,0,diego_gomez__brighton,D. Gómez,6.2,1,MO,100.0,2 - 0,0 - 1,08/11,2,0,0,9,9,9,5.58,ok
-9,Mohamed Belloumi,Hull City,M,19.0,22.0,0,mohamed_belloumi__hull_city,M. Belloumi,6.2,3,MO,89.0,1 - 1,2 - 2,07/11,2,1,0,9,9,8,5.62,ok
-9,Vitaly Janelt,Brentford,M,18.0,22.0,0,vitaly_janelt__brentford,V. Janelt,5.8,2,MD,89.0,1 - 1,2 - 0,08/11,0,4,1,9,8,8,5.46,ok
-9,Oliver McBurnie,Hull City,A,10.0,27.0,0,oliver_mcburnie__hull_city,O. McBurnie,5.1,2,A,100.0,1 - 1,2 - 2,07/11,2,4,0,9,9,9,5.13,ok
-9,Cody Gakpo,Liverpool,A,17.0,20.0,0,cody_gakpo__liverpool,C. Gakpo,5.8,1,A,67.0,2 - 0,0 - 1,08/11,3,0,0,9,7,6,5.58,ok
-9,Thierno Barry,Everton,A,16.0,16.0,0,thierno_barry__everton,T. Barry,5.4,4,A,100.0,2 - 0,0 - 1,06/11,0,0,0,9,9,9,4.98,ok
-9,Eddie Nketiah,Crystal Palace,A,8.0,8.0,0,eddie_nketiah__crystal_palace,E. Nketiah,4.5,0,A,33.0,0 - 2,2 - 0,08/11,1,0,0,9,8,3,4.36,ok
-9,Mathys Tel,Tottenham,A,8.0,8.0,0,mathys_tel__tottenham,M. Tel,5.1,1,A,56.0,0 - 2,2 - 0,07/11,0,0,0,9,7,5,5.03,ok
-9,Ellis Simms,Coventry City,A,7.0,7.0,0,ellis_simms__coventry_city,E. Simms,4.6,1,A,11.0,0 - 1,3 - 1,06/11,0,0,0,9,4,1,4.5,ok
-2,Gianluigi Donnarumma,Man. City,G,16.0,32.0,0,gianluigi_donnarumma__man_city,G. Donnarumma,5.4,0,G,100.0,2 - 1,0 - 1,07/11,0,0,0,9,9,9,5.38,ok
-2,Melker Ellborg,Sunderland,G,7.0,10.0,0,melker_ellborg__sunderland,M. Ellborg,,0,G,0.0,0 - 0,3 - 1,08/11,0,0,0,9,0,0,,ok
-2,Nico O'Reilly,Man. City,D,13.0,33.0,0,nico_o_reilly__man_city,N. O'Reilly,4.9,0,DL,44.0,2 - 1,0 - 1,07/11,0,1,0,9,7,4,5.09,ok
-2,Maxence Lacroix,Chelsea,D,11.0,30.0,0,maxence_lacroix__chelsea,M. Lacroix,5.0,0,DC,78.0,0 - 2,2 - 0,08/11,1,1,0,9,8,7,5.39,ok
-2,Reece James,Chelsea,D,10.0,25.0,0,reece_james__chelsea,R. James,5.1,0,DL,33.0,0 - 2,2 - 0,08/11,0,1,0,9,4,3,5.29,ok
-2,Nobel Mendy,Hull City,D,12.0,18.0,0,nobel_mendy__hull_city,N. Mendy,5.7,1,DL,67.0,1 - 1,2 - 2,07/11,0,0,0,9,6,6,5.8,blesse
-2,Malo Gusto,Chelsea,D,10.0,18.0,0,malo_gusto__chelsea,M. Gusto,4.8,0,DL,33.0,0 - 2,2 - 0,08/11,0,0,0,9,6,3,4.96,ok
-2,Trai Hume,Sunderland,D,12.0,17.0,0,trai_hume__sunderland,T. Hume,5.1,0,DL,67.0,0 - 0,3 - 1,08/11,0,0,0,9,8,6,4.95,ok
-2,Andy Robertson,Tottenham,D,9.0,8.0,0,andy_robertson__tottenham,A. Robertson,5.4,0,DL,78.0,0 - 2,2 - 0,07/11,2,0,0,9,8,7,5.52,ok
-2,Cole Palmer,Chelsea,M,20.0,55.0,0,cole_palmer__chelsea,C. Palmer,6.1,3,MO,100.0,0 - 2,2 - 0,08/11,3,2,1,9,9,9,6.04,ok
-2,Ryan Gravenberch,Liverpool,M,13.0,26.0,0,ryan_gravenberch__liverpool,R. Gravenberch,5.0,0,MD,44.0,2 - 0,0 - 1,08/11,1,0,1,9,7,4,4.73,ok
-2,Eberechi Eze,Arsenal,M,11.0,26.0,0,eberechi_eze__arsenal,E. Eze,5.0,0,MO,22.0,2 - 0,0 - 1,07/11,0,0,0,9,6,2,4.56,ok
-2,Dango Ouattara,Brentford,M,14.0,21.0,0,dango_ouattara__brentford,D. Ouattara,5.3,1,MO,56.0,1 - 1,2 - 0,08/11,0,0,0,9,9,5,4.92,ok
-2,Martín Zubimendi,Arsenal,M,12.0,20.0,0,martin_zubimendi__arsenal,M. Zubimendi,4.8,0,MD,0.0,2 - 0,0 - 1,07/11,0,0,0,9,6,0,4.7,ok
-2,Malick Yalcouyé,Brighton,M,11.0,14.0,0,malick_yalcouye__brighton,M. Yalcouyé,5.7,2,MO,33.0,2 - 0,0 - 1,08/11,0,0,0,9,9,3,5.07,ok
-2,Pedro Neto,Chelsea,M,11.0,13.0,0,pedro_neto__chelsea,Pedro Neto,5.4,3,MO,89.0,0 - 2,2 - 0,08/11,1,2,0,9,9,8,5.57,ok
-2,Alexander Isak,Liverpool,A,22.0,57.0,0,alexander_isak__liverpool,A. Isak,5.8,6,A,89.0,2 - 0,0 - 1,08/11,0,1,0,9,8,8,5.68,ok
-2,Viktor Gyökeres,Arsenal,A,18.0,22.0,0,viktor_gyokeres__arsenal,V. Gyökeres,4.8,0,A,11.0,2 - 0,0 - 1,07/11,1,0,0,9,6,1,4.78,ok
-2,Dominic Solanke,Tottenham,A,9.0,22.0,0,dominic_solanke__tottenham,D. Solanke,4.9,1,A,56.0,0 - 2,2 - 0,07/11,1,1,0,9,9,5,4.8,ok
-2,Ibrahim Mbaye,Aston Villa,A,8.0,8.0,0,ibrahim_mbaye__aston_villa,I. Mbaye,4.9,0,A,0.0,2 - 1,1 - 1,08/11,1,0,0,7,6,0,4.75,ok
+team_id,joueur,club,poste_groupe,cote,enchere,flag_point_interrogation,player_key,nom_data,note_moy_reelle,buts_reels_saison,poste,pct_titularisations,passes_decisives_saison,mpg_player_id,cartons_jaunes,cartons_rouges,matchs_club,matchs_joues,matchs_titulaire,points_mpg_moy,statut_performance
+0,Caoimhín Kelleher,Brentford,G,18.0,20.0,0,caoimhin_kelleher__brentford,C. Kelleher,5.9,0,G,100.0,0,mpg_championship_player_200720,0,0,10,10,10,5.84,ok
+0,Alex Cairns,Leeds,G,3.0,3.0,0,alex_cairns__leeds,A. Cairns,,0,G,0.0,0,mpg_championship_player_97846,0,0,10,0,0,,ok
+0,Maxim De Cuyper,Brighton,D,17.0,30.0,0,maxim_de_cuyper__brighton,M. De Cuyper,6.3,2,DL,100.0,3,mpg_championship_player_465730,3,0,10,10,10,5.94,ok
+0,Lewis Hall,Newcastle,D,14.0,27.0,0,lewis_hall__newcastle,L. Hall,5.0,1,DL,100.0,1,mpg_championship_player_487838,1,0,10,10,10,5.82,ok
+0,Marc Guéhi,Man. City,D,20.0,24.0,0,marc_guehi__man_city,M. Guéhi,5.4,1,DC,90.0,1,mpg_championship_player_209036,1,0,10,9,9,5.97,ok
+0,Ryan Giles,Hull City,D,14.0,14.0,0,ryan_giles__hull_city,R. Giles,5.2,0,DL,80.0,1,mpg_championship_player_232351,1,0,10,10,8,4.89,ok
+0,Jannik Schuster,Brentford,D,9.0,5.0,0,jannik_schuster__brentford,J. Schuster,6.0,0,DC,30.0,1,mpg_championship_player_513086,0,0,10,4,3,6.03,ok
+0,Conor Bradley,Liverpool,D,1.0,1.0,0,conor_bradley__liverpool,C. Bradley,,0,DL,0.0,,mpg_championship_player_492777,,,10,,,,blesse
+0,Bruno Fernandes,Man. United,M,29.0,100.0,0,bruno_fernandes__man_united,Bruno Fernandes,5.9,4,MO,90.0,2,mpg_championship_player_141746,2,0,10,9,9,5.75,ok
+0,Pascal Groß,Brighton,M,21.0,46.0,0,pascal_gro__brighton,P. Groß,6.2,4,MO,100.0,4,mpg_championship_player_60307,4,0,10,10,10,5.91,ok
+0,Marcus Tavernier,Bournemouth,M,24.0,36.0,0,marcus_tavernier__bournemouth,M. Tavernier,6.1,5,MO,100.0,0,mpg_championship_player_201658,4,0,10,10,10,5.65,ok
+0,John McGinn,Aston Villa,M,10.0,22.0,0,john_mcginn__aston_villa,J. McGinn,5.4,2,MO,90.0,4,mpg_championship_player_122806,2,0,10,10,9,5.38,ok
+0,Joe Willock,Newcastle,M,11.0,14.0,0,joe_willock__newcastle,J. Willock,5.3,2,MO,70.0,0,mpg_championship_player_200089,0,0,10,10,7,4.92,ok
+0,Matt O'Riley,Brighton,M,4.0,1.0,0,matt_o_riley__brighton,M. O'Riley,5.0,0,MD,0.0,0,mpg_championship_player_219249,0,0,10,2,0,4.38,ok
+0,Bryan Mbeumo,Man. United,A,21.0,69.0,0,bryan_mbeumo__man_united,B. Mbeumo,5.4,4,A,100.0,0,mpg_championship_player_446008,2,0,10,10,10,5.24,ok
+0,Anthony Elanga,Newcastle,A,11.0,48.0,1,anthony_elanga__newcastle,A. Elanga,5.3,2,A,40.0,0,mpg_championship_player_449434,1,0,10,6,4,4.79,incertain
+0,Kevin Schade,Brentford,A,22.0,37.0,0,kevin_schade__brentford,K. Schade,5.5,3,A,90.0,0,mpg_championship_player_513418,2,0,10,10,9,5.14,ok
+0,Hugo Ekitiké,Liverpool,A,1.0,2.0,0,hugo_ekitike__liverpool,H. Ekitiké,,0,A,0.0,,mpg_championship_player_510663,,,10,,,,blesse
+0,Brian Madjo,Aston Villa,A,1.0,1.0,0,brian_madjo__aston_villa,B. Madjo,4.5,0,A,0.0,0,mpg_championship_player_690838,1,0,10,2,0,3.99,ok
+1,Matz Sels,Nottingham Forest,G,13.0,25.0,0,matz_sels__nottingham_forest,M. Sels,4.9,0,G,100.0,0,mpg_championship_player_85633,0,0,10,10,10,5.19,ok
+1,John Victor,Nottingham Forest,G,7.0,10.0,0,john_victor__nottingham_forest,John Victor,,0,G,0.0,0,mpg_championship_player_221389,0,0,10,0,0,,ok
+1,Ezri Konsa,Arsenal,D,11.0,32.0,1,ezri_konsa__arsenal,E. Konsa,5.8,1,DC,80.0,0,mpg_championship_player_199798,0,0,10,9,8,6.04,incertain
+1,James Tarkowski,Everton,D,19.0,28.0,0,james_tarkowski__everton,J. Tarkowski,5.7,1,DC,100.0,1,mpg_championship_player_17761,2,0,10,10,10,5.85,ok
+1,Riccardo Calafiori,Arsenal,D,13.0,24.0,0,riccardo_calafiori__arsenal,R. Calafiori,5.4,1,DL,90.0,2,mpg_championship_player_466075,0,0,10,10,9,5.68,ok
+1,Nathan Collins,Brentford,D,12.0,24.0,1,nathan_collins__brentford,N. Collins,5.6,0,DC,30.0,0,mpg_championship_player_432830,1,0,10,4,3,5.72,incertain
+1,Jarrad Branthwaite,Everton,D,12.0,16.0,0,jarrad_branthwaite__everton,J. Branthwaite,5.5,0,DC,90.0,0,mpg_championship_player_480455,1,0,10,9,9,5.78,ok
+1,Vitalii Mykolenko,Everton,D,12.0,16.0,0,vitalii_mykolenko__everton,V. Mykolenko,5.4,0,DL,90.0,1,mpg_championship_player_224967,2,0,10,9,9,5.74,ok
+1,Dan Ballard,Sunderland,D,10.0,10.0,0,dan_ballard__sunderland,D. Ballard,4.5,0,DC,50.0,0,mpg_championship_player_223827,2,0,10,5,5,5.15,blesse
+1,Morgan Gibbs-White,Nottingham Forest,M,25.0,41.0,0,morgan_gibbs_white__nottingham_forest,M. Gibbs-White,5.7,1,MO,90.0,3,mpg_championship_player_222531,0,0,10,9,9,5.53,ok
+1,Martin Ødegaard,Arsenal,M,15.0,28.0,0,martin_degaard__arsenal,M. Ødegaard,5.8,3,MO,100.0,0,mpg_championship_player_184029,1,0,10,10,10,5.99,ok
+1,Rayan,Bournemouth,M,13.0,28.0,0,rayan__bournemouth,Rayan,5.2,1,MO,100.0,0,mpg_championship_player_499604,0,0,10,10,10,4.5,ok
+1,Christos Tzolis,Arsenal,M,12.0,27.0,0,christos_tzolis__arsenal,C. Tzolis,5.6,0,MO,70.0,1,mpg_championship_player_439509,2,0,10,7,7,4.97,blesse
+1,Tyler Adams,Bournemouth,M,11.0,22.0,0,tyler_adams__bournemouth,T. Adams,5.3,0,MD,80.0,0,mpg_championship_player_200785,3,0,10,10,8,5.05,ok
+1,Myles Lewis-Skelly,Arsenal,M,9.0,22.0,0,myles_lewis_skelly__arsenal,M. Lewis-Skelly,5.1,0,MD,60.0,0,mpg_championship_player_499169,2,0,10,7,6,5.17,ok
+1,Alex Iwobi,Fulham,M,13.0,13.0,0,alex_iwobi__fulham,A. Iwobi,5.8,1,MO,100.0,0,mpg_championship_player_153133,0,0,10,10,10,5.65,ok
+1,Leon Goretzka,Aston Villa,M,5.0,5.0,0,leon_goretzka__aston_villa,L. Goretzka,5.3,1,MD,25.0,0,mpg_championship_player_119090,0,0,8,4,2,4.9,ok
+1,João Pedro,Chelsea,A,30.0,71.0,0,joao_pedro__chelsea,João Pedro,6.3,5,A,60.0,3,mpg_championship_player_475168,1,0,10,6,6,6.55,ok
+1,Kai Havertz,Arsenal,A,14.0,30.0,0,kai_havertz__arsenal,K. Havertz,5.0,3,A,90.0,0,mpg_championship_player_219847,1,0,10,10,9,5.01,ok
+1,Nicolas Jackson,Aston Villa,A,8.0,18.0,0,nicolas_jackson__aston_villa,N. Jackson,5.8,6,A,82.0,1,mpg_championship_player_517052,2,0,11,9,9,5.92,ok
+1,Chuba Akpom,Ipswich Town,A,8.0,10.0,0,chuba_akpom__ipswich_town,C. Akpom,4.8,1,A,0.0,0,mpg_championship_player_147675,0,0,10,7,0,4.61,ok
+2,Gianluigi Donnarumma,Man. City,G,16.0,32.0,0,gianluigi_donnarumma__man_city,G. Donnarumma,5.2,0,G,100.0,0,mpg_championship_player_204936,0,0,10,10,10,5.2,ok
+2,Melker Ellborg,Sunderland,G,7.0,10.0,0,melker_ellborg__sunderland,M. Ellborg,,0,G,0.0,0,mpg_championship_player_515046,0,0,10,0,0,,ok
+2,Nico O'Reilly,Man. City,D,13.0,33.0,0,nico_o_reilly__man_city,N. O'Reilly,4.8,0,DL,40.0,0,mpg_championship_player_472769,1,0,10,8,4,5.07,ok
+2,Maxence Lacroix,Chelsea,D,11.0,30.0,0,maxence_lacroix__chelsea,M. Lacroix,5.0,0,DC,70.0,1,mpg_championship_player_437499,1,0,10,8,7,5.39,ok
+2,Reece James,Chelsea,D,10.0,25.0,0,reece_james__chelsea,R. James,5.1,0,DL,30.0,0,mpg_championship_player_225796,1,0,10,4,3,5.29,ok
+2,Nobel Mendy,Hull City,D,12.0,18.0,0,nobel_mendy__hull_city,N. Mendy,5.6,1,DL,70.0,0,mpg_championship_player_606930,1,0,10,7,7,5.69,ok
+2,Malo Gusto,Chelsea,D,10.0,18.0,0,malo_gusto__chelsea,M. Gusto,5.0,0,DL,30.0,0,mpg_championship_player_482609,0,0,10,7,3,5.04,ok
+2,Trai Hume,Sunderland,D,12.0,17.0,0,trai_hume__sunderland,T. Hume,5.2,0,DL,70.0,0,mpg_championship_player_487676,0,0,10,9,7,4.96,ok
+2,Andy Robertson,Tottenham,D,9.0,8.0,0,andy_robertson__tottenham,A. Robertson,5.3,0,DL,80.0,2,mpg_championship_player_122798,0,0,10,9,8,5.45,ok
+2,Cole Palmer,Chelsea,M,20.0,55.0,0,cole_palmer__chelsea,C. Palmer,6.0,3,MO,100.0,3,mpg_championship_player_244851,2,1,10,10,10,5.95,ok
+2,Ryan Gravenberch,Liverpool,M,13.0,26.0,0,ryan_gravenberch__liverpool,R. Gravenberch,5.0,0,MD,40.0,1,mpg_championship_player_441266,0,1,10,7,4,4.73,ok
+2,Eberechi Eze,Arsenal,M,11.0,26.0,0,eberechi_eze__arsenal,E. Eze,5.0,0,MO,20.0,0,mpg_championship_player_232413,0,0,10,7,2,4.61,ok
+2,Dango Ouattara,Brentford,M,14.0,21.0,0,dango_ouattara__brentford,D. Ouattara,5.3,1,MO,60.0,0,mpg_championship_player_533463,0,0,10,10,6,4.88,ok
+2,Martín Zubimendi,Arsenal,M,12.0,20.0,0,martin_zubimendi__arsenal,M. Zubimendi,4.8,0,MD,0.0,0,mpg_championship_player_481655,0,0,10,7,0,4.68,ok
+2,Malick Yalcouyé,Brighton,M,11.0,14.0,0,malick_yalcouye__brighton,M. Yalcouyé,5.6,2,MO,30.0,0,mpg_championship_player_611695,0,0,10,10,3,4.99,ok
+2,Pedro Neto,Chelsea,M,11.0,13.0,0,pedro_neto__chelsea,Pedro Neto,5.3,3,MO,90.0,1,mpg_championship_player_247632,3,0,10,10,9,5.43,ok
+2,Alexander Isak,Liverpool,A,22.0,57.0,0,alexander_isak__liverpool,A. Isak,5.8,7,A,90.0,0,mpg_championship_player_219168,1,0,10,9,9,5.78,blesse
+2,Viktor Gyökeres,Arsenal,A,18.0,22.0,0,viktor_gyokeres__arsenal,V. Gyökeres,4.8,0,A,10.0,1,mpg_championship_player_224117,0,0,10,7,1,4.81,ok
+2,Dominic Solanke,Tottenham,A,9.0,22.0,0,dominic_solanke__tottenham,D. Solanke,4.8,1,A,50.0,1,mpg_championship_player_154566,1,0,10,10,5,4.72,ok
+2,Ibrahim Mbaye,Aston Villa,A,8.0,8.0,0,ibrahim_mbaye__aston_villa,I. Mbaye,4.9,0,A,0.0,1,mpg_championship_player_638987,0,0,8,7,0,4.63,ok
+3,Lukás Hornícek,Newcastle,G,14.0,25.0,0,lukas_hornicek__newcastle,L. Hornícek,5.4,0,G,100.0,0,mpg_championship_player_470551,1,0,10,10,10,5.45,ok
+3,Zion Suzuki,Aston Villa,G,16.0,24.0,0,zion_suzuki__aston_villa,Z. Suzuki,5.6,0,G,90.0,0,mpg_championship_player_433969,1,0,10,9,9,5.83,ok
+3,Malick Thiaw,Newcastle,D,13.0,22.0,0,malick_thiaw__newcastle,M. Thiaw,4.7,0,DC,80.0,0,mpg_championship_player_465642,1,0,10,9,8,5.03,ok
+3,Josko Gvardiol,Man. City,D,13.0,20.0,0,josko_gvardiol__man_city,J. Gvardiol,5.1,1,DC,80.0,3,mpg_championship_player_477424,2,0,10,10,8,5.82,ok
+3,Micky van de Ven,Tottenham,D,10.0,18.0,0,micky_van_de_ven__tottenham,M. van de Ven,5.3,0,DC,80.0,0,mpg_championship_player_491279,3,0,10,9,8,6.07,ok
+3,Sven Botman,Newcastle,D,10.0,17.0,0,sven_botman__newcastle,S. Botman,5.0,1,DC,70.0,0,mpg_championship_player_220237,2,0,10,7,7,5.42,ok
+3,Matty Cash,Aston Villa,D,9.0,17.0,0,matty_cash__aston_villa,M. Cash,4.5,0,DL,70.0,0,mpg_championship_player_199796,5,0,10,8,7,5.27,ok
+3,Tyrick Mitchell,Crystal Palace,D,13.0,13.0,0,tyrick_mitchell__crystal_palace,T. Mitchell,4.5,2,DL,100.0,0,mpg_championship_player_244723,0,0,10,10,10,5.25,ok
+3,Ethan Ampadu,Leeds,D,12.0,12.0,0,ethan_ampadu__leeds,E. Ampadu,5.2,0,DC,100.0,0,mpg_championship_player_199598,4,0,10,10,10,5.27,ok
+3,Dominik Szoboszlai,Liverpool,M,20.0,46.0,0,dominik_szoboszlai__liverpool,D. Szoboszlai,5.8,1,MO,70.0,1,mpg_championship_player_424876,1,0,10,8,7,5.57,ok
+3,Jérémy Doku,Man. City,M,11.0,28.0,0,jeremy_doku__man_city,J. Doku,5.7,1,MO,40.0,1,mpg_championship_player_248875,0,0,10,6,4,6.17,ok
+3,Quinten Timber,Crystal Palace,M,11.0,25.0,0,quinten_timber__crystal_palace,Q. Timber,5.1,0,MO,75.0,1,mpg_championship_player_450063,0,0,8,6,6,4.88,ok
+3,Enzo Le Fée,Sunderland,M,16.0,21.0,0,enzo_le_fee__sunderland,E. Le Fée,5.8,3,MO,100.0,1,mpg_championship_player_484420,0,0,10,10,10,5.24,ok
+3,Emiliano Buendía,Aston Villa,M,13.0,21.0,0,emiliano_buendia__aston_villa,E. Buendía,5.1,1,MO,70.0,0,mpg_championship_player_195546,2,0,10,9,7,4.78,ok
+3,Víctor Muñoz,Liverpool,M,11.0,21.0,0,victor_munoz__liverpool,V. Muñoz,5.1,2,MO,50.0,0,mpg_championship_player_551499,2,0,10,9,5,4.96,ok
+3,Oscar Bobb,Fulham,M,10.0,14.0,0,oscar_bobb__fulham,O. Bobb,5.5,1,MO,100.0,0,mpg_championship_player_477555,0,0,10,10,10,5.02,ok
+3,Evanilson,Bournemouth,A,11.0,36.0,0,evanilson__bournemouth,Evanilson,6.2,5,A,100.0,4,mpg_championship_player_444102,1,0,10,10,10,6.1,ok
+3,Gonzalo García,Fulham,A,14.0,32.0,0,gonzalo_garcia__fulham,G. García,4.5,1,A,100.0,0,mpg_championship_player_551466,0,0,10,10,10,4.61,ok
+3,Yoane Wissa,Newcastle,A,10.0,31.0,0,yoane_wissa__newcastle,Y. Wissa,4.7,1,A,80.0,1,mpg_championship_player_216646,3,0,10,10,8,4.54,ok
+3,Omar Marmoush,Tottenham,A,8.0,29.0,0,omar_marmoush__tottenham,Omar Marmoush,4.9,1,A,80.0,0,mpg_championship_player_438234,0,0,10,9,8,4.89,ok
+3,Yéremy Pino,Crystal Palace,A,13.0,28.0,0,yeremy_pino__crystal_palace,Y. Pino,5.4,1,A,90.0,0,mpg_championship_player_488024,4,0,10,10,9,4.91,ok
+4,Senne Lammens,Man. United,G,15.0,33.0,0,senne_lammens__man_united,S. Lammens,5.0,0,G,100.0,0,mpg_championship_player_465247,0,0,10,10,10,4.96,ok
+4,Michael Zetterer,Leeds,G,7.0,7.0,0,michael_zetterer__leeds,M. Zetterer,,0,G,0.0,0,mpg_championship_player_155465,0,0,8,0,0,,ok
+4,Karl Darlow,Man. United,G,7.0,7.0,0,karl_darlow__man_united,K. Darlow,,0,G,0.0,0,mpg_championship_player_59735,0,0,10,0,0,,ok
+4,Keane Lewis-Potter,Brentford,D,14.0,21.0,0,keane_lewis_potter__brentford,K. Lewis-Potter,5.3,2,DL,100.0,1,mpg_championship_player_249231,0,0,10,10,10,5.27,ok
+4,Kristoffer Ajer,Brentford,D,13.0,17.0,0,kristoffer_ajer__brentford,K. Ajer,5.6,1,DC,100.0,0,mpg_championship_player_191866,3,0,10,10,10,5.73,ok
+4,Olivier Boscagli,Brighton,D,10.0,17.0,0,olivier_boscagli__brighton,O. Boscagli,5.5,0,DL,100.0,1,mpg_championship_player_204120,4,0,10,10,10,5.52,ok
+4,Thomas Meunier,Sunderland,D,10.0,16.0,0,thomas_meunier__sunderland,T. Meunier,5.1,0,DL,70.0,1,mpg_championship_player_93605,1,0,10,8,7,4.92,ok
+4,Luka Vuskovic,Brighton,D,11.0,11.0,0,luka_vuskovic__brighton,L. Vuskovic,5.8,1,DC,100.0,0,mpg_championship_player_610799,0,0,10,10,10,6.46,ok
+4,Antonee Robinson,Fulham,D,9.0,9.0,0,antonee_robinson__fulham,A. Robinson,4.7,0,DL,90.0,0,mpg_championship_player_169528,1,0,10,9,9,5.17,ok
+4,Harvey Barnes,Newcastle,M,17.0,32.0,0,harvey_barnes__newcastle,H. Barnes,5.5,2,MO,100.0,2,mpg_championship_player_201666,0,0,10,10,10,5.13,ok
+4,Justin Kluivert,Bournemouth,M,13.0,32.0,1,justin_kluivert__bournemouth,J. Kluivert,5.5,1,MO,70.0,2,mpg_championship_player_222683,1,0,10,8,7,5.28,incertain
+4,Matheus Cunha,Man. United,M,19.0,23.0,0,matheus_cunha__man_united,Matheus Cunha,5.5,1,MO,80.0,2,mpg_championship_player_430871,0,0,10,10,8,5.53,ok
+4,Daichi Kamada,Crystal Palace,M,10.0,22.0,0,daichi_kamada__crystal_palace,D. Kamada,5.0,1,MO,100.0,3,mpg_championship_player_209400,2,0,10,10,10,5.08,ok
+4,Kobbie Mainoo,Man. United,M,15.0,17.0,0,kobbie_mainoo__man_united,K. Mainoo,5.7,0,MD,60.0,1,mpg_championship_player_516895,1,0,10,8,6,5.81,ok
+4,Youri Tielemans,Man. United,M,12.0,17.0,0,youri_tielemans__man_united,Y. Tielemans,5.5,1,MD,90.0,1,mpg_championship_player_166989,1,0,10,9,9,5.46,ok
+4,Erling Haaland,Man. City,A,42.0,127.0,0,erling_haaland__man_city,E. Haaland,6.2,9,A,100.0,0,mpg_championship_player_223094,0,0,10,10,10,6.07,ok
+4,Dominic Calvert-Lewin,Leeds,A,26.0,37.0,0,dominic_calvert_lewin__leeds,D. Calvert-Lewin,4.9,4,A,100.0,0,mpg_championship_player_177815,3,0,10,10,10,4.88,ok
+4,Charalampos Kostoulas,Brighton,A,11.0,32.0,0,charalampos_kostoulas__brighton,C. Kostoulas,5.5,3,A,90.0,2,mpg_championship_player_647850,1,0,10,10,9,5.68,ok
+4,Tyrique George,Everton,A,11.0,23.0,0,tyrique_george__everton,T. George,5.5,1,A,70.0,0,mpg_championship_player_550615,1,0,10,10,7,4.95,ok
+5,Jordan Pickford,Everton,G,16.0,41.0,0,jordan_pickford__everton,J. Pickford,5.5,0,G,100.0,0,mpg_championship_player_111234,0,0,10,10,10,5.65,ok
+5,Gerónimo Rulli,Man. City,G,7.0,9.0,0,geronimo_rulli__man_city,G. Rulli,,0,G,0.0,0,mpg_championship_player_106921,0,0,10,0,0,,ok
+5,Harry Maguire,Man. United,D,11.0,47.0,0,harry_maguire__man_united,H. Maguire,4.8,0,DC,100.0,0,mpg_championship_player_95658,4,0,10,10,10,5.19,ok
+5,Virgil van Dijk,Liverpool,D,18.0,38.0,0,virgil_van_dijk__liverpool,V. van Dijk,5.6,0,DC,100.0,0,mpg_championship_player_97032,3,0,10,10,10,6.2,ok
+5,Tarik Muharemovic,Leeds,D,13.0,13.0,0,tarik_muharemovic__leeds,T. Muharemovic,5.5,0,DC,100.0,2,mpg_championship_player_522047,1,0,10,10,10,6.03,ok
+5,Jaka Bijol,Leeds,D,11.0,13.0,0,jaka_bijol__leeds,J. Bijol,5.7,0,DC,30.0,0,mpg_championship_player_434752,0,0,10,5,3,5.29,ok
+5,Lewis Dunk,Brighton,D,13.0,10.0,0,lewis_dunk__brighton,L. Dunk,5.4,1,DC,80.0,0,mpg_championship_player_83299,2,0,10,9,8,6.12,ok
+5,Joachim Andersen,Fulham,D,9.0,8.0,0,joachim_andersen__fulham,J. Andersen,4.5,0,DC,20.0,0,mpg_championship_player_174874,1,0,10,3,2,5.15,ok
+5,Declan Rice,Arsenal,M,23.0,52.0,0,declan_rice__arsenal,D. Rice,5.7,0,MD,100.0,5,mpg_championship_player_204480,1,0,10,10,10,6.08,ok
+5,Phil Foden,Man. City,M,16.0,41.0,0,phil_foden__man_city,P. Foden,5.4,1,MO,40.0,2,mpg_championship_player_209244,1,1,10,8,4,5.15,suspendu
+5,Jacob Ramsey,Newcastle,M,13.0,37.0,1,jacob_ramsey__newcastle,J. Ramsey,5.0,1,MO,0.0,0,mpg_championship_player_232653,1,1,10,5,0,4.79,incertain
+5,Iliman Ndiaye,Man. City,M,16.0,22.0,0,iliman_ndiaye__man_city,I. Ndiaye,5.5,0,MO,90.0,3,mpg_championship_player_440993,0,0,10,10,9,5.58,ok
+5,Harry Wilson,Leeds,M,14.0,18.0,0,harry_wilson__leeds,H. Wilson,4.8,0,MO,30.0,0,mpg_championship_player_153682,1,0,10,8,3,4.52,ok
+5,Mathias Jensen,Brentford,M,8.0,15.0,1,mathias_jensen__brentford,M. Jensen,5.4,0,MD,40.0,0,mpg_championship_player_207283,0,0,10,6,4,5.18,incertain
+5,Marcus Rashford,Man. United,A,15.0,45.0,0,marcus_rashford__man_united,M. Rashford,5.1,0,A,40.0,0,mpg_championship_player_176297,0,0,10,6,4,4.72,ok
+5,Richarlison,Tottenham,A,11.0,45.0,0,richarlison__tottenham,Richarlison,3.0,0,A,10.0,0,mpg_championship_player_212319,0,0,10,1,1,3.77,ok
+5,Malick Fofana,Sunderland,A,11.0,26.0,0,malick_fofana__sunderland,M. Fofana,4.5,0,A,0.0,0,mpg_championship_player_549940,0,0,8,5,0,4.37,ok
+5,Benjamin Sesko,Man. United,A,16.0,20.0,0,benjamin_sesko__man_united,B. Sesko,4.9,1,A,0.0,0,mpg_championship_player_485711,0,0,10,4,0,4.54,blesse
+6,David Raya,Arsenal,G,16.0,41.0,0,david_raya__arsenal,D. Raya,5.8,0,G,100.0,0,mpg_championship_player_154561,1,0,10,10,10,6.11,ok
+6,Kepa Arrizabalaga,Arsenal,G,7.0,9.0,0,kepa_arrizabalaga__arsenal,K. Arrizabalaga,,0,G,0.0,0,mpg_championship_player_109745,0,0,10,0,0,,ok
+6,Mark Travers,Everton,G,7.0,8.0,0,mark_travers__everton,M. Travers,,0,G,0.0,0,mpg_championship_player_229600,0,0,10,0,0,,ok
+6,James Justin,Leeds,D,16.0,49.0,0,james_justin__leeds,J. Justin,5.7,1,DL,100.0,1,mpg_championship_player_220627,1,0,10,10,10,5.3,ok
+6,Daniel Muñoz,Nottingham Forest,D,12.0,19.0,0,daniel_munoz__nottingham_forest,D. Muñoz,4.8,0,DL,70.0,1,mpg_championship_player_247348,1,0,10,9,7,5.26,ok
+6,Cristhian Mosquera,Arsenal,D,10.0,17.0,0,cristhian_mosquera__arsenal,C. Mosquera,5.5,0,DC,20.0,0,mpg_championship_player_500040,0,0,10,2,2,5.89,ok
+6,Adrien Truffert,Bournemouth,D,11.0,16.0,0,adrien_truffert__bournemouth,A. Truffert,5.0,0,DL,100.0,1,mpg_championship_player_494521,2,0,10,10,10,5.41,ok
+6,John Egan,Hull City,D,10.0,8.0,0,john_egan__hull_city,J. Egan,5.3,0,DC,100.0,0,mpg_championship_player_108416,1,0,10,10,10,5.4,ok
+6,Jacob Greaves,Ipswich Town,D,8.0,8.0,0,jacob_greaves__ipswich_town,J. Greaves,4.1,0,DC,50.0,0,mpg_championship_player_449429,2,0,10,5,5,4.46,ok
+6,James Garner,Everton,M,16.0,51.0,0,james_garner__everton,J. Garner,5.4,0,MD,90.0,0,mpg_championship_player_232928,3,0,10,10,9,5.29,ok
+6,Yasin Ayari,Brighton,M,13.0,51.0,0,yasin_ayari__brighton,Y. Ayari,6.2,3,MO,90.0,0,mpg_championship_player_509416,1,0,10,9,9,5.51,ok
+6,Granit Xhaka,Sunderland,M,12.0,51.0,0,granit_xhaka__sunderland,G. Xhaka,5.3,0,MD,100.0,0,mpg_championship_player_84450,2,0,10,10,10,5.28,ok
+6,Nilson Angulo,Sunderland,M,9.0,18.0,0,nilson_angulo__sunderland,N. Angulo,5.1,1,MO,80.0,1,mpg_championship_player_536661,2,0,10,9,8,4.35,ok
+6,Mamadou Sangaré,Brentford,M,11.0,13.0,0,mamadou_sangare__brentford,M. Sangaré,5.5,0,MD,70.0,1,mpg_championship_player_513545,2,0,10,10,7,5.23,ok
+6,Josh King,Fulham,M,13.0,10.0,0,josh_king__fulham,J. King,5.7,2,MO,100.0,1,mpg_championship_player_577725,3,0,10,10,10,5.23,ok
+6,Florentino,Ipswich Town,M,6.0,5.0,0,florentino__ipswich_town,Florentino,4.8,1,MD,50.0,0,mpg_championship_player_216055,0,0,10,7,5,4.81,ok
+6,Noah Okafor,Leeds,A,14.0,51.0,0,noah_okafor__leeds,N. Okafor,5.1,2,A,60.0,0,mpg_championship_player_435997,1,0,10,9,6,5.02,ok
+6,Igor Thiago,Brentford,A,23.0,40.0,0,igor_thiago__brentford,Igor Thiago,4.8,2,A,100.0,2,mpg_championship_player_502500,4,1,10,10,10,4.98,ok
+6,Brian Brobbey,Sunderland,A,16.0,13.0,0,brian_brobbey__sunderland,B. Brobbey,5.0,3,A,80.0,0,mpg_championship_player_441264,2,0,10,8,8,4.96,blesse
+6,Emersonn,Ipswich Town,A,13.0,11.0,0,emersonn__ipswich_town,Emersonn,4.7,2,A,100.0,1,mpg_championship_player_543968,0,0,10,10,10,4.8,ok
+6,Matias Fernandez-Pardo,Newcastle,A,9.0,11.0,0,matias_fernandez_pardo__newcastle,M. Fernandez-Pardo,4.5,0,A,50.0,0,mpg_championship_player_613221,0,0,8,6,4,4.34,ok
+7,James Trafford,Leeds,G,15.0,31.0,0,james_trafford__leeds,J. Trafford,6.0,0,G,100.0,0,mpg_championship_player_432720,0,0,10,10,10,5.96,ok
+7,Emiliano Martínez,Chelsea,G,15.0,15.0,0,emiliano_martinez__chelsea,E. Martínez,5.7,0,G,55.0,0,mpg_championship_player_98980,0,0,11,6,6,5.7,ok
+7,Jan Paul van Hecke,Tottenham,D,14.0,32.0,0,jan_paul_van_hecke__tottenham,J. van Hecke,5.5,2,DC,100.0,0,mpg_championship_player_469142,2,0,10,10,10,6.22,ok
+7,Leif Davis,Ipswich Town,D,15.0,23.0,0,leif_davis__ipswich_town,L. Davis,4.8,2,DL,100.0,1,mpg_championship_player_455084,2,0,10,10,10,5.23,ok
+7,Jayden Bogle,Leeds,D,13.0,21.0,0,jayden_bogle__leeds,J. Bogle,5.1,1,DL,100.0,0,mpg_championship_player_226182,3,0,10,10,10,5.18,ok
+7,Matteo Ruggeri,Aston Villa,D,10.0,16.0,0,matteo_ruggeri__aston_villa,M. Ruggeri,5.1,0,DL,20.0,0,mpg_championship_player_487992,0,0,10,4,2,5.2,ok
+7,Nordi Mukiele,Sunderland,D,11.0,13.0,0,nordi_mukiele__sunderland,N. Mukiele,5.1,0,DL,80.0,0,mpg_championship_player_200834,1,0,10,8,8,5.58,ok
+7,Ben Chilwell,Crystal Palace,D,8.0,9.0,0,ben_chilwell__crystal_palace,B. Chilwell,5.8,1,DL,0.0,0,mpg_championship_player_172850,0,0,8,2,0,5.63,ok
+7,Antoine Semenyo,Man. City,M,31.0,66.0,0,antoine_semenyo__man_city,A. Semenyo,5.9,2,MO,60.0,3,mpg_championship_player_437730,0,0,10,7,6,6.1,ok
+7,Morgan Rogers,Chelsea,M,25.0,56.0,0,morgan_rogers__chelsea,M. Rogers,6.2,5,MO,100.0,1,mpg_championship_player_244850,3,0,10,10,10,5.69,ok
+7,Alexis Mac Allister,Liverpool,M,13.0,41.0,0,alexis_mac_allister__liverpool,A. Mac Allister,5.4,1,MO,80.0,0,mpg_championship_player_243016,4,0,10,10,8,5.33,ok
+7,Enzo Fernández,Man. City,M,24.0,31.0,0,enzo_fernandez__man_city,E. Fernández,5.1,1,MD,70.0,0,mpg_championship_player_448047,1,0,10,9,7,5.15,ok
+7,Fabio Fábio Carvalho,Brentford,M,5.0,5.0,0,fabio_fabio_carvalho__brentford,F. Fábio Carvalho,6.0,1,MO,0.0,0,mpg_championship_player_244858,0,0,10,1,0,5.59,ok
+7,Sávio,Tottenham,M,8.0,4.0,0,savio__tottenham,Sávio,6.0,0,MO,40.0,0,mpg_championship_player_510281,0,0,10,4,4,5.07,ok
+7,Jørgen Strand Larsen,Crystal Palace,A,14.0,43.0,0,j_rgen_strand_larsen__crystal_palace,J. Strand Larsen,4.8,1,A,60.0,0,mpg_championship_player_247412,0,0,10,8,6,4.8,ok
+7,Liam Delap,Nottingham Forest,A,10.0,42.0,0,liam_delap__nottingham_forest,L. Delap,4.8,3,A,80.0,0,mpg_championship_player_463034,2,0,10,9,8,4.98,ok
+7,Igor Jesus,Nottingham Forest,A,13.0,36.0,0,igor_jesus__nottingham_forest,Igor Jesus,4.8,1,A,20.0,0,mpg_championship_player_482973,2,0,10,6,2,4.85,blesse
+7,Junior Kroupi,Bournemouth,A,10.0,16.0,1,junior_kroupi__bournemouth,J. Kroupi,5.0,0,A,0.0,1,mpg_championship_player_560262,0,0,10,3,0,4.84,incertain
+8,Alisson Becker,Liverpool,G,17.0,37.0,0,alisson_becker__liverpool,Alisson Becker,5.4,0,G,100.0,0,mpg_championship_player_116535,1,0,10,10,10,5.34,ok
+8,Bart Verbruggen,Brighton,G,17.0,14.0,0,bart_verbruggen__brighton,B. Verbruggen,6.0,0,G,100.0,0,mpg_championship_player_489639,0,0,10,10,10,5.78,ok
+8,Luke Shaw,Man. United,D,9.0,31.0,0,luke_shaw__man_united,L. Shaw,4.8,0,DL,50.0,1,mpg_championship_player_106760,2,0,10,5,5,5.64,ok
+8,Gabriel Magalhães,Arsenal,D,21.0,28.0,0,gabriel_magalhaes__arsenal,Gabriel Magalhães,5.6,1,DC,100.0,0,mpg_championship_player_226597,2,0,10,10,10,5.93,ok
+8,Semi Ajayi,Hull City,D,11.0,27.0,0,semi_ajayi__hull_city,S. Ajayi,5.3,1,DC,100.0,0,mpg_championship_player_146426,2,0,10,10,10,5.37,ok
+8,Ferdi Kadioglu,Brighton,D,12.0,12.0,0,ferdi_kadioglu__brighton,F. Kadioglu,5.4,0,DL,70.0,0,mpg_championship_player_231416,1,0,10,7,7,5.46,ok
+8,Ainsley Maitland-Niles,Everton,D,11.0,8.0,0,ainsley_maitland_niles__everton,A. Maitland-Niles,5.2,1,DL,50.0,1,mpg_championship_player_154043,0,0,8,5,4,5.24,ok
+8,William Saliba,Arsenal,D,1.0,5.0,0,william_saliba__arsenal,W. Saliba,,0,DC,0.0,,mpg_championship_player_462424,,,10,,,,blesse
+8,Florian Wirtz,Liverpool,M,16.0,41.0,0,florian_wirtz__liverpool,F. Wirtz,5.7,1,MO,100.0,3,mpg_championship_player_494595,1,0,10,10,10,5.78,ok
+8,Kiernan Dewsbury-Hall,Everton,M,20.0,39.0,0,kiernan_dewsbury_hall__everton,K. Dewsbury-Hall,6.0,3,MO,100.0,1,mpg_championship_player_215413,1,0,10,10,10,5.84,ok
+8,Alex Scott,Bournemouth,M,16.0,34.0,0,alex_scott__bournemouth,A. Scott,5.7,1,MD,50.0,0,mpg_championship_player_503139,1,0,10,5,5,5.65,blesse
+8,Bruno Guimarães,Arsenal,M,15.0,32.0,0,bruno_guimaraes__arsenal,Bruno Guimarães,5.5,2,MD,40.0,0,mpg_championship_player_208706,0,0,10,8,4,5.56,ok
+8,Johan Manzambi,Aston Villa,M,9.0,29.0,0,johan_manzambi__aston_villa,J. Manzambi,6.4,2,MO,60.0,3,mpg_championship_player_614071,1,0,10,7,6,6.17,ok
+8,Jack Hinshelwood,Brighton,M,12.0,19.0,1,jack_hinshelwood__brighton,J. Hinshelwood,5.7,3,MO,10.0,0,mpg_championship_player_532529,0,0,10,5,1,5.29,incertain
+8,William Osula,Newcastle,A,10.0,40.0,0,william_osula__newcastle,W. Osula,5.0,1,A,40.0,1,mpg_championship_player_538207,1,0,10,6,4,4.79,blesse
+8,Jean-Philippe Mateta,Crystal Palace,A,11.0,37.0,1,jean_philippe_mateta__crystal_palace,J. Mateta,3.8,0,A,30.0,0,mpg_championship_player_231747,0,1,10,4,3,3.45,incertain
+8,Arnaud Kalimuendo,Nottingham Forest,A,3.0,36.0,0,arnaud_kalimuendo__nottingham_forest,A. Kalimuendo,4.5,0,A,0.0,0,mpg_championship_player_465680,0,0,10,4,0,4.11,ok
+8,Bradley Barcola,Liverpool,A,15.0,31.0,0,bradley_barcola__liverpool,B. Barcola,5.4,0,A,88.0,3,mpg_championship_player_482616,3,0,8,8,7,5.03,ok
+9,Walter Benítez,Crystal Palace,G,10.0,20.0,0,walter_benitez__crystal_palace,W. Benítez,4.7,0,G,50.0,0,mpg_championship_player_121709,0,0,10,5,5,4.8,ok
+9,Konstantinos Tzolakis,Hull City,G,17.0,16.0,0,konstantinos_tzolakis__hull_city,K. Tzolakis,6.1,0,G,100.0,0,mpg_championship_player_473284,1,0,10,10,10,6.07,ok
+9,Michael Kayode,Brentford,D,15.0,27.0,0,michael_kayode__brentford,M. Kayode,5.1,1,DL,90.0,0,mpg_championship_player_607464,2,0,10,10,9,5.25,ok
+9,Jérémy Jacquet,Liverpool,D,14.0,27.0,0,jeremy_jacquet__liverpool,J. Jacquet,5.3,0,DC,100.0,0,mpg_championship_player_606702,2,0,10,10,10,5.58,ok
+9,Neco Williams,Nottingham Forest,D,13.0,27.0,1,neco_williams__nottingham_forest,N. Williams,5.0,1,DL,100.0,0,mpg_championship_player_215136,1,0,10,10,10,5.42,incertain
+9,Ben White,Arsenal,D,7.0,22.0,0,ben_white__arsenal,B. White,5.8,0,DC,70.0,3,mpg_championship_player_198869,0,0,10,7,7,6.13,ok
+9,Rúben Dias,Man. City,D,17.0,17.0,0,ruben_dias__man_city,Rúben Dias,4.8,0,DC,100.0,0,mpg_championship_player_171314,0,0,10,10,10,5.66,ok
+9,Piero Hincapié,Arsenal,D,9.0,14.0,0,piero_hincapie__arsenal,P. Hincapié,5.0,0,DC,0.0,0,mpg_championship_player_448104,0,0,10,5,0,4.86,ok
+9,Ola Aina,Nottingham Forest,D,9.0,9.0,0,ola_aina__nottingham_forest,O. Aina,4.5,0,DL,60.0,0,mpg_championship_player_159506,3,0,10,6,6,4.78,ok
+9,Rayan Cherki,Man. City,M,24.0,67.0,0,rayan_cherki__man_city,R. Cherki,6.2,5,MO,70.0,2,mpg_championship_player_466052,2,0,10,9,7,6.41,ok
+9,Bukayo Saka,Arsenal,M,25.0,58.0,0,bukayo_saka__arsenal,B. Saka,6.1,3,MO,70.0,0,mpg_championship_player_223340,0,0,10,7,7,5.68,ok
+9,Elliot Anderson,Man. City,M,17.0,38.0,0,elliot_anderson__man_city,E. Anderson,5.7,0,MD,90.0,1,mpg_championship_player_215379,2,0,10,10,9,6.06,ok
+9,Diego Gómez,Brighton,M,19.0,23.0,0,diego_gomez__brighton,D. Gómez,6.3,2,MO,100.0,2,mpg_championship_player_514254,0,0,10,10,10,5.65,ok
+9,Mohamed Belloumi,Hull City,M,19.0,22.0,0,mohamed_belloumi__hull_city,M. Belloumi,6.2,3,MO,80.0,2,mpg_championship_player_540324,1,0,10,9,8,5.62,ok
+9,Vitaly Janelt,Brentford,M,18.0,22.0,0,vitaly_janelt__brentford,V. Janelt,5.7,2,MD,90.0,0,mpg_championship_player_204580,4,1,10,9,9,5.39,ok
+9,Oliver McBurnie,Hull City,A,10.0,27.0,0,oliver_mcburnie__hull_city,O. McBurnie,5.0,2,A,100.0,2,mpg_championship_player_169432,4,0,10,10,10,5.05,ok
+9,Cody Gakpo,Liverpool,A,17.0,20.0,0,cody_gakpo__liverpool,C. Gakpo,5.8,1,A,70.0,3,mpg_championship_player_243298,0,0,10,8,7,5.51,blesse
+9,Thierno Barry,Everton,A,16.0,16.0,0,thierno_barry__everton,T. Barry,5.7,6,A,100.0,1,mpg_championship_player_586309,0,0,10,10,10,5.32,ok
+9,Eddie Nketiah,Crystal Palace,A,8.0,8.0,0,eddie_nketiah__crystal_palace,E. Nketiah,4.6,1,A,30.0,1,mpg_championship_player_205533,0,0,10,9,3,4.42,ok
+9,Mathys Tel,Tottenham,A,8.0,8.0,0,mathys_tel__tottenham,M. Tel,5.0,1,A,60.0,0,mpg_championship_player_511499,0,0,10,8,6,4.95,ok
+9,Ellis Simms,Coventry City,A,7.0,7.0,0,ellis_simms__coventry_city,E. Simms,4.6,1,A,10.0,0,mpg_championship_player_218997,0,0,10,4,1,4.5,ok

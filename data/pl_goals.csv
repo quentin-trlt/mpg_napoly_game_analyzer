@@ -1,0 +1,290 @@
+pl_match_id,pl_gw,date,club,side,type_but,minute,buteur_mpg_id,buteur_nom,passeur_mpg_id,passeur_nom,buteur_player_key,passeur_player_key
+mpg_championship_match_2645195,1,2026-08-21T19:00:00.000Z,Arsenal,dom,but,49',mpg_championship_player_184029,Ødegaard,mpg_championship_player_198869,White,martin_degaard__arsenal,ben_white__arsenal
+mpg_championship_match_2645195,1,2026-08-21T19:00:00.000Z,Arsenal,dom,but,23',mpg_championship_player_223340,Saka,,,bukayo_saka__arsenal,
+mpg_championship_match_2645195,1,2026-08-21T19:00:00.000Z,Arsenal,dom,but,15',mpg_championship_player_219847,Havertz,mpg_championship_player_466075,Calafiori,kai_havertz__arsenal,riccardo_calafiori__arsenal
+mpg_championship_match_2645198,1,2026-08-22T11:30:00.000Z,Hull City,dom,but,38',mpg_championship_player_606930,Mendy,mpg_championship_player_243413,Slater,nobel_mendy__hull_city,
+mpg_championship_match_2645198,1,2026-08-22T11:30:00.000Z,Hull City,dom,but,17',mpg_championship_player_146426,Ajayi,,,semi_ajayi__hull_city,
+mpg_championship_match_2645197,1,2026-08-22T14:00:00.000Z,Everton,dom,but,53',mpg_championship_player_586309,Barry,mpg_championship_player_440993,Ndiaye,thierno_barry__everton,iliman_ndiaye__man_city
+mpg_championship_match_2645197,1,2026-08-22T14:00:00.000Z,Everton,dom,but,42',mpg_championship_player_215413,Dewsbury-Hall,mpg_championship_player_609873,Armstrong,kiernan_dewsbury_hall__everton,
+mpg_championship_match_2645199,1,2026-08-22T14:00:00.000Z,Ipswich Town,dom,but,90',mpg_championship_player_443261,Clarke,mpg_championship_player_212314,Lukic,,
+mpg_championship_match_2645199,1,2026-08-22T14:00:00.000Z,Ipswich Town,dom,but,24',mpg_championship_player_543968,Emersonn,mpg_championship_player_474120,Enciso,emersonn__ipswich_town,
+mpg_championship_match_2645199,1,2026-08-22T14:00:00.000Z,Sunderland,ext,but,39',mpg_championship_player_536661,Angulo,,,nilson_angulo__sunderland,
+mpg_championship_match_2645200,1,2026-08-22T14:00:00.000Z,Leeds,ext,but,88',mpg_championship_player_466525,Stach,,,,
+mpg_championship_match_2645196,1,2026-08-22T16:30:00.000Z,Brentford,dom,but,49',mpg_championship_player_607464,Kayode,,,michael_kayode__brentford,
+mpg_championship_match_2645196,1,2026-08-22T16:30:00.000Z,Brentford,dom,but,33',mpg_championship_player_204580,Janelt,,,vitaly_janelt__brentford,
+mpg_championship_match_2645196,1,2026-08-22T16:30:00.000Z,Brentford,dom,but,12',mpg_championship_player_249231,Lewis-Potter,mpg_championship_player_513545,Sangaré,keane_lewis_potter__brentford,mamadou_sangare__brentford
+mpg_championship_match_2645201,1,2026-08-23T13:00:00.000Z,Brighton,dom,but,31',mpg_championship_player_532529,Hinshelwood,,,jack_hinshelwood__brighton,
+mpg_championship_match_2645201,1,2026-08-23T13:00:00.000Z,Brighton,dom,but,30',mpg_championship_player_532529,Hinshelwood,mpg_championship_player_514254,Gómez,jack_hinshelwood__brighton,diego_gomez__brighton
+mpg_championship_match_2645201,1,2026-08-23T13:00:00.000Z,Brighton,dom,but,18',mpg_championship_player_465730,De Cuyper,mpg_championship_player_463067,Rutter,maxim_de_cuyper__brighton,
+mpg_championship_match_2645201,1,2026-08-23T13:00:00.000Z,Brighton,dom,csc,8',mpg_championship_player_184667,Lindelöf,,,,
+mpg_championship_match_2645202,1,2026-08-23T13:00:00.000Z,Man. City,dom,but,90' +1,mpg_championship_player_477424,Gvardiol,mpg_championship_player_466052,Cherki,josko_gvardiol__man_city,rayan_cherki__man_city
+mpg_championship_match_2645202,1,2026-08-23T13:00:00.000Z,Man. City,dom,but,84',mpg_championship_player_209036,Guéhi,mpg_championship_player_466052,Cherki,marc_guehi__man_city,rayan_cherki__man_city
+mpg_championship_match_2645202,1,2026-08-23T13:00:00.000Z,Bournemouth,ext,but,26',mpg_championship_player_201658,Tavernier,mpg_championship_player_444102,Evanilson,marcus_tavernier__bournemouth,evanilson__bournemouth
+mpg_championship_match_2645203,1,2026-08-23T15:30:00.000Z,Newcastle,dom,but,57',mpg_championship_player_200089,Willock,mpg_championship_player_216646,Wissa,joe_willock__newcastle,yoane_wissa__newcastle
+mpg_championship_match_2645203,1,2026-08-23T15:30:00.000Z,Newcastle,dom,but,5',mpg_championship_player_449434,Elanga,mpg_championship_player_538207,Osula,anthony_elanga__newcastle,william_osula__newcastle
+mpg_championship_match_2645203,1,2026-08-23T15:30:00.000Z,Liverpool,ext,penalty,90' +9,mpg_championship_player_424876,Szoboszlai,,,dominik_szoboszlai__liverpool,
+mpg_championship_match_2645203,1,2026-08-23T15:30:00.000Z,Liverpool,ext,but,55',mpg_championship_player_243298,Gakpo,mpg_championship_player_441266,Gravenberch,cody_gakpo__liverpool,ryan_gravenberch__liverpool
+mpg_championship_match_2645204,1,2026-08-24T19:00:00.000Z,Fulham,dom,but,54',mpg_championship_player_551466,García,,,gonzalo_garcia__fulham,
+mpg_championship_match_2645204,1,2026-08-24T19:00:00.000Z,Fulham,dom,but,23',mpg_championship_player_577725,King,mpg_championship_player_166477,Castagne,josh_king__fulham,
+mpg_championship_match_2645204,1,2026-08-24T19:00:00.000Z,Chelsea,ext,but,49',mpg_championship_player_244851,Palmer,mpg_championship_player_475168,João Pedro,cole_palmer__chelsea,joao_pedro__chelsea
+mpg_championship_match_2645204,1,2026-08-24T19:00:00.000Z,Chelsea,ext,but,41',mpg_championship_player_244850,Rogers,mpg_championship_player_437499,Lacroix,morgan_rogers__chelsea,maxence_lacroix__chelsea
+mpg_championship_match_2645204,1,2026-08-24T19:00:00.000Z,Chelsea,ext,but,1',mpg_championship_player_475168,João Pedro,mpg_championship_player_244851,Palmer,joao_pedro__chelsea,cole_palmer__chelsea
+mpg_championship_match_2645209,2,2026-08-28T19:00:00.000Z,Crystal Palace,dom,csc,56',mpg_championship_player_204936,Donnarumma,,,gianluigi_donnarumma__man_city,
+mpg_championship_match_2645209,2,2026-08-28T19:00:00.000Z,Man. City,ext,but,84',mpg_championship_player_223094,Haaland,mpg_championship_player_209244,Foden,erling_haaland__man_city,phil_foden__man_city
+mpg_championship_match_2645209,2,2026-08-28T19:00:00.000Z,Man. City,ext,but,59',mpg_championship_player_466052,Cherki,mpg_championship_player_477424,Gvardiol,rayan_cherki__man_city,josko_gvardiol__man_city
+mpg_championship_match_2645209,2,2026-08-28T19:00:00.000Z,Man. City,ext,but,54',mpg_championship_player_466052,Cherki,mpg_championship_player_209244,Foden,rayan_cherki__man_city,phil_foden__man_city
+mpg_championship_match_2645209,2,2026-08-28T19:00:00.000Z,Man. City,ext,but,17',mpg_championship_player_223094,Haaland,mpg_championship_player_437730,Semenyo,erling_haaland__man_city,antoine_semenyo__man_city
+mpg_championship_match_2645211,2,2026-08-29T11:30:00.000Z,Liverpool,dom,but,82',mpg_championship_player_551499,Muñoz,mpg_championship_player_494595,Wirtz,victor_munoz__liverpool,florian_wirtz__liverpool
+mpg_championship_match_2645211,2,2026-08-29T11:30:00.000Z,Liverpool,dom,but,60',mpg_championship_player_219168,Isak,mpg_championship_player_243298,Gakpo,alexander_isak__liverpool,cody_gakpo__liverpool
+mpg_championship_match_2645211,2,2026-08-29T11:30:00.000Z,Liverpool,dom,annule_var,31',mpg_championship_player_494595,Wirtz,,,florian_wirtz__liverpool,
+mpg_championship_match_2645211,2,2026-08-29T11:30:00.000Z,Nottingham Forest,ext,penalty,70',mpg_championship_player_222531,Gibbs-White,,,morgan_gibbs_white__nottingham_forest,
+mpg_championship_match_2645211,2,2026-08-29T11:30:00.000Z,Nottingham Forest,ext,but,24',mpg_championship_player_456512,Ndoye,mpg_championship_player_222531,Gibbs-White,,morgan_gibbs_white__nottingham_forest
+mpg_championship_match_2645205,2,2026-08-29T14:00:00.000Z,Bournemouth,dom,but,41',mpg_championship_player_503139,Scott,mpg_championship_player_444102,Evanilson,alex_scott__bournemouth,evanilson__bournemouth
+mpg_championship_match_2645205,2,2026-08-29T14:00:00.000Z,Everton,ext,but,90' +1,mpg_championship_player_17761,Tarkowski,,,james_tarkowski__everton,
+mpg_championship_match_2645208,2,2026-08-29T14:00:00.000Z,Hull City,ext,but,82',mpg_championship_player_232905,Millar,mpg_championship_player_540324,Belloumi,,mohamed_belloumi__hull_city
+mpg_championship_match_2645214,2,2026-08-29T16:30:00.000Z,Newcastle,ext,but,72',mpg_championship_player_216646,Wissa,mpg_championship_player_470313,Woltemade,yoane_wissa__newcastle,
+mpg_championship_match_2645214,2,2026-08-29T16:30:00.000Z,Newcastle,ext,but,62',mpg_championship_player_449434,Elanga,mpg_championship_player_463726,Dedic,anthony_elanga__newcastle,
+mpg_championship_match_2645207,2,2026-08-30T13:00:00.000Z,Chelsea,dom,but,74',mpg_championship_player_244851,Palmer,mpg_championship_player_475168,João Pedro,cole_palmer__chelsea,joao_pedro__chelsea
+mpg_championship_match_2645207,2,2026-08-30T13:00:00.000Z,Chelsea,dom,but,32',mpg_championship_player_475168,João Pedro,mpg_championship_player_551210,Hato,joao_pedro__chelsea,
+mpg_championship_match_2645207,2,2026-08-30T13:00:00.000Z,Chelsea,dom,but,14',mpg_championship_player_247632,Pedro Neto,mpg_championship_player_244850,Rogers,pedro_neto__chelsea,morgan_rogers__chelsea
+mpg_championship_match_2645207,2,2026-08-30T13:00:00.000Z,Chelsea,dom,but,4',mpg_championship_player_514356,Lavia,,,,
+mpg_championship_match_2645207,2,2026-08-30T13:00:00.000Z,Brighton,ext,but,90' +6,mpg_championship_player_60307,Groß,,,pascal_gro__brighton,
+mpg_championship_match_2645207,2,2026-08-30T13:00:00.000Z,Brighton,ext,csc,63',mpg_championship_player_475168,João Pedro,,,joao_pedro__chelsea,
+mpg_championship_match_2645207,2,2026-08-30T13:00:00.000Z,Brighton,ext,but,35',mpg_championship_player_611695,Yalcouyé,,,malick_yalcouye__brighton,
+mpg_championship_match_2645210,2,2026-08-30T13:00:00.000Z,Leeds,dom,but,79',mpg_championship_player_177815,Calvert-Lewin,mpg_championship_player_174594,Nmecha,dominic_calvert_lewin__leeds,
+mpg_championship_match_2645210,2,2026-08-30T13:00:00.000Z,Brentford,ext,but,41',mpg_championship_player_513418,Schade,mpg_championship_player_249231,Lewis-Potter,kevin_schade__brentford,keane_lewis_potter__brentford
+mpg_championship_match_2645213,2,2026-08-30T13:00:00.000Z,Sunderland,dom,but,75',mpg_championship_player_437505,Isidor,mpg_championship_player_547027,Diarra,,
+mpg_championship_match_2645212,2,2026-08-30T15:30:00.000Z,Man. United,dom,but,82',mpg_championship_player_446008,Mbeumo,mpg_championship_player_141746,Bruno Fernandes,bryan_mbeumo__man_united,bruno_fernandes__man_united
+mpg_championship_match_2645212,2,2026-08-30T15:30:00.000Z,Man. United,dom,but,68',mpg_championship_player_141746,Bruno Fernandes,,,bruno_fernandes__man_united,
+mpg_championship_match_2645212,2,2026-08-30T15:30:00.000Z,Man. United,dom,penalty,61',mpg_championship_player_141746,Bruno Fernandes,,,bruno_fernandes__man_united,
+mpg_championship_match_2645212,2,2026-08-30T15:30:00.000Z,Man. United,dom,csc,56',mpg_championship_player_449429,Greaves,,,jacob_greaves__ipswich_town,
+mpg_championship_match_2645212,2,2026-08-30T15:30:00.000Z,Man. United,dom,but,40',mpg_championship_player_141746,Bruno Fernandes,mpg_championship_player_430871,Matheus Cunha,bruno_fernandes__man_united,matheus_cunha__man_united
+mpg_championship_match_2645212,2,2026-08-30T15:30:00.000Z,Ipswich Town,ext,but,90' +1,mpg_championship_player_147675,Akpom,mpg_championship_player_474120,Enciso,chuba_akpom__ipswich_town,
+mpg_championship_match_2645212,2,2026-08-30T15:30:00.000Z,Ipswich Town,ext,but,29',mpg_championship_player_455084,Davis,mpg_championship_player_531442,Abdul Fatawu,leif_davis__ipswich_town,
+mpg_championship_match_2645206,2,2026-08-31T19:00:00.000Z,Arsenal,ext,but,59',mpg_championship_player_223340,Saka,mpg_championship_player_466075,Calafiori,bukayo_saka__arsenal,riccardo_calafiori__arsenal
+mpg_championship_match_2645221,3,2026-09-04T19:00:00.000Z,Liverpool,ext,but,9',mpg_championship_player_219168,Isak,mpg_championship_player_243298,Gakpo,alexander_isak__liverpool,cody_gakpo__liverpool
+mpg_championship_match_2645221,3,2026-09-04T19:00:00.000Z,Liverpool,ext,but,6',mpg_championship_player_219168,Isak,mpg_championship_player_243298,Gakpo,alexander_isak__liverpool,cody_gakpo__liverpool
+mpg_championship_match_2645223,3,2026-09-05T11:30:00.000Z,Newcastle,dom,but,88',mpg_championship_player_232653,Ramsey,,,jacob_ramsey__newcastle,
+mpg_championship_match_2645223,3,2026-09-05T11:30:00.000Z,Newcastle,dom,but,37',mpg_championship_player_201666,Barnes,mpg_championship_player_487838,Hall,harvey_barnes__newcastle,lewis_hall__newcastle
+mpg_championship_match_2645223,3,2026-09-05T11:30:00.000Z,Bournemouth,ext,csc,35',mpg_championship_player_465642,Thiaw,,,malick_thiaw__newcastle,
+mpg_championship_match_2645223,3,2026-09-05T11:30:00.000Z,Bournemouth,ext,but,9',mpg_championship_player_201658,Tavernier,,,marcus_tavernier__bournemouth,
+mpg_championship_match_2645216,3,2026-09-05T14:00:00.000Z,Brentford,dom,annule_var,70',mpg_championship_player_444180,Anthony,,,,
+mpg_championship_match_2645216,3,2026-09-05T14:00:00.000Z,Brentford,dom,but,57',mpg_championship_player_204580,Janelt,,,vitaly_janelt__brentford,
+mpg_championship_match_2645216,3,2026-09-05T14:00:00.000Z,Sunderland,ext,penalty,82',mpg_championship_player_484420,Le Fée,,,enzo_le_fee__sunderland,
+mpg_championship_match_2645216,3,2026-09-05T14:00:00.000Z,Sunderland,ext,annule_var,6',mpg_championship_player_223827,Ballard,,,dan_ballard__sunderland,
+mpg_championship_match_2645217,3,2026-09-05T14:00:00.000Z,Brighton,dom,but,71',mpg_championship_player_610799,Vuskovic,mpg_championship_player_465730,De Cuyper,luka_vuskovic__brighton,maxim_de_cuyper__brighton
+mpg_championship_match_2645217,3,2026-09-05T14:00:00.000Z,Leeds,ext,but,15',mpg_championship_player_226182,Bogle,mpg_championship_player_248056,Tanaka,jayden_bogle__leeds,
+mpg_championship_match_2645219,3,2026-09-05T14:00:00.000Z,Fulham,dom,but,42',mpg_championship_player_571779,Palacios,,,,
+mpg_championship_match_2645219,3,2026-09-05T14:00:00.000Z,Fulham,dom,but,11',mpg_championship_player_577725,King,,,josh_king__fulham,
+mpg_championship_match_2645219,3,2026-09-05T14:00:00.000Z,Crystal Palace,ext,but,77',mpg_championship_player_172850,Chilwell,mpg_championship_player_209400,Kamada,ben_chilwell__crystal_palace,daichi_kamada__crystal_palace
+mpg_championship_match_2645219,3,2026-09-05T14:00:00.000Z,Crystal Palace,ext,but,54',mpg_championship_player_244723,Mitchell,,,tyrick_mitchell__crystal_palace,
+mpg_championship_match_2645219,3,2026-09-05T14:00:00.000Z,Crystal Palace,ext,but,35',mpg_championship_player_244723,Mitchell,mpg_championship_player_205533,Nketiah,tyrick_mitchell__crystal_palace,eddie_nketiah__crystal_palace
+mpg_championship_match_2645219,3,2026-09-05T14:00:00.000Z,Crystal Palace,ext,annule_var,13',mpg_championship_player_209400,Kamada,,,daichi_kamada__crystal_palace,
+mpg_championship_match_2645222,3,2026-09-05T14:00:00.000Z,Man. City,dom,but,26',mpg_championship_player_223094,Haaland,mpg_championship_player_437730,Semenyo,erling_haaland__man_city,antoine_semenyo__man_city
+mpg_championship_match_2645224,3,2026-09-05T14:00:00.000Z,Nottingham Forest,dom,annule_var,67',mpg_championship_player_215136,Williams,,,neco_williams__nottingham_forest,
+mpg_championship_match_2645218,3,2026-09-06T13:00:00.000Z,Everton,dom,but,90' +6,mpg_championship_player_154043,Maitland-Niles,,,ainsley_maitland_niles__everton,
+mpg_championship_match_2645218,3,2026-09-06T13:00:00.000Z,Everton,dom,but,83',mpg_championship_player_550615,George,mpg_championship_player_244860,Hackney,tyrique_george__everton,
+mpg_championship_match_2645218,3,2026-09-06T13:00:00.000Z,Man. United,ext,but,88',mpg_championship_player_485711,Sesko,mpg_championship_player_106760,Shaw,benjamin_sesko__man_united,luke_shaw__man_united
+mpg_championship_match_2645218,3,2026-09-06T13:00:00.000Z,Man. United,ext,but,46',mpg_championship_player_446008,Mbeumo,mpg_championship_player_516895,Mainoo,bryan_mbeumo__man_united,kobbie_mainoo__man_united
+mpg_championship_match_2645215,3,2026-09-06T15:30:00.000Z,Arsenal,dom,but,50',mpg_championship_player_184029,Ødegaard,mpg_championship_player_439509,Tzolis,martin_degaard__arsenal,christos_tzolis__arsenal
+mpg_championship_match_2645215,3,2026-09-06T15:30:00.000Z,Arsenal,dom,but,25',mpg_championship_player_219847,Havertz,mpg_championship_player_204480,Rice,kai_havertz__arsenal,declan_rice__arsenal
+mpg_championship_match_2645215,3,2026-09-06T15:30:00.000Z,Arsenal,dom,annule_var,12',mpg_championship_player_466075,Calafiori,,,riccardo_calafiori__arsenal,
+mpg_championship_match_2645215,3,2026-09-06T15:30:00.000Z,Chelsea,ext,but,2',mpg_championship_player_244850,Rogers,mpg_championship_player_551210,Hato,morgan_rogers__chelsea,
+mpg_championship_match_2645225,4,2026-09-12T14:00:00.000Z,Bournemouth,dom,but,52',mpg_championship_player_201658,Tavernier,mpg_championship_player_444102,Evanilson,marcus_tavernier__bournemouth,evanilson__bournemouth
+mpg_championship_match_2645225,4,2026-09-12T14:00:00.000Z,Bournemouth,dom,but,38',mpg_championship_player_222683,Kluivert,,,justin_kluivert__bournemouth,
+mpg_championship_match_2645225,4,2026-09-12T14:00:00.000Z,Brentford,ext,but,56',mpg_championship_player_513418,Schade,,,kevin_schade__brentford,
+mpg_championship_match_2645225,4,2026-09-12T14:00:00.000Z,Brentford,ext,but,34',mpg_championship_player_513418,Schade,mpg_championship_player_508395,Yarmoliuk,kevin_schade__brentford,
+mpg_championship_match_2645226,4,2026-09-12T14:00:00.000Z,Aston Villa,dom,but,74',mpg_championship_player_653481,Alysson,mpg_championship_player_122806,McGinn,,john_mcginn__aston_villa
+mpg_championship_match_2645226,4,2026-09-12T14:00:00.000Z,Nottingham Forest,ext,but,88',mpg_championship_player_482973,Igor Jesus,mpg_championship_player_222531,Gibbs-White,igor_jesus__nottingham_forest,morgan_gibbs_white__nottingham_forest
+mpg_championship_match_2645226,4,2026-09-12T14:00:00.000Z,Nottingham Forest,ext,but,46',mpg_championship_player_463034,Delap,mpg_championship_player_575476,Murillo,liam_delap__nottingham_forest,
+mpg_championship_match_2645227,4,2026-09-12T14:00:00.000Z,Chelsea,dom,but,66',mpg_championship_player_475168,João Pedro,mpg_championship_player_244851,Palmer,joao_pedro__chelsea,cole_palmer__chelsea
+mpg_championship_match_2645227,4,2026-09-12T14:00:00.000Z,Chelsea,dom,but,7',mpg_championship_player_244850,Rogers,mpg_championship_player_475168,João Pedro,morgan_rogers__chelsea,joao_pedro__chelsea
+mpg_championship_match_2645227,4,2026-09-12T14:00:00.000Z,Hull City,ext,but,34',mpg_championship_player_540324,Belloumi,mpg_championship_player_169432,McBurnie,mohamed_belloumi__hull_city,oliver_mcburnie__hull_city
+mpg_championship_match_2645227,4,2026-09-12T14:00:00.000Z,Hull City,ext,but,28',mpg_championship_player_540324,Belloumi,mpg_championship_player_232351,Giles,mohamed_belloumi__hull_city,ryan_giles__hull_city
+mpg_championship_match_2645229,4,2026-09-12T14:00:00.000Z,Crystal Palace,dom,but,75',mpg_championship_player_247412,Strand Larsen,mpg_championship_player_209400,Kamada,j_rgen_strand_larsen__crystal_palace,daichi_kamada__crystal_palace
+mpg_championship_match_2645229,4,2026-09-12T14:00:00.000Z,Crystal Palace,dom,but,14',mpg_championship_player_570794,Khalaili,mpg_championship_player_209400,Kamada,,daichi_kamada__crystal_palace
+mpg_championship_match_2645229,4,2026-09-12T14:00:00.000Z,Ipswich Town,ext,but,90',mpg_championship_player_431639,Flemming,,,,
+mpg_championship_match_2645229,4,2026-09-12T14:00:00.000Z,Ipswich Town,ext,but,45',mpg_championship_player_455084,Davis,mpg_championship_player_543968,Emersonn,leif_davis__ipswich_town,emersonn__ipswich_town
+mpg_championship_match_2645229,4,2026-09-12T14:00:00.000Z,Ipswich Town,ext,but,23',mpg_championship_player_543968,Emersonn,mpg_championship_player_455084,Davis,emersonn__ipswich_town,leif_davis__ipswich_town
+mpg_championship_match_2645233,4,2026-09-12T19:00:00.000Z,Arsenal,ext,penalty,90' +7,mpg_championship_player_223340,Saka,,,bukayo_saka__arsenal,
+mpg_championship_match_2645233,4,2026-09-12T19:00:00.000Z,Arsenal,ext,but,58',mpg_championship_player_208706,Bruno Guimarães,mpg_championship_player_204480,Rice,bruno_guimaraes__arsenal,declan_rice__arsenal
+mpg_championship_match_2645228,4,2026-09-13T13:00:00.000Z,Brighton,ext,but,90' +4,mpg_championship_player_509416,Ayari,mpg_championship_player_60307,Groß,yasin_ayari__brighton,pascal_gro__brighton
+mpg_championship_match_2645228,4,2026-09-13T13:00:00.000Z,Brighton,ext,but,83',mpg_championship_player_83299,Dunk,mpg_championship_player_592984,Chema Andrés,lewis_dunk__brighton,
+mpg_championship_match_2645228,4,2026-09-13T13:00:00.000Z,Brighton,ext,penalty,70',mpg_championship_player_60307,Groß,,,pascal_gro__brighton,
+mpg_championship_match_2645228,4,2026-09-13T13:00:00.000Z,Brighton,ext,but,51',mpg_championship_player_611695,Yalcouyé,mpg_championship_player_465730,De Cuyper,malick_yalcouye__brighton,maxim_de_cuyper__brighton
+mpg_championship_match_2645228,4,2026-09-13T13:00:00.000Z,Brighton,ext,but,35',mpg_championship_player_647850,Kostoulas,mpg_championship_player_60307,Groß,charalampos_kostoulas__brighton,pascal_gro__brighton
+mpg_championship_match_2645232,4,2026-09-13T15:30:00.000Z,Man. City,ext,but,60',mpg_championship_player_223094,Haaland,,,erling_haaland__man_city,
+mpg_championship_match_2645230,4,2026-09-14T19:00:00.000Z,Leeds,dom,but,59',mpg_championship_player_435997,Okafor,,,noah_okafor__leeds,
+mpg_championship_match_2645230,4,2026-09-14T19:00:00.000Z,Leeds,dom,but,45' +1,mpg_championship_player_177815,Calvert-Lewin,mpg_championship_player_522047,Muharemovic,dominic_calvert_lewin__leeds,tarik_muharemovic__leeds
+mpg_championship_match_2645230,4,2026-09-14T19:00:00.000Z,Leeds,dom,but,34',mpg_championship_player_177815,Calvert-Lewin,mpg_championship_player_220627,Justin,dominic_calvert_lewin__leeds,james_justin__leeds
+mpg_championship_match_2645230,4,2026-09-14T19:00:00.000Z,Leeds,dom,csc,32',mpg_championship_player_547719,Miley,,,,
+mpg_championship_match_2645230,4,2026-09-14T19:00:00.000Z,Newcastle,ext,but,90',mpg_championship_player_611665,Touré,,,,
+mpg_championship_match_2645236,5,2026-09-18T19:00:00.000Z,Brentford,dom,but,90' +4,mpg_championship_player_244858,Fábio Carvalho,,,fabio_fabio_carvalho__brentford,
+mpg_championship_match_2645236,5,2026-09-18T19:00:00.000Z,Brentford,dom,but,83',mpg_championship_player_502500,Igor Thiago,,,igor_thiago__brentford,
+mpg_championship_match_2645236,5,2026-09-18T19:00:00.000Z,Brentford,dom,but,61',mpg_championship_player_444180,Anthony,mpg_championship_player_513086,Schuster,,jannik_schuster__brentford
+mpg_championship_match_2645244,5,2026-09-19T11:30:00.000Z,Tottenham,dom,but,90' +8,mpg_championship_player_469142,van Hecke,mpg_championship_player_122798,Robertson,jan_paul_van_hecke__tottenham,andy_robertson__tottenham
+mpg_championship_match_2645244,5,2026-09-19T11:30:00.000Z,Tottenham,dom,but,86',mpg_championship_player_232787,Gallagher,mpg_championship_player_460842,Kudus,,
+mpg_championship_match_2645244,5,2026-09-19T11:30:00.000Z,Tottenham,dom,annule_var,59',mpg_championship_player_460842,Kudus,,,,
+mpg_championship_match_2645244,5,2026-09-19T11:30:00.000Z,Aston Villa,ext,but,79',mpg_championship_player_195546,Buendía,mpg_championship_player_122806,McGinn,emiliano_buendia__aston_villa,john_mcginn__aston_villa
+mpg_championship_match_2645244,5,2026-09-19T11:30:00.000Z,Aston Villa,ext,but,67',mpg_championship_player_517052,Jackson,mpg_championship_player_614071,Manzambi,nicolas_jackson__aston_villa,johan_manzambi__aston_villa
+mpg_championship_match_2645244,5,2026-09-19T11:30:00.000Z,Aston Villa,ext,but,45' +4,mpg_championship_player_614071,Manzambi,mpg_championship_player_226944,Kamara,johan_manzambi__aston_villa,
+mpg_championship_match_2645237,5,2026-09-19T14:00:00.000Z,Brighton,dom,but,57',mpg_championship_player_592984,Chema Andrés,mpg_championship_player_60307,Groß,,pascal_gro__brighton
+mpg_championship_match_2645237,5,2026-09-19T14:00:00.000Z,Brighton,dom,but,45',mpg_championship_player_647850,Kostoulas,mpg_championship_player_514254,Gómez,charalampos_kostoulas__brighton,diego_gomez__brighton
+mpg_championship_match_2645237,5,2026-09-19T14:00:00.000Z,Brighton,dom,but,31',mpg_championship_player_60307,Groß,mpg_championship_player_647850,Kostoulas,pascal_gro__brighton,charalampos_kostoulas__brighton
+mpg_championship_match_2645238,5,2026-09-19T14:00:00.000Z,Everton,dom,annule_var,58',mpg_championship_player_586309,Barry,,,thierno_barry__everton,
+mpg_championship_match_2645238,5,2026-09-19T14:00:00.000Z,Everton,dom,but,11',mpg_championship_player_586309,Barry,mpg_championship_player_17761,Tarkowski,thierno_barry__everton,james_tarkowski__everton
+mpg_championship_match_2645242,5,2026-09-19T14:00:00.000Z,Newcastle,dom,but,7',mpg_championship_player_487838,Hall,mpg_championship_player_201666,Barnes,lewis_hall__newcastle,harvey_barnes__newcastle
+mpg_championship_match_2645242,5,2026-09-19T14:00:00.000Z,Newcastle,dom,but,3',mpg_championship_player_200089,Willock,mpg_championship_player_201666,Barnes,joe_willock__newcastle,harvey_barnes__newcastle
+mpg_championship_match_2645242,5,2026-09-19T14:00:00.000Z,Hull City,ext,but,67',mpg_championship_player_490884,Cho,mpg_championship_player_540324,Belloumi,,mohamed_belloumi__hull_city
+mpg_championship_match_2645243,5,2026-09-19T16:30:00.000Z,Nottingham Forest,dom,annule_var,87',mpg_championship_player_482973,Igor Jesus,,,igor_jesus__nottingham_forest,
+mpg_championship_match_2645243,5,2026-09-19T16:30:00.000Z,Coventry City,ext,but,55',mpg_championship_player_173878,Dasilva,mpg_championship_player_472739,Rushworth,,
+mpg_championship_match_2645235,5,2026-09-20T13:00:00.000Z,Liverpool,ext,but,57',mpg_championship_player_219168,Isak,,,alexander_isak__liverpool,
+mpg_championship_match_2645240,5,2026-09-20T13:00:00.000Z,Crystal Palace,ext,annule_var,51',mpg_championship_player_244723,Mitchell,,,tyrick_mitchell__crystal_palace,
+mpg_championship_match_2645241,5,2026-09-20T13:00:00.000Z,Man. City,dom,but,81',mpg_championship_player_223094,Haaland,mpg_championship_player_477424,Gvardiol,erling_haaland__man_city,josko_gvardiol__man_city
+mpg_championship_match_2645241,5,2026-09-20T13:00:00.000Z,Man. City,dom,but,57',mpg_championship_player_437730,Semenyo,,,antoine_semenyo__man_city,
+mpg_championship_match_2645241,5,2026-09-20T13:00:00.000Z,Man. City,dom,but,43',mpg_championship_player_437730,Semenyo,mpg_championship_player_209036,Guéhi,antoine_semenyo__man_city,marc_guehi__man_city
+mpg_championship_match_2645241,5,2026-09-20T13:00:00.000Z,Man. City,dom,but,29',mpg_championship_player_466052,Cherki,mpg_championship_player_437730,Semenyo,rayan_cherki__man_city,antoine_semenyo__man_city
+mpg_championship_match_2645241,5,2026-09-20T13:00:00.000Z,Man. City,dom,but,9',mpg_championship_player_448047,Fernández,,,enzo_fernandez__man_city,
+mpg_championship_match_2645241,5,2026-09-20T13:00:00.000Z,Sunderland,ext,but,59',mpg_championship_player_441264,Brobbey,mpg_championship_player_536661,Angulo,brian_brobbey__sunderland,nilson_angulo__sunderland
+mpg_championship_match_2645241,5,2026-09-20T13:00:00.000Z,Sunderland,ext,but,33',mpg_championship_player_441264,Brobbey,mpg_championship_player_93605,Meunier,brian_brobbey__sunderland,thomas_meunier__sunderland
+mpg_championship_match_2645241,5,2026-09-20T13:00:00.000Z,Sunderland,ext,but,12',mpg_championship_player_441264,Brobbey,mpg_championship_player_484420,Le Fée,brian_brobbey__sunderland,enzo_le_fee__sunderland
+mpg_championship_match_2645239,5,2026-09-20T15:30:00.000Z,Fulham,dom,csc,63',mpg_championship_player_221820,Martínez,,,,
+mpg_championship_match_2645239,5,2026-09-20T15:30:00.000Z,Man. United,ext,but,89',mpg_championship_player_430871,Matheus Cunha,mpg_championship_player_596777,Dorgu,matheus_cunha__man_united,
+mpg_championship_match_2645245,6,2026-10-10T11:30:00.000Z,Arsenal,dom,but,70',mpg_championship_player_208706,Bruno Guimarães,mpg_championship_player_204480,Rice,bruno_guimaraes__arsenal,declan_rice__arsenal
+mpg_championship_match_2645245,6,2026-10-10T11:30:00.000Z,Arsenal,dom,but,62',mpg_championship_player_466075,Calafiori,mpg_championship_player_198869,White,riccardo_calafiori__arsenal,ben_white__arsenal
+mpg_championship_match_2645245,6,2026-10-10T11:30:00.000Z,Leeds,ext,but,55',mpg_championship_player_220627,Justin,mpg_championship_player_243526,Gudmundsson,james_justin__leeds,
+mpg_championship_match_2645246,6,2026-10-10T14:00:00.000Z,Aston Villa,dom,but,77',mpg_championship_player_122806,McGinn,mpg_championship_player_614071,Manzambi,john_mcginn__aston_villa,johan_manzambi__aston_villa
+mpg_championship_match_2645246,6,2026-10-10T14:00:00.000Z,Aston Villa,dom,but,12',mpg_championship_player_517052,Jackson,,,nicolas_jackson__aston_villa,
+mpg_championship_match_2645246,6,2026-10-10T14:00:00.000Z,Brentford,ext,but,79',mpg_championship_player_191866,Ajer,mpg_championship_player_444180,Anthony,kristoffer_ajer__brentford,
+mpg_championship_match_2645246,6,2026-10-10T14:00:00.000Z,Brentford,ext,but,10',mpg_championship_player_508395,Yarmoliuk,,,,
+mpg_championship_match_2645247,6,2026-10-10T14:00:00.000Z,Chelsea,dom,but,70',mpg_championship_player_56979,Henderson,,,,
+mpg_championship_match_2645247,6,2026-10-10T14:00:00.000Z,Chelsea,dom,but,67',mpg_championship_player_475168,João Pedro,mpg_championship_player_498444,Chavarría,joao_pedro__chelsea,
+mpg_championship_match_2645247,6,2026-10-10T14:00:00.000Z,Chelsea,dom,but,46',mpg_championship_player_475168,João Pedro,mpg_championship_player_247632,Pedro Neto,joao_pedro__chelsea,pedro_neto__chelsea
+mpg_championship_match_2645247,6,2026-10-10T14:00:00.000Z,Chelsea,dom,but,3',mpg_championship_player_244850,Rogers,mpg_championship_player_56979,Henderson,morgan_rogers__chelsea,
+mpg_championship_match_2645247,6,2026-10-10T14:00:00.000Z,Chelsea,dom,but,2',mpg_championship_player_56979,Henderson,mpg_championship_player_244851,Palmer,,cole_palmer__chelsea
+mpg_championship_match_2645247,6,2026-10-10T14:00:00.000Z,Bournemouth,ext,but,51',mpg_championship_player_444102,Evanilson,,,evanilson__bournemouth,
+mpg_championship_match_2645251,6,2026-10-10T14:00:00.000Z,Ipswich Town,dom,but,90' +1,mpg_championship_player_216616,O'Shea,mpg_championship_player_443261,Clarke,,
+mpg_championship_match_2645251,6,2026-10-10T14:00:00.000Z,Ipswich Town,dom,but,88',mpg_championship_player_572584,Ouattara,,,,
+mpg_championship_match_2645251,6,2026-10-10T14:00:00.000Z,Fulham,ext,but,55',mpg_championship_player_184349,Sessegnon,,,,
+mpg_championship_match_2645254,6,2026-10-10T14:00:00.000Z,Brighton,ext,but,90' +3,mpg_championship_player_512123,Hadjam,mpg_championship_player_463067,Rutter,,
+mpg_championship_match_2645254,6,2026-10-10T14:00:00.000Z,Brighton,ext,but,53',mpg_championship_player_465730,De Cuyper,mpg_championship_player_60307,Groß,maxim_de_cuyper__brighton,pascal_gro__brighton
+mpg_championship_match_2645253,6,2026-10-10T16:30:00.000Z,Man. United,dom,but,73',mpg_championship_player_446008,Mbeumo,mpg_championship_player_430871,Matheus Cunha,bryan_mbeumo__man_united,matheus_cunha__man_united
+mpg_championship_match_2645253,6,2026-10-10T16:30:00.000Z,Tottenham,ext,but,90' +2,mpg_championship_player_154566,Solanke,mpg_championship_player_432422,Tonali,dominic_solanke__tottenham,
+mpg_championship_match_2645249,6,2026-10-11T13:00:00.000Z,Crystal Palace,dom,but,59',mpg_championship_player_488024,Pino,,,yeremy_pino__crystal_palace,
+mpg_championship_match_2645249,6,2026-10-11T13:00:00.000Z,Crystal Palace,dom,but,45' +4,mpg_championship_player_152551,Lerma,mpg_championship_player_496221,Wharton,,
+mpg_championship_match_2645249,6,2026-10-11T13:00:00.000Z,Crystal Palace,dom,but,41',mpg_championship_player_209400,Kamada,mpg_championship_player_450063,Timber,daichi_kamada__crystal_palace,quinten_timber__crystal_palace
+mpg_championship_match_2645249,6,2026-10-11T13:00:00.000Z,Nottingham Forest,ext,but,3',mpg_championship_player_456512,Ndoye,,,,
+mpg_championship_match_2645250,6,2026-10-11T13:00:00.000Z,Hull City,dom,but,74',mpg_championship_player_540324,Belloumi,mpg_championship_player_608227,Stroud,mohamed_belloumi__hull_city,
+mpg_championship_match_2645250,6,2026-10-11T13:00:00.000Z,Hull City,dom,but,48',mpg_championship_player_462635,Gelhardt,mpg_championship_player_243951,Thomas,,
+mpg_championship_match_2645250,6,2026-10-11T13:00:00.000Z,Everton,ext,but,68',mpg_championship_player_586309,Barry,mpg_championship_player_215413,Dewsbury-Hall,thierno_barry__everton,kiernan_dewsbury_hall__everton
+mpg_championship_match_2645250,6,2026-10-11T13:00:00.000Z,Everton,ext,but,55',mpg_championship_player_215413,Dewsbury-Hall,mpg_championship_player_154043,Maitland-Niles,kiernan_dewsbury_hall__everton,ainsley_maitland_niles__everton
+mpg_championship_match_2645250,6,2026-10-11T13:00:00.000Z,Everton,ext,annule_var,33',mpg_championship_player_242898,Johnson,,,,
+mpg_championship_match_2645252,6,2026-10-11T15:30:00.000Z,Man. City,ext,but,78',mpg_championship_player_466052,Cherki,mpg_championship_player_477424,Gvardiol,rayan_cherki__man_city,josko_gvardiol__man_city
+mpg_championship_match_2645252,6,2026-10-11T15:30:00.000Z,Man. City,ext,but,68',mpg_championship_player_248875,Doku,mpg_championship_player_215379,Anderson,jeremy_doku__man_city,elliot_anderson__man_city
+mpg_championship_match_2645252,6,2026-10-11T15:30:00.000Z,Man. City,ext,but,65',mpg_championship_player_223094,Haaland,,,erling_haaland__man_city,
+mpg_championship_match_2645248,6,2026-10-12T19:00:00.000Z,Coventry City,dom,but,86',mpg_championship_player_566213,Mfuni,mpg_championship_player_173878,Dasilva,,
+mpg_championship_match_2645248,6,2026-10-12T19:00:00.000Z,Coventry City,dom,but,81',mpg_championship_player_218997,Simms,mpg_championship_player_230730,Thomas-Asante,ellis_simms__coventry_city,
+mpg_championship_match_2645248,6,2026-10-12T19:00:00.000Z,Coventry City,dom,but,48',mpg_championship_player_627221,Cherif,,,,
+mpg_championship_match_2645248,6,2026-10-12T19:00:00.000Z,Coventry City,dom,penalty,6',mpg_championship_player_480457,Rudoni,,,,
+mpg_championship_match_2645248,6,2026-10-12T19:00:00.000Z,Newcastle,ext,but,70',mpg_championship_player_220237,Botman,mpg_championship_player_465694,González,sven_botman__newcastle,
+mpg_championship_match_2645258,7,2026-10-17T11:30:00.000Z,Chelsea,ext,but,90',mpg_championship_player_247632,Pedro Neto,,,pedro_neto__chelsea,
+mpg_championship_match_2645258,7,2026-10-17T11:30:00.000Z,Chelsea,ext,but,46',mpg_championship_player_247632,Pedro Neto,,,pedro_neto__chelsea,
+mpg_championship_match_2645256,7,2026-10-17T14:00:00.000Z,Brentford,dom,but,44',mpg_championship_player_249231,Lewis-Potter,mpg_championship_player_502500,Igor Thiago,keane_lewis_potter__brentford,igor_thiago__brentford
+mpg_championship_match_2645256,7,2026-10-17T14:00:00.000Z,Liverpool,ext,but,70',mpg_championship_player_219168,Isak,mpg_championship_player_482616,Barcola,alexander_isak__liverpool,bradley_barcola__liverpool
+mpg_championship_match_2645256,7,2026-10-17T14:00:00.000Z,Liverpool,ext,but,62',mpg_championship_player_551499,Muñoz,mpg_championship_player_494595,Wirtz,victor_munoz__liverpool,florian_wirtz__liverpool
+mpg_championship_match_2645259,7,2026-10-17T14:00:00.000Z,Fulham,dom,but,33',mpg_championship_player_153133,Iwobi,mpg_championship_player_207189,Berge,alex_iwobi__fulham,
+mpg_championship_match_2645261,7,2026-10-17T14:00:00.000Z,Man. City,dom,annule_var,84',mpg_championship_player_223094,Haaland,,,erling_haaland__man_city,
+mpg_championship_match_2645261,7,2026-10-17T14:00:00.000Z,Man. City,dom,but,69',mpg_championship_player_223094,Haaland,mpg_championship_player_440993,Ndiaye,erling_haaland__man_city,iliman_ndiaye__man_city
+mpg_championship_match_2645261,7,2026-10-17T14:00:00.000Z,Man. City,dom,but,34',mpg_championship_player_223094,Haaland,mpg_championship_player_91651,Kovacic,erling_haaland__man_city,
+mpg_championship_match_2645261,7,2026-10-17T14:00:00.000Z,Man. City,dom,but,19',mpg_championship_player_209244,Foden,mpg_championship_player_248875,Doku,phil_foden__man_city,jeremy_doku__man_city
+mpg_championship_match_2645261,7,2026-10-17T14:00:00.000Z,Ipswich Town,ext,penalty,90',mpg_championship_player_431639,Flemming,,,,
+mpg_championship_match_2645261,7,2026-10-17T14:00:00.000Z,Ipswich Town,ext,but,21',mpg_championship_player_442967,Maeda,mpg_championship_player_572584,Ouattara,,
+mpg_championship_match_2645262,7,2026-10-17T16:30:00.000Z,Aston Villa,ext,but,36',mpg_championship_player_614071,Manzambi,mpg_championship_player_448089,João Gomes,johan_manzambi__aston_villa,
+mpg_championship_match_2645255,7,2026-10-18T13:00:00.000Z,Bournemouth,dom,but,48',mpg_championship_player_444102,Evanilson,,,evanilson__bournemouth,
+mpg_championship_match_2645255,7,2026-10-18T13:00:00.000Z,Bournemouth,dom,but,5',mpg_championship_player_201658,Tavernier,mpg_championship_player_444102,Evanilson,marcus_tavernier__bournemouth,evanilson__bournemouth
+mpg_championship_match_2645257,7,2026-10-18T13:00:00.000Z,Brighton,dom,but,84',mpg_championship_player_532529,Hinshelwood,,,jack_hinshelwood__brighton,
+mpg_championship_match_2645257,7,2026-10-18T13:00:00.000Z,Brighton,dom,but,49',mpg_championship_player_647850,Kostoulas,,,charalampos_kostoulas__brighton,
+mpg_championship_match_2645257,7,2026-10-18T13:00:00.000Z,Brighton,dom,but,10',mpg_championship_player_509416,Ayari,mpg_championship_player_647850,Kostoulas,yasin_ayari__brighton,charalampos_kostoulas__brighton
+mpg_championship_match_2645257,7,2026-10-18T13:00:00.000Z,Brighton,dom,but,7',mpg_championship_player_514254,Gómez,mpg_championship_player_204120,Boscagli,diego_gomez__brighton,olivier_boscagli__brighton
+mpg_championship_match_2645257,7,2026-10-18T13:00:00.000Z,Brighton,dom,csc,4',mpg_championship_player_651426,Canvot,,,,
+mpg_championship_match_2645260,7,2026-10-18T13:00:00.000Z,Leeds,dom,but,51',mpg_championship_player_177815,Calvert-Lewin,mpg_championship_player_522047,Muharemovic,dominic_calvert_lewin__leeds,tarik_muharemovic__leeds
+mpg_championship_match_2645260,7,2026-10-18T13:00:00.000Z,Man. United,ext,but,35',mpg_championship_player_446008,Mbeumo,mpg_championship_player_166989,Tielemans,bryan_mbeumo__man_united,youri_tielemans__man_united
+mpg_championship_match_2645263,7,2026-10-18T15:30:00.000Z,Arsenal,ext,but,80',mpg_championship_player_248857,Madueke,mpg_championship_player_204480,Rice,,declan_rice__arsenal
+mpg_championship_match_2645264,7,2026-10-19T19:00:00.000Z,Tottenham,dom,but,90' +6,mpg_championship_player_115556,Davies,mpg_championship_player_154566,Solanke,,dominic_solanke__tottenham
+mpg_championship_match_2645264,7,2026-10-19T19:00:00.000Z,Tottenham,dom,but,58',mpg_championship_player_438234,Omar Marmoush,mpg_championship_player_122798,Robertson,omar_marmoush__tottenham,andy_robertson__tottenham
+mpg_championship_match_2645264,7,2026-10-19T19:00:00.000Z,Tottenham,dom,but,14',mpg_championship_player_172780,Maddison,mpg_championship_player_460842,Kudus,,
+mpg_championship_match_2645264,7,2026-10-19T19:00:00.000Z,Coventry City,ext,but,49',mpg_championship_player_480457,Rudoni,mpg_championship_player_230730,Thomas-Asante,,
+mpg_championship_match_2645271,8,2026-10-23T19:00:00.000Z,Ipswich Town,dom,but,41',mpg_championship_player_474120,Enciso,,,,
+mpg_championship_match_2645271,8,2026-10-23T19:00:00.000Z,Nottingham Forest,ext,but,13',mpg_championship_player_215136,Williams,mpg_championship_player_247348,Muñoz,neco_williams__nottingham_forest,daniel_munoz__nottingham_forest
+mpg_championship_match_2645266,8,2026-10-24T11:30:00.000Z,Aston Villa,dom,but,60',mpg_championship_player_517052,Jackson,mpg_championship_player_638987,Mbaye,nicolas_jackson__aston_villa,ibrahim_mbaye__aston_villa
+mpg_championship_match_2645266,8,2026-10-24T11:30:00.000Z,Aston Villa,dom,but,6',mpg_championship_player_517052,Jackson,mpg_championship_player_122806,McGinn,nicolas_jackson__aston_villa,john_mcginn__aston_villa
+mpg_championship_match_2645266,8,2026-10-24T11:30:00.000Z,Man. City,ext,but,52',mpg_championship_player_223094,Haaland,mpg_championship_player_440993,Ndiaye,erling_haaland__man_city,iliman_ndiaye__man_city
+mpg_championship_match_2645265,8,2026-10-24T14:00:00.000Z,Arsenal,dom,but,68',mpg_championship_player_226597,Gabriel Magalhães,mpg_championship_player_198869,White,gabriel_magalhaes__arsenal,ben_white__arsenal
+mpg_championship_match_2645265,8,2026-10-24T14:00:00.000Z,Arsenal,dom,but,7',mpg_championship_player_199798,Konsa,mpg_championship_player_224117,Gyökeres,ezri_konsa__arsenal,viktor_gyokeres__arsenal
+mpg_championship_match_2645268,8,2026-10-24T14:00:00.000Z,Fulham,ext,but,80',mpg_championship_player_477555,Bobb,mpg_championship_player_577725,King,oscar_bobb__fulham,josh_king__fulham
+mpg_championship_match_2645267,8,2026-10-24T16:30:00.000Z,Tottenham,ext,but,87',mpg_championship_player_511499,Tel,,,mathys_tel__tottenham,
+mpg_championship_match_2645267,8,2026-10-24T16:30:00.000Z,Tottenham,ext,csc,77',mpg_championship_player_549939,Penders,,,,
+mpg_championship_match_2645269,8,2026-10-25T14:00:00.000Z,Newcastle,ext,but,58',mpg_championship_player_201666,Barnes,mpg_championship_player_463726,Dedic,harvey_barnes__newcastle,
+mpg_championship_match_2645269,8,2026-10-25T14:00:00.000Z,Newcastle,ext,annule_var,52',mpg_championship_player_200089,Willock,,,joe_willock__newcastle,
+mpg_championship_match_2645269,8,2026-10-25T14:00:00.000Z,Newcastle,ext,but,47',mpg_championship_player_538207,Osula,mpg_championship_player_114243,Murphy,william_osula__newcastle,
+mpg_championship_match_2645270,8,2026-10-25T14:00:00.000Z,Hull City,dom,penalty,24',mpg_championship_player_169432,McBurnie,,,oliver_mcburnie__hull_city,
+mpg_championship_match_2645270,8,2026-10-25T14:00:00.000Z,Brentford,ext,but,63',mpg_championship_player_533463,Ouattara,mpg_championship_player_502500,Igor Thiago,dango_ouattara__brentford,igor_thiago__brentford
+mpg_championship_match_2645272,8,2026-10-25T14:00:00.000Z,Liverpool,dom,but,21',mpg_championship_player_219168,Isak,mpg_championship_player_482616,Barcola,alexander_isak__liverpool,bradley_barcola__liverpool
+mpg_championship_match_2645272,8,2026-10-25T14:00:00.000Z,Liverpool,dom,csc,17',mpg_championship_player_60307,Groß,,,pascal_gro__brighton,
+mpg_championship_match_2645273,8,2026-10-25T14:00:00.000Z,Bournemouth,ext,but,71',mpg_championship_player_444102,Evanilson,mpg_championship_player_155408,Cook,evanilson__bournemouth,
+mpg_championship_match_2645273,8,2026-10-25T14:00:00.000Z,Bournemouth,ext,but,43',mpg_championship_player_201658,Tavernier,mpg_championship_player_494521,Truffert,marcus_tavernier__bournemouth,adrien_truffert__bournemouth
+mpg_championship_match_2645273,8,2026-10-25T14:00:00.000Z,Bournemouth,ext,but,38',mpg_championship_player_499604,Rayan,mpg_championship_player_222683,Kluivert,rayan__bournemouth,justin_kluivert__bournemouth
+mpg_championship_match_2645278,9,2026-10-31T12:30:00.000Z,Chelsea,dom,annule_var,70',mpg_championship_player_624773,Estêvão,,,,
+mpg_championship_match_2645278,9,2026-10-31T12:30:00.000Z,Chelsea,dom,penalty,64',mpg_championship_player_244851,Palmer,,,cole_palmer__chelsea,
+mpg_championship_match_2645278,9,2026-10-31T12:30:00.000Z,Chelsea,dom,but,50',mpg_championship_player_244850,Rogers,mpg_championship_player_514356,Lavia,morgan_rogers__chelsea,
+mpg_championship_match_2645278,9,2026-10-31T12:30:00.000Z,Man. United,ext,annule_var,33',mpg_championship_player_430871,Matheus Cunha,,,matheus_cunha__man_united,
+mpg_championship_match_2645275,9,2026-10-31T15:00:00.000Z,Bournemouth,dom,but,90' +4,mpg_championship_player_489888,Adli,mpg_championship_player_560262,Kroupi,,junior_kroupi__bournemouth
+mpg_championship_match_2645275,9,2026-10-31T15:00:00.000Z,Bournemouth,dom,but,31',mpg_championship_player_444102,Evanilson,mpg_championship_player_222683,Kluivert,evanilson__bournemouth,justin_kluivert__bournemouth
+mpg_championship_match_2645275,9,2026-10-31T15:00:00.000Z,Leeds,ext,annule_var,13',mpg_championship_player_177815,Calvert-Lewin,,,dominic_calvert_lewin__leeds,
+mpg_championship_match_2645277,9,2026-10-31T15:00:00.000Z,Brentford,dom,but,76',mpg_championship_player_502500,Igor Thiago,mpg_championship_player_444180,Anthony,igor_thiago__brentford,
+mpg_championship_match_2645277,9,2026-10-31T15:00:00.000Z,Brentford,dom,csc,30',mpg_championship_player_227444,Milenkovic,,,,
+mpg_championship_match_2645279,9,2026-10-31T15:00:00.000Z,Coventry City,dom,but,52',mpg_championship_player_480457,Rudoni,mpg_championship_player_226965,Torp,,
+mpg_championship_match_2645279,9,2026-10-31T15:00:00.000Z,Coventry City,dom,but,37',mpg_championship_player_210156,Awoniyi,,,,
+mpg_championship_match_2645279,9,2026-10-31T15:00:00.000Z,Coventry City,dom,but,17',mpg_championship_player_501459,Sakamoto,,,,
+mpg_championship_match_2645279,9,2026-10-31T15:00:00.000Z,Sunderland,ext,penalty,67',mpg_championship_player_484420,Le Fée,,,enzo_le_fee__sunderland,
+mpg_championship_match_2645280,9,2026-10-31T15:00:00.000Z,Hull City,dom,but,68',mpg_championship_player_169432,McBurnie,,,oliver_mcburnie__hull_city,
+mpg_championship_match_2645280,9,2026-10-31T15:00:00.000Z,Hull City,dom,but,58',mpg_championship_player_490094,Iroegbunam,mpg_championship_player_169432,McBurnie,,oliver_mcburnie__hull_city
+mpg_championship_match_2645280,9,2026-10-31T15:00:00.000Z,Ipswich Town,ext,but,74',mpg_championship_player_474120,Enciso,mpg_championship_player_241117,Matusiwa,,
+mpg_championship_match_2645280,9,2026-10-31T15:00:00.000Z,Ipswich Town,ext,but,22',mpg_championship_player_216055,Florentino,mpg_championship_player_572584,Ouattara,florentino__ipswich_town,
+mpg_championship_match_2645282,9,2026-10-31T15:00:00.000Z,Brighton,ext,but,11',mpg_championship_player_509416,Ayari,mpg_championship_player_465730,De Cuyper,yasin_ayari__brighton,maxim_de_cuyper__brighton
+mpg_championship_match_2645284,9,2026-10-31T17:30:00.000Z,Tottenham,dom,but,73',mpg_championship_player_469142,van Hecke,,,jan_paul_van_hecke__tottenham,
+mpg_championship_match_2645284,9,2026-10-31T17:30:00.000Z,Tottenham,dom,but,25',mpg_championship_player_547701,Gray,mpg_championship_player_460842,Kudus,,
+mpg_championship_match_2645276,9,2026-10-31T20:00:00.000Z,Aston Villa,dom,but,39',mpg_championship_player_517052,Jackson,mpg_championship_player_614071,Manzambi,nicolas_jackson__aston_villa,johan_manzambi__aston_villa
+mpg_championship_match_2645276,9,2026-10-31T20:00:00.000Z,Fulham,ext,csc,64',mpg_championship_player_433969,Suzuki,,,zion_suzuki__aston_villa,
+mpg_championship_match_2645281,9,2026-11-01T16:30:00.000Z,Arsenal,ext,but,16',mpg_championship_player_219847,Havertz,mpg_championship_player_204480,Rice,kai_havertz__arsenal,declan_rice__arsenal
+mpg_championship_match_2645283,9,2026-11-02T20:00:00.000Z,Everton,ext,but,49',mpg_championship_player_586309,Barry,,,thierno_barry__everton,
+mpg_championship_match_2645288,10,2026-11-06T20:00:00.000Z,Everton,dom,but,81',mpg_championship_player_215413,Dewsbury-Hall,mpg_championship_player_586309,Barry,kiernan_dewsbury_hall__everton,thierno_barry__everton
+mpg_championship_match_2645288,10,2026-11-06T20:00:00.000Z,Everton,dom,but,61',mpg_championship_player_586309,Barry,,,thierno_barry__everton,
+mpg_championship_match_2645288,10,2026-11-06T20:00:00.000Z,Everton,dom,but,56',mpg_championship_player_586309,Barry,mpg_championship_player_224967,Mykolenko,thierno_barry__everton,vitalii_mykolenko__everton
+mpg_championship_match_2645288,10,2026-11-06T20:00:00.000Z,Coventry City,ext,but,52',mpg_championship_player_242893,Gboho,,,,
+mpg_championship_match_2645291,10,2026-11-07T12:30:00.000Z,Leeds,dom,but,79',mpg_championship_player_435997,Okafor,,,noah_okafor__leeds,
+mpg_championship_match_2645285,10,2026-11-07T15:00:00.000Z,Arsenal,dom,but,72',mpg_championship_player_184029,Ødegaard,,,martin_degaard__arsenal,
+mpg_championship_match_2645289,10,2026-11-07T15:00:00.000Z,Fulham,dom,but,83',mpg_championship_player_244042,Rodrigo Muniz,,,,
+mpg_championship_match_2645289,10,2026-11-07T15:00:00.000Z,Newcastle,ext,but,80',mpg_championship_player_114243,Murphy,,,,
+mpg_championship_match_2645293,10,2026-11-07T17:30:00.000Z,Nottingham Forest,dom,but,73',mpg_championship_player_463034,Delap,mpg_championship_player_222531,Gibbs-White,liam_delap__nottingham_forest,morgan_gibbs_white__nottingham_forest
+mpg_championship_match_2645293,10,2026-11-07T17:30:00.000Z,Nottingham Forest,dom,but,18',mpg_championship_player_463034,Delap,mpg_championship_player_204561,Schlager,liam_delap__nottingham_forest,
+mpg_championship_match_2645293,10,2026-11-07T17:30:00.000Z,Nottingham Forest,dom,but,6',mpg_championship_player_575458,Jair Cunha,,,,
+mpg_championship_match_2645293,10,2026-11-07T17:30:00.000Z,Man. City,ext,but,52',mpg_championship_player_466052,Cherki,,,rayan_cherki__man_city,
+mpg_championship_match_2645286,10,2026-11-08T14:00:00.000Z,Brighton,dom,penalty,42',mpg_championship_player_60307,Groß,,,pascal_gro__brighton,
+mpg_championship_match_2645286,10,2026-11-08T14:00:00.000Z,Brighton,dom,but,15',mpg_championship_player_514254,Gómez,,,diego_gomez__brighton,
+mpg_championship_match_2645287,10,2026-11-08T14:00:00.000Z,Crystal Palace,dom,penalty,90' +5,mpg_championship_player_205533,Nketiah,,,eddie_nketiah__crystal_palace,
+mpg_championship_match_2645287,10,2026-11-08T14:00:00.000Z,Liverpool,ext,but,89',mpg_championship_player_219168,Isak,mpg_championship_player_494595,Wirtz,alexander_isak__liverpool,florian_wirtz__liverpool
+mpg_championship_match_2645287,10,2026-11-08T14:00:00.000Z,Liverpool,ext,but,54',mpg_championship_player_494595,Wirtz,mpg_championship_player_482616,Barcola,florian_wirtz__liverpool,bradley_barcola__liverpool
+mpg_championship_match_2645287,10,2026-11-08T14:00:00.000Z,Liverpool,ext,but,40',mpg_championship_player_243016,Mac Allister,mpg_championship_player_424876,Szoboszlai,alexis_mac_allister__liverpool,dominik_szoboszlai__liverpool
+mpg_championship_match_2645290,10,2026-11-08T14:00:00.000Z,Ipswich Town,dom,penalty,73',mpg_championship_player_443261,Clarke,,,,
+mpg_championship_match_2645290,10,2026-11-08T14:00:00.000Z,Bournemouth,ext,csc,46',mpg_championship_player_455084,Davis,,,leif_davis__ipswich_town,
+mpg_championship_match_2645290,10,2026-11-08T14:00:00.000Z,Bournemouth,ext,but,5',mpg_championship_player_444102,Evanilson,,,evanilson__bournemouth,
+mpg_championship_match_2645294,10,2026-11-08T14:00:00.000Z,Sunderland,dom,penalty,36',mpg_championship_player_484420,Le Fée,,,enzo_le_fee__sunderland,
+mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Man. United,dom,but,90' +6,mpg_championship_player_596777,Dorgu,mpg_championship_player_141746,Bruno Fernandes,,bruno_fernandes__man_united
+mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Man. United,dom,but,90' +2,mpg_championship_player_458249,Zirkzee,mpg_championship_player_596777,Dorgu,,
+mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Man. United,dom,but,44',mpg_championship_player_166989,Tielemans,mpg_championship_player_230001,Mazraoui,youri_tielemans__man_united,
+mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Man. United,dom,penalty,16',mpg_championship_player_141746,Bruno Fernandes,,,bruno_fernandes__man_united,
+mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Aston Villa,ext,but,53',mpg_championship_player_119090,Goretzka,mpg_championship_player_517052,Jackson,leon_goretzka__aston_villa,nicolas_jackson__aston_villa
+mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Aston Villa,ext,penalty,48',mpg_championship_player_122806,McGinn,,,john_mcginn__aston_villa,
+mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Aston Villa,ext,but,4',mpg_championship_player_517052,Jackson,,,nicolas_jackson__aston_villa,
+mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Aston Villa,ext,but,1',mpg_championship_player_653481,Alysson,mpg_championship_player_122806,McGinn,,john_mcginn__aston_villa

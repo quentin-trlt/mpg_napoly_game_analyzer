@@ -1,53 +1,61 @@
 rang,joueur,club,poste,equipe_abrev,buts_reels,buts_mpg,buts_total,team_id,player_key
-1,Nicolas Jackson,Aston Villa,A,LSN,4,0,4,1,nicolas_jackson__aston_villa
-2,Erling Haaland,Man. City,A,FCP,4,0,4,4,erling_haaland__man_city
-3,Pedro Neto,Chelsea,MO,SOU,2,1,3,2,pedro_neto__chelsea
-4,Cole Palmer,Chelsea,MO,SOU,1,2,3,2,cole_palmer__chelsea
-5,Evanilson,Bournemouth,A,PFC,2,0,2,3,evanilson__bournemouth
-6,João Pedro,Chelsea,A,LSN,2,0,2,1,joao_pedro__chelsea
-7,Thierno Barry,Everton,A,UPL,2,0,2,9,thierno_barry__everton
-8,Oliver McBurnie,Hull City,A,UPL,2,0,2,9,oliver_mcburnie__hull_city
-9,Alexander Isak,Liverpool,A,SOU,2,0,2,2,alexander_isak__liverpool
-10,Bryan Mbeumo,Man. United,A,FCR,2,0,2,0,bryan_mbeumo__man_united
-11,Marcus Tavernier,Bournemouth,MO,FCR,2,0,2,0,marcus_tavernier__bournemouth
-12,Yasin Ayari,Brighton,MO,L69,2,0,2,6,yasin_ayari__brighton
-13,Morgan Rogers,Chelsea,MO,EDF,2,0,2,7,morgan_rogers__chelsea
-14,Igor Thiago,Brentford,A,L69,1,1,2,6,igor_thiago__brentford
-15,Diego Gómez,Brighton,MO,UPL,1,1,2,9,diego_gomez__brighton
-16,Mohamed Belloumi,Hull City,MO,UPL,1,1,2,9,mohamed_belloumi__hull_city
-17,Jérémy Doku,Man. City,MO,PFC,1,1,2,3,jeremy_doku__man_city
-18,Maxim De Cuyper,Brighton,DL,FCR,1,1,2,0,maxim_de_cuyper__brighton
-19,Josh King,Fulham,MO,L69,0,2,2,6,josh_king__fulham
-20,Kai Havertz,Arsenal,A,LSN,1,0,1,1,kai_havertz__arsenal
-21,Charalampos Kostoulas,Brighton,A,FCP,1,0,1,4,charalampos_kostoulas__brighton
-22,Yéremy Pino,Crystal Palace,A,PFC,1,0,1,3,yeremy_pino__crystal_palace
-23,Dominic Calvert-Lewin,Leeds,A,FCP,1,0,1,4,dominic_calvert_lewin__leeds
-24,William Osula,Newcastle,A,TFS,1,0,1,8,william_osula__newcastle
-25,Johan Manzambi,Aston Villa,MO,TFS,1,0,1,8,johan_manzambi__aston_villa
-26,John McGinn,Aston Villa,MO,FCR,1,0,1,0,john_mcginn__aston_villa
-27,Rayan,Bournemouth,MO,LSN,1,0,1,1,rayan__bournemouth
-28,Jack Hinshelwood,Brighton,MO,TFS,1,0,1,8,jack_hinshelwood__brighton
-29,Daichi Kamada,Crystal Palace,MO,FCP,1,0,1,4,daichi_kamada__crystal_palace
-30,Kiernan Dewsbury-Hall,Everton,MO,TFS,1,0,1,8,kiernan_dewsbury_hall__everton
-31,Oscar Bobb,Fulham,MO,PFC,1,0,1,3,oscar_bobb__fulham
-32,Alex Iwobi,Fulham,MO,LSN,1,0,1,1,alex_iwobi__fulham
-33,Rayan Cherki,Man. City,MO,UPL,1,0,1,9,rayan_cherki__man_city
-34,Harvey Barnes,Newcastle,MO,FCP,1,0,1,4,harvey_barnes__newcastle
-35,Riccardo Calafiori,Arsenal,DL,LSN,1,0,1,1,riccardo_calafiori__arsenal
-36,Keane Lewis-Potter,Brentford,DL,FCP,1,0,1,4,keane_lewis_potter__brentford
-37,James Justin,Leeds,DL,L69,1,0,1,6,james_justin__leeds
-38,Gabriel Magalhães,Arsenal,DC,TFS,1,0,1,8,gabriel_magalhaes__arsenal
-39,Ezri Konsa,Arsenal,DC,LSN,1,0,1,1,ezri_konsa__arsenal
-40,Sven Botman,Newcastle,DC,PFC,1,0,1,3,sven_botman__newcastle
-41,Jan Paul van Hecke,Tottenham,DC,EDF,1,0,1,7,jan_paul_van_hecke__tottenham
-42,Viktor Gyökeres,Arsenal,A,SOU,0,1,1,2,viktor_gyokeres__arsenal
-43,Junior Kroupi,Bournemouth,A,EDF,0,1,1,7,junior_kroupi__bournemouth
-44,Noah Okafor,Leeds,A,L69,0,1,1,6,noah_okafor__leeds
-45,Bradley Barcola,Liverpool,A,TFS,0,1,1,8,bradley_barcola__liverpool
-46,Dominic Solanke,Tottenham,A,SOU,0,1,1,2,dominic_solanke__tottenham
-47,Dango Ouattara,Brentford,MO,SOU,0,1,1,2,dango_ouattara__brentford
-48,Malick Yalcouyé,Brighton,MO,SOU,0,1,1,2,malick_yalcouye__brighton
-49,Nilson Angulo,Sunderland,MO,L69,0,1,1,6,nilson_angulo__sunderland
-50,Granit Xhaka,Sunderland,MD,L69,0,1,1,6,granit_xhaka__sunderland
-51,Tyrick Mitchell,Crystal Palace,DL,PFC,0,1,1,3,tyrick_mitchell__crystal_palace
-52,Andy Robertson,Tottenham,DL,SOU,0,1,1,2,andy_robertson__tottenham
+1,Nicolas Jackson,Aston Villa,A,LSN,5,0,5,1,nicolas_jackson__aston_villa
+2,Thierno Barry,Everton,A,UPL,4,0,4,9,thierno_barry__everton
+3,Erling Haaland,Man. City,A,FCP,4,0,4,4,erling_haaland__man_city
+4,Evanilson,Bournemouth,A,PFC,3,0,3,3,evanilson__bournemouth
+5,Alexander Isak,Liverpool,A,SOU,3,0,3,2,alexander_isak__liverpool
+6,Diego Gómez,Brighton,MO,UPL,2,1,3,9,diego_gomez__brighton
+7,Pedro Neto,Chelsea,MO,SOU,2,1,3,2,pedro_neto__chelsea
+8,Cole Palmer,Chelsea,MO,SOU,1,2,3,2,cole_palmer__chelsea
+9,João Pedro,Chelsea,A,LSN,2,0,2,1,joao_pedro__chelsea
+10,Oliver McBurnie,Hull City,A,UPL,2,0,2,9,oliver_mcburnie__hull_city
+11,Bryan Mbeumo,Man. United,A,FCR,2,0,2,0,bryan_mbeumo__man_united
+12,Liam Delap,Nottingham Forest,A,EDF,2,0,2,7,liam_delap__nottingham_forest
+13,John McGinn,Aston Villa,MO,FCR,2,0,2,0,john_mcginn__aston_villa
+14,Marcus Tavernier,Bournemouth,MO,FCR,2,0,2,0,marcus_tavernier__bournemouth
+15,Yasin Ayari,Brighton,MO,L69,2,0,2,6,yasin_ayari__brighton
+16,Morgan Rogers,Chelsea,MO,EDF,2,0,2,7,morgan_rogers__chelsea
+17,Kiernan Dewsbury-Hall,Everton,MO,TFS,2,0,2,8,kiernan_dewsbury_hall__everton
+18,Igor Thiago,Brentford,A,L69,1,1,2,6,igor_thiago__brentford
+19,Mohamed Belloumi,Hull City,MO,UPL,1,1,2,9,mohamed_belloumi__hull_city
+20,Jérémy Doku,Man. City,MO,PFC,1,1,2,3,jeremy_doku__man_city
+21,Maxim De Cuyper,Brighton,DL,FCR,1,1,2,0,maxim_de_cuyper__brighton
+22,Josh King,Fulham,MO,L69,0,2,2,6,josh_king__fulham
+23,Kai Havertz,Arsenal,A,LSN,1,0,1,1,kai_havertz__arsenal
+24,Charalampos Kostoulas,Brighton,A,FCP,1,0,1,4,charalampos_kostoulas__brighton
+25,Yéremy Pino,Crystal Palace,A,PFC,1,0,1,3,yeremy_pino__crystal_palace
+26,Dominic Calvert-Lewin,Leeds,A,FCP,1,0,1,4,dominic_calvert_lewin__leeds
+27,William Osula,Newcastle,A,TFS,1,0,1,8,william_osula__newcastle
+28,Martin Ødegaard,Arsenal,MO,LSN,1,0,1,1,martin_degaard__arsenal
+29,Johan Manzambi,Aston Villa,MO,TFS,1,0,1,8,johan_manzambi__aston_villa
+30,Rayan,Bournemouth,MO,LSN,1,0,1,1,rayan__bournemouth
+31,Pascal Groß,Brighton,MO,FCR,1,0,1,0,pascal_gro__brighton
+32,Jack Hinshelwood,Brighton,MO,TFS,1,0,1,8,jack_hinshelwood__brighton
+33,Daichi Kamada,Crystal Palace,MO,FCP,1,0,1,4,daichi_kamada__crystal_palace
+34,Oscar Bobb,Fulham,MO,PFC,1,0,1,3,oscar_bobb__fulham
+35,Alex Iwobi,Fulham,MO,LSN,1,0,1,1,alex_iwobi__fulham
+36,Rayan Cherki,Man. City,MO,UPL,1,0,1,9,rayan_cherki__man_city
+37,Bruno Fernandes,Man. United,MO,FCR,1,0,1,0,bruno_fernandes__man_united
+38,Harvey Barnes,Newcastle,MO,FCP,1,0,1,4,harvey_barnes__newcastle
+39,Enzo Le Fée,Sunderland,MO,PFC,1,0,1,3,enzo_le_fee__sunderland
+40,Leon Goretzka,Aston Villa,MD,LSN,1,0,1,1,leon_goretzka__aston_villa
+41,Riccardo Calafiori,Arsenal,DL,LSN,1,0,1,1,riccardo_calafiori__arsenal
+42,Keane Lewis-Potter,Brentford,DL,FCP,1,0,1,4,keane_lewis_potter__brentford
+43,James Justin,Leeds,DL,L69,1,0,1,6,james_justin__leeds
+44,Gabriel Magalhães,Arsenal,DC,TFS,1,0,1,8,gabriel_magalhaes__arsenal
+45,Ezri Konsa,Arsenal,DC,LSN,1,0,1,1,ezri_konsa__arsenal
+46,Sven Botman,Newcastle,DC,PFC,1,0,1,3,sven_botman__newcastle
+47,Jan Paul van Hecke,Tottenham,DC,EDF,1,0,1,7,jan_paul_van_hecke__tottenham
+48,Viktor Gyökeres,Arsenal,A,SOU,0,1,1,2,viktor_gyokeres__arsenal
+49,Junior Kroupi,Bournemouth,A,EDF,0,1,1,7,junior_kroupi__bournemouth
+50,Noah Okafor,Leeds,A,L69,0,1,1,6,noah_okafor__leeds
+51,Bradley Barcola,Liverpool,A,TFS,0,1,1,8,bradley_barcola__liverpool
+52,Dominic Solanke,Tottenham,A,SOU,0,1,1,2,dominic_solanke__tottenham
+53,Christos Tzolis,Arsenal,MO,LSN,0,1,1,1,christos_tzolis__arsenal
+54,Dango Ouattara,Brentford,MO,SOU,0,1,1,2,dango_ouattara__brentford
+55,Malick Yalcouyé,Brighton,MO,SOU,0,1,1,2,malick_yalcouye__brighton
+56,Dominik Szoboszlai,Liverpool,MO,PFC,0,1,1,3,dominik_szoboszlai__liverpool
+57,Nilson Angulo,Sunderland,MO,L69,0,1,1,6,nilson_angulo__sunderland
+58,Granit Xhaka,Sunderland,MD,L69,0,1,1,6,granit_xhaka__sunderland
+59,Tyrick Mitchell,Crystal Palace,DL,PFC,0,1,1,3,tyrick_mitchell__crystal_palace
+60,Andy Robertson,Tottenham,DL,SOU,0,1,1,2,andy_robertson__tottenham

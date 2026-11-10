@@ -1,44 +1,44 @@
 categorie,rang,joueur,club,poste,equipe_abrev,achat,buts,valeur,team_id,player_key
-ratio_achat_par_but,1,Pedro Neto,Chelsea,MO,SOU,13.0,3,4.33,2,pedro_neto__chelsea
-ratio_achat_par_but,2,Nicolas Jackson,Aston Villa,A,LSN,18.0,4,4.5,1,nicolas_jackson__aston_villa
-ratio_achat_par_but,3,Josh King,Fulham,MO,L69,10.0,2,5.0,6,josh_king__fulham
-ratio_achat_par_but,4,Thierno Barry,Everton,A,UPL,16.0,2,8.0,9,thierno_barry__everton
-ratio_achat_par_but,5,Andy Robertson,Tottenham,DL,SOU,8.0,1,8.0,2,andy_robertson__tottenham
-ratio_achat_par_but,6,Mohamed Belloumi,Hull City,MO,UPL,22.0,2,11.0,9,mohamed_belloumi__hull_city
-ratio_achat_par_but,7,Diego Gómez,Brighton,MO,UPL,23.0,2,11.5,9,diego_gomez__brighton
-ratio_achat_par_but,8,Alex Iwobi,Fulham,MO,LSN,13.0,1,13.0,1,alex_iwobi__fulham
-ratio_achat_par_but,9,Tyrick Mitchell,Crystal Palace,DL,PFC,13.0,1,13.0,3,tyrick_mitchell__crystal_palace
-ratio_achat_par_but,10,Oliver McBurnie,Hull City,A,UPL,27.0,2,13.5,9,oliver_mcburnie__hull_city
+ratio_achat_par_but,1,Nicolas Jackson,Aston Villa,A,LSN,18.0,5,3.6,1,nicolas_jackson__aston_villa
+ratio_achat_par_but,2,Thierno Barry,Everton,A,UPL,16.0,4,4.0,9,thierno_barry__everton
+ratio_achat_par_but,3,Pedro Neto,Chelsea,MO,SOU,13.0,3,4.33,2,pedro_neto__chelsea
+ratio_achat_par_but,4,Josh King,Fulham,MO,L69,10.0,2,5.0,6,josh_king__fulham
+ratio_achat_par_but,5,Leon Goretzka,Aston Villa,MD,LSN,5.0,1,5.0,1,leon_goretzka__aston_villa
+ratio_achat_par_but,6,Diego Gómez,Brighton,MO,UPL,23.0,3,7.67,9,diego_gomez__brighton
+ratio_achat_par_but,7,Andy Robertson,Tottenham,DL,SOU,8.0,1,8.0,2,andy_robertson__tottenham
+ratio_achat_par_but,8,John McGinn,Aston Villa,MO,FCR,22.0,2,11.0,0,john_mcginn__aston_villa
+ratio_achat_par_but,9,Mohamed Belloumi,Hull City,MO,UPL,22.0,2,11.0,9,mohamed_belloumi__hull_city
+ratio_achat_par_but,10,Evanilson,Bournemouth,A,PFC,36.0,3,12.0,3,evanilson__bournemouth
 meilleurs_gardiens,1,Emiliano Martínez,Chelsea,G,EDF,15.0,,6.5,7,emiliano_martinez__chelsea
-meilleurs_gardiens,2,Bart Verbruggen,Brighton,G,TFS,14.0,,6.17,8,bart_verbruggen__brighton
-meilleurs_gardiens,3,David Raya,Arsenal,G,L69,41.0,,6.0,6,david_raya__arsenal
-meilleurs_defenseurs,1,Micky van de Ven,Tottenham,DC,PFC,18.0,,7.0,3,micky_van_de_ven__tottenham
-meilleurs_defenseurs,2,Ezri Konsa,Arsenal,DC,LSN,32.0,,6.5,1,ezri_konsa__arsenal
-meilleurs_defenseurs,3,Andy Robertson,Tottenham,DL,SOU,8.0,,6.17,2,andy_robertson__tottenham
-meilleurs_defenseurs,4,Maxim De Cuyper,Brighton,DL,FCR,30.0,,6.13,0,maxim_de_cuyper__brighton
-meilleurs_defenseurs,5,Gabriel Magalhães,Arsenal,DC,TFS,28.0,,6.0,8,gabriel_magalhaes__arsenal
-meilleurs_defenseurs,6,Jan Paul van Hecke,Tottenham,DC,EDF,32.0,,5.88,7,jan_paul_van_hecke__tottenham
-meilleurs_defenseurs,7,Luka Vuskovic,Brighton,DC,FCP,11.0,,5.88,4,luka_vuskovic__brighton
-meilleurs_defenseurs,8,Kristoffer Ajer,Brentford,DC,FCP,17.0,,5.83,4,kristoffer_ajer__brentford
-meilleurs_defenseurs,9,Riccardo Calafiori,Arsenal,DL,LSN,24.0,,5.5,1,riccardo_calafiori__arsenal
-meilleurs_defenseurs,10,Jaka Bijol,Leeds,DC,IOO,13.0,,5.5,5,jaka_bijol__leeds
-meilleurs_milieux,1,Kiernan Dewsbury-Hall,Everton,MO,TFS,39.0,,7.25,8,kiernan_dewsbury_hall__everton
+meilleurs_gardiens,2,Bart Verbruggen,Brighton,G,TFS,14.0,,6.13,8,bart_verbruggen__brighton
+meilleurs_gardiens,3,Lukás Hornícek,Newcastle,G,PFC,25.0,,6.0,3,lukas_hornicek__newcastle
+meilleurs_defenseurs,1,Ezri Konsa,Arsenal,DC,LSN,32.0,,6.6,1,ezri_konsa__arsenal
+meilleurs_defenseurs,2,Maxim De Cuyper,Brighton,DL,FCR,30.0,,6.1,0,maxim_de_cuyper__brighton
+meilleurs_defenseurs,3,Luka Vuskovic,Brighton,DC,FCP,11.0,,6.1,4,luka_vuskovic__brighton
+meilleurs_defenseurs,4,Jan Paul van Hecke,Tottenham,DC,EDF,32.0,,5.9,7,jan_paul_van_hecke__tottenham
+meilleurs_defenseurs,5,Gabriel Magalhães,Arsenal,DC,TFS,28.0,,5.9,8,gabriel_magalhaes__arsenal
+meilleurs_defenseurs,6,Kristoffer Ajer,Brentford,DC,FCP,17.0,,5.83,4,kristoffer_ajer__brentford
+meilleurs_defenseurs,7,Olivier Boscagli,Brighton,DL,FCP,17.0,,5.75,4,olivier_boscagli__brighton
+meilleurs_defenseurs,8,Andy Robertson,Tottenham,DL,SOU,8.0,,5.75,2,andy_robertson__tottenham
+meilleurs_defenseurs,9,Riccardo Calafiori,Arsenal,DL,LSN,24.0,,5.63,1,riccardo_calafiori__arsenal
+meilleurs_defenseurs,10,Virgil van Dijk,Liverpool,DC,IOO,38.0,,5.6,5,virgil_van_dijk__liverpool
+meilleurs_milieux,1,Kiernan Dewsbury-Hall,Everton,MO,TFS,39.0,,7.0,8,kiernan_dewsbury_hall__everton
 meilleurs_milieux,2,Youri Tielemans,Man. United,MD,FCP,17.0,,7.0,4,youri_tielemans__man_united
-meilleurs_milieux,3,Alex Iwobi,Fulham,MO,LSN,13.0,,6.67,1,alex_iwobi__fulham
-meilleurs_milieux,4,Cole Palmer,Chelsea,MO,SOU,55.0,,6.5,2,cole_palmer__chelsea
-meilleurs_milieux,5,Jérémy Doku,Man. City,MO,PFC,28.0,,6.5,3,jeremy_doku__man_city
-meilleurs_milieux,6,Morgan Rogers,Chelsea,MO,EDF,56.0,,6.38,7,morgan_rogers__chelsea
-meilleurs_milieux,7,Johan Manzambi,Aston Villa,MO,TFS,29.0,,6.38,8,johan_manzambi__aston_villa
-meilleurs_milieux,8,Diego Gómez,Brighton,MO,UPL,23.0,,6.25,9,diego_gomez__brighton
-meilleurs_milieux,9,Pedro Neto,Chelsea,MO,SOU,13.0,,6.25,2,pedro_neto__chelsea
-meilleurs_milieux,10,Rayan,Bournemouth,MO,LSN,28.0,,6.17,1,rayan__bournemouth
+meilleurs_milieux,3,Dominik Szoboszlai,Liverpool,MO,PFC,46.0,,6.5,3,dominik_szoboszlai__liverpool
+meilleurs_milieux,4,Johan Manzambi,Aston Villa,MO,TFS,29.0,,6.5,8,johan_manzambi__aston_villa
+meilleurs_milieux,5,Diego Gómez,Brighton,MO,UPL,23.0,,6.4,9,diego_gomez__brighton
+meilleurs_milieux,6,Alex Iwobi,Fulham,MO,LSN,13.0,,6.38,1,alex_iwobi__fulham
+meilleurs_milieux,7,Cole Palmer,Chelsea,MO,SOU,55.0,,6.2,2,cole_palmer__chelsea
+meilleurs_milieux,8,Yasin Ayari,Brighton,MO,L69,51.0,,6.2,6,yasin_ayari__brighton
+meilleurs_milieux,9,Rayan,Bournemouth,MO,LSN,28.0,,6.17,1,rayan__bournemouth
+meilleurs_milieux,10,John McGinn,Aston Villa,MO,FCR,22.0,,6.1,0,john_mcginn__aston_villa
 meilleurs_attaquants,1,João Pedro,Chelsea,A,LSN,71.0,,8.0,1,joao_pedro__chelsea
 meilleurs_attaquants,2,Evanilson,Bournemouth,A,PFC,36.0,,7.0,3,evanilson__bournemouth
-meilleurs_attaquants,3,Nicolas Jackson,Aston Villa,A,LSN,18.0,,6.63,1,nicolas_jackson__aston_villa
+meilleurs_attaquants,3,Nicolas Jackson,Aston Villa,A,LSN,18.0,,6.6,1,nicolas_jackson__aston_villa
 meilleurs_attaquants,4,Alexander Isak,Liverpool,A,SOU,57.0,,6.5,2,alexander_isak__liverpool
-meilleurs_attaquants,5,Erling Haaland,Man. City,A,FCP,127.0,,6.25,4,erling_haaland__man_city
-meilleurs_attaquants,6,Omar Marmoush,Tottenham,A,PFC,29.0,,6.0,3,omar_marmoush__tottenham
-meilleurs_attaquants,7,Dominic Solanke,Tottenham,A,SOU,22.0,,6.0,2,dominic_solanke__tottenham
-meilleurs_attaquants,8,Mathys Tel,Tottenham,A,UPL,8.0,,6.0,9,mathys_tel__tottenham
-meilleurs_attaquants,9,Charalampos Kostoulas,Brighton,A,FCP,32.0,,5.67,4,charalampos_kostoulas__brighton
-meilleurs_attaquants,10,Bradley Barcola,Liverpool,A,TFS,31.0,,5.5,8,bradley_barcola__liverpool
+meilleurs_attaquants,5,Dominic Solanke,Tottenham,A,SOU,22.0,,6.0,2,dominic_solanke__tottenham
+meilleurs_attaquants,6,Erling Haaland,Man. City,A,FCP,127.0,,5.9,4,erling_haaland__man_city
+meilleurs_attaquants,7,Thierno Barry,Everton,A,UPL,16.0,,5.9,9,thierno_barry__everton
+meilleurs_attaquants,8,Charalampos Kostoulas,Brighton,A,FCP,32.0,,5.75,4,charalampos_kostoulas__brighton
+meilleurs_attaquants,9,Bradley Barcola,Liverpool,A,TFS,31.0,,5.6,8,bradley_barcola__liverpool
+meilleurs_attaquants,10,Cody Gakpo,Liverpool,A,UPL,20.0,,5.5,9,cody_gakpo__liverpool

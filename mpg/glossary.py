@@ -48,9 +48,9 @@ GLOSSARY: dict[str, str] = {
     ),
     "note_brute": (
         "**Note brute.** Les notes affichées par MPG incluent les bonus (capitaine +0,5, défense à 4 ou 5, McDo+, "
-        "Zahia, Suarez subi…). On les retire pour comparer les joueurs entre eux, et notamment titulaires et "
+        "Zahia, Suarez et Cheat Code subis…). On les retire pour comparer les joueurs entre eux, et notamment titulaires et "
         "remplaçants. Contrôle : la moyenne des notes brutes retombe exactement sur la colonne « moyenne sans bonus » "
-        "du site pour les équipes n'ayant aligné aucun Rotaldo. Les bonus à cible imprécise (Cheat Code) ne sont pas retirés."
+        "du site pour les équipes n'ayant aligné aucun Rotaldo."
     ),
     "all_play": (
         "**Classement « contre tout le monde » (all-play).** Chaque journée, on compare la note moyenne de l'équipe "

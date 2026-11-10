@@ -1,0 +1,381 @@
+pl_match_id,pl_gw,date,home_club,away_club,home_club_short,away_club_short,home_score,away_score,statut
+mpg_championship_match_2645195,1,2026-08-21T19:00:00.000Z,Arsenal,Coventry City,ARS,COV,3,0,joue
+mpg_championship_match_2645198,1,2026-08-22T11:30:00.000Z,Hull City,Man. United,HUL,MUN,2,0,joue
+mpg_championship_match_2645197,1,2026-08-22T14:00:00.000Z,Everton,Crystal Palace,EVE,CRY,2,0,joue
+mpg_championship_match_2645199,1,2026-08-22T14:00:00.000Z,Ipswich Town,Sunderland,IPS,SUN,2,1,joue
+mpg_championship_match_2645200,1,2026-08-22T14:00:00.000Z,Nottingham Forest,Leeds,NFO,LEE,0,1,joue
+mpg_championship_match_2645196,1,2026-08-22T16:30:00.000Z,Brentford,Tottenham,BRE,TOT,3,0,joue
+mpg_championship_match_2645201,1,2026-08-23T13:00:00.000Z,Brighton,Aston Villa,BHA,AVL,4,0,joue
+mpg_championship_match_2645202,1,2026-08-23T13:00:00.000Z,Man. City,Bournemouth,MCI,BOU,2,1,joue
+mpg_championship_match_2645203,1,2026-08-23T15:30:00.000Z,Newcastle,Liverpool,NEW,LIV,2,2,joue
+mpg_championship_match_2645204,1,2026-08-24T19:00:00.000Z,Fulham,Chelsea,FUL,CHE,2,3,joue
+mpg_championship_match_2645209,2,2026-08-28T19:00:00.000Z,Crystal Palace,Man. City,CRY,MCI,1,4,joue
+mpg_championship_match_2645211,2,2026-08-29T11:30:00.000Z,Liverpool,Nottingham Forest,LIV,NFO,2,2,joue
+mpg_championship_match_2645205,2,2026-08-29T14:00:00.000Z,Bournemouth,Everton,BOU,EVE,1,1,joue
+mpg_championship_match_2645208,2,2026-08-29T14:00:00.000Z,Coventry City,Hull City,COV,HUL,0,1,joue
+mpg_championship_match_2645214,2,2026-08-29T16:30:00.000Z,Tottenham,Newcastle,TOT,NEW,0,2,joue
+mpg_championship_match_2645207,2,2026-08-30T13:00:00.000Z,Chelsea,Brighton,CHE,BHA,4,3,joue
+mpg_championship_match_2645210,2,2026-08-30T13:00:00.000Z,Leeds,Brentford,LEE,BRE,1,1,joue
+mpg_championship_match_2645213,2,2026-08-30T13:00:00.000Z,Sunderland,Fulham,SUN,FUL,1,0,joue
+mpg_championship_match_2645212,2,2026-08-30T15:30:00.000Z,Man. United,Ipswich Town,MUN,IPS,5,2,joue
+mpg_championship_match_2645206,2,2026-08-31T19:00:00.000Z,Aston Villa,Arsenal,AVL,ARS,0,1,joue
+mpg_championship_match_2645221,3,2026-09-04T19:00:00.000Z,Ipswich Town,Liverpool,IPS,LIV,0,2,joue
+mpg_championship_match_2645223,3,2026-09-05T11:30:00.000Z,Newcastle,Bournemouth,NEW,BOU,2,2,joue
+mpg_championship_match_2645216,3,2026-09-05T14:00:00.000Z,Brentford,Sunderland,BRE,SUN,1,1,joue
+mpg_championship_match_2645217,3,2026-09-05T14:00:00.000Z,Brighton,Leeds,BHA,LEE,1,1,joue
+mpg_championship_match_2645219,3,2026-09-05T14:00:00.000Z,Fulham,Crystal Palace,FUL,CRY,2,3,joue
+mpg_championship_match_2645222,3,2026-09-05T14:00:00.000Z,Man. City,Coventry City,MCI,COV,1,0,joue
+mpg_championship_match_2645224,3,2026-09-05T14:00:00.000Z,Nottingham Forest,Tottenham,NFO,TOT,0,0,joue
+mpg_championship_match_2645220,3,2026-09-05T16:30:00.000Z,Hull City,Aston Villa,HUL,AVL,0,0,joue
+mpg_championship_match_2645218,3,2026-09-06T13:00:00.000Z,Everton,Man. United,EVE,MUN,2,2,joue
+mpg_championship_match_2645215,3,2026-09-06T15:30:00.000Z,Arsenal,Chelsea,ARS,CHE,2,1,joue
+mpg_championship_match_2645225,4,2026-09-12T14:00:00.000Z,Bournemouth,Brentford,BOU,BRE,2,2,joue
+mpg_championship_match_2645226,4,2026-09-12T14:00:00.000Z,Aston Villa,Nottingham Forest,AVL,NFO,1,2,joue
+mpg_championship_match_2645227,4,2026-09-12T14:00:00.000Z,Chelsea,Hull City,CHE,HUL,2,2,joue
+mpg_championship_match_2645229,4,2026-09-12T14:00:00.000Z,Crystal Palace,Ipswich Town,CRY,IPS,2,3,joue
+mpg_championship_match_2645231,4,2026-09-12T14:00:00.000Z,Liverpool,Fulham,LIV,FUL,0,0,joue
+mpg_championship_match_2645234,4,2026-09-12T16:30:00.000Z,Tottenham,Everton,TOT,EVE,0,0,joue
+mpg_championship_match_2645233,4,2026-09-12T19:00:00.000Z,Sunderland,Arsenal,SUN,ARS,0,2,joue
+mpg_championship_match_2645228,4,2026-09-13T13:00:00.000Z,Coventry City,Brighton,COV,BHA,0,5,joue
+mpg_championship_match_2645232,4,2026-09-13T15:30:00.000Z,Man. United,Man. City,MUN,MCI,0,1,joue
+mpg_championship_match_2645230,4,2026-09-14T19:00:00.000Z,Leeds,Newcastle,LEE,NEW,4,1,joue
+mpg_championship_match_2645236,5,2026-09-18T19:00:00.000Z,Brentford,Chelsea,BRE,CHE,3,0,joue
+mpg_championship_match_2645244,5,2026-09-19T11:30:00.000Z,Tottenham,Aston Villa,TOT,AVL,2,3,joue
+mpg_championship_match_2645237,5,2026-09-19T14:00:00.000Z,Brighton,Arsenal,BHA,ARS,3,0,joue
+mpg_championship_match_2645238,5,2026-09-19T14:00:00.000Z,Everton,Ipswich Town,EVE,IPS,1,0,joue
+mpg_championship_match_2645242,5,2026-09-19T14:00:00.000Z,Newcastle,Hull City,NEW,HUL,2,1,joue
+mpg_championship_match_2645243,5,2026-09-19T16:30:00.000Z,Nottingham Forest,Coventry City,NFO,COV,0,1,joue
+mpg_championship_match_2645235,5,2026-09-20T13:00:00.000Z,Bournemouth,Liverpool,BOU,LIV,0,1,joue
+mpg_championship_match_2645240,5,2026-09-20T13:00:00.000Z,Leeds,Crystal Palace,LEE,CRY,0,0,joue
+mpg_championship_match_2645241,5,2026-09-20T13:00:00.000Z,Man. City,Sunderland,MCI,SUN,5,3,joue
+mpg_championship_match_2645239,5,2026-09-20T15:30:00.000Z,Fulham,Man. United,FUL,MUN,1,1,joue
+mpg_championship_match_2645245,6,2026-10-10T11:30:00.000Z,Arsenal,Leeds,ARS,LEE,2,1,joue
+mpg_championship_match_2645246,6,2026-10-10T14:00:00.000Z,Aston Villa,Brentford,AVL,BRE,2,2,joue
+mpg_championship_match_2645247,6,2026-10-10T14:00:00.000Z,Chelsea,Bournemouth,CHE,BOU,5,1,joue
+mpg_championship_match_2645251,6,2026-10-10T14:00:00.000Z,Ipswich Town,Fulham,IPS,FUL,2,1,joue
+mpg_championship_match_2645254,6,2026-10-10T14:00:00.000Z,Sunderland,Brighton,SUN,BHA,0,2,joue
+mpg_championship_match_2645253,6,2026-10-10T16:30:00.000Z,Man. United,Tottenham,MUN,TOT,1,1,joue
+mpg_championship_match_2645249,6,2026-10-11T13:00:00.000Z,Crystal Palace,Nottingham Forest,CRY,NFO,3,1,joue
+mpg_championship_match_2645250,6,2026-10-11T13:00:00.000Z,Hull City,Everton,HUL,EVE,2,2,joue
+mpg_championship_match_2645252,6,2026-10-11T15:30:00.000Z,Liverpool,Man. City,LIV,MCI,0,3,joue
+mpg_championship_match_2645248,6,2026-10-12T19:00:00.000Z,Coventry City,Newcastle,COV,NEW,4,1,joue
+mpg_championship_match_2645258,7,2026-10-17T11:30:00.000Z,Everton,Chelsea,EVE,CHE,0,2,joue
+mpg_championship_match_2645256,7,2026-10-17T14:00:00.000Z,Brentford,Liverpool,BRE,LIV,1,2,joue
+mpg_championship_match_2645259,7,2026-10-17T14:00:00.000Z,Fulham,Hull City,FUL,HUL,1,0,joue
+mpg_championship_match_2645261,7,2026-10-17T14:00:00.000Z,Man. City,Ipswich Town,MCI,IPS,3,2,joue
+mpg_championship_match_2645262,7,2026-10-17T16:30:00.000Z,Newcastle,Aston Villa,NEW,AVL,0,1,joue
+mpg_championship_match_2645255,7,2026-10-18T13:00:00.000Z,Bournemouth,Sunderland,BOU,SUN,2,0,joue
+mpg_championship_match_2645257,7,2026-10-18T13:00:00.000Z,Brighton,Crystal Palace,BHA,CRY,5,0,joue
+mpg_championship_match_2645260,7,2026-10-18T13:00:00.000Z,Leeds,Man. United,LEE,MUN,1,1,joue
+mpg_championship_match_2645263,7,2026-10-18T15:30:00.000Z,Nottingham Forest,Arsenal,NFO,ARS,0,1,joue
+mpg_championship_match_2645264,7,2026-10-19T19:00:00.000Z,Tottenham,Coventry City,TOT,COV,3,1,joue
+mpg_championship_match_2645271,8,2026-10-23T19:00:00.000Z,Ipswich Town,Nottingham Forest,IPS,NFO,1,1,joue
+mpg_championship_match_2645266,8,2026-10-24T11:30:00.000Z,Aston Villa,Man. City,AVL,MCI,2,1,joue
+mpg_championship_match_2645265,8,2026-10-24T14:00:00.000Z,Arsenal,Everton,ARS,EVE,2,0,joue
+mpg_championship_match_2645268,8,2026-10-24T14:00:00.000Z,Coventry City,Fulham,COV,FUL,0,1,joue
+mpg_championship_match_2645267,8,2026-10-24T16:30:00.000Z,Chelsea,Tottenham,CHE,TOT,0,2,joue
+mpg_championship_match_2645269,8,2026-10-25T14:00:00.000Z,Crystal Palace,Newcastle,CRY,NEW,0,2,joue
+mpg_championship_match_2645270,8,2026-10-25T14:00:00.000Z,Hull City,Brentford,HUL,BRE,1,1,joue
+mpg_championship_match_2645272,8,2026-10-25T14:00:00.000Z,Liverpool,Brighton,LIV,BHA,2,0,joue
+mpg_championship_match_2645273,8,2026-10-25T14:00:00.000Z,Man. United,Bournemouth,MUN,BOU,0,3,joue
+mpg_championship_match_2645274,8,2026-10-25T16:30:00.000Z,Sunderland,Leeds,SUN,LEE,0,0,joue
+mpg_championship_match_2645278,9,2026-10-31T12:30:00.000Z,Chelsea,Man. United,CHE,MUN,2,0,joue
+mpg_championship_match_2645275,9,2026-10-31T15:00:00.000Z,Bournemouth,Leeds,BOU,LEE,2,0,joue
+mpg_championship_match_2645277,9,2026-10-31T15:00:00.000Z,Brentford,Nottingham Forest,BRE,NFO,2,0,joue
+mpg_championship_match_2645279,9,2026-10-31T15:00:00.000Z,Coventry City,Sunderland,COV,SUN,3,1,joue
+mpg_championship_match_2645280,9,2026-10-31T15:00:00.000Z,Hull City,Ipswich Town,HUL,IPS,2,2,joue
+mpg_championship_match_2645282,9,2026-10-31T15:00:00.000Z,Man. City,Brighton,MCI,BHA,0,1,joue
+mpg_championship_match_2645284,9,2026-10-31T17:30:00.000Z,Tottenham,Crystal Palace,TOT,CRY,2,0,joue
+mpg_championship_match_2645276,9,2026-10-31T20:00:00.000Z,Aston Villa,Fulham,AVL,FUL,1,1,joue
+mpg_championship_match_2645281,9,2026-11-01T16:30:00.000Z,Liverpool,Arsenal,LIV,ARS,0,1,joue
+mpg_championship_match_2645283,9,2026-11-02T20:00:00.000Z,Newcastle,Everton,NEW,EVE,0,1,joue
+mpg_championship_match_2645288,10,2026-11-06T20:00:00.000Z,Everton,Coventry City,EVE,COV,3,1,joue
+mpg_championship_match_2645291,10,2026-11-07T12:30:00.000Z,Leeds,Tottenham,LEE,TOT,1,0,joue
+mpg_championship_match_2645285,10,2026-11-07T15:00:00.000Z,Arsenal,Hull City,ARS,HUL,1,0,joue
+mpg_championship_match_2645289,10,2026-11-07T15:00:00.000Z,Fulham,Newcastle,FUL,NEW,1,1,joue
+mpg_championship_match_2645293,10,2026-11-07T17:30:00.000Z,Nottingham Forest,Man. City,NFO,MCI,3,1,joue
+mpg_championship_match_2645286,10,2026-11-08T14:00:00.000Z,Brighton,Brentford,BHA,BRE,2,0,joue
+mpg_championship_match_2645287,10,2026-11-08T14:00:00.000Z,Crystal Palace,Liverpool,CRY,LIV,1,3,joue
+mpg_championship_match_2645290,10,2026-11-08T14:00:00.000Z,Ipswich Town,Bournemouth,IPS,BOU,1,2,joue
+mpg_championship_match_2645294,10,2026-11-08T14:00:00.000Z,Sunderland,Chelsea,SUN,CHE,1,0,joue
+mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Man. United,Aston Villa,MUN,AVL,4,4,joue
+mpg_championship_match_2645302,11,2026-11-21T12:30:00.000Z,Man. City,Fulham,MCI,FUL,,,a_venir
+mpg_championship_match_2645295,11,2026-11-21T15:00:00.000Z,Bournemouth,Nottingham Forest,BOU,NFO,,,a_venir
+mpg_championship_match_2645296,11,2026-11-21T15:00:00.000Z,Aston Villa,Sunderland,AVL,SUN,,,a_venir
+mpg_championship_match_2645298,11,2026-11-21T15:00:00.000Z,Chelsea,Leeds,CHE,LEE,,,a_venir
+mpg_championship_match_2645299,11,2026-11-21T15:00:00.000Z,Coventry City,Crystal Palace,COV,CRY,,,a_venir
+mpg_championship_match_2645304,11,2026-11-21T15:00:00.000Z,Tottenham,Ipswich Town,TOT,IPS,,,a_venir
+mpg_championship_match_2645303,11,2026-11-21T17:30:00.000Z,Newcastle,Arsenal,NEW,ARS,,,a_venir
+mpg_championship_match_2645300,11,2026-11-22T14:00:00.000Z,Hull City,Brighton,HUL,BHA,,,a_venir
+mpg_championship_match_2645301,11,2026-11-22T16:30:00.000Z,Liverpool,Man. United,LIV,MUN,,,a_venir
+mpg_championship_match_2645297,11,2026-11-23T20:00:00.000Z,Brentford,Everton,BRE,EVE,,,a_venir
+mpg_championship_match_2645313,12,2026-11-27T20:00:00.000Z,Nottingham Forest,Chelsea,NFO,CHE,,,a_venir
+mpg_championship_match_2645311,12,2026-11-28T15:00:00.000Z,Leeds,Coventry City,LEE,COV,,,a_venir
+mpg_championship_match_2645312,12,2026-11-28T15:00:00.000Z,Man. United,Brentford,MUN,BRE,,,a_venir
+mpg_championship_match_2645310,12,2026-11-28T17:30:00.000Z,Ipswich Town,Aston Villa,IPS,AVL,,,a_venir
+mpg_championship_match_2645308,12,2026-11-29T12:00:00.000Z,Everton,Liverpool,EVE,LIV,,,a_venir
+mpg_championship_match_2645306,12,2026-11-29T14:05:00.000Z,Brighton,Newcastle,BHA,NEW,,,a_venir
+mpg_championship_match_2645307,12,2026-11-29T14:05:00.000Z,Crystal Palace,Hull City,CRY,HUL,,,a_venir
+mpg_championship_match_2645309,12,2026-11-29T14:05:00.000Z,Fulham,Bournemouth,FUL,BOU,,,a_venir
+mpg_championship_match_2645314,12,2026-11-29T14:05:00.000Z,Sunderland,Tottenham,SUN,TOT,,,a_venir
+mpg_championship_match_2645305,12,2026-11-29T16:30:00.000Z,Arsenal,Man. City,ARS,MCI,,,a_venir
+mpg_championship_match_2645319,13,2026-12-01T20:00:00.000Z,Coventry City,Ipswich Town,COV,IPS,,,a_venir
+mpg_championship_match_2645318,13,2026-12-02T19:30:00.000Z,Chelsea,Crystal Palace,CHE,CRY,,,a_venir
+mpg_championship_match_2645320,13,2026-12-02T19:30:00.000Z,Hull City,Nottingham Forest,HUL,NFO,,,a_venir
+mpg_championship_match_2645321,13,2026-12-02T19:30:00.000Z,Liverpool,Sunderland,LIV,SUN,,,a_venir
+mpg_championship_match_2645322,13,2026-12-02T19:30:00.000Z,Man. City,Leeds,MCI,LEE,,,a_venir
+mpg_championship_match_2645315,13,2026-12-02T20:15:00.000Z,Bournemouth,Brighton,BOU,BHA,,,a_venir
+mpg_championship_match_2645316,13,2026-12-02T20:15:00.000Z,Aston Villa,Everton,AVL,EVE,,,a_venir
+mpg_championship_match_2645317,13,2026-12-02T20:15:00.000Z,Brentford,Arsenal,BRE,ARS,,,a_venir
+mpg_championship_match_2645323,13,2026-12-02T20:15:00.000Z,Newcastle,Man. United,NEW,MUN,,,a_venir
+mpg_championship_match_2645324,13,2026-12-03T20:00:00.000Z,Tottenham,Fulham,TOT,FUL,,,a_venir
+mpg_championship_match_2645328,14,2026-12-05T12:30:00.000Z,Chelsea,Liverpool,CHE,LIV,,,a_venir
+mpg_championship_match_2645325,14,2026-12-05T15:00:00.000Z,Bournemouth,Hull City,BOU,HUL,,,a_venir
+mpg_championship_match_2645326,14,2026-12-05T15:00:00.000Z,Aston Villa,Crystal Palace,AVL,CRY,,,a_venir
+mpg_championship_match_2645330,14,2026-12-05T15:00:00.000Z,Leeds,Ipswich Town,LEE,IPS,,,a_venir
+mpg_championship_match_2645331,14,2026-12-05T15:00:00.000Z,Man. United,Coventry City,MUN,COV,,,a_venir
+mpg_championship_match_2645333,14,2026-12-05T17:30:00.000Z,Nottingham Forest,Brighton,NFO,BHA,,,a_venir
+mpg_championship_match_2645327,14,2026-12-05T20:00:00.000Z,Brentford,Man. City,BRE,MCI,,,a_venir
+mpg_championship_match_2645329,14,2026-12-06T14:00:00.000Z,Everton,Fulham,EVE,FUL,,,a_venir
+mpg_championship_match_2645332,14,2026-12-06T14:00:00.000Z,Newcastle,Sunderland,NEW,SUN,,,a_venir
+mpg_championship_match_2645334,14,2026-12-06T16:30:00.000Z,Tottenham,Arsenal,TOT,ARS,,,a_venir
+mpg_championship_match_2645339,15,2026-12-12T15:00:00.000Z,Fulham,Brentford,FUL,BRE,,,a_venir
+mpg_championship_match_2645341,15,2026-12-12T15:00:00.000Z,Ipswich Town,Newcastle,IPS,NEW,,,a_venir
+mpg_championship_match_2645342,15,2026-12-12T15:00:00.000Z,Liverpool,Leeds,LIV,LEE,,,a_venir
+mpg_championship_match_2645343,15,2026-12-12T17:30:00.000Z,Man. City,Chelsea,MCI,CHE,,,a_venir
+mpg_championship_match_2645335,15,2026-12-13T14:00:00.000Z,Arsenal,Bournemouth,ARS,BOU,,,a_venir
+mpg_championship_match_2645336,15,2026-12-13T14:00:00.000Z,Brighton,Everton,BHA,EVE,,,a_venir
+mpg_championship_match_2645344,15,2026-12-13T14:00:00.000Z,Sunderland,Nottingham Forest,SUN,NFO,,,a_venir
+mpg_championship_match_2645337,15,2026-12-13T16:30:00.000Z,Coventry City,Aston Villa,COV,AVL,,,a_venir
+mpg_championship_match_2645338,15,2026-12-13T19:00:00.000Z,Crystal Palace,Man. United,CRY,MUN,,,a_venir
+mpg_championship_match_2645340,15,2026-12-14T20:00:00.000Z,Hull City,Tottenham,HUL,TOT,,,a_venir
+mpg_championship_match_2645347,16,2026-12-19T12:30:00.000Z,Brentford,Newcastle,BRE,NEW,,,a_venir
+mpg_championship_match_2645345,16,2026-12-19T15:00:00.000Z,Bournemouth,Coventry City,BOU,COV,,,a_venir
+mpg_championship_match_2645350,16,2026-12-19T15:00:00.000Z,Leeds,Fulham,LEE,FUL,,,a_venir
+mpg_championship_match_2645352,16,2026-12-19T15:00:00.000Z,Man. City,Hull City,MCI,HUL,,,a_venir
+mpg_championship_match_2645351,16,2026-12-19T17:30:00.000Z,Liverpool,Tottenham,LIV,TOT,,,a_venir
+mpg_championship_match_2645348,16,2026-12-20T14:00:00.000Z,Brighton,Ipswich Town,BHA,IPS,,,a_venir
+mpg_championship_match_2645353,16,2026-12-20T14:00:00.000Z,Nottingham Forest,Everton,NFO,EVE,,,a_venir
+mpg_championship_match_2645354,16,2026-12-20T14:00:00.000Z,Sunderland,Crystal Palace,SUN,CRY,,,a_venir
+mpg_championship_match_2645346,16,2026-12-20T16:30:00.000Z,Arsenal,Man. United,ARS,MUN,,,a_venir
+mpg_championship_match_2645349,16,2026-12-21T20:00:00.000Z,Chelsea,Aston Villa,CHE,AVL,,,a_venir
+mpg_championship_match_2645355,17,2026-12-26T12:30:00.000Z,Aston Villa,Leeds,AVL,LEE,,,a_venir
+mpg_championship_match_2645358,17,2026-12-26T15:00:00.000Z,Everton,Sunderland,EVE,SUN,,,a_venir
+mpg_championship_match_2645359,17,2026-12-26T15:00:00.000Z,Fulham,Brighton,FUL,BHA,,,a_venir
+mpg_championship_match_2645361,17,2026-12-26T15:00:00.000Z,Ipswich Town,Brentford,IPS,BRE,,,a_venir
+mpg_championship_match_2645364,17,2026-12-26T15:00:00.000Z,Tottenham,Bournemouth,TOT,BOU,,,a_venir
+mpg_championship_match_2645360,17,2026-12-26T17:30:00.000Z,Hull City,Liverpool,HUL,LIV,,,a_venir
+mpg_championship_match_2645363,17,2026-12-26T20:00:00.000Z,Newcastle,Man. City,NEW,MCI,,,a_venir
+mpg_championship_match_2645356,17,2026-12-27T14:00:00.000Z,Coventry City,Chelsea,COV,CHE,,,a_venir
+mpg_championship_match_2645362,17,2026-12-27T16:30:00.000Z,Man. United,Nottingham Forest,MUN,NFO,,,a_venir
+mpg_championship_match_2645357,17,2026-12-27T19:00:00.000Z,Crystal Palace,Arsenal,CRY,ARS,,,a_venir
+mpg_championship_match_2645370,18,2026-12-29T19:30:00.000Z,Hull City,Leeds,HUL,LEE,,,a_venir
+mpg_championship_match_2645374,18,2026-12-29T19:30:00.000Z,Tottenham,Brighton,TOT,BHA,,,a_venir
+mpg_championship_match_2645368,18,2026-12-29T20:15:00.000Z,Everton,Man. City,EVE,MCI,,,a_venir
+mpg_championship_match_2645366,18,2026-12-30T19:30:00.000Z,Coventry City,Brentford,COV,BRE,,,a_venir
+mpg_championship_match_2645367,18,2026-12-30T19:30:00.000Z,Crystal Palace,Bournemouth,CRY,BOU,,,a_venir
+mpg_championship_match_2645369,18,2026-12-30T19:30:00.000Z,Fulham,Arsenal,FUL,ARS,,,a_venir
+mpg_championship_match_2645372,18,2026-12-30T19:30:00.000Z,Man. United,Sunderland,MUN,SUN,,,a_venir
+mpg_championship_match_2645373,18,2026-12-30T19:30:00.000Z,Newcastle,Nottingham Forest,NEW,NFO,,,a_venir
+mpg_championship_match_2645365,18,2026-12-30T20:15:00.000Z,Aston Villa,Liverpool,AVL,LIV,,,a_venir
+mpg_championship_match_2645371,18,2026-12-30T20:15:00.000Z,Ipswich Town,Chelsea,IPS,CHE,,,a_venir
+mpg_championship_match_2645380,19,2027-01-01T20:00:00.000Z,Leeds,Everton,LEE,EVE,,,a_venir
+mpg_championship_match_2645378,19,2027-01-02T12:30:00.000Z,Brighton,Man. United,BHA,MUN,,,a_venir
+mpg_championship_match_2645376,19,2027-01-02T15:00:00.000Z,Arsenal,Ipswich Town,ARS,IPS,,,a_venir
+mpg_championship_match_2645377,19,2027-01-02T15:00:00.000Z,Brentford,Crystal Palace,BRE,CRY,,,a_venir
+mpg_championship_match_2645381,19,2027-01-02T15:00:00.000Z,Liverpool,Coventry City,LIV,COV,,,a_venir
+mpg_championship_match_2645383,19,2027-01-02T15:00:00.000Z,Nottingham Forest,Fulham,NFO,FUL,,,a_venir
+mpg_championship_match_2645384,19,2027-01-02T15:00:00.000Z,Sunderland,Hull City,SUN,HUL,,,a_venir
+mpg_championship_match_2645375,19,2027-01-02T17:30:00.000Z,Bournemouth,Aston Villa,BOU,AVL,,,a_venir
+mpg_championship_match_2645379,19,2027-01-03T14:00:00.000Z,Chelsea,Newcastle,CHE,NEW,,,a_venir
+mpg_championship_match_2645382,19,2027-01-03T16:30:00.000Z,Man. City,Tottenham,MCI,TOT,,,a_venir
+mpg_championship_match_2645385,20,2027-01-05T19:30:00.000Z,Arsenal,Brentford,ARS,BRE,,,a_venir
+mpg_championship_match_2645386,20,2027-01-05T19:30:00.000Z,Brighton,Bournemouth,BHA,BOU,,,a_venir
+mpg_championship_match_2645388,20,2027-01-05T19:30:00.000Z,Everton,Aston Villa,EVE,AVL,,,a_venir
+mpg_championship_match_2645393,20,2027-01-05T19:30:00.000Z,Nottingham Forest,Hull City,NFO,HUL,,,a_venir
+mpg_championship_match_2645394,20,2027-01-05T20:15:00.000Z,Sunderland,Liverpool,SUN,LIV,,,a_venir
+mpg_championship_match_2645387,20,2027-01-06T19:30:00.000Z,Crystal Palace,Chelsea,CRY,CHE,,,a_venir
+mpg_championship_match_2645389,20,2027-01-06T19:30:00.000Z,Fulham,Tottenham,FUL,TOT,,,a_venir
+mpg_championship_match_2645390,20,2027-01-06T19:30:00.000Z,Ipswich Town,Coventry City,IPS,COV,,,a_venir
+mpg_championship_match_2645391,20,2027-01-06T20:15:00.000Z,Leeds,Man. City,LEE,MCI,,,a_venir
+mpg_championship_match_2645392,20,2027-01-07T20:00:00.000Z,Man. United,Newcastle,MUN,NEW,,,a_venir
+mpg_championship_match_2645395,21,2027-01-16T15:00:00.000Z,Bournemouth,Ipswich Town,BOU,IPS,,,a_venir
+mpg_championship_match_2645396,21,2027-01-16T15:00:00.000Z,Aston Villa,Man. United,AVL,MUN,,,a_venir
+mpg_championship_match_2645397,21,2027-01-16T15:00:00.000Z,Brentford,Brighton,BRE,BHA,,,a_venir
+mpg_championship_match_2645398,21,2027-01-16T15:00:00.000Z,Chelsea,Sunderland,CHE,SUN,,,a_venir
+mpg_championship_match_2645399,21,2027-01-16T15:00:00.000Z,Coventry City,Everton,COV,EVE,,,a_venir
+mpg_championship_match_2645400,21,2027-01-16T15:00:00.000Z,Hull City,Arsenal,HUL,ARS,,,a_venir
+mpg_championship_match_2645401,21,2027-01-16T15:00:00.000Z,Liverpool,Crystal Palace,LIV,CRY,,,a_venir
+mpg_championship_match_2645402,21,2027-01-16T15:00:00.000Z,Man. City,Nottingham Forest,MCI,NFO,,,a_venir
+mpg_championship_match_2645403,21,2027-01-16T15:00:00.000Z,Newcastle,Fulham,NEW,FUL,,,a_venir
+mpg_championship_match_2645404,21,2027-01-16T15:00:00.000Z,Tottenham,Leeds,TOT,LEE,,,a_venir
+mpg_championship_match_2645405,22,2027-01-23T15:00:00.000Z,Arsenal,Newcastle,ARS,NEW,,,a_venir
+mpg_championship_match_2645406,22,2027-01-23T15:00:00.000Z,Brighton,Man. City,BHA,MCI,,,a_venir
+mpg_championship_match_2645407,22,2027-01-23T15:00:00.000Z,Crystal Palace,Tottenham,CRY,TOT,,,a_venir
+mpg_championship_match_2645408,22,2027-01-23T15:00:00.000Z,Everton,Brentford,EVE,BRE,,,a_venir
+mpg_championship_match_2645409,22,2027-01-23T15:00:00.000Z,Fulham,Aston Villa,FUL,AVL,,,a_venir
+mpg_championship_match_2645410,22,2027-01-23T15:00:00.000Z,Ipswich Town,Hull City,IPS,HUL,,,a_venir
+mpg_championship_match_2645411,22,2027-01-23T15:00:00.000Z,Leeds,Chelsea,LEE,CHE,,,a_venir
+mpg_championship_match_2645412,22,2027-01-23T15:00:00.000Z,Man. United,Liverpool,MUN,LIV,,,a_venir
+mpg_championship_match_2645413,22,2027-01-23T15:00:00.000Z,Nottingham Forest,Bournemouth,NFO,BOU,,,a_venir
+mpg_championship_match_2645414,22,2027-01-23T15:00:00.000Z,Sunderland,Coventry City,SUN,COV,,,a_venir
+mpg_championship_match_2645415,23,2027-01-30T15:00:00.000Z,Bournemouth,Fulham,BOU,FUL,,,a_venir
+mpg_championship_match_2645416,23,2027-01-30T15:00:00.000Z,Aston Villa,Ipswich Town,AVL,IPS,,,a_venir
+mpg_championship_match_2645417,23,2027-01-30T15:00:00.000Z,Brentford,Man. United,BRE,MUN,,,a_venir
+mpg_championship_match_2645418,23,2027-01-30T15:00:00.000Z,Chelsea,Nottingham Forest,CHE,NFO,,,a_venir
+mpg_championship_match_2645419,23,2027-01-30T15:00:00.000Z,Coventry City,Leeds,COV,LEE,,,a_venir
+mpg_championship_match_2645420,23,2027-01-30T15:00:00.000Z,Hull City,Crystal Palace,HUL,CRY,,,a_venir
+mpg_championship_match_2645421,23,2027-01-30T15:00:00.000Z,Liverpool,Everton,LIV,EVE,,,a_venir
+mpg_championship_match_2645422,23,2027-01-30T15:00:00.000Z,Man. City,Arsenal,MCI,ARS,,,a_venir
+mpg_championship_match_2645423,23,2027-01-30T15:00:00.000Z,Newcastle,Brighton,NEW,BHA,,,a_venir
+mpg_championship_match_2645424,23,2027-01-30T15:00:00.000Z,Tottenham,Sunderland,TOT,SUN,,,a_venir
+mpg_championship_match_2645425,24,2027-02-06T15:00:00.000Z,Arsenal,Liverpool,ARS,LIV,,,a_venir
+mpg_championship_match_2645426,24,2027-02-06T15:00:00.000Z,Brighton,Hull City,BHA,HUL,,,a_venir
+mpg_championship_match_2645427,24,2027-02-06T15:00:00.000Z,Crystal Palace,Coventry City,CRY,COV,,,a_venir
+mpg_championship_match_2645428,24,2027-02-06T15:00:00.000Z,Everton,Newcastle,EVE,NEW,,,a_venir
+mpg_championship_match_2645429,24,2027-02-06T15:00:00.000Z,Fulham,Man. City,FUL,MCI,,,a_venir
+mpg_championship_match_2645430,24,2027-02-06T15:00:00.000Z,Ipswich Town,Tottenham,IPS,TOT,,,a_venir
+mpg_championship_match_2645431,24,2027-02-06T15:00:00.000Z,Leeds,Bournemouth,LEE,BOU,,,a_venir
+mpg_championship_match_2645432,24,2027-02-06T15:00:00.000Z,Man. United,Chelsea,MUN,CHE,,,a_venir
+mpg_championship_match_2645433,24,2027-02-06T15:00:00.000Z,Nottingham Forest,Brentford,NFO,BRE,,,a_venir
+mpg_championship_match_2645434,24,2027-02-06T15:00:00.000Z,Sunderland,Aston Villa,SUN,AVL,,,a_venir
+mpg_championship_match_2645435,25,2027-02-10T20:00:00.000Z,Aston Villa,Bournemouth,AVL,BOU,,,a_venir
+mpg_championship_match_2645436,25,2027-02-10T20:00:00.000Z,Coventry City,Liverpool,COV,LIV,,,a_venir
+mpg_championship_match_2645437,25,2027-02-10T20:00:00.000Z,Crystal Palace,Brentford,CRY,BRE,,,a_venir
+mpg_championship_match_2645438,25,2027-02-10T20:00:00.000Z,Everton,Leeds,EVE,LEE,,,a_venir
+mpg_championship_match_2645439,25,2027-02-10T20:00:00.000Z,Fulham,Nottingham Forest,FUL,NFO,,,a_venir
+mpg_championship_match_2645440,25,2027-02-10T20:00:00.000Z,Hull City,Sunderland,HUL,SUN,,,a_venir
+mpg_championship_match_2645441,25,2027-02-10T20:00:00.000Z,Ipswich Town,Arsenal,IPS,ARS,,,a_venir
+mpg_championship_match_2645442,25,2027-02-10T20:00:00.000Z,Man. United,Brighton,MUN,BHA,,,a_venir
+mpg_championship_match_2645443,25,2027-02-10T20:00:00.000Z,Newcastle,Chelsea,NEW,CHE,,,a_venir
+mpg_championship_match_2645444,25,2027-02-10T20:00:00.000Z,Tottenham,Man. City,TOT,MCI,,,a_venir
+mpg_championship_match_2645445,26,2027-02-20T15:00:00.000Z,Bournemouth,Crystal Palace,BOU,CRY,,,a_venir
+mpg_championship_match_2645446,26,2027-02-20T15:00:00.000Z,Arsenal,Fulham,ARS,FUL,,,a_venir
+mpg_championship_match_2645447,26,2027-02-20T15:00:00.000Z,Brentford,Coventry City,BRE,COV,,,a_venir
+mpg_championship_match_2645448,26,2027-02-20T15:00:00.000Z,Brighton,Tottenham,BHA,TOT,,,a_venir
+mpg_championship_match_2645449,26,2027-02-20T15:00:00.000Z,Chelsea,Ipswich Town,CHE,IPS,,,a_venir
+mpg_championship_match_2645450,26,2027-02-20T15:00:00.000Z,Leeds,Aston Villa,LEE,AVL,,,a_venir
+mpg_championship_match_2645451,26,2027-02-20T15:00:00.000Z,Liverpool,Hull City,LIV,HUL,,,a_venir
+mpg_championship_match_2645452,26,2027-02-20T15:00:00.000Z,Man. City,Newcastle,MCI,NEW,,,a_venir
+mpg_championship_match_2645453,26,2027-02-20T15:00:00.000Z,Nottingham Forest,Man. United,NFO,MUN,,,a_venir
+mpg_championship_match_2645454,26,2027-02-20T15:00:00.000Z,Sunderland,Everton,SUN,EVE,,,a_venir
+mpg_championship_match_2645455,27,2027-02-27T15:00:00.000Z,Aston Villa,Chelsea,AVL,CHE,,,a_venir
+mpg_championship_match_2645456,27,2027-02-27T15:00:00.000Z,Coventry City,Bournemouth,COV,BOU,,,a_venir
+mpg_championship_match_2645457,27,2027-02-27T15:00:00.000Z,Crystal Palace,Sunderland,CRY,SUN,,,a_venir
+mpg_championship_match_2645458,27,2027-02-27T15:00:00.000Z,Everton,Nottingham Forest,EVE,NFO,,,a_venir
+mpg_championship_match_2645459,27,2027-02-27T15:00:00.000Z,Fulham,Leeds,FUL,LEE,,,a_venir
+mpg_championship_match_2645460,27,2027-02-27T15:00:00.000Z,Hull City,Man. City,HUL,MCI,,,a_venir
+mpg_championship_match_2645461,27,2027-02-27T15:00:00.000Z,Ipswich Town,Brighton,IPS,BHA,,,a_venir
+mpg_championship_match_2645462,27,2027-02-27T15:00:00.000Z,Man. United,Arsenal,MUN,ARS,,,a_venir
+mpg_championship_match_2645463,27,2027-02-27T15:00:00.000Z,Newcastle,Brentford,NEW,BRE,,,a_venir
+mpg_championship_match_2645464,27,2027-02-27T15:00:00.000Z,Tottenham,Liverpool,TOT,LIV,,,a_venir
+mpg_championship_match_2645465,28,2027-03-03T20:00:00.000Z,Bournemouth,Tottenham,BOU,TOT,,,a_venir
+mpg_championship_match_2645466,28,2027-03-03T20:00:00.000Z,Arsenal,Crystal Palace,ARS,CRY,,,a_venir
+mpg_championship_match_2645467,28,2027-03-03T20:00:00.000Z,Brentford,Ipswich Town,BRE,IPS,,,a_venir
+mpg_championship_match_2645468,28,2027-03-03T20:00:00.000Z,Brighton,Fulham,BHA,FUL,,,a_venir
+mpg_championship_match_2645469,28,2027-03-03T20:00:00.000Z,Chelsea,Coventry City,CHE,COV,,,a_venir
+mpg_championship_match_2645470,28,2027-03-03T20:00:00.000Z,Leeds,Hull City,LEE,HUL,,,a_venir
+mpg_championship_match_2645471,28,2027-03-03T20:00:00.000Z,Liverpool,Aston Villa,LIV,AVL,,,a_venir
+mpg_championship_match_2645472,28,2027-03-03T20:00:00.000Z,Man. City,Everton,MCI,EVE,,,a_venir
+mpg_championship_match_2645473,28,2027-03-03T20:00:00.000Z,Nottingham Forest,Newcastle,NFO,NEW,,,a_venir
+mpg_championship_match_2645474,28,2027-03-03T20:00:00.000Z,Sunderland,Man. United,SUN,MUN,,,a_venir
+mpg_championship_match_2645475,29,2027-03-13T15:00:00.000Z,Bournemouth,Newcastle,BOU,NEW,,,a_venir
+mpg_championship_match_2645476,29,2027-03-13T15:00:00.000Z,Aston Villa,Hull City,AVL,HUL,,,a_venir
+mpg_championship_match_2645477,29,2027-03-13T15:00:00.000Z,Chelsea,Arsenal,CHE,ARS,,,a_venir
+mpg_championship_match_2645478,29,2027-03-13T15:00:00.000Z,Coventry City,Man. City,COV,MCI,,,a_venir
+mpg_championship_match_2645479,29,2027-03-13T15:00:00.000Z,Crystal Palace,Fulham,CRY,FUL,,,a_venir
+mpg_championship_match_2645480,29,2027-03-13T15:00:00.000Z,Leeds,Brighton,LEE,BHA,,,a_venir
+mpg_championship_match_2645481,29,2027-03-13T15:00:00.000Z,Liverpool,Ipswich Town,LIV,IPS,,,a_venir
+mpg_championship_match_2645482,29,2027-03-13T15:00:00.000Z,Man. United,Everton,MUN,EVE,,,a_venir
+mpg_championship_match_2645483,29,2027-03-13T15:00:00.000Z,Sunderland,Brentford,SUN,BRE,,,a_venir
+mpg_championship_match_2645484,29,2027-03-13T15:00:00.000Z,Tottenham,Nottingham Forest,TOT,NFO,,,a_venir
+mpg_championship_match_2645485,30,2027-03-20T15:00:00.000Z,Arsenal,Sunderland,ARS,SUN,,,a_venir
+mpg_championship_match_2645486,30,2027-03-20T15:00:00.000Z,Brentford,Bournemouth,BRE,BOU,,,a_venir
+mpg_championship_match_2645487,30,2027-03-20T15:00:00.000Z,Brighton,Coventry City,BHA,COV,,,a_venir
+mpg_championship_match_2645488,30,2027-03-20T15:00:00.000Z,Everton,Tottenham,EVE,TOT,,,a_venir
+mpg_championship_match_2645489,30,2027-03-20T15:00:00.000Z,Fulham,Liverpool,FUL,LIV,,,a_venir
+mpg_championship_match_2645490,30,2027-03-20T15:00:00.000Z,Hull City,Chelsea,HUL,CHE,,,a_venir
+mpg_championship_match_2645491,30,2027-03-20T15:00:00.000Z,Ipswich Town,Crystal Palace,IPS,CRY,,,a_venir
+mpg_championship_match_2645492,30,2027-03-20T15:00:00.000Z,Man. City,Man. United,MCI,MUN,,,a_venir
+mpg_championship_match_2645493,30,2027-03-20T15:00:00.000Z,Newcastle,Leeds,NEW,LEE,,,a_venir
+mpg_championship_match_2645494,30,2027-03-20T15:00:00.000Z,Nottingham Forest,Aston Villa,NFO,AVL,,,a_venir
+mpg_championship_match_2645495,31,2027-04-10T14:00:00.000Z,Bournemouth,Man. City,BOU,MCI,,,a_venir
+mpg_championship_match_2645496,31,2027-04-10T14:00:00.000Z,Aston Villa,Brighton,AVL,BHA,,,a_venir
+mpg_championship_match_2645497,31,2027-04-10T14:00:00.000Z,Chelsea,Fulham,CHE,FUL,,,a_venir
+mpg_championship_match_2645498,31,2027-04-10T14:00:00.000Z,Coventry City,Arsenal,COV,ARS,,,a_venir
+mpg_championship_match_2645499,31,2027-04-10T14:00:00.000Z,Crystal Palace,Everton,CRY,EVE,,,a_venir
+mpg_championship_match_2645500,31,2027-04-10T14:00:00.000Z,Leeds,Nottingham Forest,LEE,NFO,,,a_venir
+mpg_championship_match_2645501,31,2027-04-10T14:00:00.000Z,Liverpool,Newcastle,LIV,NEW,,,a_venir
+mpg_championship_match_2645502,31,2027-04-10T14:00:00.000Z,Man. United,Hull City,MUN,HUL,,,a_venir
+mpg_championship_match_2645503,31,2027-04-10T14:00:00.000Z,Sunderland,Ipswich Town,SUN,IPS,,,a_venir
+mpg_championship_match_2645504,31,2027-04-10T14:00:00.000Z,Tottenham,Brentford,TOT,BRE,,,a_venir
+mpg_championship_match_2645505,32,2027-04-17T14:00:00.000Z,Arsenal,Aston Villa,ARS,AVL,,,a_venir
+mpg_championship_match_2645506,32,2027-04-17T14:00:00.000Z,Brentford,Leeds,BRE,LEE,,,a_venir
+mpg_championship_match_2645507,32,2027-04-17T14:00:00.000Z,Brighton,Chelsea,BHA,CHE,,,a_venir
+mpg_championship_match_2645508,32,2027-04-17T14:00:00.000Z,Everton,Bournemouth,EVE,BOU,,,a_venir
+mpg_championship_match_2645509,32,2027-04-17T14:00:00.000Z,Fulham,Sunderland,FUL,SUN,,,a_venir
+mpg_championship_match_2645510,32,2027-04-17T14:00:00.000Z,Hull City,Coventry City,HUL,COV,,,a_venir
+mpg_championship_match_2645511,32,2027-04-17T14:00:00.000Z,Ipswich Town,Man. United,IPS,MUN,,,a_venir
+mpg_championship_match_2645512,32,2027-04-17T14:00:00.000Z,Man. City,Crystal Palace,MCI,CRY,,,a_venir
+mpg_championship_match_2645513,32,2027-04-17T14:00:00.000Z,Newcastle,Tottenham,NEW,TOT,,,a_venir
+mpg_championship_match_2645514,32,2027-04-17T14:00:00.000Z,Nottingham Forest,Liverpool,NFO,LIV,,,a_venir
+mpg_championship_match_2645515,33,2027-04-24T14:00:00.000Z,Bournemouth,Arsenal,BOU,ARS,,,a_venir
+mpg_championship_match_2645516,33,2027-04-24T14:00:00.000Z,Aston Villa,Coventry City,AVL,COV,,,a_venir
+mpg_championship_match_2645517,33,2027-04-24T14:00:00.000Z,Brentford,Fulham,BRE,FUL,,,a_venir
+mpg_championship_match_2645518,33,2027-04-24T14:00:00.000Z,Chelsea,Man. City,CHE,MCI,,,a_venir
+mpg_championship_match_2645519,33,2027-04-24T14:00:00.000Z,Everton,Brighton,EVE,BHA,,,a_venir
+mpg_championship_match_2645520,33,2027-04-24T14:00:00.000Z,Leeds,Liverpool,LEE,LIV,,,a_venir
+mpg_championship_match_2645521,33,2027-04-24T14:00:00.000Z,Man. United,Crystal Palace,MUN,CRY,,,a_venir
+mpg_championship_match_2645522,33,2027-04-24T14:00:00.000Z,Newcastle,Ipswich Town,NEW,IPS,,,a_venir
+mpg_championship_match_2645523,33,2027-04-24T14:00:00.000Z,Nottingham Forest,Sunderland,NFO,SUN,,,a_venir
+mpg_championship_match_2645524,33,2027-04-24T14:00:00.000Z,Tottenham,Hull City,TOT,HUL,,,a_venir
+mpg_championship_match_2645525,34,2027-05-01T14:00:00.000Z,Arsenal,Tottenham,ARS,TOT,,,a_venir
+mpg_championship_match_2645526,34,2027-05-01T14:00:00.000Z,Brighton,Nottingham Forest,BHA,NFO,,,a_venir
+mpg_championship_match_2645527,34,2027-05-01T14:00:00.000Z,Coventry City,Man. United,COV,MUN,,,a_venir
+mpg_championship_match_2645528,34,2027-05-01T14:00:00.000Z,Crystal Palace,Aston Villa,CRY,AVL,,,a_venir
+mpg_championship_match_2645529,34,2027-05-01T14:00:00.000Z,Fulham,Everton,FUL,EVE,,,a_venir
+mpg_championship_match_2645530,34,2027-05-01T14:00:00.000Z,Hull City,Bournemouth,HUL,BOU,,,a_venir
+mpg_championship_match_2645531,34,2027-05-01T14:00:00.000Z,Ipswich Town,Leeds,IPS,LEE,,,a_venir
+mpg_championship_match_2645532,34,2027-05-01T14:00:00.000Z,Liverpool,Chelsea,LIV,CHE,,,a_venir
+mpg_championship_match_2645533,34,2027-05-01T14:00:00.000Z,Man. City,Brentford,MCI,BRE,,,a_venir
+mpg_championship_match_2645534,34,2027-05-01T14:00:00.000Z,Sunderland,Newcastle,SUN,NEW,,,a_venir
+mpg_championship_match_2645535,35,2027-05-08T14:00:00.000Z,Bournemouth,Man. United,BOU,MUN,,,a_venir
+mpg_championship_match_2645536,35,2027-05-08T14:00:00.000Z,Brentford,Aston Villa,BRE,AVL,,,a_venir
+mpg_championship_match_2645537,35,2027-05-08T14:00:00.000Z,Brighton,Sunderland,BHA,SUN,,,a_venir
+mpg_championship_match_2645538,35,2027-05-08T14:00:00.000Z,Everton,Hull City,EVE,HUL,,,a_venir
+mpg_championship_match_2645539,35,2027-05-08T14:00:00.000Z,Fulham,Ipswich Town,FUL,IPS,,,a_venir
+mpg_championship_match_2645540,35,2027-05-08T14:00:00.000Z,Leeds,Arsenal,LEE,ARS,,,a_venir
+mpg_championship_match_2645541,35,2027-05-08T14:00:00.000Z,Man. City,Liverpool,MCI,LIV,,,a_venir
+mpg_championship_match_2645542,35,2027-05-08T14:00:00.000Z,Newcastle,Coventry City,NEW,COV,,,a_venir
+mpg_championship_match_2645543,35,2027-05-08T14:00:00.000Z,Nottingham Forest,Crystal Palace,NFO,CRY,,,a_venir
+mpg_championship_match_2645544,35,2027-05-08T14:00:00.000Z,Tottenham,Chelsea,TOT,CHE,,,a_venir
+mpg_championship_match_2645545,36,2027-05-15T14:00:00.000Z,Arsenal,Nottingham Forest,ARS,NFO,,,a_venir
+mpg_championship_match_2645546,36,2027-05-15T14:00:00.000Z,Aston Villa,Newcastle,AVL,NEW,,,a_venir
+mpg_championship_match_2645547,36,2027-05-15T14:00:00.000Z,Chelsea,Everton,CHE,EVE,,,a_venir
+mpg_championship_match_2645548,36,2027-05-15T14:00:00.000Z,Coventry City,Tottenham,COV,TOT,,,a_venir
+mpg_championship_match_2645549,36,2027-05-15T14:00:00.000Z,Crystal Palace,Brighton,CRY,BHA,,,a_venir
+mpg_championship_match_2645550,36,2027-05-15T14:00:00.000Z,Hull City,Fulham,HUL,FUL,,,a_venir
+mpg_championship_match_2645551,36,2027-05-15T14:00:00.000Z,Ipswich Town,Man. City,IPS,MCI,,,a_venir
+mpg_championship_match_2645552,36,2027-05-15T14:00:00.000Z,Liverpool,Brentford,LIV,BRE,,,a_venir
+mpg_championship_match_2645553,36,2027-05-15T14:00:00.000Z,Man. United,Leeds,MUN,LEE,,,a_venir
+mpg_championship_match_2645554,36,2027-05-15T14:00:00.000Z,Sunderland,Bournemouth,SUN,BOU,,,a_venir
+mpg_championship_match_2645555,37,2027-05-23T14:00:00.000Z,Bournemouth,Chelsea,BOU,CHE,,,a_venir
+mpg_championship_match_2645556,37,2027-05-23T14:00:00.000Z,Brentford,Hull City,BRE,HUL,,,a_venir
+mpg_championship_match_2645557,37,2027-05-23T14:00:00.000Z,Brighton,Liverpool,BHA,LIV,,,a_venir
+mpg_championship_match_2645558,37,2027-05-23T14:00:00.000Z,Everton,Arsenal,EVE,ARS,,,a_venir
+mpg_championship_match_2645559,37,2027-05-23T14:00:00.000Z,Fulham,Coventry City,FUL,COV,,,a_venir
+mpg_championship_match_2645560,37,2027-05-23T14:00:00.000Z,Leeds,Sunderland,LEE,SUN,,,a_venir
+mpg_championship_match_2645561,37,2027-05-23T14:00:00.000Z,Man. City,Aston Villa,MCI,AVL,,,a_venir
+mpg_championship_match_2645562,37,2027-05-23T14:00:00.000Z,Newcastle,Crystal Palace,NEW,CRY,,,a_venir
+mpg_championship_match_2645563,37,2027-05-23T14:00:00.000Z,Nottingham Forest,Ipswich Town,NFO,IPS,,,a_venir
+mpg_championship_match_2645564,37,2027-05-23T14:00:00.000Z,Tottenham,Man. United,TOT,MUN,,,a_venir
+mpg_championship_match_2645565,38,2027-05-30T15:00:00.000Z,Arsenal,Brighton,ARS,BHA,,,a_venir
+mpg_championship_match_2645566,38,2027-05-30T15:00:00.000Z,Aston Villa,Tottenham,AVL,TOT,,,a_venir
+mpg_championship_match_2645567,38,2027-05-30T15:00:00.000Z,Chelsea,Brentford,CHE,BRE,,,a_venir
+mpg_championship_match_2645568,38,2027-05-30T15:00:00.000Z,Coventry City,Nottingham Forest,COV,NFO,,,a_venir
+mpg_championship_match_2645569,38,2027-05-30T15:00:00.000Z,Crystal Palace,Leeds,CRY,LEE,,,a_venir
+mpg_championship_match_2645570,38,2027-05-30T15:00:00.000Z,Hull City,Newcastle,HUL,NEW,,,a_venir
+mpg_championship_match_2645571,38,2027-05-30T15:00:00.000Z,Ipswich Town,Everton,IPS,EVE,,,a_venir
+mpg_championship_match_2645572,38,2027-05-30T15:00:00.000Z,Liverpool,Bournemouth,LIV,BOU,,,a_venir
+mpg_championship_match_2645573,38,2027-05-30T15:00:00.000Z,Man. United,Fulham,MUN,FUL,,,a_venir
+mpg_championship_match_2645574,38,2027-05-30T15:00:00.000Z,Sunderland,Man. City,SUN,MCI,,,a_venir

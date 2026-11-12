@@ -1,7 +1,9 @@
 import numpy as np
 import pandas as pd
 
-from mpg.loader import PL_COUNTED
+from mpg.loader import PL_COUNTED, League
+
+LOCAL_TZ = "Europe/Paris"
 
 
 def club_view(results: pd.DataFrame) -> pd.DataFrame:
@@ -67,3 +69,19 @@ def player_totals(pl_goals: pd.DataFrame) -> pd.DataFrame:
     passes = counted.dropna(subset=["passeur_player_key"]).groupby("passeur_player_key").size().rename("passes_pl")
     out = pd.concat([buts, passes], axis=1).fillna(0).astype(int)
     return out.rename_axis("player_key").reset_index()
+
+
+def mpg_gw_date(league: League, gw: int) -> pd.Timestamp:
+    dates = league.fixtures.loc[league.fixtures["gw"] == gw, "date"].dropna()
+    if dates.empty:
+        raise ValueError(f"journée MPG {gw} sans date dans fixtures.csv")
+    return dates.min()
+
+
+def pl_gw_for(league: League, mpg_gw: int) -> int:
+    """Journée de PL dont le premier match tombe le plus près de la date de la journée MPG."""
+    if league.club_results is None:
+        raise ValueError("club_results.csv est nécessaire pour relier une journée MPG à une journée de PL")
+    first = league.club_results.groupby("pl_gw")["date"].min().dt.tz_convert(LOCAL_TZ).dt.tz_localize(None)
+    target = mpg_gw_date(league, mpg_gw)
+    return int((first.dt.normalize() - target).abs().idxmin())

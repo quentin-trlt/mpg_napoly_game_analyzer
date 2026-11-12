@@ -19,11 +19,9 @@ from mpg.analysis import Analysis
 from mpg.coach.rules import Draws
 from mpg.fpl import UNAVAILABLE_STATUS
 from mpg.loader import League
-from mpg.premier_league import club_view
+from mpg.playing_time import PlayModel, play_features, recent
+from mpg.premier_league import LOCAL_TZ, club_view, pl_gw_for
 
-LOOKBACK = 5
-MIN_PLAY_ROUNDS = 3
-PLAY_RIDGE = 1.0
 PLAY_PRIOR_WEIGHT = 2.0
 XG_PRIOR_MINUTES = 450.0
 DEFAULT_MINUTES = 75.0
@@ -33,23 +31,6 @@ STRENGTH_RIDGE = 2.0
 NOTE_BOUNDS = (0.5, 10.0)
 UNAVAILABLE_GWS = {"blesse": 2, "suspendu": 1, "i": 2, "s": 1}
 OVERRIDE_LEVELS = {"sûr": 1.0, "probable": 0.8, "incertain": 0.5, "absent": 0.0}
-LOCAL_TZ = "Europe/Paris"
-
-
-def mpg_gw_date(league: League, gw: int) -> pd.Timestamp:
-    dates = league.fixtures.loc[league.fixtures["gw"] == gw, "date"].dropna()
-    if dates.empty:
-        raise ValueError(f"journée MPG {gw} sans date dans fixtures.csv")
-    return dates.min()
-
-
-def pl_gw_for(league: League, mpg_gw: int) -> int:
-    """Journée de PL dont le premier match tombe le plus près de la date de la journée MPG."""
-    if league.club_results is None:
-        raise ValueError("club_results.csv est nécessaire pour relier une journée MPG à une journée de PL")
-    first = league.club_results.groupby("pl_gw")["date"].min().dt.tz_convert(LOCAL_TZ).dt.tz_localize(None)
-    target = mpg_gw_date(league, mpg_gw)
-    return int((first.dt.normalize() - target).abs().idxmin())
 
 
 def deadline(league: League, pl_gw: int) -> pd.Timestamp:
@@ -200,76 +181,6 @@ def fit_note_model(a: Analysis) -> NoteModel:
     )
 
 
-def _by_round(hist: pd.DataFrame | None) -> pd.DataFrame:
-    """Historique FPL agrégé par journée (une journée double compte comme une seule)."""
-    if hist is None or hist.empty:
-        return pd.DataFrame(columns=["round", "minutes", "starts", "xg"])
-    return hist.groupby("round", as_index=False).agg(
-        minutes=("minutes", "sum"), starts=("starts", "max"), xg=("xg", "sum")
-    )
-
-
-def _recent(hist: pd.DataFrame | None, pl_gw: int) -> pd.DataFrame:
-    rounds = _by_round(hist)
-    return rounds[rounds["round"] < pl_gw].sort_values("round").tail(LOOKBACK)
-
-
-def play_features(hist: pd.DataFrame | None, pl_gw: int, taux_jeu: float) -> np.ndarray | None:
-    """Constante, part des 5 dernières journées jouées, a joué la dernière, part de titularisations, taux saison."""
-    recent = _recent(hist, pl_gw)
-    if len(recent) < MIN_PLAY_ROUNDS:
-        return None
-    played = recent["minutes"] > 0
-    return np.array([1.0, played.mean(), float(played.iloc[-1]), recent["starts"].mean(), taux_jeu])
-
-
-@dataclass
-class PlayModel:
-    """Logit de P(minutes > 0 à la prochaine journée), estimé sur l'historique FPL des joueurs de la ligue."""
-
-    coef: np.ndarray
-    n_obs: int
-    brier: float
-
-    def prob(self, x: np.ndarray) -> float:
-        return float(1 / (1 + np.exp(-(x @ self.coef))))
-
-
-def fit_play_model(
-    fpl_players: pd.DataFrame, fpl_history: dict[int, pd.DataFrame], taux: pd.Series, upto_round: int
-) -> PlayModel | None:
-    """Une observation par joueur et par journée jouée avant `upto_round`, avec les variables connues la veille.
-
-    MPG note tout joueur entré en jeu, même une minute : la cible est donc minutes > 0. Le taux de jeu de la saison
-    est celui d'aujourd'hui (légère fuite d'information, sans conséquence pour la prévision de la journée suivante).
-    """
-    x_rows, y = [], []
-    for key, eid in zip(fpl_players["player_key"], fpl_players["element_id"]):
-        if pd.isna(eid) or int(eid) not in fpl_history:
-            continue
-        rounds = _by_round(fpl_history[int(eid)])
-        rate = float(taux.get(key, np.nan))
-        rate = 0.8 if np.isnan(rate) else rate
-        for r, minutes in zip(rounds["round"], rounds["minutes"]):
-            if r >= upto_round:
-                continue
-            x = play_features(fpl_history[int(eid)], int(r), rate)
-            if x is not None:
-                x_rows.append(x)
-                y.append(float(minutes > 0))
-    if len(y) < 50:
-        return None
-    x, y = np.array(x_rows), np.array(y)
-
-    def nll(beta: np.ndarray) -> float:
-        z = x @ beta
-        return float(np.sum(np.logaddexp(0, z) - y * z) + PLAY_RIDGE * beta[1:] @ beta[1:])
-
-    beta = optimize.minimize(nll, np.zeros(x.shape[1]), method="BFGS").x
-    p = 1 / (1 + np.exp(-(x @ beta)))
-    return PlayModel(coef=beta, n_obs=len(y), brier=float(np.mean((p - y) ** 2)))
-
-
 def _availability(row: pd.Series, horizon: int) -> float:
     """Disponibilité à `horizon` journées (1 = la prochaine), d'après FPL si le joueur est apparié."""
     status = row.get("status")
@@ -335,7 +246,7 @@ def project_players(
         has_match = isinstance(row["adversaire_pl"], str)
         eid = row.get("element_id")
         full_hist = fpl_history.get(int(eid)) if pd.notna(eid) else None
-        hist = _recent(full_hist, history_until)
+        hist = recent(full_hist, history_until)
         played = hist[hist["minutes"] > 0]
         features = play_features(full_hist, history_until, rate) if play_model is not None else None
         if features is not None:

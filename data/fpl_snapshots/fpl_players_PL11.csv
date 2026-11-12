@@ -1,0 +1,197 @@
+player_key,joueur,club,element_id,web_name,fpl_club,methode,score_appariement,status,chance_next,news,minutes,starts,goals_scored,own_goals,xg,xg90,prochaine_journee_pl,recupere_le
+caoimhin_kelleher__brentford,Caoimhín Kelleher,Brentford,82,Kelleher,Brentford,club,1.0,a,,,900,10,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+alex_cairns__leeds,Alex Cairns,Leeds,625,Cairns,Leeds,club,1.0,a,,,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+maxim_de_cuyper__brighton,Maxim De Cuyper,Brighton,115,De Cuyper,Brighton,club,1.0,a,,,822,10,2,0,2.44,0.27,11,2026-11-12T23:37:55+00:00
+lewis_hall__newcastle,Lewis Hall,Newcastle,449,Hall,Newcastle,club,1.0,a,,,899,10,1,0,0.51,0.05,11,2026-11-12T23:37:55+00:00
+marc_guehi__man_city,Marc Guéhi,Man. City,388,Guéhi,Man City,club,1.0,d,75.0,Unspecified injury - 75% chance of playing,720,9,1,0,0.95,0.12,11,2026-11-12T23:37:55+00:00
+ryan_giles__hull_city,Ryan Giles,Hull City,282,Giles,Hull City,club,1.0,a,,,698,8,0,0,0.02,0.0,11,2026-11-12T23:37:55+00:00
+jannik_schuster__brentford,Jannik Schuster,Brentford,93,Schuster,Brentford,club,1.0,a,100.0,,298,3,0,0,0.1,0.03,11,2026-11-12T23:37:55+00:00
+conor_bradley__liverpool,Conor Bradley,Liverpool,360,Bradley,Liverpool,club,1.0,i,0.0,Knee injury - Unknown return date,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+bruno_fernandes__man_united,Bruno Fernandes,Man. United,426,B.Fernandes,Man Utd,club,1.0,a,,,810,9,4,0,3.94,0.44,11,2026-11-12T23:37:55+00:00
+pascal_gro__brighton,Pascal Groß,Brighton,124,Groß,Brighton,club,1.0,a,,,880,10,4,1,3.03,0.31,11,2026-11-12T23:37:55+00:00
+marcus_tavernier__bournemouth,Marcus Tavernier,Bournemouth,68,Tavernier,Bournemouth,club,1.0,a,,,840,10,5,0,4.21,0.45,11,2026-11-12T23:37:55+00:00
+john_mcginn__aston_villa,John McGinn,Aston Villa,45,McGinn,Aston Villa,club,1.0,a,,,790,9,2,0,3.22,0.37,11,2026-11-12T23:37:55+00:00
+joe_willock__newcastle,Joe Willock,Newcastle,460,Willock,Newcastle,club,1.0,a,,,565,7,2,0,1.31,0.21,11,2026-11-12T23:37:55+00:00
+matt_o_riley__brighton,Matt O'Riley,Brighton,126,O'Riley,Brighton,club,1.0,a,,,10,0,0,0,0.28,2.52,11,2026-11-12T23:37:55+00:00
+bryan_mbeumo__man_united,Bryan Mbeumo,Man. United,427,Mbeumo,Man Utd,club,1.0,a,,,892,10,4,0,4.63,0.47,11,2026-11-12T23:37:55+00:00
+anthony_elanga__newcastle,Anthony Elanga,Newcastle,454,Elanga,Newcastle,club,1.0,a,100.0,,325,4,2,0,0.77,0.21,11,2026-11-12T23:37:55+00:00
+kevin_schade__brentford,Kevin Schade,Brentford,94,Schade,Brentford,club,1.0,a,100.0,,777,9,3,0,2.44,0.28,11,2026-11-12T23:37:55+00:00
+hugo_ekitike__liverpool,Hugo Ekitiké,Liverpool,380,Ekitiké,Liverpool,club,1.0,i,0.0,Achilles injury - Unknown return date,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+brian_madjo__aston_villa,Brian Madjo,Aston Villa,582,Madjo,Aston Villa,club,1.0,a,100.0,,12,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+matz_sels__nottingham_forest,Matz Sels,Nottingham Forest,467,Sels,Nott'm Forest,club,1.0,a,,,900,10,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+john_victor__nottingham_forest,John Victor,Nottingham Forest,468,John,Nott'm Forest,club,1.0,a,,,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+ezri_konsa__arsenal,Ezri Konsa,Arsenal,31,Konsa,Arsenal,club,0.9833333333333334,a,100.0,,731,8,1,0,0.64,0.08,11,2026-11-12T23:37:55+00:00
+james_tarkowski__everton,James Tarkowski,Everton,229,Tarkowski,Everton,club,1.0,a,,,900,10,1,0,0.18,0.02,11,2026-11-12T23:37:55+00:00
+riccardo_calafiori__arsenal,Riccardo Calafiori,Arsenal,8,Calafiori,Arsenal,club,1.0,a,100.0,,767,9,1,0,1.22,0.14,11,2026-11-12T23:37:55+00:00
+nathan_collins__brentford,Nathan Collins,Brentford,84,Collins,Brentford,club,1.0,a,100.0,,241,3,0,0,0.51,0.19,11,2026-11-12T23:37:55+00:00
+jarrad_branthwaite__everton,Jarrad Branthwaite,Everton,230,Branthwaite,Everton,club,1.0,a,100.0,,799,9,0,0,0.35,0.04,11,2026-11-12T23:37:55+00:00
+vitalii_mykolenko__everton,Vitalii Mykolenko,Everton,233,Mykolenko,Everton,club,1.0,a,100.0,,793,9,0,0,0.18,0.02,11,2026-11-12T23:37:55+00:00
+dan_ballard__sunderland,Dan Ballard,Sunderland,532,Ballard,Sunderland,club,0.988,i,0.0,Hamstring injury - Unknown return date,450,5,0,0,0.31,0.06,11,2026-11-12T23:37:55+00:00
+morgan_gibbs_white__nottingham_forest,Morgan Gibbs-White,Nottingham Forest,480,Gibbs-White,Nott'm Forest,club,1.0,a,100.0,,810,9,1,0,2.54,0.28,11,2026-11-12T23:37:55+00:00
+martin_degaard__arsenal,Martin Ødegaard,Arsenal,15,Ødegaard,Arsenal,club,1.0,a,,,823,10,3,0,2.4,0.26,11,2026-11-12T23:37:55+00:00
+rayan__bournemouth,Rayan,Bournemouth,67,Rayan,Bournemouth,club,1.0,a,,,874,10,1,0,2.51,0.26,11,2026-11-12T23:37:55+00:00
+christos_tzolis__arsenal,Christos Tzolis,Arsenal,557,Tzolis,Arsenal,club,1.0,a,100.0,,513,7,0,0,0.44,0.08,11,2026-11-12T23:37:55+00:00
+tyler_adams__bournemouth,Tyler Adams,Bournemouth,73,Adams,Bournemouth,club,1.0,a,100.0,,727,8,0,0,0.16,0.02,11,2026-11-12T23:37:55+00:00
+myles_lewis_skelly__arsenal,Myles Lewis-Skelly,Arsenal,7,Lewis-Skelly,Arsenal,club,1.0,a,,,428,6,0,0,0.22,0.05,11,2026-11-12T23:37:55+00:00
+alex_iwobi__fulham,Alex Iwobi,Fulham,261,Iwobi,Fulham,club,1.0,a,,,821,10,1,0,1.35,0.15,11,2026-11-12T23:37:55+00:00
+leon_goretzka__aston_villa,Leon Goretzka,Aston Villa,618,Goretzka,Aston Villa,club,1.0,a,100.0,,168,2,1,0,0.46,0.25,11,2026-11-12T23:37:55+00:00
+joao_pedro__chelsea,João Pedro,Chelsea,165,João Pedro,Chelsea,club,1.0,i,0.0,Thigh injury - Unknown return date,521,6,5,1,3.05,0.53,11,2026-11-12T23:37:55+00:00
+kai_havertz__arsenal,Kai Havertz,Arsenal,26,Havertz,Arsenal,club,1.0,a,100.0,,731,9,3,0,2.78,0.34,11,2026-11-12T23:37:55+00:00
+nicolas_jackson__aston_villa,Nicolas Jackson,Aston Villa,166,N.Jackson,Aston Villa,club,1.0,a,,,722,9,6,0,3.46,0.43,11,2026-11-12T23:37:55+00:00
+chuba_akpom__ipswich_town,Chuba Akpom,Ipswich Town,320,Akpom,Ipswich Town,club,1.0,a,,,119,0,1,0,1.3,0.98,11,2026-11-12T23:37:55+00:00
+gianluigi_donnarumma__man_city,Gianluigi Donnarumma,Man. City,384,Donnarumma,Man City,club,1.0,a,,,900,10,0,1,0.0,0.0,11,2026-11-12T23:37:55+00:00
+melker_ellborg__sunderland,Melker Ellborg,Sunderland,531,Ellborg,Sunderland,club,1.0,a,,,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+nico_o_reilly__man_city,Nico O'Reilly,Man. City,387,O'Reilly,Man City,club,1.0,a,100.0,,359,4,0,0,1.46,0.37,11,2026-11-12T23:37:55+00:00
+maxence_lacroix__chelsea,Maxence Lacroix,Chelsea,200,Lacroix,Chelsea,club,1.0,i,0.0,Hamstring injury - Unknown return date,634,7,0,0,0.4,0.06,11,2026-11-12T23:37:55+00:00
+reece_james__chelsea,Reece James,Chelsea,142,James,Chelsea,club,1.0,i,0.0,Knee injury - Unknown return date,292,3,0,0,0.33,0.1,11,2026-11-12T23:37:55+00:00
+nobel_mendy__hull_city,Nobel Mendy,Hull City,586,Mendy,Hull City,club,1.0,a,100.0,,519,7,1,0,0.62,0.11,11,2026-11-12T23:37:55+00:00
+malo_gusto__chelsea,Malo Gusto,Chelsea,144,Gusto,Chelsea,club,1.0,a,100.0,,305,3,0,0,0.14,0.04,11,2026-11-12T23:37:55+00:00
+trai_hume__sunderland,Trai Hume,Sunderland,534,Hume,Sunderland,club,1.0,a,,,640,7,0,0,0.53,0.07,11,2026-11-12T23:37:55+00:00
+andy_robertson__tottenham,Andy Robertson,Tottenham,502,Robertson,Spurs,club,0.99,a,100.0,,664,8,0,0,0.27,0.04,11,2026-11-12T23:37:55+00:00
+cole_palmer__chelsea,Cole Palmer,Chelsea,154,Palmer,Chelsea,club,1.0,a,100.0,,878,10,3,0,2.55,0.26,11,2026-11-12T23:37:55+00:00
+ryan_gravenberch__liverpool,Ryan Gravenberch,Liverpool,371,Gravenberch,Liverpool,club,1.0,d,75.0,Foot injury - 75% chance of playing,341,4,0,0,0.17,0.04,11,2026-11-12T23:37:55+00:00
+eberechi_eze__arsenal,Eberechi Eze,Arsenal,14,Eze,Arsenal,club,1.0,a,,,230,2,0,0,0.19,0.07,11,2026-11-12T23:37:55+00:00
+dango_ouattara__brentford,Dango Ouattara,Brentford,95,O.Dango,Brentford,club,1.0,a,,,440,6,1,0,1.06,0.22,11,2026-11-12T23:37:55+00:00
+martin_zubimendi__arsenal,Martín Zubimendi,Arsenal,19,Zubimendi,Arsenal,club,0.99,a,100.0,,100,0,0,0,0.21,0.19,11,2026-11-12T23:37:55+00:00
+malick_yalcouye__brighton,Malick Yalcouyé,Brighton,605,Yalcouyé,Brighton,club,1.0,a,,,322,3,2,0,1.46,0.41,11,2026-11-12T23:37:55+00:00
+pedro_neto__chelsea,Pedro Neto,Chelsea,156,Neto,Chelsea,club,1.0,a,,,738,9,3,0,1.82,0.22,11,2026-11-12T23:37:55+00:00
+alexander_isak__liverpool,Alexander Isak,Liverpool,379,Isak,Liverpool,club,1.0,a,100.0,,747,9,7,0,4.88,0.59,11,2026-11-12T23:37:55+00:00
+viktor_gyokeres__arsenal,Viktor Gyökeres,Arsenal,25,Gyökeres,Arsenal,club,1.0,a,,,180,1,0,0,0.11,0.06,11,2026-11-12T23:37:55+00:00
+dominic_solanke__tottenham,Dominic Solanke,Tottenham,526,Solanke,Spurs,club,0.9875,a,,,487,5,1,0,1.9,0.35,11,2026-11-12T23:37:55+00:00
+ibrahim_mbaye__aston_villa,Ibrahim Mbaye,Aston Villa,631,Mbaye,Aston Villa,club,1.0,a,,,144,0,0,0,0.35,0.22,11,2026-11-12T23:37:55+00:00
+lukas_hornicek__newcastle,Lukás Hornícek,Newcastle,567,Horníček,Newcastle,club,1.0,a,,,900,10,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+zion_suzuki__aston_villa,Zion Suzuki,Aston Villa,597,Suzuki,Aston Villa,club,1.0,a,,,810,9,0,1,0.0,0.0,11,2026-11-12T23:37:55+00:00
+malick_thiaw__newcastle,Malick Thiaw,Newcastle,445,Thiaw,Newcastle,club,1.0,a,,,715,8,0,1,0.0,0.0,11,2026-11-12T23:37:55+00:00
+josko_gvardiol__man_city,Josko Gvardiol,Man. City,391,Gvardiol,Man City,club,1.0,d,75.0,Unspecified injury - 75% chance of playing,700,8,1,0,0.8,0.1,11,2026-11-12T23:37:55+00:00
+micky_van_de_ven__tottenham,Micky van de Ven,Tottenham,503,Van de Ven,Spurs,club,1.0,a,100.0,,736,8,0,0,0.67,0.08,11,2026-11-12T23:37:55+00:00
+sven_botman__newcastle,Sven Botman,Newcastle,447,Botman,Newcastle,club,1.0,a,,,630,7,1,0,0.21,0.03,11,2026-11-12T23:37:55+00:00
+matty_cash__aston_villa,Matty Cash,Aston Villa,32,Cash,Aston Villa,club,1.0,a,100.0,,656,7,0,0,0.21,0.03,11,2026-11-12T23:37:55+00:00
+tyrick_mitchell__crystal_palace,Tyrick Mitchell,Crystal Palace,204,Mitchell,Crystal Palace,club,1.0,a,,,869,10,2,0,0.79,0.08,11,2026-11-12T23:37:55+00:00
+ethan_ampadu__leeds,Ethan Ampadu,Leeds,338,Ampadu,Leeds,club,1.0,a,,,900,10,0,0,0.25,0.02,11,2026-11-12T23:37:55+00:00
+dominik_szoboszlai__liverpool,Dominik Szoboszlai,Liverpool,368,Szoboszlai,Liverpool,club,1.0,a,100.0,,571,7,1,0,1.54,0.24,11,2026-11-12T23:37:55+00:00
+jeremy_doku__man_city,Jérémy Doku,Man. City,400,Doku,Man City,club,1.0,a,100.0,,395,4,1,0,0.86,0.2,11,2026-11-12T23:37:55+00:00
+quinten_timber__crystal_palace,Quinten Timber,Crystal Palace,644,Timber,Crystal Palace,club,1.0,a,100.0,,447,6,0,0,0.49,0.1,11,2026-11-12T23:37:55+00:00
+enzo_le_fee__sunderland,Enzo Le Fée,Sunderland,542,E.Le Fée,Sunderland,club,1.0,a,,,863,10,3,0,3.83,0.4,11,2026-11-12T23:37:55+00:00
+emiliano_buendia__aston_villa,Emiliano Buendía,Aston Villa,41,Buendía,Aston Villa,club,0.9875,a,,,583,7,1,0,1.59,0.25,11,2026-11-12T23:37:55+00:00
+victor_munoz__liverpool,Víctor Muñoz,Liverpool,377,Munoz,Liverpool,club,1.0,a,100.0,,455,5,2,0,0.79,0.16,11,2026-11-12T23:37:55+00:00
+oscar_bobb__fulham,Oscar Bobb,Fulham,264,Bobb,Fulham,club,1.0,a,,,729,10,1,0,1.83,0.23,11,2026-11-12T23:37:55+00:00
+evanilson__bournemouth,Evanilson,Bournemouth,79,Evanilson,Bournemouth,club,1.0,a,,,837,10,5,0,4.45,0.48,11,2026-11-12T23:37:55+00:00
+gonzalo_garcia__fulham,Gonzalo García,Fulham,569,Gonzalo,Fulham,club,1.0,a,,,819,10,1,0,4.05,0.45,11,2026-11-12T23:37:55+00:00
+yoane_wissa__newcastle,Yoane Wissa,Newcastle,464,Wissa,Newcastle,club,1.0,a,,,707,8,1,0,3.41,0.43,11,2026-11-12T23:37:55+00:00
+omar_marmoush__tottenham,Omar Marmoush,Tottenham,401,Marmoush,Spurs,club,1.0,a,100.0,,653,8,1,0,1.04,0.14,11,2026-11-12T23:37:55+00:00
+yeremy_pino__crystal_palace,Yéremy Pino,Crystal Palace,211,Yeremy,Crystal Palace,club,0.9758620689655173,a,,,684,9,1,0,1.61,0.21,11,2026-11-12T23:37:55+00:00
+senne_lammens__man_united,Senne Lammens,Man. United,412,Lammens,Man Utd,club,1.0,a,,,900,10,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+michael_zetterer__leeds,Michael Zetterer,Leeds,629,Zetterer,Leeds,club,1.0,a,,,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+karl_darlow__man_united,Karl Darlow,Man. United,325,Darlow,Man Utd,club,1.0,a,100.0,,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+keane_lewis_potter__brentford,Keane Lewis-Potter,Brentford,86,Lewis-Potter,Brentford,club,1.0,a,,,773,10,2,0,1.41,0.16,11,2026-11-12T23:37:55+00:00
+kristoffer_ajer__brentford,Kristoffer Ajer,Brentford,87,Ajer,Brentford,club,1.0,a,,,900,10,1,0,0.46,0.05,11,2026-11-12T23:37:55+00:00
+olivier_boscagli__brighton,Olivier Boscagli,Brighton,114,Boscagli,Brighton,club,1.0,a,,,782,10,0,0,0.14,0.02,11,2026-11-12T23:37:55+00:00
+thomas_meunier__sunderland,Thomas Meunier,Sunderland,541,Meunier,Sunderland,club,1.0,a,100.0,,534,7,0,0,0.49,0.08,11,2026-11-12T23:37:55+00:00
+luka_vuskovic__brighton,Luka Vuskovic,Brighton,504,Vuskovic,Brighton,club,1.0,a,,,887,10,1,0,1.25,0.13,11,2026-11-12T23:37:55+00:00
+antonee_robinson__fulham,Antonee Robinson,Fulham,254,Robinson,Fulham,club,1.0,a,100.0,,789,9,0,0,0.41,0.05,11,2026-11-12T23:37:55+00:00
+harvey_barnes__newcastle,Harvey Barnes,Newcastle,453,Barnes,Newcastle,club,1.0,a,,,886,10,2,0,2.2,0.22,11,2026-11-12T23:37:55+00:00
+justin_kluivert__bournemouth,Justin Kluivert,Bournemouth,70,Kluivert,Bournemouth,club,1.0,a,100.0,,518,7,1,0,1.43,0.25,11,2026-11-12T23:37:55+00:00
+matheus_cunha__man_united,Matheus Cunha,Man. United,428,Cunha,Man Utd,club,1.0,a,,,703,8,1,0,1.46,0.19,11,2026-11-12T23:37:55+00:00
+daichi_kamada__crystal_palace,Daichi Kamada,Crystal Palace,214,Kamada,Crystal Palace,club,1.0,a,,,877,10,1,0,1.3,0.13,11,2026-11-12T23:37:55+00:00
+kobbie_mainoo__man_united,Kobbie Mainoo,Man. United,432,Mainoo,Man Utd,club,1.0,a,100.0,,566,6,0,0,0.42,0.07,11,2026-11-12T23:37:55+00:00
+youri_tielemans__man_united,Youri Tielemans,Man. United,43,Tielemans,Man Utd,club,1.0,a,100.0,,653,9,1,0,0.96,0.13,11,2026-11-12T23:37:55+00:00
+erling_haaland__man_city,Erling Haaland,Man. City,411,Haaland,Man City,club,1.0,a,100.0,,889,10,9,0,7.06,0.71,11,2026-11-12T23:37:55+00:00
+dominic_calvert_lewin__leeds,Dominic Calvert-Lewin,Leeds,346,Calvert-Lewin,Leeds,club,1.0,a,100.0,,863,10,3,0,4.25,0.44,11,2026-11-12T23:37:55+00:00
+charalampos_kostoulas__brighton,Charalampos Kostoulas,Brighton,138,Kostoulas,Brighton,club,1.0,a,,,724,9,3,0,2.59,0.32,11,2026-11-12T23:37:55+00:00
+tyrique_george__everton,Tyrique George,Everton,242,George,Everton,club,1.0,a,,,637,7,1,0,0.57,0.08,11,2026-11-12T23:37:55+00:00
+jordan_pickford__everton,Jordan Pickford,Everton,226,Pickford,Everton,club,1.0,a,,,900,10,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+geronimo_rulli__man_city,Gerónimo Rulli,Man. City,587,Rulli,Man City,club,1.0,a,,,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+harry_maguire__man_united,Harry Maguire,Man. United,418,Maguire,Man Utd,club,1.0,d,75.0,Back injury - 75% chance of playing,855,10,0,0,0.32,0.03,11,2026-11-12T23:37:55+00:00
+virgil_van_dijk__liverpool,Virgil van Dijk,Liverpool,356,Virgil,Liverpool,club,1.0,d,75.0,Unspecified injury - 75% chance of playing,900,10,0,0,0.42,0.04,11,2026-11-12T23:37:55+00:00
+tarik_muharemovic__leeds,Tarik Muharemovic,Leeds,334,Muharemović,Leeds,club,1.0,a,,,900,10,0,0,0.65,0.06,11,2026-11-12T23:37:55+00:00
+jaka_bijol__leeds,Jaka Bijol,Leeds,327,Bijol,Leeds,club,1.0,a,,,258,3,0,0,0.13,0.05,11,2026-11-12T23:37:55+00:00
+lewis_dunk__brighton,Lewis Dunk,Brighton,116,Dunk,Brighton,club,1.0,a,100.0,,749,8,1,0,0.03,0.0,11,2026-11-12T23:37:55+00:00
+joachim_andersen__fulham,Joachim Andersen,Fulham,253,Andersen,Fulham,club,1.0,a,100.0,,190,2,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+declan_rice__arsenal,Declan Rice,Arsenal,13,Rice,Arsenal,club,1.0,a,100.0,,822,10,0,0,0.57,0.06,11,2026-11-12T23:37:55+00:00
+phil_foden__man_city,Phil Foden,Man. City,398,Foden,Man City,club,1.0,a,100.0,,361,4,1,0,2.31,0.58,11,2026-11-12T23:37:55+00:00
+jacob_ramsey__newcastle,Jacob Ramsey,Newcastle,456,J.Ramsey,Newcastle,club,1.0,a,100.0,,97,0,1,0,0.19,0.18,11,2026-11-12T23:37:55+00:00
+iliman_ndiaye__man_city,Iliman Ndiaye,Man. City,237,Ndiaye,Man City,club,1.0,a,,,766,9,0,0,1.74,0.2,11,2026-11-12T23:37:55+00:00
+harry_wilson__leeds,Harry Wilson,Leeds,260,Wilson,Leeds,club,1.0,a,100.0,,325,3,0,0,0.14,0.04,11,2026-11-12T23:37:55+00:00
+mathias_jensen__brentford,Mathias Jensen,Brentford,97,Jensen,Brentford,club,1.0,a,100.0,,316,4,0,0,0.18,0.05,11,2026-11-12T23:37:55+00:00
+marcus_rashford__man_united,Marcus Rashford,Man. United,429,Rashford,Man Utd,club,1.0,i,0.0,Hip injury - Unknown return date,352,4,0,0,0.78,0.2,11,2026-11-12T23:37:55+00:00
+richarlison__tottenham,Richarlison,Tottenham,527,Richarlison,Spurs,club,1.0,u,0.0,not included in squad.,67,1,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+malick_fofana__sunderland,Malick Fofana,Sunderland,646,Fofana,Sunderland,club,1.0,a,,,131,0,0,0,0.42,0.29,11,2026-11-12T23:37:55+00:00
+benjamin_sesko__man_united,Benjamin Sesko,Man. United,439,Šeško,Man Utd,club,1.0,i,0.0,Shin injury - Unknown return date,76,0,1,0,0.39,0.46,11,2026-11-12T23:37:55+00:00
+david_raya__arsenal,David Raya,Arsenal,1,Raya,Arsenal,club,0.98,a,,,900,10,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+kepa_arrizabalaga__arsenal,Kepa Arrizabalaga,Arsenal,2,Arrizabalaga,Arsenal,club,0.9923076923076923,a,,,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+mark_travers__everton,Mark Travers,Everton,227,Travers,Everton,club,1.0,a,,,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+james_justin__leeds,James Justin,Leeds,332,Justin,Leeds,club,1.0,a,,,881,10,1,0,0.48,0.05,11,2026-11-12T23:37:55+00:00
+daniel_munoz__nottingham_forest,Daniel Muñoz,Nottingham Forest,201,Muñoz,Nott'm Forest,club,0.9833333333333334,a,,,636,7,0,0,1.1,0.16,11,2026-11-12T23:37:55+00:00
+cristhian_mosquera__arsenal,Cristhian Mosquera,Arsenal,11,Mosquera,Arsenal,club,1.0,a,100.0,,168,2,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+adrien_truffert__bournemouth,Adrien Truffert,Bournemouth,61,Truffert,Bournemouth,club,1.0,a,,,893,10,0,0,0.17,0.02,11,2026-11-12T23:37:55+00:00
+john_egan__hull_city,John Egan,Hull City,277,Egan,Hull City,club,1.0,a,,,842,10,0,0,0.32,0.03,11,2026-11-12T23:37:55+00:00
+jacob_greaves__ipswich_town,Jacob Greaves,Ipswich Town,306,Greaves,Ipswich Town,club,1.0,a,,,447,5,0,1,0.02,0.0,11,2026-11-12T23:37:55+00:00
+james_garner__everton,James Garner,Everton,239,Garner,Everton,club,1.0,a,100.0,,778,9,0,0,0.48,0.06,11,2026-11-12T23:37:55+00:00
+yasin_ayari__brighton,Yasin Ayari,Brighton,129,Ayari,Brighton,club,1.0,a,100.0,,741,9,3,0,2.2,0.27,11,2026-11-12T23:37:55+00:00
+granit_xhaka__sunderland,Granit Xhaka,Sunderland,544,Xhaka,Sunderland,club,1.0,d,75.0,Calf injury - 75% chance of playing,813,10,0,0,0.15,0.02,11,2026-11-12T23:37:55+00:00
+nilson_angulo__sunderland,Nilson Angulo,Sunderland,551,N.Angulo,Sunderland,club,1.0,a,,,521,8,1,0,0.79,0.14,11,2026-11-12T23:37:55+00:00
+mamadou_sangare__brentford,Mamadou Sangaré,Brentford,565,M.Sangaré,Brentford,club,1.0,a,,,613,7,0,0,0.48,0.07,11,2026-11-12T23:37:55+00:00
+josh_king__fulham,Josh King,Fulham,268,King,Fulham,club,1.0,a,100.0,,806,10,2,0,2.01,0.22,11,2026-11-12T23:37:55+00:00
+florentino__ipswich_town,Florentino,Ipswich Town,571,Florentino,Ipswich Town,club,1.0,a,100.0,,399,5,1,0,0.22,0.05,11,2026-11-12T23:37:55+00:00
+noah_okafor__leeds,Noah Okafor,Leeds,336,Okafor,Leeds,club,1.0,a,100.0,,480,6,2,0,0.85,0.16,11,2026-11-12T23:37:55+00:00
+igor_thiago__brentford,Igor Thiago,Brentford,106,Thiago,Brentford,club,1.0,s,0.0,Suspended until 5 Dec,824,10,2,0,4.12,0.45,11,2026-11-12T23:37:55+00:00
+brian_brobbey__sunderland,Brian Brobbey,Sunderland,552,Brobbey,Sunderland,club,1.0,d,75.0,Muscular injury - 75% chance of playing,619,8,3,0,4.21,0.61,11,2026-11-12T23:37:55+00:00
+emersonn__ipswich_town,Emersonn,Ipswich Town,316,Emersonn,Ipswich Town,club,1.0,a,100.0,,652,10,2,0,2.71,0.37,11,2026-11-12T23:37:55+00:00
+matias_fernandez_pardo__newcastle,Matias Fernandez-Pardo,Newcastle,634,Fernandez-Pardo,Newcastle,club,1.0,a,100.0,,318,4,0,0,0.62,0.18,11,2026-11-12T23:37:55+00:00
+james_trafford__leeds,James Trafford,Leeds,385,Trafford,Leeds,club,1.0,a,,,900,10,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+emiliano_martinez__chelsea,Emiliano Martínez,Chelsea,28,Martinez,Chelsea,club,1.0,d,75.0,Head injury - 75% chance of playing,524,6,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+jan_paul_van_hecke__tottenham,Jan Paul van Hecke,Tottenham,112,Van Hecke,Spurs,club,1.0,a,100.0,,900,10,2,0,1.7,0.17,11,2026-11-12T23:37:55+00:00
+leif_davis__ipswich_town,Leif Davis,Ipswich Town,305,Davis,Ipswich Town,club,1.0,a,,,900,10,2,1,1.64,0.16,11,2026-11-12T23:37:55+00:00
+jayden_bogle__leeds,Jayden Bogle,Leeds,330,Bogle,Leeds,club,1.0,a,,,810,10,2,0,1.76,0.2,11,2026-11-12T23:37:55+00:00
+matteo_ruggeri__aston_villa,Matteo Ruggeri,Aston Villa,596,Ruggeri,Aston Villa,club,1.0,i,0.0,Hamstring injury - Expected back 2 Jan,158,2,0,0,0.03,0.02,11,2026-11-12T23:37:55+00:00
+nordi_mukiele__sunderland,Nordi Mukiele,Sunderland,533,Mukiele,Sunderland,club,1.0,a,100.0,,681,8,0,0,0.83,0.11,11,2026-11-12T23:37:55+00:00
+ben_chilwell__crystal_palace,Ben Chilwell,Crystal Palace,643,Chilwell,Crystal Palace,club,1.0,a,100.0,,29,0,1,0,0.27,0.84,11,2026-11-12T23:37:55+00:00
+antoine_semenyo__man_city,Antoine Semenyo,Man. City,397,Semenyo,Man City,club,1.0,i,0.0,Knee injury - Unknown return date,553,6,2,0,0.34,0.06,11,2026-11-12T23:37:55+00:00
+morgan_rogers__chelsea,Morgan Rogers,Chelsea,40,Rogers,Chelsea,club,1.0,a,,,880,10,5,0,3.04,0.31,11,2026-11-12T23:37:55+00:00
+alexis_mac_allister__liverpool,Alexis Mac Allister,Liverpool,372,Mac Allister,Liverpool,club,1.0,a,,,756,8,1,0,0.96,0.11,11,2026-11-12T23:37:55+00:00
+enzo_fernandez__man_city,Enzo Fernández,Man. City,155,Enzo,Man City,club,1.0,a,,,620,7,1,0,1.56,0.23,11,2026-11-12T23:37:55+00:00
+fabio_fabio_carvalho__brentford,Fabio Fábio Carvalho,Brentford,100,Carvalho,Brentford,club,0.9933333333333334,i,0.0,Knock - Expected back 23 Nov,3,0,1,0,0.43,12.9,11,2026-11-12T23:37:55+00:00
+savio__tottenham,Sávio,Tottenham,403,Sávio,Spurs,club,1.0,i,0.0,Muscular injury - Expected back 21 Nov,330,4,0,0,0.54,0.15,11,2026-11-12T23:37:55+00:00
+j_rgen_strand_larsen__crystal_palace,Jørgen Strand Larsen,Crystal Palace,222,Strand Larsen,Crystal Palace,club,1.0,d,75.0,Ankle injury - 75% chance of playing,511,6,1,0,1.48,0.26,11,2026-11-12T23:37:55+00:00
+liam_delap__nottingham_forest,Liam Delap,Nottingham Forest,167,Delap,Nott'm Forest,club,1.0,a,,,678,8,3,0,2.95,0.39,11,2026-11-12T23:37:55+00:00
+igor_jesus__nottingham_forest,Igor Jesus,Nottingham Forest,491,Igor Jesus,Nott'm Forest,club,1.0,a,100.0,,260,2,1,0,1.25,0.43,11,2026-11-12T23:37:55+00:00
+junior_kroupi__bournemouth,Junior Kroupi,Bournemouth,78,Kroupi.Jr,Bournemouth,club,1.0,a,100.0,,47,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+alisson_becker__liverpool,Alisson Becker,Liverpool,350,A.Becker,Liverpool,club,1.0,a,,,900,10,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+bart_verbruggen__brighton,Bart Verbruggen,Brighton,109,Verbruggen,Brighton,club,1.0,a,,,900,10,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+luke_shaw__man_united,Luke Shaw,Man. United,423,Shaw,Man Utd,club,1.0,i,0.0,Unspecified injury - Unknown return date,425,5,0,0,0.03,0.01,11,2026-11-12T23:37:55+00:00
+gabriel_magalhaes__arsenal,Gabriel Magalhães,Arsenal,4,Gabriel,Arsenal,club,1.0,a,,,900,10,1,0,1.47,0.15,11,2026-11-12T23:37:55+00:00
+semi_ajayi__hull_city,Semi Ajayi,Hull City,279,Ajayi,Hull City,club,1.0,a,100.0,,851,10,1,0,0.78,0.08,11,2026-11-12T23:37:55+00:00
+ferdi_kadioglu__brighton,Ferdi Kadioglu,Brighton,113,F.Kadıoğlu,Brighton,club,0.9285714285714286,a,100.0,,517,7,0,0,0.15,0.03,11,2026-11-12T23:37:55+00:00
+ainsley_maitland_niles__everton,Ainsley Maitland-Niles,Everton,649,Maitland-Niles,Everton,club,1.0,a,,,308,4,1,0,0.06,0.02,11,2026-11-12T23:37:55+00:00
+william_saliba__arsenal,William Saliba,Arsenal,6,Saliba,Arsenal,club,1.0,a,100.0,,0,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+florian_wirtz__liverpool,Florian Wirtz,Liverpool,366,Wirtz,Liverpool,club,1.0,a,100.0,,791,10,1,0,1.83,0.21,11,2026-11-12T23:37:55+00:00
+kiernan_dewsbury_hall__everton,Kiernan Dewsbury-Hall,Everton,236,Dewsbury-Hall,Everton,club,1.0,a,,,895,10,3,0,1.78,0.18,11,2026-11-12T23:37:55+00:00
+alex_scott__bournemouth,Alex Scott,Bournemouth,69,Scott,Bournemouth,club,1.0,a,100.0,,446,5,1,0,0.64,0.13,11,2026-11-12T23:37:55+00:00
+bruno_guimaraes__arsenal,Bruno Guimarães,Arsenal,452,Bruno G.,Arsenal,club,1.0,a,100.0,,386,4,2,0,0.36,0.08,11,2026-11-12T23:37:55+00:00
+johan_manzambi__aston_villa,Johan Manzambi,Aston Villa,53,Manzambi,Aston Villa,club,1.0,d,75.0,Calf injury - 75% chance of playing,461,6,2,0,1.67,0.33,11,2026-11-12T23:37:55+00:00
+jack_hinshelwood__brighton,Jack Hinshelwood,Brighton,123,Hinshelwood,Brighton,club,1.0,a,100.0,,157,1,3,0,2.52,1.44,11,2026-11-12T23:37:55+00:00
+william_osula__newcastle,William Osula,Newcastle,465,Osula,Newcastle,club,1.0,a,100.0,,351,4,1,0,0.81,0.21,11,2026-11-12T23:37:55+00:00
+jean_philippe_mateta__crystal_palace,Jean-Philippe Mateta,Crystal Palace,223,Mateta,Crystal Palace,club,1.0,s,0.0,Suspended until 2 Dec,164,3,0,0,1.96,1.08,11,2026-11-12T23:37:55+00:00
+arnaud_kalimuendo__nottingham_forest,Arnaud Kalimuendo,Nottingham Forest,493,Kalimuendo,Nott'm Forest,club,1.0,a,,,50,0,0,0,0.03,0.05,11,2026-11-12T23:37:55+00:00
+bradley_barcola__liverpool,Bradley Barcola,Liverpool,627,Barcola,Liverpool,club,1.0,a,,,579,7,0,0,1.41,0.22,11,2026-11-12T23:37:55+00:00
+walter_benitez__crystal_palace,Walter Benítez,Crystal Palace,199,Benitez,Crystal Palace,club,1.0,a,,,450,5,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+konstantinos_tzolakis__hull_city,Konstantinos Tzolakis,Hull City,572,Tzolakis,Hull City,club,1.0,a,,,900,10,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+michael_kayode__brentford,Michael Kayode,Brentford,88,Kayode,Brentford,club,1.0,a,,,744,9,1,0,0.59,0.07,11,2026-11-12T23:37:55+00:00
+jeremy_jacquet__liverpool,Jérémy Jacquet,Liverpool,362,Jacquet,Liverpool,club,1.0,a,100.0,,862,10,0,0,0.53,0.06,11,2026-11-12T23:37:55+00:00
+neco_williams__nottingham_forest,Neco Williams,Nottingham Forest,469,N.Williams,Nott'm Forest,club,1.0,a,100.0,,893,10,1,0,0.96,0.1,11,2026-11-12T23:37:55+00:00
+ben_white__arsenal,Ben White,Arsenal,10,White,Arsenal,club,0.9833333333333334,a,100.0,,532,7,0,0,0.18,0.03,11,2026-11-12T23:37:55+00:00
+ruben_dias__man_city,Rúben Dias,Man. City,390,Rúben,Man City,club,1.0,a,,,900,10,0,0,0.51,0.05,11,2026-11-12T23:37:55+00:00
+piero_hincapie__arsenal,Piero Hincapié,Arsenal,9,Hincapie,Arsenal,club,1.0,a,100.0,,67,0,0,0,0.0,0.0,11,2026-11-12T23:37:55+00:00
+ola_aina__nottingham_forest,Ola Aina,Nottingham Forest,473,Aina,Nott'm Forest,club,1.0,a,,,433,6,0,0,0.06,0.01,11,2026-11-12T23:37:55+00:00
+rayan_cherki__man_city,Rayan Cherki,Man. City,399,Cherki,Man City,club,1.0,a,,,562,7,5,0,1.92,0.31,11,2026-11-12T23:37:55+00:00
+bukayo_saka__arsenal,Bukayo Saka,Arsenal,12,Saka,Arsenal,club,1.0,i,0.0,Thigh injury - Unknown return date,596,7,3,0,3.63,0.55,11,2026-11-12T23:37:55+00:00
+elliot_anderson__man_city,Elliot Anderson,Man. City,481,Anderson,Man City,club,1.0,a,100.0,,786,9,0,0,0.3,0.03,11,2026-11-12T23:37:55+00:00
+diego_gomez__brighton,Diego Gómez,Brighton,127,Gomez,Brighton,club,1.0,a,,,873,10,2,0,1.35,0.14,11,2026-11-12T23:37:55+00:00
+mohamed_belloumi__hull_city,Mohamed Belloumi,Hull City,286,Belloumi,Hull City,club,1.0,d,75.0,Hamstring injury - 75% chance of playing,685,8,3,0,1.29,0.17,11,2026-11-12T23:37:55+00:00
+vitaly_janelt__brentford,Vitaly Janelt,Brentford,98,Janelt,Brentford,club,1.0,a,100.0,,810,9,2,0,0.53,0.06,11,2026-11-12T23:37:55+00:00
+oliver_mcburnie__hull_city,Oliver McBurnie,Hull City,295,McBurnie,Hull City,club,0.990909090909091,a,,,886,10,2,0,2.22,0.23,11,2026-11-12T23:37:55+00:00
+cody_gakpo__liverpool,Cody Gakpo,Liverpool,367,Gakpo,Liverpool,club,1.0,a,100.0,,601,7,1,0,1.24,0.19,11,2026-11-12T23:37:55+00:00
+thierno_barry__everton,Thierno Barry,Everton,249,Barry,Everton,club,1.0,a,,,851,10,6,0,7.29,0.77,11,2026-11-12T23:37:55+00:00
+eddie_nketiah__crystal_palace,Eddie Nketiah,Crystal Palace,224,Nketiah,Crystal Palace,club,1.0,a,100.0,,287,3,1,0,2.15,0.67,11,2026-11-12T23:37:55+00:00
+mathys_tel__tottenham,Mathys Tel,Tottenham,514,Tel,Spurs,club,1.0,d,75.0,Ankle injury - 75% chance of playing,477,6,1,0,0.66,0.12,11,2026-11-12T23:37:55+00:00
+ellis_simms__coventry_city,Ellis Simms,Coventry City,195,Simms,Coventry City,club,1.0,a,,,116,1,1,0,0.4,0.31,11,2026-11-12T23:37:55+00:00

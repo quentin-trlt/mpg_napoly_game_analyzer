@@ -14,9 +14,11 @@ from scipy.optimize import linear_sum_assignment
 
 from mpg.analysis import Analysis
 from mpg.coach import optimizer as op
-from mpg.coach.projection import ClubStrength, NoteModel, PlayModel, pl_gw_for, project_players, sample_draws
+from mpg.coach.projection import ClubStrength, NoteModel, project_players, sample_draws
 from mpg.coach.rules import FORMATIONS
 from mpg.coaching import bonus_key
+from mpg.playing_time import PlayModel
+from mpg.premier_league import pl_gw_for
 
 FUTURE_DRAWS = 1500
 UNAVAILABLE_GAIN = -1e6

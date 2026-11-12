@@ -16,6 +16,7 @@ from mpg.forecast.models import (
     PoissonModel,
     default_models,
 )
+from mpg.playing_time import league_play_probabilities
 
 POINTS = np.array([[3, 1, 0], [0, 1, 3]])
 REFERENCE = BaselineModel.name
@@ -24,8 +25,10 @@ REFERENCE = BaselineModel.name
 def build_context(a: Analysis, upto_gw: int | None = None) -> Context:
     """Contexte de prédiction avec les matchs joués jusqu'à `upto_gw` (par défaut la dernière journée).
 
-    Les données joueurs (taux de jeu, moyennes PL, notes rétrécies) sont celles du jour : en rejouant le passé,
-    elles contiennent de l'information postérieure à la journée prédite. Tout le reste (résultats, bonus posés,
+    La probabilité de jouer de chaque joueur vient du modèle de temps de jeu sur l'instantané FPL
+    (`mpg.playing_time`), recalculée avec les seules journées PL antérieures ; sans instantané, c'est le taux de jeu
+    de la saison. Les autres données joueurs (moyennes PL, notes rétrécies, statut) sont celles du jour : en
+    rejouant le passé, elles contiennent de l'information postérieure à la journée prédite. Tout le reste (résultats, bonus posés,
     stock de bonus restant, pentes estimées) est limité aux journées ≤ `upto_gw`.
     """
     league = a.league
@@ -44,12 +47,17 @@ def build_context(a: Analysis, upto_gw: int | None = None) -> Context:
     delta = (home["note_moy_brute"] - home["note_moy_brute_adv"]).to_numpy(float)
     note_slope = OrderedLogit(b0=2.0).fit(delta, home["resultat"].map(RESULT_TO_IDX).to_numpy()).b
 
+    players = a.player_value
+    rates = league_play_probabilities(league, upto + 1)
+    if rates is not None:
+        players = players.assign(taux_jeu=players["player_key"].map(rates).fillna(players["taux_jeu"]))
+
     bonus_used = league.bonus[league.bonus["gw"] <= upto]
     remaining = remaining_bonuses(bonus_used, league.bonus_stock, team_ids) if league.bonus_stock is not None else None
     return Context(
         tm=tm,
         strength=a.favourites.set_index("team_id")["indice_force"],
-        players=a.player_value,
+        players=players,
         lineups=lu,
         team_ids=team_ids,
         upto_gw=upto,

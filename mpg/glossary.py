@@ -209,8 +209,9 @@ GLOSSARY: dict[str, str] = {
     ),
     "modele_structurel": (
         "**Modèle structurel.** On simule chaque match au niveau des joueurs : le 11 probable dans la formation habituelle "
-        "et un banc de 7, la probabilité que chacun joue (taux de jeu PL, 0 pendant 2 journées pour un blessé, 1 pour un "
-        "suspendu), un Rotaldo à {rotaldo:.1f} si un poste reste vide, puis la note de chaque joueur (sa note rétrécie "
+        "et un banc de 7, la probabilité que chacun joue (modèle de temps de jeu estimé sur l'historique FPL des joueurs "
+        "de la ligue : part des 5 dernières journées jouées, a joué la dernière, titularisations, taux de la saison ; "
+        "0 pendant 2 journées pour un blessé, 1 pour un suspendu), un Rotaldo à {rotaldo:.1f} si un poste reste vide, puis la note de chaque joueur (sa note rétrécie "
         "plus un aléa de match d'écart-type {sigma:.2f}). L'écart de note moyenne entre les deux équipes donne les "
         "probabilités V/N/D via un logit ordonné ajusté sur les matchs joués. C'est le seul modèle qui voit les blessures "
         "et le temps de jeu."
@@ -226,8 +227,9 @@ GLOSSARY: dict[str, str] = {
     ),
     "fuite_backtest": (
         "**Rejeu du passé et ses limites.** Chaque journée est prédite avec un modèle ajusté uniquement sur les "
-        "journées précédentes. Mais les données joueurs (taux de jeu, moyennes PL, statut) sont celles d'aujourd'hui : "
-        "le modèle structurel « connaît » un peu le futur et son score est optimiste. La seule évaluation sans biais "
+        "journées précédentes. La probabilité de jouer est elle aussi recalculée avec les seules journées PL "
+        "antérieures, mais les autres données joueurs (moyennes PL, statut) sont celles d'aujourd'hui : le modèle "
+        "structurel « connaît » un peu le futur et son score est optimiste. La seule évaluation sans biais "
         "est celle des pronostics figés avant chaque journée, plus bas."
     ),
     "et_si": (

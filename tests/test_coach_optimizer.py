@@ -9,6 +9,7 @@ from mpg.coach.bonus_plan import assign, team_stock
 from mpg.coach.recommend import naive_lineup, next_match, recommend
 from mpg.coach.rules import BENCH_SIZE, FORMATIONS, slots_of
 from mpg.forecast.bonus import MIROIR
+from mpg.premier_league import LOCAL_TZ, mpg_gw_date, pl_gw_for
 
 
 @pytest.fixture(scope="module")
@@ -24,11 +25,11 @@ def rec(analysis):
 
 def test_pl_gameweek_mapping_follows_dates(analysis):
     league = analysis.league
-    mapping = [pr.pl_gw_for(league, g) for g in range(1, league.n_gw + 1)]
+    mapping = [pl_gw_for(league, g) for g in range(1, league.n_gw + 1)]
     assert mapping == sorted(mapping) and len(set(mapping)) == len(mapping)
     for g, pl in zip(range(1, league.n_gw + 1), mapping):
         first = league.club_results.loc[league.club_results["pl_gw"] == pl, "date"].min()
-        gap = abs(first.tz_convert(pr.LOCAL_TZ).tz_localize(None).normalize() - pr.mpg_gw_date(league, g))
+        gap = abs(first.tz_convert(LOCAL_TZ).tz_localize(None).normalize() - mpg_gw_date(league, g))
         assert gap <= pd.Timedelta(days=3)
 
 
@@ -43,7 +44,7 @@ def test_draws_are_consistent(analysis):
     league = analysis.league
     model = pr.fit_note_model(analysis)
     strength = pr.fit_club_strength(league.club_results)
-    proj = pr.project_players(analysis, [0, 1], pr.pl_gw_for(league, league.last_gw + 1), model, strength)
+    proj = pr.project_players(analysis, [0, 1], pl_gw_for(league, league.last_gw + 1), model, strength)
     d = pr.sample_draws(proj, model, n_draws=500, seed=1)
     assert d.note.shape == (len(proj), 500)
     assert np.all(np.mod(d.note * 2, 1) == 0)

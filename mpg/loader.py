@@ -134,6 +134,8 @@ OPTIONAL_FILES: dict[str, list[str]] = {
         "buteur_player_key",
         "passeur_player_key",
     ],
+    "fpl_players": ["player_key", "element_id", "status", "chance_next", "minutes", "xg90", "prochaine_journee_pl"],
+    "fpl_history": ["player_key", "element_id", "round", "minutes", "starts", "goals_scored", "own_goals", "xg"],
 }
 
 
@@ -157,6 +159,8 @@ class League:
     bonus_stock: pd.DataFrame | None = None
     club_results: pd.DataFrame | None = None
     pl_goals: pd.DataFrame | None = None
+    fpl_players: pd.DataFrame | None = None
+    fpl_history: pd.DataFrame | None = None
 
     @property
     def played(self) -> pd.DataFrame:
@@ -244,6 +248,17 @@ def _read_optional(data_dir: Path, name: str) -> pd.DataFrame | None:
     return df
 
 
+def _read_fpl(data_dir: Path) -> tuple[pd.DataFrame | None, pd.DataFrame | None]:
+    """Instantané FPL écrit par `build_fpl.py` (facultatif). Les deux fichiers vont ensemble."""
+    players = _read_optional(data_dir, "fpl_players")
+    history = _read_optional(data_dir, "fpl_history")
+    if players is None or history is None:
+        return None, None
+    players["element_id"] = players["element_id"].astype("Int64")
+    history["element_id"] = history["element_id"].astype(int)
+    return players, history
+
+
 def _check_values(df: pd.DataFrame, col: str, allowed: tuple[str, ...], file: str) -> None:
     unknown = set(df[col].dropna()) - set(allowed)
     if unknown:
@@ -297,6 +312,7 @@ def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
 
     _check_values(raw["goals"], "type_but", GOAL_TYPES, "goals.csv")
 
+    fpl_players, fpl_history = _read_fpl(data_dir)
     bonus = raw["bonus"].copy()
     bonus["effet_pts"] = pd.to_numeric(bonus["effet"].str.replace("pt", "", regex=False), errors="coerce")
 
@@ -315,4 +331,6 @@ def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
         bonus_stock=_read_bonus_stock(data_dir),
         club_results=_read_club_results(data_dir),
         pl_goals=_read_pl_goals(data_dir),
+        fpl_players=fpl_players,
+        fpl_history=fpl_history,
     )

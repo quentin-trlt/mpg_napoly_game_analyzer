@@ -16,17 +16,16 @@ from mpg.coach.bonus_plan import FUTURE_DRAWS, assign, future_gains, team_stock
 from mpg.coach.projection import (
     ClubStrength,
     NoteModel,
-    PlayModel,
     deadline,
     fit_club_strength,
     fit_note_model,
-    fit_play_model,
-    pl_gw_for,
     project_players,
     sample_draws,
 )
 from mpg.coach.rules import Draws, Lineup, slots_of
 from mpg.forecast.bonus import MCDO, MIROIR
+from mpg.playing_time import PlayModel, fit_play_model
+from mpg.premier_league import pl_gw_for
 
 N_DRAWS = 4000
 TOP_LINEUPS = 5

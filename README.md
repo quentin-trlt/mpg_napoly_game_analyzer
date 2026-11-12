@@ -42,8 +42,14 @@ players.club ──< club_results (home_club / away_club) ──< pl_goals (pl_m
 | `bonus_stock.csv` | 1 ligne par bonus | Dotation de bonus de début de saison, identique pour toutes les équipes |
 | `club_results.csv` | 1 ligne par match de PL (380) | Calendrier complet des 38 journées : date (ISO 8601 UTC), clubs et codes courts, score si joué, `statut` (`joue`, `a_venir`, `en_cours` pendant un match) |
 | `pl_goals.csv` | 1 ligne par but de PL | Match, journée, club bénéficiaire, côté (`dom`/`ext`), type (`but`, `penalty`, `csc`, `annule_var`), minute, buteur et passeur (id MPG, nom, `player_key` vide si le joueur n'est dans aucune équipe de la ligue) |
+| `fpl_players.csv` | 1 ligne par joueur de la ligue (196) | Instantané Fantasy Premier League écrit par `build_fpl.py` : `element_id` FPL apparié au `player_key`, statut (`a`, `d`, `i`, `s`, `u`), `chance_next` (chance de jouer la prochaine journée, %), news, minutes, titularisations, buts, xG et xG/90 de la saison, prochaine journée PL, date de récupération |
+| `fpl_history.csv` | 1 ligne par joueur et par match FPL | Minutes, titularisation, buts, CSC et xG de chaque match de PL joué (`round` = journée PL) |
+
+Les deux fichiers FPL se régénèrent après chaque export MPG avec `uv run python build_fpl.py`. Le script archive aussi `fpl_players.csv` dans `fpl_snapshots/fpl_players_PL<journée>.csv` : `chance_next` n'est plus consultable une fois la journée passée, et ces copies permettront de mesurer ce qu'elle apporte.
 
 ## Points d'attention
+
+- **Probabilité de jouer.** Le modèle structurel des prédictions ne prend plus le taux de jeu de la saison mais un logit de P(minutes > 0) estimé sur `fpl_history.csv` (`mpg.playing_time`), recalculé à chaque journée avec les seules journées PL antérieures. Rejoué sur J1-J5, il réduit le RPS du modèle structurel (0,199 → 0,191) ; `experiments/backtest_engine.py` refait la comparaison. Sans les fichiers FPL, le taux de la saison reste utilisé.
 
 - **Deux notes différentes.** `note_avec_bonus` (lineups) est la note du match MPG, bonus inclus : sa moyenne par équipe retombe exactement sur la colonne « +B. » du site. `note_moy_reelle` (players) est la moyenne sur la saison réelle de Premier League.
 - **Valeur de l'effectif.** `valeur_effectif_meur` = somme des cotes + budget non dépensé. Seuls USPionvillePusitanos (5 M) et Tractou'pelle (25 M) n'ont pas dépensé tout leur budget. L'hypothèse d'un budget de 500 M vient des données, pas d'une règle lue sur le site.

@@ -1,10 +1,24 @@
 from html import escape
 
+import pandas as pd
 import streamlit as st
 
 from app import charts
 from app.components import fmt_m, fmt_pct, form_badges, hero, how, kpi_row, rank_tone, section, stat_grid, table_height
 from mpg.analysis import Analysis, team_card
+from mpg.premier_league import club_form
+
+
+def _with_club_form(roster: pd.DataFrame, results: pd.DataFrame | None) -> pd.DataFrame:
+    """Ajoute la forme récente du club (5 derniers, ordre chronologique) et son prochain match."""
+    if results is None:
+        return roster.assign(forme_club="", prochain_match="")
+    form = club_form(results)
+    date = form["prochain_date"].dt.tz_convert("Europe/Paris").dt.strftime("%d/%m")
+    lieu = form["prochain_domicile"].map({True: "dom.", False: "ext."})
+    form["prochain_match"] = (form["prochain_adversaire_short"] + " (" + lieu + "), " + date).fillna("")
+    out = roster.merge(form[["club", "forme_club", "prochain_match"]], on="club", how="left")
+    return out.fillna({"forme_club": "", "prochain_match": ""})
 
 
 def _profile(a: Analysis, team_id: int) -> list[tuple[str, int, str]]:
@@ -100,12 +114,15 @@ def render(a: Analysis, team_id: int) -> None:
     how("surpaiement", meta)
 
     section("Effectif")
+    squad = _with_club_form(roster, a.league.club_results)
     st.dataframe(
-        roster.sort_values(["poste_groupe", "enchere"], ascending=[True, False])[
+        squad.sort_values(["poste_groupe", "enchere"], ascending=[True, False])[
             [
                 "joueur",
                 "poste",
                 "club",
+                "forme_club",
+                "prochain_match",
                 "enchere",
                 "cote",
                 "surpaiement_x",
@@ -130,6 +147,12 @@ def render(a: Analysis, team_id: int) -> None:
             "joueur": st.column_config.TextColumn("Joueur", pinned=True),
             "poste": "Poste",
             "club": "Club",
+            "forme_club": st.column_config.TextColumn(
+                "Forme du club", help="5 derniers résultats du club en PL, du plus ancien au plus récent"
+            ),
+            "prochain_match": st.column_config.TextColumn(
+                "Prochain match", help="Adversaire du club, lieu et date (heure de Paris)"
+            ),
             "enchere": st.column_config.NumberColumn("Prix", format="%d M€"),
             "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
             "surpaiement_x": st.column_config.NumberColumn("× cote", format="%.2f"),

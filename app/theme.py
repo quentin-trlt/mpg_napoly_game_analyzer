@@ -146,14 +146,58 @@ h2 {{ font-size: 1.35rem !important; font-weight: 600; margin-top: 1.6rem !impor
     .top5 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
 }}
 @media (max-width: 640px) {{
-    .stats, .fixtures, .ladder, .top5 {{ grid-template-columns: minmax(0, 1fr); }}
-    .hero .title {{ font-size: 2.2rem; }}
+    .block-container {{ padding: 3.6rem 1rem 4rem; }}
+    [data-testid="stHeader"] {{ background: rgba(11,17,32,0.88); backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid {BORDER}; }}
+    [data-testid="stMainBlockContainer"] h3 {{ font-size: 1.4rem !important; padding-top: 1.4rem; }}
+    .hero {{ margin-bottom: 1.1rem; }}
+    .hero .title {{ font-size: 2.15rem; }}
+    .hero .subtitle {{ font-size: .94rem; line-height: 1.5; }}
+
+    .stats {{ grid-template-columns: repeat(2, minmax(0, 1fr)); border-radius: 12px; }}
+    .stats > .stat:last-child:nth-child(odd) {{ grid-column: 1 / -1; }}
+    .stat {{ padding: 12px 14px; }}
+    .stat .label {{ font-size: .78rem; }}
+    .stat .value {{ font-size: 1.7rem; margin-top: 4px; }}
+    .stat .value.small {{ font-size: 1.3rem; }}
+    .stat .value .of {{ font-size: .95rem; }}
+    .stat .sub {{ font-size: .76rem; }}
+
+    .panel {{ padding: 2px 14px; }}
+    .ladder {{ grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 18px; }}
+    .ladder .rung:nth-last-child(-n+3) {{ border-bottom: 1px solid {BORDER}; }}
+    .ladder .rung:nth-last-child(-n+2) {{ border-bottom: none; }}
+    .rung {{ padding: 12px 0; }}
+    .rung .name {{ font-size: .86rem; }}
+    .rung .hint {{ font-size: .72rem; }}
+    .rung .rank {{ font-size: 1.6rem; }}
+
+    .top5 {{ grid-template-columns: minmax(0, 1fr); }}
+    .fixtures {{ grid-template-columns: minmax(0, 1fr); gap: 10px; }}
+    .fixture {{ padding: 12px 14px; }}
+    .fixture .team {{ font-size: .9rem; }}
+    .fixture .pair {{ display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); column-gap: 10px;
+        align-items: start; }}
+    .fixture .pair > :last-child {{ text-align: right; }}
+    .fixture .pair .vs {{ margin: 0; align-self: center; }}
+    .fixture .pair .vs::before, .fixture .pair .vs::after {{ display: none; }}
+    .fixture .score {{ font-size: 1.6rem; }}
+    .fixture.result .row.top {{ gap: 8px; }}
+    .fixture.result .scorers {{ gap: 8px; }}
+
+    div.chart-title {{ padding: 12px 12px 0; font-size: .9rem; }}
+    [data-testid="stButtonGroup"] > div {{ flex-wrap: wrap; }}
 }}
 
 [data-testid="stExpander"] details {{ border: 1px solid {BORDER}; border-radius: 12px; background: rgba(19,28,46,0.6); }}
 [data-testid="stExpander"] summary p {{ color: {TEXT_2}; font-size: .88rem; }}
 [data-testid="stDataFrame"] {{ border: 1px solid {BORDER}; border-radius: 12px; overflow: hidden; }}
 [data-testid="stPlotlyChart"] {{ border: 1px solid {BORDER}; border-radius: 14px; overflow: hidden; }}
+.chart-title {{ color: {TEXT}; font-size: .95rem; font-weight: 500; line-height: 1.35; padding: 15px 16px 0; }}
+[data-testid="stVerticalBlock"]:has(> [data-testid="stElementContainer"] .chart-title) {{ gap: 0; background: {SURFACE};
+    border: 1px solid {BORDER}; border-radius: 14px; overflow: hidden; }}
+[data-testid="stVerticalBlock"]:has(> [data-testid="stElementContainer"] .chart-title) [data-testid="stPlotlyChart"] {{
+    border: none; border-radius: 0; }}
 [data-testid="stTabs"] [role="tab"] p {{ font-size: .92rem; font-weight: 500; }}
 button:focus-visible, [role="tab"]:focus-visible, [role="radio"]:focus-visible {{ outline: 2px solid {ACCENT} !important; outline-offset: 2px; }}
 @media (prefers-reduced-motion: reduce) {{ * {{ transition: none !important; }} }}

@@ -33,8 +33,8 @@ def _match_card(r: pd.Series, team_id: int) -> str:
             f"{ISSUES[int(r['issue'])]}. Score prédit : {escape(str(r['score_probable']))}{exact_note}.</div>"
         )
     return (
-        f'<div class="fixture{" me" if me else ""}"><div class="team">{escape(r["home_team"])}</div>'
-        f'<div class="vs">contre</div><div class="team">{escape(r["away_team"])}</div>'
+        f'<div class="fixture{" me" if me else ""}"><div class="pair"><div class="team">{escape(r["home_team"])}</div>'
+        f'<div class="vs">contre</div><div class="team">{escape(r["away_team"])}</div></div>'
         f'<div class="foot">{prob_bar(r["p_dom"], r["p_nul"], r["p_ext"])}{result}</div></div>'
     )
 

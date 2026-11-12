@@ -4,7 +4,7 @@ st.set_page_config(
     page_title="Napoly Game · Analyse MPG",
     page_icon=":material/sports_soccer:",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="auto",
 )
 
 from app import theme  # noqa: E402

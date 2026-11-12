@@ -22,8 +22,8 @@ def _next_gw(a: Analysis, fc: dict, team_id: int) -> None:
     section(f"Journée {gw} : les pronostics", "Probabilités de l'ensemble des trois modèles.")
     cards = [
         f'<div class="fixture{" me" if team_id in (m["home_team_id"], m["away_team_id"]) else ""}">'
-        f'<div class="team">{escape(m["home_team"])}</div><div class="vs">contre</div>'
-        f'<div class="team">{escape(m["away_team"])}</div>'
+        f'<div class="pair"><div class="team">{escape(m["home_team"])}</div><div class="vs">contre</div>'
+        f'<div class="team">{escape(m["away_team"])}</div></div>'
         f'<div class="foot">{prob_bar(m["p_dom"], m["p_nul"], m["p_ext"])}'
         f'<div class="meta" style="margin-top:8px">Score le plus probable : <b>{m["score_probable"]}</b></div></div></div>'
         for _, m in nxt.iterrows()

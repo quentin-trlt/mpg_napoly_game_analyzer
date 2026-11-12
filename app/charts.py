@@ -1,3 +1,5 @@
+from html import escape
+
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
@@ -22,12 +24,53 @@ from app.theme import (
 )
 
 CONFIG = {"displayModeBar": False, "scrollZoom": False}
+DEFAULT_TOP = 78
+TITLE_ROOM = 46
+
+
+def is_mobile() -> bool:
+    return "Mobi" in (st.context.headers.get("User-Agent") or "")
+
+
+def _has_legend(fig: go.Figure) -> bool:
+    shown = [t for t in fig.data if t.showlegend is not False and t.name]
+    return bool(shown) if fig.layout.showlegend else fig.layout.showlegend is None and len(shown) >= 2
+
+
+def _short(text: str, n: int) -> str:
+    return text if len(text) <= n else text[: n - 1].rstrip() + "…"
+
+
+def _compact(fig: go.Figure) -> None:
+    """Version téléphone : moins de marge pour les étiquettes de fin de ligne, titres d'axe sur deux lignes."""
+    if (fig.layout.margin.r or 0) >= 150:
+        fig.update_layout(margin_r=104)
+        for ann in fig.layout.annotations:
+            if ann.xanchor == "left" and ann.text:
+                ann.text = _short(ann.text, 13)
+                ann.font.size = 10
+    for ax in (fig.layout.xaxis, fig.layout.yaxis):
+        text = ax.title.text
+        if text and len(text) > 28 and "<br>" not in text:
+            ax.title.text = _two_lines(text)
+    fig.update_layout(legend_font_size=11, hoverlabel_font_size=12, dragmode=False)
 
 
 def show(fig: go.Figure, height: int | None = None) -> None:
+    """Affiche la figure dans une carte ; le titre passe en HTML pour revenir à la ligne sur petit écran."""
     if height:
         fig.update_layout(height=height)
-    st.plotly_chart(fig, theme=None, config=CONFIG)
+    if is_mobile():
+        _compact(fig)
+    title = fig.layout.title.text
+    if not title:
+        st.plotly_chart(fig, theme=None, config=CONFIG)
+        return
+    top = fig.layout.margin.t if fig.layout.margin.t is not None else DEFAULT_TOP
+    fig.update_layout(title_text=None, margin_t=max(top - TITLE_ROOM, 30) if _has_legend(fig) else max(top - 56, 24))
+    with st.container():
+        st.html(f'<div class="chart-title">{escape(title)}</div>')
+        st.plotly_chart(fig, theme=None, config=CONFIG)
 
 
 def _bar_colors(team_ids: pd.Series, team_id: int, base: str = SERIES[0]) -> list[str]:
@@ -483,10 +526,20 @@ def team_boxes(
 def price_note_facets(pv: pd.DataFrame, team_id: int) -> go.Figure:
     from plotly.subplots import make_subplots
 
+    mobile = is_mobile()
+    n_cols = 2 if mobile else 4
+    ticks = [2, 5, 20, 50] if mobile else [2, 5, 10, 20, 50, 100]
     fig = make_subplots(
-        rows=1, cols=4, subplot_titles=[LINE_LABELS[g] for g in "GDMA"], shared_yaxes=True, horizontal_spacing=0.03
+        rows=4 // n_cols,
+        cols=n_cols,
+        subplot_titles=[LINE_LABELS[g] for g in "GDMA"],
+        shared_yaxes=True,
+        horizontal_spacing=0.05 if mobile else 0.03,
+        vertical_spacing=0.14,
     )
-    for i, g in enumerate("GDMA", start=1):
+    for i, g in enumerate("GDMA"):
+        row, col = divmod(i, n_cols)
+        row, col = row + 1, col + 1
         d = pv[(pv["poste_groupe"] == g) & (pv["n_notes"] > 0)].sort_values("enchere")
         me = d["team_id"] == team_id
         fig.add_trace(
@@ -505,8 +558,8 @@ def price_note_facets(pv: pd.DataFrame, team_id: int) -> go.Figure:
                 hovertemplate="<b>%{customdata[0]}</b> · %{customdata[1]}<br>Enchère : %{x:.0f} M€<br>"
                 "Note rétrécie : %{y:.2f}<br>Écart au prix : %{customdata[2]:+.2f}<extra></extra>",
             ),
-            row=1,
-            col=i,
+            row=row,
+            col=col,
         )
         fig.add_trace(
             go.Scatter(
@@ -515,28 +568,29 @@ def price_note_facets(pv: pd.DataFrame, team_id: int) -> go.Figure:
                 mode="lines",
                 line=dict(color=SERIES[1], width=2),
                 hoverinfo="skip",
-                showlegend=i == 1,
+                showlegend=i == 0,
                 name="Note attendue pour le prix",
             ),
-            row=1,
-            col=i,
+            row=row,
+            col=col,
         )
         fig.update_xaxes(
             type="log",
-            row=1,
-            col=i,
-            tickvals=[2, 5, 10, 20, 50, 100],
-            ticktext=["2", "5", "10", "20", "50", "100"],
-            title_text="Enchère (M€, log)" if i == 1 else None,
+            row=row,
+            col=col,
+            tickvals=ticks,
+            ticktext=[str(t) for t in ticks],
+            title_text="Enchère (M€, log)" if i == 4 - n_cols else None,
         )
+        if col == 1:
+            fig.update_yaxes(title_text="Note rétrécie", row=row, col=col)
     for ann in fig.layout.annotations:
         ann.font = dict(color=TEXT_2, size=12)
-    fig.update_yaxes(title_text="Note rétrécie", row=1, col=1)
     fig.update_layout(
         title="Prix payé et rendement, par poste",
-        height=430,
+        height=640 if mobile else 430,
         margin=dict(t=120),
-        legend=dict(x=1, xanchor="right", y=1.12, yanchor="bottom"),
+        legend=dict(x=1, xanchor="right", y=1.12 if not mobile else 1.06, yanchor="bottom"),
     )
     return fig
 
@@ -609,13 +663,14 @@ def _two_lines(text: str) -> str:
 
 
 def component_heatmap(m: pd.DataFrame, comps: list[str], labels: dict[str, str]) -> go.Figure:
+    mobile = is_mobile()
     d = m.sort_values("score")
     z = d[comps].to_numpy()
     lim = max(2.0, float(np.nanmax(np.abs(z))))
     fig = go.Figure(
         go.Heatmap(
             z=z,
-            x=[_two_lines(labels[c]) for c in comps],
+            x=[labels[c] if mobile else _two_lines(labels[c]) for c in comps],
             y=d["team_name"],
             zmid=0,
             zmin=-lim,
@@ -632,8 +687,10 @@ def component_heatmap(m: pd.DataFrame, comps: list[str], labels: dict[str, str])
             hovertemplate="<b>%{y}</b><br>%{x} : %{z:+.2f} (z robuste)<extra></extra>",
         )
     )
-    fig.update_xaxes(side="top", gridcolor="rgba(0,0,0,0)", tickangle=0, tickfont=dict(size=11))
+    fig.update_xaxes(side="top", gridcolor="rgba(0,0,0,0)", tickangle=-50 if mobile else 0, tickfont=dict(size=11))
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
+    if mobile:
+        fig.update_traces(textfont_size=10, colorbar_thickness=8)
     fig.update_layout(
         title="Composantes du score (z-score robuste, 0 = médiane de la ligue)",
         height=440,

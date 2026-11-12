@@ -4,3 +4,5 @@ __pycache__/
 .ruff_cache/
 .idea/
 .DS_Store
+.coach/
+data/fpl_cache/

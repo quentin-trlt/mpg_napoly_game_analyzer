@@ -77,7 +77,7 @@ def _next_fixtures(a: Analysis, team_id: int) -> None:
         ]
         cards.append(
             f'<div class="fixture{" me" if me else ""}"><div class="meta">{date}{heure}</div>'
-            f'<div style="margin-top:8px">{sides[0]}</div><div class="vs">contre</div>{sides[1]}</div>'
+            f'<div class="pair" style="margin-top:8px">{sides[0]}<div class="vs">contre</div>{sides[1]}</div></div>'
         )
     fixture_grid(cards, min(len(cards), 5))
 

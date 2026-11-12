@@ -85,6 +85,16 @@ class ClubStrength:
     def mean_goals(self) -> float:
         return float(np.exp(self.base + self.home / 2))
 
+    def opponent_factor(self, opp: str, home: bool) -> float:
+        """Multiplicateur des buts d'un joueur selon l'adversaire et le lieu, par rapport à un match moyen.
+
+        L'xG d'un joueur reflète déjà l'attaque de son club : seuls comptent la défense adverse, comparée à la
+        moyenne des défenses, et le lieu, comparé à une moitié de matchs à domicile.
+        """
+        mean_def = np.mean(np.exp(-np.array(list(self.defence.values()))))
+        venue = self.home / 2 if home else -self.home / 2
+        return float(np.exp(venue - self.defence.get(opp, 0.0)) / mean_def)
+
 
 def fit_club_strength(results: pd.DataFrame, ridge: float = STRENGTH_RIDGE) -> ClubStrength:
     played = results[results["statut"] == "joue"].dropna(subset=["home_score", "away_score"])
@@ -340,6 +350,7 @@ def project_players(
             if has_match
             else (strength.mean_goals, strength.mean_goals)
         )
+        opp_factor = strength.opponent_factor(row["adversaire_pl"], bool(row["domicile_pl"])) if has_match else 1.0
         line = row["poste_groupe"]
         adj = model.beta_for.get(line, 0.0) * (gf - model.goals_mean)
         adj += model.beta_against.get(line, 0.0) * (ga - model.goals_mean)
@@ -354,10 +365,10 @@ def project_players(
             recent_xg = float(played["xg"].sum()) if len(played) else 0.0
             recent_min = float(played["minutes"].sum()) if len(played) else 0.0
             xg90 = (recent_xg + season_xg90 * XG_PRIOR_MINUTES / 90) / ((recent_min + XG_PRIOR_MINUTES) / 90)
-            lam = xg90 * minutes / 90 * gf / strength.mean_goals
+            lam = xg90 * minutes / 90 * opp_factor
         else:
             per_match = (row["buts_reels_saison"] or 0) / max(row["matchs_joues"] or 0, 1)
-            lam = float(per_match) * gf / strength.mean_goals
+            lam = float(per_match) * opp_factor
 
         override = overrides.get(row["player_key"])
         rows.append(

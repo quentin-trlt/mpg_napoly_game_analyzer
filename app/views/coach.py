@@ -462,9 +462,9 @@ difficulté de l'adversaire (Poisson attaque/défense sur les résultats de PL).
 sur {rec.holdout.n} autres tirages. Les remplacements tactiques qui ne rapportent rien sur ces tirages indépendants
 sont retirés.
 
-**Limite connue.** Sur la J6, les compos simulées marquent environ 2,3 buts par équipe et par match, contre 2,0 en
-moyenne sur les journées jouées. Une partie de l'écart vient de compos mieux remplies que celles des coachs (environ
-1 titulaire absent par match au lieu de 1,3), le reste d'une légère surestimation des buts. Les nuls sont donc un
-peu sous-estimés (16 % contre 20 %).
+**Limite connue.** Rejoué sur J1-J5 sans information postérieure (`experiments/backtest_engine.py`), le moteur
+simule 2,3 buts par équipe et par match contre 2,0 observés, même avec les compos réellement posées, et prédit moins
+bien l'issue des matchs que le modèle structurel de l'app principale. Les comparaisons entre compos d'un même match
+restent valables (mêmes tirages, règles exactes) ; les probabilités affichées sont à lire comme des ordres de grandeur.
 """
         )

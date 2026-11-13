@@ -1,0 +1,79 @@
+rang,joueur,club,poste,equipe_abrev,buts_reels,buts_mpg,buts_total,team_id,player_key
+1,Mohamed Mohamed Salah,Liverpool,A,CFR,15,0,15,1,mohamed_salah__liverpool
+2,Alexander Isak,Newcastle,A,COL,13,0,13,0,alexander_isak__newcastle
+3,Bryan Mbeumo,Brentford,A,FCR,7,3,10,3,bryan_mbeumo__brentford
+4,Yoane Wissa,Brentford,A,SPR,8,0,8,2,yoane_wissa__brentford
+5,Chris Wood,Nottingham Forest,A,L69,8,0,8,6,chris_wood__nottingham_forest
+6,Matheus Cunha,Wolverhampton,A,L69,6,2,8,6,matheus_santos_matheus_cunha__wolverhampton
+7,Alex Iwobi,Fulham,MO,SPR,6,2,8,2,alex_iwobi__fulham
+8,Bruno Fernandes,Man. United,MO,RSH,4,4,8,4,bruno_miguel_bruno_fernandes__man_united
+9,Cole Palmer,Chelsea,MO,GTF,7,0,7,7,cole_palmer__chelsea
+10,Erling Haaland,Man. City,A,CFR,6,1,7,1,erling_haaland__man_city
+11,Dominic Solanke,Tottenham,A,RSH,4,3,7,4,dominic_solanke__tottenham
+12,James Maddison,Tottenham,MO,FCR,6,0,6,3,james_maddison__tottenham
+13,Nicolas Jackson,Chelsea,A,COL,5,1,6,0,nicolas_jackson__chelsea
+14,Raúl Jiménez,Fulham,A,FCR,4,1,5,3,raul_jimenez__fulham
+15,Anthony Gordon,Newcastle,MO,COL,4,1,5,0,anthony_gordon__newcastle
+16,Son Heung-Min,Tottenham,MO,COL,4,1,5,0,heung_min_son_heung_min__tottenham
+17,Bukayo Saka,Arsenal,A,FCM,3,2,5,5,bukayo_saka__arsenal
+18,Eberechi Eze,Crystal Palace,MO,FCR,1,4,5,3,eberechi_eze__crystal_palace
+19,Ollie Watkins,Aston Villa,A,RSH,4,0,4,4,ollie_watkins__aston_villa
+20,Jamie Vardy,Leicester,A,GTF,4,0,4,7,jamie_vardy__leicester
+21,Morgan Gibbs-White,Nottingham Forest,MO,SPR,3,1,4,2,morgan_gibbs_white__nottingham_forest
+22,Dejan Kulusevski,Tottenham,MO,SPR,3,1,4,2,dejan_kulusevski__tottenham
+23,Diogo Jota,Liverpool,A,GTF,3,0,3,7,diogo_jose_diogo_jota__liverpool
+24,Marcus Rashford,Man. United,A,RSH,3,0,3,4,marcus_rashford__man_united
+25,Jarrod Bowen,West Ham,A,FCR,3,0,3,3,jarrod_bowen__west_ham
+26,Kaoru Mitoma,Brighton,MO,COL,3,0,3,0,kaoru_mitoma__brighton
+27,Luis Díaz,Liverpool,MO,FCR,3,0,3,3,luis_diaz__liverpool
+28,Phil Foden,Man. City,MO,FCM,3,0,3,5,phil_foden__man_city
+29,Brennan Johnson,Tottenham,MO,RSH,3,0,3,4,brennan_johnson__tottenham
+30,Tomás Soucek,West Ham,MD,GTF,3,0,3,7,tomas_soucek__west_ham
+31,Josko Gvardiol,Man. City,DC,L69,3,0,3,6,josko_gvardiol__man_city
+32,Danny Welbeck,Brighton,A,GTF,2,1,3,7,danny_welbeck__brighton
+33,Iliman Ndiaye,Everton,MO,CFR,2,1,3,1,iliman_ndiaye__everton
+34,Dominik Szoboszlai,Liverpool,MO,GTF,2,1,3,7,dominik_szoboszlai__liverpool
+35,Mohammed Kudus,West Ham,MO,COL,2,1,3,0,mohammed_kudus__west_ham
+36,Keane Lewis-Potter,Brentford,A,CFR,1,2,3,1,keane_lewis_potter__brentford
+37,Darwin Núñez,Liverpool,A,SPR,1,2,3,2,darwin_nunez__liverpool
+38,Martin Ødegaard,Arsenal,MO,FCM,1,2,3,5,martin_degaard__arsenal
+39,Enzo Fernández,Chelsea,MD,RSH,1,2,3,4,enzo_fernandez__chelsea
+40,Bruno Guimarães,Newcastle,MD,SPR,1,2,3,2,bruno_guimaraes__newcastle
+41,Kai Havertz,Arsenal,A,FCM,2,0,2,5,kai_havertz__arsenal
+42,João Pedro,Brighton,A,FCR,2,0,2,3,joao_pedro__brighton
+43,Bernardo Silva,Man. City,MO,CFR,2,0,2,1,bernardo_silva__man_city
+44,Lucas Paquetá,West Ham,MO,FCM,2,0,2,5,lucas_paqueta__west_ham
+45,Ola Aina,Nottingham Forest,DL,FCR,2,0,2,3,ola_aina__nottingham_forest
+46,William Saliba,Arsenal,DC,FCR,2,0,2,3,william_saliba__arsenal
+47,Marc Guéhi,Crystal Palace,DC,SPR,2,0,2,2,marc_guehi__crystal_palace
+48,Nikola Milenkovic,Nottingham Forest,DC,GTF,2,0,2,7,nikola_milenkovic__nottingham_forest
+49,Callum Hudson-Odoi,Nottingham Forest,A,FCM,1,1,2,5,callum_hudson_odoi__nottingham_forest
+50,Leandro Trossard,Arsenal,MO,SPR,1,1,2,2,leandro_trossard__arsenal
+51,Emile Smith Rowe,Fulham,MO,SPR,1,1,2,2,emile_smith_rowe__fulham
+52,Alexis Mac Allister,Liverpool,MO,RSH,1,1,2,4,alexis_mac_allister__liverpool
+53,Declan Rice,Arsenal,MD,L69,1,1,2,6,declan_rice__arsenal
+54,Moisés Caicedo,Chelsea,MD,RSH,1,1,2,4,moises_caicedo__chelsea
+55,Emerson,West Ham,DL,COL,1,1,2,0,emerson__west_ham
+56,Fabian Schär,Newcastle,DC,COL,1,1,2,0,fabian_schar__newcastle
+57,Dominic Calvert-Lewin,Everton,A,CFR,0,2,2,1,dominic_calvert_lewin__everton
+58,Timo Werner,Tottenham,A,L69,0,2,2,6,timo_werner__tottenham
+59,Youri Tielemans,Aston Villa,MO,CFR,0,2,2,1,youri_tielemans__aston_villa
+60,Sandro Tonali,Newcastle,MD,FCR,0,2,2,3,sandro_tonali__newcastle
+61,Lucas Digne,Aston Villa,DL,COL,0,2,2,0,lucas_digne__aston_villa
+62,Jhon Durán,Aston Villa,A,COL,1,0,1,0,jhon_duran__aston_villa
+63,Jean-Philippe Mateta,Crystal Palace,A,L69,1,0,1,6,jean_philippe_mateta__crystal_palace
+64,Liam Delap,Ipswich Town,A,COL,1,0,1,0,liam_delap__ipswich_town
+65,Rasmus Højlund,Man. United,A,RSH,1,0,1,4,rasmus_h_jlund__man_united
+66,Noni Madueke,Chelsea,MO,CFR,1,0,1,1,noni_madueke__chelsea
+67,Kevin De Bruyne,Man. City,MO,FCM,1,0,1,5,kevin_de_bruyne__man_city
+68,Jérémy Doku,Man. City,MO,FCM,1,0,1,5,jeremy_doku__man_city
+69,Alejandro Garnacho,Man. United,MO,L69,1,0,1,6,alejandro_garnacho__man_united
+70,João Gomes,Wolverhampton,MO,GTF,1,0,1,7,joao_victor_joao_gomes__wolverhampton
+71,Trent Alexander-Arnold,Liverpool,DL,L69,1,0,1,6,trent_alexander_arnold__liverpool
+72,Pedro Porro,Tottenham,DL,CFR,1,0,1,1,pedro_porro__tottenham
+73,Gabriel Magalhães,Arsenal,DC,SPR,1,0,1,2,gabriel_magalhaes__arsenal
+74,Jurriën Jurriën Timber,Arsenal,DC,RSH,1,0,1,4,jurrien_timber__arsenal
+75,Virgil van Dijk,Liverpool,DC,L69,1,0,1,6,virgil_van_dijk__liverpool
+76,Reiss Nelson,Fulham,A,SPR,0,1,1,2,reiss_nelson__fulham
+77,Kobbie Mainoo,Man. United,MO,RSH,0,1,1,4,kobbie_mainoo__man_united
+78,Ryan Gravenberch,Liverpool,MD,SPR,0,1,1,2,ryan_gravenberch__liverpool

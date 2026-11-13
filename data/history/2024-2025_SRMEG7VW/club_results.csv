@@ -1,0 +1,141 @@
+pl_match_id,pl_gw,date,home_club,away_club,home_club_short,away_club_short,home_score,away_score,statut
+mpg_championship_match_2444548,8,2024-10-19T11:30:00Z,Tottenham,West Ham,TOT,WHU,4,1,joue
+mpg_championship_match_2444541,8,2024-10-19T14:00:00Z,Fulham,Aston Villa,FUL,AVL,1,3,joue
+mpg_championship_match_2444544,8,2024-10-19T14:00:00Z,Man. United,Brentford,MUN,BRE,2,1,joue
+mpg_championship_match_2444545,8,2024-10-19T14:00:00Z,Newcastle,Brighton,NEW,BHA,0,1,joue
+mpg_championship_match_2444547,8,2024-10-19T14:00:00Z,Southampton,Leicester,SOU,LEI,2,3,joue
+mpg_championship_match_2444542,8,2024-10-19T14:15:00Z,Ipswich Town,Everton,IPS,EVE,0,2,joue
+mpg_championship_match_2444540,8,2024-10-19T16:30:00Z,Bournemouth,Arsenal,BOU,ARS,2,0,joue
+mpg_championship_match_2444549,8,2024-10-20T13:00:00Z,Wolverhampton,Man. City,WOL,MCI,1,2,joue
+mpg_championship_match_2444543,8,2024-10-20T15:30:00Z,Liverpool,Chelsea,LIV,CHE,2,1,joue
+mpg_championship_match_2444546,8,2024-10-21T19:00:00Z,Nottingham Forest,Crystal Palace,NFO,CRY,1,0,joue
+mpg_championship_match_2444557,9,2024-10-25T19:00:00Z,Leicester,Nottingham Forest,LEI,NFO,1,3,joue
+mpg_championship_match_2444551,9,2024-10-26T14:00:00Z,Aston Villa,Bournemouth,AVL,BOU,1,1,joue
+mpg_championship_match_2444552,9,2024-10-26T14:00:00Z,Brentford,Ipswich Town,BRE,IPS,4,3,joue
+mpg_championship_match_2444553,9,2024-10-26T14:00:00Z,Brighton,Wolverhampton,BHA,WOL,2,2,joue
+mpg_championship_match_2444558,9,2024-10-26T14:00:00Z,Man. City,Southampton,MCI,SOU,1,0,joue
+mpg_championship_match_2444556,9,2024-10-26T16:30:00Z,Everton,Fulham,EVE,FUL,1,1,joue
+mpg_championship_match_2444554,9,2024-10-27T14:00:00Z,Chelsea,Newcastle,CHE,NEW,2,1,joue
+mpg_championship_match_2444555,9,2024-10-27T14:00:00Z,Crystal Palace,Tottenham,CRY,TOT,1,0,joue
+mpg_championship_match_2444559,9,2024-10-27T14:00:00Z,West Ham,Man. United,WHU,MUN,2,1,joue
+mpg_championship_match_2444550,9,2024-10-27T16:30:00Z,Arsenal,Liverpool,ARS,LIV,2,2,joue
+mpg_championship_match_2444565,10,2024-11-02T12:30:00Z,Newcastle,Arsenal,NEW,ARS,1,0,joue
+mpg_championship_match_2444560,10,2024-11-02T15:00:00Z,Bournemouth,Man. City,BOU,MCI,2,1,joue
+mpg_championship_match_2444562,10,2024-11-02T15:00:00Z,Ipswich Town,Leicester,IPS,LEI,1,1,joue
+mpg_championship_match_2444563,10,2024-11-02T15:00:00Z,Liverpool,Brighton,LIV,BHA,2,1,joue
+mpg_championship_match_2444566,10,2024-11-02T15:00:00Z,Nottingham Forest,West Ham,NFO,WHU,3,0,joue
+mpg_championship_match_2444567,10,2024-11-02T15:00:00Z,Southampton,Everton,SOU,EVE,1,0,joue
+mpg_championship_match_2444569,10,2024-11-02T17:30:00Z,Wolverhampton,Crystal Palace,WOL,CRY,2,2,joue
+mpg_championship_match_2444568,10,2024-11-03T14:00:00Z,Tottenham,Aston Villa,TOT,AVL,4,1,joue
+mpg_championship_match_2444564,10,2024-11-03T16:30:00Z,Man. United,Chelsea,MUN,CHE,1,1,joue
+mpg_championship_match_2444561,10,2024-11-04T20:00:00Z,Fulham,Brentford,FUL,BRE,2,1,joue
+mpg_championship_match_2444570,11,2024-11-09T15:00:00Z,Brentford,Bournemouth,BRE,BOU,3,2,joue
+mpg_championship_match_2444573,11,2024-11-09T15:00:00Z,Crystal Palace,Fulham,CRY,FUL,0,2,joue
+mpg_championship_match_2444578,11,2024-11-09T15:00:00Z,West Ham,Everton,WHU,EVE,0,0,joue
+mpg_championship_match_2444579,11,2024-11-09T15:00:00Z,Wolverhampton,Southampton,WOL,SOU,2,0,joue
+mpg_championship_match_2444571,11,2024-11-09T17:30:00Z,Brighton,Man. City,BHA,MCI,2,1,joue
+mpg_championship_match_2444574,11,2024-11-09T20:00:00Z,Liverpool,Aston Villa,LIV,AVL,2,0,joue
+mpg_championship_match_2444575,11,2024-11-10T14:00:00Z,Man. United,Leicester,MUN,LEI,3,0,joue
+mpg_championship_match_2444576,11,2024-11-10T14:00:00Z,Nottingham Forest,Newcastle,NFO,NEW,1,3,joue
+mpg_championship_match_2444577,11,2024-11-10T14:00:00Z,Tottenham,Ipswich Town,TOT,IPS,1,2,joue
+mpg_championship_match_2444572,11,2024-11-10T16:30:00Z,Chelsea,Arsenal,CHE,ARS,1,1,joue
+mpg_championship_match_2444586,12,2024-11-23T12:30:00Z,Leicester,Chelsea,LEI,CHE,1,2,joue
+mpg_championship_match_2444580,12,2024-11-23T15:00:00Z,Bournemouth,Brighton,BOU,BHA,1,2,joue
+mpg_championship_match_2444581,12,2024-11-23T15:00:00Z,Arsenal,Nottingham Forest,ARS,NFO,3,0,joue
+mpg_championship_match_2444582,12,2024-11-23T15:00:00Z,Aston Villa,Crystal Palace,AVL,CRY,2,2,joue
+mpg_championship_match_2444583,12,2024-11-23T15:00:00Z,Everton,Brentford,EVE,BRE,0,0,joue
+mpg_championship_match_2444584,12,2024-11-23T15:00:00Z,Fulham,Wolverhampton,FUL,WOL,1,4,joue
+mpg_championship_match_2444587,12,2024-11-23T17:30:00Z,Man. City,Tottenham,MCI,TOT,0,4,joue
+mpg_championship_match_2444589,12,2024-11-24T14:00:00Z,Southampton,Liverpool,SOU,LIV,2,3,joue
+mpg_championship_match_2444585,12,2024-11-24T16:30:00Z,Ipswich Town,Man. United,IPS,MUN,1,1,joue
+mpg_championship_match_2444588,12,2024-11-25T20:00:00Z,Newcastle,West Ham,NEW,WHU,0,2,joue
+mpg_championship_match_2444591,13,2024-11-29T20:00:00Z,Brighton,Southampton,BHA,SOU,1,1,joue
+mpg_championship_match_2444590,13,2024-11-30T15:00:00Z,Brentford,Leicester,BRE,LEI,4,1,joue
+mpg_championship_match_2444593,13,2024-11-30T15:00:00Z,Crystal Palace,Newcastle,CRY,NEW,1,1,joue
+mpg_championship_match_2444596,13,2024-11-30T15:00:00Z,Nottingham Forest,Ipswich Town,NFO,IPS,1,0,joue
+mpg_championship_match_2444599,13,2024-11-30T15:00:00Z,Wolverhampton,Bournemouth,WOL,BOU,2,4,joue
+mpg_championship_match_2444598,13,2024-11-30T17:30:00Z,West Ham,Arsenal,WHU,ARS,2,5,joue
+mpg_championship_match_2444592,13,2024-12-01T13:30:00Z,Chelsea,Aston Villa,CHE,AVL,3,0,joue
+mpg_championship_match_2444595,13,2024-12-01T13:30:00Z,Man. United,Everton,MUN,EVE,4,0,joue
+mpg_championship_match_2444597,13,2024-12-01T13:30:00Z,Tottenham,Fulham,TOT,FUL,1,1,joue
+mpg_championship_match_2444594,13,2024-12-01T16:00:00Z,Liverpool,Man. City,LIV,MCI,2,0,joue
+mpg_championship_match_2444605,14,2024-12-03T19:30:00Z,Ipswich Town,Crystal Palace,IPS,CRY,0,1,joue
+mpg_championship_match_2444606,14,2024-12-03T20:15:00Z,Leicester,West Ham,LEI,WHU,3,1,joue
+mpg_championship_match_2444603,14,2024-12-04T19:30:00Z,Everton,Wolverhampton,EVE,WOL,4,0,joue
+mpg_championship_match_2444607,14,2024-12-04T19:30:00Z,Man. City,Nottingham Forest,MCI,NFO,3,0,joue
+mpg_championship_match_2444608,14,2024-12-04T19:30:00Z,Newcastle,Liverpool,NEW,LIV,3,3,joue
+mpg_championship_match_2444609,14,2024-12-04T19:30:00Z,Southampton,Chelsea,SOU,CHE,1,5,joue
+mpg_championship_match_2444601,14,2024-12-04T20:15:00Z,Arsenal,Man. United,ARS,MUN,2,0,joue
+mpg_championship_match_2444602,14,2024-12-04T20:15:00Z,Aston Villa,Brentford,AVL,BRE,3,1,joue
+mpg_championship_match_2444604,14,2024-12-05T19:30:00Z,Fulham,Brighton,FUL,BHA,3,1,joue
+mpg_championship_match_2444600,14,2024-12-05T20:15:00Z,Bournemouth,Tottenham,BOU,TOT,1,0,joue
+mpg_championship_match_2444610,15,2024-12-07T15:00:00Z,Aston Villa,Southampton,AVL,SOU,1,0,joue
+mpg_championship_match_2444611,15,2024-12-07T15:00:00Z,Brentford,Newcastle,BRE,NEW,4,2,joue
+mpg_championship_match_2444612,15,2024-12-07T15:00:00Z,Crystal Palace,Man. City,CRY,MCI,2,2,joue
+mpg_championship_match_2444617,15,2024-12-07T17:30:00Z,Man. United,Nottingham Forest,MUN,NFO,2,3,joue
+mpg_championship_match_2444614,15,2024-12-08T14:00:00Z,Fulham,Arsenal,FUL,ARS,1,1,joue
+mpg_championship_match_2444615,15,2024-12-08T14:00:00Z,Ipswich Town,Bournemouth,IPS,BOU,1,2,joue
+mpg_championship_match_2444616,15,2024-12-08T14:00:00Z,Leicester,Brighton,LEI,BHA,2,2,joue
+mpg_championship_match_2444618,15,2024-12-08T16:30:00Z,Tottenham,Chelsea,TOT,CHE,3,4,joue
+mpg_championship_match_2444619,15,2024-12-09T20:00:00Z,West Ham,Wolverhampton,WHU,WOL,2,1,joue
+mpg_championship_match_2444613,15,2025-02-12T19:30:00Z,Everton,Liverpool,EVE,LIV,2,2,joue
+mpg_championship_match_2444621,16,2024-12-14T15:00:00Z,Arsenal,Everton,ARS,EVE,0,0,joue
+mpg_championship_match_2444624,16,2024-12-14T15:00:00Z,Liverpool,Fulham,LIV,FUL,2,2,joue
+mpg_championship_match_2444626,16,2024-12-14T15:00:00Z,Newcastle,Leicester,NEW,LEI,4,0,joue
+mpg_championship_match_2444629,16,2024-12-14T15:00:00Z,Wolverhampton,Ipswich Town,WOL,IPS,1,2,joue
+mpg_championship_match_2444627,16,2024-12-14T17:30:00Z,Nottingham Forest,Aston Villa,NFO,AVL,2,1,joue
+mpg_championship_match_2444622,16,2024-12-15T14:00:00Z,Brighton,Crystal Palace,BHA,CRY,1,3,joue
+mpg_championship_match_2444625,16,2024-12-15T16:30:00Z,Man. City,Man. United,MCI,MUN,1,2,joue
+mpg_championship_match_2444623,16,2024-12-15T19:00:00Z,Chelsea,Brentford,CHE,BRE,2,1,joue
+mpg_championship_match_2444628,16,2024-12-15T19:00:00Z,Southampton,Tottenham,SOU,TOT,0,5,joue
+mpg_championship_match_2444620,16,2024-12-16T20:00:00Z,Bournemouth,West Ham,BOU,WHU,1,1,joue
+mpg_championship_match_2444630,17,2024-12-21T12:30:00Z,Aston Villa,Man. City,AVL,MCI,2,1,joue
+mpg_championship_match_2444631,17,2024-12-21T15:00:00Z,Brentford,Nottingham Forest,BRE,NFO,0,2,joue
+mpg_championship_match_2444635,17,2024-12-21T15:00:00Z,Ipswich Town,Newcastle,IPS,NEW,0,4,joue
+mpg_championship_match_2444639,17,2024-12-21T15:00:00Z,West Ham,Brighton,WHU,BHA,1,1,joue
+mpg_championship_match_2444632,17,2024-12-21T17:30:00Z,Crystal Palace,Arsenal,CRY,ARS,1,5,joue
+mpg_championship_match_2444633,17,2024-12-22T14:00:00Z,Everton,Chelsea,EVE,CHE,0,0,joue
+mpg_championship_match_2444634,17,2024-12-22T14:00:00Z,Fulham,Southampton,FUL,SOU,0,0,joue
+mpg_championship_match_2444636,17,2024-12-22T14:00:00Z,Leicester,Wolverhampton,LEI,WOL,0,3,joue
+mpg_championship_match_2444637,17,2024-12-22T14:00:00Z,Man. United,Bournemouth,MUN,BOU,0,3,joue
+mpg_championship_match_2444638,17,2024-12-22T16:30:00Z,Tottenham,Liverpool,TOT,LIV,3,6,joue
+mpg_championship_match_2444645,18,2024-12-26T12:30:00Z,Man. City,Everton,MCI,EVE,1,1,joue
+mpg_championship_match_2444640,18,2024-12-26T15:00:00Z,Bournemouth,Crystal Palace,BOU,CRY,0,0,joue
+mpg_championship_match_2444643,18,2024-12-26T15:00:00Z,Chelsea,Fulham,CHE,FUL,1,2,joue
+mpg_championship_match_2444646,18,2024-12-26T15:00:00Z,Newcastle,Aston Villa,NEW,AVL,3,0,joue
+mpg_championship_match_2444647,18,2024-12-26T15:00:00Z,Nottingham Forest,Tottenham,NFO,TOT,1,0,joue
+mpg_championship_match_2444648,18,2024-12-26T15:00:00Z,Southampton,West Ham,SOU,WHU,0,1,joue
+mpg_championship_match_2444649,18,2024-12-26T17:30:00Z,Wolverhampton,Man. United,WOL,MUN,2,0,joue
+mpg_championship_match_2444644,18,2024-12-26T20:00:00Z,Liverpool,Leicester,LIV,LEI,3,1,joue
+mpg_championship_match_2444642,18,2024-12-27T19:30:00Z,Brighton,Brentford,BHA,BRE,0,0,joue
+mpg_championship_match_2444641,18,2024-12-27T20:15:00Z,Arsenal,Ipswich Town,ARS,IPS,1,0,joue
+mpg_championship_match_2444656,19,2024-12-29T14:30:00Z,Leicester,Man. City,LEI,MCI,0,2,joue
+mpg_championship_match_2444652,19,2024-12-29T15:00:00Z,Crystal Palace,Southampton,CRY,SOU,2,1,joue
+mpg_championship_match_2444653,19,2024-12-29T15:00:00Z,Everton,Nottingham Forest,EVE,NFO,0,2,joue
+mpg_championship_match_2444654,19,2024-12-29T15:00:00Z,Fulham,Bournemouth,FUL,BOU,2,2,joue
+mpg_championship_match_2444658,19,2024-12-29T15:00:00Z,Tottenham,Wolverhampton,TOT,WOL,2,2,joue
+mpg_championship_match_2444659,19,2024-12-29T17:15:00Z,West Ham,Liverpool,WHU,LIV,0,5,joue
+mpg_championship_match_2444650,19,2024-12-30T19:45:00Z,Aston Villa,Brighton,AVL,BHA,2,2,joue
+mpg_championship_match_2444655,19,2024-12-30T19:45:00Z,Ipswich Town,Chelsea,IPS,CHE,2,0,joue
+mpg_championship_match_2444657,19,2024-12-30T20:00:00Z,Man. United,Newcastle,MUN,NEW,0,2,joue
+mpg_championship_match_2444651,19,2025-01-01T17:30:00Z,Brentford,Arsenal,BRE,ARS,1,3,joue
+mpg_championship_match_2444668,20,2025-01-04T12:30:00Z,Tottenham,Newcastle,TOT,NEW,1,2,joue
+mpg_championship_match_2444660,20,2025-01-04T15:00:00Z,Bournemouth,Everton,BOU,EVE,1,0,joue
+mpg_championship_match_2444661,20,2025-01-04T15:00:00Z,Aston Villa,Leicester,AVL,LEI,2,1,joue
+mpg_championship_match_2444663,20,2025-01-04T15:00:00Z,Crystal Palace,Chelsea,CRY,CHE,1,1,joue
+mpg_championship_match_2444666,20,2025-01-04T15:00:00Z,Man. City,West Ham,MCI,WHU,4,1,joue
+mpg_championship_match_2444667,20,2025-01-04T15:00:00Z,Southampton,Brentford,SOU,BRE,0,5,joue
+mpg_championship_match_2444662,20,2025-01-04T17:30:00Z,Brighton,Arsenal,BHA,ARS,1,1,joue
+mpg_championship_match_2444664,20,2025-01-05T14:00:00Z,Fulham,Ipswich Town,FUL,IPS,2,2,joue
+mpg_championship_match_2444665,20,2025-01-05T16:30:00Z,Liverpool,Man. United,LIV,MUN,2,2,joue
+mpg_championship_match_2444669,20,2025-01-06T20:00:00Z,Wolverhampton,Nottingham Forest,WOL,NFO,0,3,joue
+mpg_championship_match_2444671,21,2025-01-14T19:30:00Z,Brentford,Man. City,BRE,MCI,2,2,joue
+mpg_championship_match_2444676,21,2025-01-14T19:30:00Z,West Ham,Fulham,WHU,FUL,3,2,joue
+mpg_championship_match_2444677,21,2025-01-14T19:30:00Z,Chelsea,Bournemouth,CHE,BOU,2,2,joue
+mpg_championship_match_2444675,21,2025-01-14T20:00:00Z,Nottingham Forest,Liverpool,NFO,LIV,1,1,joue
+mpg_championship_match_2444672,21,2025-01-15T19:30:00Z,Everton,Aston Villa,EVE,AVL,0,1,joue
+mpg_championship_match_2444674,21,2025-01-15T19:30:00Z,Leicester,Crystal Palace,LEI,CRY,0,2,joue
+mpg_championship_match_2444679,21,2025-01-15T19:30:00Z,Newcastle,Wolverhampton,NEW,WOL,3,0,joue
+mpg_championship_match_2444670,21,2025-01-15T20:00:00Z,Arsenal,Tottenham,ARS,TOT,2,1,joue
+mpg_championship_match_2444673,21,2025-01-16T19:30:00Z,Ipswich Town,Brighton,IPS,BHA,0,2,joue
+mpg_championship_match_2444678,21,2025-01-16T20:00:00Z,Man. United,Southampton,MUN,SOU,3,1,joue

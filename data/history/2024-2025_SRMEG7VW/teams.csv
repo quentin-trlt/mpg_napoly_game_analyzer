@@ -1,0 +1,9 @@
+team_id,mpg_team_id,team_name,coach,president,stade,valeur_effectif_meur,moy_11type_gen,moy_11type_def,moy_11type_mil,moy_11type_att,rang_moyenne,rang_attaque,rang_defense,rang_pire_selectionneur,rang_rateaux,rang_precieux,classement,variation_rang,g,n,p,diff_buts,pts,forme,moy_equipe,moy_equipe_avec_bonus,buts_pour_reels,buts_pour_mpg,buts_pour_total,buts_contre_reels,buts_contre_mpg,buts_contre_total,rotaldos_alignes,bonus_subis,precieux_occasions,precieux_matchs,nb_joueurs,nb_G,nb_D,nb_M,nb_A,total_enchere,total_cote,budget_restant,note_moy_reelle_effectif,abrev
+0,mpg_team_SRMEG7VW_1_1_0,Colo Colo,Victor_RM,,,,5.4,5.2,5.6,5.5,1,1,1,6,6,7,1,,10,1,3,22,31,,5.41,5.64,35,8,43,20,4,24,3,7,2,0,19,2,7,6,4,500.0,,0.0,,COL
+1,mpg_team_SRMEG7VW_1_1_1,CFR Cluj,vincentprono92,,,,5.4,5.4,5.3,5.7,4,4,2,8,2,1,4,,6,3,5,10,21,,5.36,5.42,28,8,36,20,7,27,2,10,0,6,18,2,6,6,4,500.0,,0.0,,CFR
+2,mpg_team_SRMEG7VW_1_1_2,СПАРТАК ВАРНА,Emilinho_,,,,5.2,5.4,5.5,4.6,3,3,4,3,3,5,2,,8,1,5,7,25,,5.27,5.44,27,12,39,22,9,31,9,10,2,1,19,2,6,7,4,500.0,,0.0,,SPR
+3,mpg_team_SRMEG7VW_1_1_3,Fc ratpi,Jacquesjr#2M49T,,,,5.0,4.5,5.1,5.4,2,2,8,5,8,3,5,,5,1,8,-3,16,,5.38,5.46,30,10,40,36,8,44,6,5,1,1,20,2,8,6,4,500.0,,0.0,,FCR
+4,mpg_team_SRMEG7VW_1_1_4,Rashford fc,HuGoat_Ncy,,,,5.1,4.7,5.5,4.9,5,5,6,7,5,2,3,,7,1,6,0,22,,5.2,5.35,23,12,35,33,3,36,3,8,0,5,18,2,6,6,4,500.0,,0.0,,RSH
+5,mpg_team_SRMEG7VW_1_1_5,FC Metz,Serunos,,,,5.3,5.1,5.6,5.1,6,8,3,2,7,4,8,,4,3,7,-11,15,,5.01,5.23,14,5,19,24,4,28,12,6,1,1,18,2,6,6,4,500.0,,0.0,,FCM
+6,mpg_team_SRMEG7VW_1_1_6,FC 69latrik,ketXfentanyl,,,,5.0,5.4,5.3,4.5,7,7,7,4,4,6,6,,5,1,8,-17,16,,5.12,5.18,22,5,27,26,17,43,9,10,1,0,24,3,7,8,6,500.0,,0.0,,L69
+7,mpg_team_SRMEG7VW_1_1_7,Gastonjuif Fc,RAPH#5C4A9,,,,5.3,4.6,5.5,6.2,8,6,5,1,1,8,7,,4,3,7,-8,15,,4.87,4.87,24,2,26,22,10,32,21,15,2,0,18,2,6,6,4,500.0,,0.0,,GTF

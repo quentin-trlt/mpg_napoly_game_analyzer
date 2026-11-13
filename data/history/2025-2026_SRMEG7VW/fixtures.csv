@@ -1,0 +1,91 @@
+gw,date,home_team_id,away_team_id,home_goals,away_goals,heure,statut,match_id,home_formation,away_formation,home_team,away_team,resultat_dom
+1,2025-08-15,6,0,0,0,,joue,mpg_division_match_SRMEG7VW_2_1_1_1_6_0,3-4-3,4-3-3,ЦСКА,Colo Colo,N
+1,2025-08-15,8,7,1,4,,joue,mpg_division_match_SRMEG7VW_2_1_1_2_8_7,3-4-3,3-4-3,AS Ba,Gdzie Jest Biały Węg,D
+1,2025-08-15,2,9,2,1,,joue,mpg_division_match_SRMEG7VW_2_1_1_3_2_9,4-4-2,3-4-3,Гунърс,Biranda Team,V
+1,2025-08-15,3,1,1,3,,joue,mpg_division_match_SRMEG7VW_2_1_1_4_3_1,3-5-2,3-4-3,Fc ratpi,Vinvin FC,D
+1,2025-08-15,4,5,1,1,,joue,mpg_division_match_SRMEG7VW_2_1_1_5_4_5,3-4-3,4-3-3,FC ABG,FC 69latrik,N
+2,2025-08-22,7,6,1,0,,joue,mpg_division_match_SRMEG7VW_2_1_2_1_7_6,3-4-3,3-4-3,Gdzie Jest Biały Węg,ЦСКА,V
+2,2025-08-22,1,4,2,0,,joue,mpg_division_match_SRMEG7VW_2_1_2_2_1_4,3-4-3,3-4-3,Vinvin FC,FC ABG,V
+2,2025-08-22,9,3,1,3,,joue,mpg_division_match_SRMEG7VW_2_1_2_3_9_3,3-4-3,3-4-3,Biranda Team,Fc ratpi,D
+2,2025-08-22,0,2,1,5,,joue,mpg_division_match_SRMEG7VW_2_1_2_4_0_2,4-3-3,3-4-3,Colo Colo,Гунърс,D
+2,2025-08-22,5,8,5,3,,joue,mpg_division_match_SRMEG7VW_2_1_2_5_5_8,4-3-3,3-4-3,FC 69latrik,AS Ba,V
+3,2025-08-30,6,5,0,4,,joue,mpg_division_match_SRMEG7VW_2_1_3_1_6_5,3-4-3,4-4-2,ЦСКА,FC 69latrik,D
+3,2025-08-30,8,1,1,0,,joue,mpg_division_match_SRMEG7VW_2_1_3_2_8_1,3-4-3,3-4-3,AS Ba,Vinvin FC,V
+3,2025-08-30,2,7,3,0,,joue,mpg_division_match_SRMEG7VW_2_1_3_3_2_7,3-5-2,3-4-3,Гунърс,Gdzie Jest Biały Węg,V
+3,2025-08-30,0,9,3,0,,joue,mpg_division_match_SRMEG7VW_2_1_3_4_0_9,4-4-2,3-4-3,Colo Colo,Biranda Team,V
+3,2025-08-30,4,3,3,0,,joue,mpg_division_match_SRMEG7VW_2_1_3_5_4_3,3-4-3,3-4-3,FC ABG,Fc ratpi,V
+4,2025-09-13,7,0,0,0,,joue,mpg_division_match_SRMEG7VW_2_1_4_1_7_0,4-3-3,4-4-2,Gdzie Jest Biały Węg,Colo Colo,N
+4,2025-09-13,3,8,0,2,,joue,mpg_division_match_SRMEG7VW_2_1_4_2_3_8,3-4-3,3-4-3,Fc ratpi,AS Ba,D
+4,2025-09-13,1,6,2,4,,joue,mpg_division_match_SRMEG7VW_2_1_4_3_1_6,3-4-3,3-4-3,Vinvin FC,ЦСКА,D
+4,2025-09-13,9,4,3,1,,joue,mpg_division_match_SRMEG7VW_2_1_4_4_9_4,3-4-3,4-3-3,Biranda Team,FC ABG,V
+4,2025-09-13,5,2,2,4,,joue,mpg_division_match_SRMEG7VW_2_1_4_5_5_2,4-4-2,4-4-2,FC 69latrik,Гунърс,D
+5,2025-09-20,6,3,5,2,,joue,mpg_division_match_SRMEG7VW_2_1_5_1_6_3,3-4-3,3-4-3,ЦСКА,Fc ratpi,V
+5,2025-09-20,8,4,2,1,,joue,mpg_division_match_SRMEG7VW_2_1_5_2_8_4,3-4-3,4-3-3,AS Ba,FC ABG,V
+5,2025-09-20,7,9,1,2,,joue,mpg_division_match_SRMEG7VW_2_1_5_3_7_9,4-3-3,3-4-3,Gdzie Jest Biały Węg,Biranda Team,D
+5,2025-09-20,2,1,1,0,,joue,mpg_division_match_SRMEG7VW_2_1_5_4_2_1,4-4-2,3-4-3,Гунърс,Vinvin FC,V
+5,2025-09-20,0,5,2,0,,joue,mpg_division_match_SRMEG7VW_2_1_5_5_0_5,4-4-2,4-4-2,Colo Colo,FC 69latrik,V
+6,2025-09-27,3,2,1,3,,joue,mpg_division_match_SRMEG7VW_2_1_6_1_3_2,3-4-3,4-4-2,Fc ratpi,Гунърс,D
+6,2025-09-27,1,0,1,1,,joue,mpg_division_match_SRMEG7VW_2_1_6_2_1_0,3-4-3,4-4-2,Vinvin FC,Colo Colo,N
+6,2025-09-27,9,8,5,0,,joue,mpg_division_match_SRMEG7VW_2_1_6_3_9_8,3-4-3,3-4-3,Biranda Team,AS Ba,V
+6,2025-09-27,5,7,5,0,,joue,mpg_division_match_SRMEG7VW_2_1_6_4_5_7,4-4-2,4-3-3,FC 69latrik,Gdzie Jest Biały Węg,V
+6,2025-09-27,4,6,1,4,,joue,mpg_division_match_SRMEG7VW_2_1_6_5_4_6,4-3-3,3-4-3,FC ABG,ЦСКА,D
+7,2025-10-03,6,8,5,0,,joue,mpg_division_match_SRMEG7VW_2_1_7_1_6_8,3-4-3,3-4-3,ЦСКА,AS Ba,V
+7,2025-10-03,7,1,3,2,,joue,mpg_division_match_SRMEG7VW_2_1_7_2_7_1,4-3-3,3-4-3,Gdzie Jest Biały Węg,Vinvin FC,V
+7,2025-10-03,2,4,2,1,,joue,mpg_division_match_SRMEG7VW_2_1_7_3_2_4,4-4-2,4-3-3,Гунърс,FC ABG,V
+7,2025-10-03,0,3,2,2,,joue,mpg_division_match_SRMEG7VW_2_1_7_4_0_3,4-4-2,3-4-3,Colo Colo,Fc ratpi,N
+7,2025-10-03,5,9,2,0,,joue,mpg_division_match_SRMEG7VW_2_1_7_5_5_9,4-4-2,3-4-3,FC 69latrik,Biranda Team,V
+8,2025-10-18,6,9,6,0,,joue,mpg_division_match_SRMEG7VW_2_1_8_1_6_9,3-4-3,3-4-3,ЦСКА,Biranda Team,V
+8,2025-10-18,8,2,0,4,,joue,mpg_division_match_SRMEG7VW_2_1_8_2_8_2,3-4-3,4-4-2,AS Ba,Гунърс,D
+8,2025-10-18,3,7,1,1,,joue,mpg_division_match_SRMEG7VW_2_1_8_3_3_7,3-4-3,3-4-3,Fc ratpi,Gdzie Jest Biały Węg,N
+8,2025-10-18,1,5,0,8,,joue,mpg_division_match_SRMEG7VW_2_1_8_4_1_5,3-4-3,4-4-2,Vinvin FC,FC 69latrik,D
+8,2025-10-18,4,0,4,1,,joue,mpg_division_match_SRMEG7VW_2_1_8_5_4_0,4-3-3,4-4-2,FC ABG,Colo Colo,V
+9,2025-10-24,7,4,1,5,,joue,mpg_division_match_SRMEG7VW_2_1_9_1_7_4,3-4-3,4-3-3,Gdzie Jest Biały Węg,FC ABG,D
+9,2025-10-24,2,6,2,1,,joue,mpg_division_match_SRMEG7VW_2_1_9_2_2_6,4-4-2,3-4-3,Гунърс,ЦСКА,V
+9,2025-10-24,9,1,2,7,,joue,mpg_division_match_SRMEG7VW_2_1_9_3_9_1,3-4-3,3-4-3,Biranda Team,Vinvin FC,D
+9,2025-10-24,0,8,4,2,,joue,mpg_division_match_SRMEG7VW_2_1_9_4_0_8,4-4-2,3-4-3,Colo Colo,AS Ba,V
+9,2025-10-24,5,3,1,1,,joue,mpg_division_match_SRMEG7VW_2_1_9_5_5_3,4-4-2,3-4-3,FC 69latrik,Fc ratpi,N
+10,2025-11-01,0,6,1,2,,joue,mpg_division_match_SRMEG7VW_2_1_10_1_0_6,4-4-2,3-4-3,Colo Colo,ЦСКА,D
+10,2025-11-01,7,8,3,1,,joue,mpg_division_match_SRMEG7VW_2_1_10_2_7_8,3-4-3,3-4-3,Gdzie Jest Biały Węg,AS Ba,V
+10,2025-11-01,9,2,3,4,,joue,mpg_division_match_SRMEG7VW_2_1_10_3_9_2,3-4-3,3-4-3,Biranda Team,Гунърс,D
+10,2025-11-01,1,3,1,0,,joue,mpg_division_match_SRMEG7VW_2_1_10_4_1_3,3-4-3,3-4-3,Vinvin FC,Fc ratpi,V
+10,2025-11-01,5,4,3,3,,joue,mpg_division_match_SRMEG7VW_2_1_10_5_5_4,4-4-2,4-3-3,FC 69latrik,FC ABG,N
+11,2025-11-08,6,7,3,3,,joue,mpg_division_match_SRMEG7VW_2_1_11_1_6_7,3-4-3,4-4-2,ЦСКА,Gdzie Jest Biały Węg,N
+11,2025-11-08,4,1,7,1,,joue,mpg_division_match_SRMEG7VW_2_1_11_2_4_1,4-3-3,3-4-3,FC ABG,Vinvin FC,V
+11,2025-11-08,3,9,3,1,,joue,mpg_division_match_SRMEG7VW_2_1_11_3_3_9,3-4-3,3-4-3,Fc ratpi,Biranda Team,V
+11,2025-11-08,2,0,2,3,,joue,mpg_division_match_SRMEG7VW_2_1_11_4_2_0,4-3-3,4-4-2,Гунърс,Colo Colo,D
+11,2025-11-08,8,5,1,4,,joue,mpg_division_match_SRMEG7VW_2_1_11_5_8_5,3-4-3,4-4-2,AS Ba,FC 69latrik,D
+12,2025-11-22,5,6,0,2,,joue,mpg_division_match_SRMEG7VW_2_1_12_1_5_6,4-4-2,3-4-3,FC 69latrik,ЦСКА,D
+12,2025-11-22,1,8,1,10,,joue,mpg_division_match_SRMEG7VW_2_1_12_2_1_8,3-4-3,4-3-3,Vinvin FC,AS Ba,D
+12,2025-11-22,7,2,3,0,,joue,mpg_division_match_SRMEG7VW_2_1_12_3_7_2,4-4-2,4-2-4,Gdzie Jest Biały Węg,Гунърс,V
+12,2025-11-22,9,0,1,1,,joue,mpg_division_match_SRMEG7VW_2_1_12_4_9_0,3-4-3,4-4-2,Biranda Team,Colo Colo,N
+12,2025-11-22,3,4,2,0,,joue,mpg_division_match_SRMEG7VW_2_1_12_5_3_4,3-4-3,4-3-3,Fc ratpi,FC ABG,V
+13,2025-11-29,0,7,1,2,,joue,mpg_division_match_SRMEG7VW_2_1_13_1_0_7,4-4-2,4-4-2,Colo Colo,Gdzie Jest Biały Węg,D
+13,2025-11-29,8,3,2,5,,joue,mpg_division_match_SRMEG7VW_2_1_13_2_8_3,4-3-3,3-4-3,AS Ba,Fc ratpi,D
+13,2025-11-29,6,1,6,3,,joue,mpg_division_match_SRMEG7VW_2_1_13_3_6_1,4-3-3,3-4-3,ЦСКА,Vinvin FC,V
+13,2025-11-29,4,9,6,0,,joue,mpg_division_match_SRMEG7VW_2_1_13_4_4_9,4-3-3,3-4-3,FC ABG,Biranda Team,V
+13,2025-11-29,2,5,1,1,,joue,mpg_division_match_SRMEG7VW_2_1_13_5_2_5,3-4-3,4-4-2,Гунърс,FC 69latrik,N
+14,2025-12-02,3,6,1,2,,joue,mpg_division_match_SRMEG7VW_2_1_14_1_3_6,3-4-3,4-3-3,Fc ratpi,ЦСКА,D
+14,2025-12-02,4,8,5,1,,joue,mpg_division_match_SRMEG7VW_2_1_14_2_4_8,4-3-3,4-3-3,FC ABG,AS Ba,V
+14,2025-12-02,9,7,3,1,,joue,mpg_division_match_SRMEG7VW_2_1_14_3_9_7,3-4-3,4-4-2,Biranda Team,Gdzie Jest Biały Węg,V
+14,2025-12-02,1,2,2,6,,joue,mpg_division_match_SRMEG7VW_2_1_14_4_1_2,3-4-3,4-3-3,Vinvin FC,Гунърс,D
+14,2025-12-02,5,0,2,1,,joue,mpg_division_match_SRMEG7VW_2_1_14_5_5_0,4-4-2,4-4-2,FC 69latrik,Colo Colo,V
+15,2025-12-06,2,3,2,4,,joue,mpg_division_match_SRMEG7VW_2_1_15_1_2_3,4-3-3,3-4-3,Гунърс,Fc ratpi,D
+15,2025-12-06,0,1,4,0,,joue,mpg_division_match_SRMEG7VW_2_1_15_2_0_1,4-4-2,3-4-3,Colo Colo,Vinvin FC,V
+15,2025-12-06,8,9,1,5,,joue,mpg_division_match_SRMEG7VW_2_1_15_3_8_9,4-3-3,3-4-3,AS Ba,Biranda Team,D
+15,2025-12-06,7,5,0,3,,joue,mpg_division_match_SRMEG7VW_2_1_15_4_7_5,4-4-2,4-4-2,Gdzie Jest Biały Węg,FC 69latrik,D
+15,2025-12-06,6,4,3,1,,joue,mpg_division_match_SRMEG7VW_2_1_15_5_6_4,4-3-3,4-3-3,ЦСКА,FC ABG,V
+16,2025-12-13,8,6,0,3,,joue,mpg_division_match_SRMEG7VW_2_1_16_1_8_6,4-3-3,4-3-3,AS Ba,ЦСКА,D
+16,2025-12-13,1,7,1,2,,joue,mpg_division_match_SRMEG7VW_2_1_16_2_1_7,3-4-3,3-5-2,Vinvin FC,Gdzie Jest Biały Węg,D
+16,2025-12-13,4,2,3,3,,joue,mpg_division_match_SRMEG7VW_2_1_16_3_4_2,4-3-3,4-4-2,FC ABG,Гунърс,N
+16,2025-12-13,3,0,2,1,,joue,mpg_division_match_SRMEG7VW_2_1_16_4_3_0,3-4-3,4-4-2,Fc ratpi,Colo Colo,V
+16,2025-12-13,9,5,2,10,,joue,mpg_division_match_SRMEG7VW_2_1_16_5_9_5,3-4-3,4-4-2,Biranda Team,FC 69latrik,D
+17,2025-12-20,9,6,0,8,,joue,mpg_division_match_SRMEG7VW_2_1_17_1_9_6,3-4-3,4-4-2,Biranda Team,ЦСКА,D
+17,2025-12-20,2,8,2,3,,joue,mpg_division_match_SRMEG7VW_2_1_17_2_2_8,3-4-3,4-3-3,Гунърс,AS Ba,D
+17,2025-12-20,7,3,4,2,,joue,mpg_division_match_SRMEG7VW_2_1_17_3_7_3,3-5-2,3-4-3,Gdzie Jest Biały Węg,Fc ratpi,V
+17,2025-12-20,5,1,3,2,,joue,mpg_division_match_SRMEG7VW_2_1_17_4_5_1,4-4-2,3-4-3,FC 69latrik,Vinvin FC,V
+17,2025-12-20,0,4,1,2,,joue,mpg_division_match_SRMEG7VW_2_1_17_5_0_4,4-4-2,4-5-1,Colo Colo,FC ABG,D
+18,2025-12-26,4,7,2,3,,joue,mpg_division_match_SRMEG7VW_2_1_18_1_4_7,3-5-2,3-5-2,FC ABG,Gdzie Jest Biały Węg,D
+18,2025-12-26,6,2,0,1,,joue,mpg_division_match_SRMEG7VW_2_1_18_2_6_2,4-4-2,3-4-3,ЦСКА,Гунърс,D
+18,2025-12-26,1,9,5,2,,joue,mpg_division_match_SRMEG7VW_2_1_18_3_1_9,3-4-3,3-4-3,Vinvin FC,Biranda Team,V
+18,2025-12-26,8,0,1,1,,joue,mpg_division_match_SRMEG7VW_2_1_18_4_8_0,4-3-3,4-4-2,AS Ba,Colo Colo,N
+18,2025-12-26,3,5,0,3,,joue,mpg_division_match_SRMEG7VW_2_1_18_5_3_5,3-4-3,4-4-2,Fc ratpi,FC 69latrik,D

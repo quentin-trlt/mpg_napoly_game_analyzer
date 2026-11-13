@@ -1,0 +1,186 @@
+match_id,gw,team_id,side,bonus,effet,cible_affiche,icone
+mpg_division_match_SRMEG7VW_1_1_1_1_5_6,1,5,dom,Capitaine,+0.5pt,Saka,captain_icon
+mpg_division_match_SRMEG7VW_1_1_1_1_5_6,1,5,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_1_1_5_6,1,6,ext,Capitaine,+0.5pt,Gündogan,captain_icon
+mpg_division_match_SRMEG7VW_1_1_1_2_2_1,1,2,dom,Capitaine,+0.5pt,Trossard,captain_icon
+mpg_division_match_SRMEG7VW_1_1_1_2_2_1,1,2,dom,McDo+,+1pt,Calafiori,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_1_2_2_1,1,1,ext,Capitaine,+0.5pt,Mohamed Salah,captain_icon
+mpg_division_match_SRMEG7VW_1_1_1_3_4_0,1,4,dom,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_1_3_4_0,1,0,ext,Capitaine,+0.5pt,Gordon,captain_icon
+mpg_division_match_SRMEG7VW_1_1_1_3_4_0,1,0,ext,McDo+,+1pt,Kudus,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_1_3_4_0,1,0,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_1_4_3_7,1,3,dom,Capitaine,+0.5pt,Saliba,captain_icon
+mpg_division_match_SRMEG7VW_1_1_1_4_3_7,1,3,dom,McDo+,+1pt,Akanji,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_2_1_6_3,2,6,dom,Capitaine,+0.5pt,Sancho,captain_icon
+mpg_division_match_SRMEG7VW_1_1_2_1_6_3,2,6,dom,Miroir,,,
+mpg_division_match_SRMEG7VW_1_1_2_1_6_3,2,3,ext,Capitaine,+0.5pt,Maddison,captain_icon
+mpg_division_match_SRMEG7VW_1_1_2_2_7_4,2,4,ext,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_2_2_7_4,2,4,ext,La valise à Nanard,+5M,Aït-Nouri,
+mpg_division_match_SRMEG7VW_1_1_2_3_0_2,2,0,dom,Capitaine,+0.5pt,Onana,captain_icon
+mpg_division_match_SRMEG7VW_1_1_2_3_0_2,2,0,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_2_3_0_2,2,2,ext,Capitaine,+0.5pt,Wissa,captain_icon
+mpg_division_match_SRMEG7VW_1_1_2_4_1_5,2,1,dom,Capitaine,+0.5pt,Mohamed Salah,captain_icon
+mpg_division_match_SRMEG7VW_1_1_2_4_1_5,2,5,ext,Capitaine,+0.5pt,Doku,captain_icon
+mpg_division_match_SRMEG7VW_1_1_2_4_1_5,2,5,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_3_1_2_7,3,2,dom,Capitaine,+0.5pt,Núñez,captain_icon
+mpg_division_match_SRMEG7VW_1_1_3_1_2_7,3,2,dom,La valise à Nanard,+5M,João Gomes,
+mpg_division_match_SRMEG7VW_1_1_3_2_4_6,3,4,dom,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_3_2_4_6,3,4,dom,Zahia,+0.5pt,Titulaires,zahia_icon
+mpg_division_match_SRMEG7VW_1_1_3_2_4_6,3,6,ext,Capitaine,+0.5pt,van Dijk,captain_icon
+mpg_division_match_SRMEG7VW_1_1_3_3_3_5,3,3,dom,Capitaine,+0.5pt,Maddison,captain_icon
+mpg_division_match_SRMEG7VW_1_1_3_3_3_5,3,3,dom,Miroir,,,
+mpg_division_match_SRMEG7VW_1_1_3_3_3_5,3,5,ext,Capitaine,+0.5pt,Saka,captain_icon
+mpg_division_match_SRMEG7VW_1_1_3_3_3_5,3,5,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_3_4_0_1,3,0,dom,Capitaine,+0.5pt,Andreas Pereira,captain_icon
+mpg_division_match_SRMEG7VW_1_1_3_4_0_1,3,0,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_3_4_0_1,3,1,ext,Capitaine,+0.5pt,Bernardo Silva,captain_icon
+mpg_division_match_SRMEG7VW_1_1_3_4_0_1,3,1,ext,Miroir,,,
+mpg_division_match_SRMEG7VW_1_1_4_1_5_4,4,5,dom,Capitaine,+0.5pt,Hudson-Odoi,captain_icon
+mpg_division_match_SRMEG7VW_1_1_4_1_5_4,4,5,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_4_1_5_4,4,4,ext,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_4_2_6_2,4,6,dom,Capitaine,+0.5pt,van Dijk,captain_icon
+mpg_division_match_SRMEG7VW_1_1_4_2_6_2,4,6,dom,McDo+,+1pt,Gvardiol,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_4_2_6_2,4,2,ext,Capitaine,+0.5pt,Iwobi,captain_icon
+mpg_division_match_SRMEG7VW_1_1_4_3_7_0,4,0,ext,Capitaine,+0.5pt,Son Heung-Min,captain_icon
+mpg_division_match_SRMEG7VW_1_1_4_3_7_0,4,0,ext,McDo+,+1pt,Isak,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_4_3_7_0,4,0,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_4_4_1_3,4,1,dom,Capitaine,+0.5pt,Lewis-Potter,captain_icon
+mpg_division_match_SRMEG7VW_1_1_4_4_1_3,4,3,ext,Capitaine,+0.5pt,Maddison,captain_icon
+mpg_division_match_SRMEG7VW_1_1_4_4_1_3,4,3,ext,La valise à Nanard,+5M,Joelinton,
+mpg_division_match_SRMEG7VW_1_1_5_1_2_5,5,2,dom,Capitaine,+0.5pt,Núñez,captain_icon
+mpg_division_match_SRMEG7VW_1_1_5_1_2_5,5,2,dom,Chapron rouge,,Smith Rowe,
+mpg_division_match_SRMEG7VW_1_1_5_1_2_5,5,5,ext,Capitaine,+0.5pt,Ødegaard,captain_icon
+mpg_division_match_SRMEG7VW_1_1_5_1_2_5,5,5,ext,Miroir,,,
+mpg_division_match_SRMEG7VW_1_1_5_1_2_5,5,5,ext,Chapron rouge,,Lucas Paquetá,
+mpg_division_match_SRMEG7VW_1_1_5_1_2_5,5,5,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_5_2_4_3,5,4,dom,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_5_2_4_3,5,3,ext,Capitaine,+0.5pt,Saliba,captain_icon
+mpg_division_match_SRMEG7VW_1_1_5_3_7_1,5,1,ext,Capitaine,+0.5pt,Lewis-Potter,captain_icon
+mpg_division_match_SRMEG7VW_1_1_5_3_7_1,5,1,ext,McDo+,+1pt,Ndiaye,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_5_4_0_6,5,0,dom,Capitaine,+0.5pt,Mitoma,captain_icon
+mpg_division_match_SRMEG7VW_1_1_5_4_0_6,5,0,dom,La valise à Nanard,+5M,Matheus Cunha,
+mpg_division_match_SRMEG7VW_1_1_5_4_0_6,5,0,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_6_1_5_0,6,5,dom,Capitaine,+0.5pt,Saka,captain_icon
+mpg_division_match_SRMEG7VW_1_1_6_1_5_0,6,5,dom,Suarez,,Sels,suarez_icon
+mpg_division_match_SRMEG7VW_1_1_6_1_5_0,6,5,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_6_1_5_0,6,0,ext,Capitaine,+0.5pt,Mitoma,captain_icon
+mpg_division_match_SRMEG7VW_1_1_6_1_5_0,6,0,ext,Miroir,,,
+mpg_division_match_SRMEG7VW_1_1_6_1_5_0,6,0,ext,Suarez,-1pt,Sánchez,suarez_icon
+mpg_division_match_SRMEG7VW_1_1_6_1_5_0,6,0,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_6_2_6_7,6,6,dom,Capitaine,+0.5pt,Matheus Cunha,captain_icon
+mpg_division_match_SRMEG7VW_1_1_6_3_4_1,6,4,dom,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_6_3_4_1,6,4,dom,Suarez,-1pt,Kelleher,suarez_icon
+mpg_division_match_SRMEG7VW_1_1_6_3_4_1,6,1,ext,Capitaine,+0.5pt,Lewis-Potter,captain_icon
+mpg_division_match_SRMEG7VW_1_1_6_3_4_1,6,1,ext,Suarez,-1pt,Raya,suarez_icon
+mpg_division_match_SRMEG7VW_1_1_6_4_3_2,6,3,dom,Capitaine,+0.5pt,Saliba,captain_icon
+mpg_division_match_SRMEG7VW_1_1_6_4_3_2,6,2,ext,Capitaine,+0.5pt,Gabriel Magalhães,captain_icon
+mpg_division_match_SRMEG7VW_1_1_6_4_3_2,6,2,ext,5 défenseurs,+1pt,Déf. titulaires,5_def_icon
+mpg_division_match_SRMEG7VW_1_1_7_1_2_4,7,2,dom,Capitaine,+0.5pt,Guéhi,captain_icon
+mpg_division_match_SRMEG7VW_1_1_7_1_2_4,7,2,dom,Zahia,,Titulaires,zahia_icon
+mpg_division_match_SRMEG7VW_1_1_7_1_2_4,7,2,dom,5 défenseurs,+1pt,Déf. titulaires,5_def_icon
+mpg_division_match_SRMEG7VW_1_1_7_1_2_4,7,4,ext,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_7_1_2_4,7,4,ext,Miroir,,,
+mpg_division_match_SRMEG7VW_1_1_7_1_2_4,7,4,ext,Zahia,+0.5pt,Titulaires,zahia_icon
+mpg_division_match_SRMEG7VW_1_1_7_2_7_5,7,5,ext,Capitaine,+0.5pt,Saka,captain_icon
+mpg_division_match_SRMEG7VW_1_1_7_2_7_5,7,5,ext,Zahia,+0.5pt,Titulaires,zahia_icon
+mpg_division_match_SRMEG7VW_1_1_7_2_7_5,7,5,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_7_3_0_3,7,0,dom,Capitaine,+0.5pt,Son Heung-Min,captain_icon
+mpg_division_match_SRMEG7VW_1_1_7_3_0_3,7,0,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_7_3_0_3,7,3,ext,Capitaine,+0.5pt,Mbeumo,captain_icon
+mpg_division_match_SRMEG7VW_1_1_7_3_0_3,7,3,ext,Chapron rouge,,Mitoma,
+mpg_division_match_SRMEG7VW_1_1_7_4_1_6,7,1,dom,Capitaine,+0.5pt,Lewis-Potter,captain_icon
+mpg_division_match_SRMEG7VW_1_1_8_1_6_5,8,5,ext,Capitaine,+0.5pt,Saka,captain_icon
+mpg_division_match_SRMEG7VW_1_1_8_1_6_5,8,5,ext,Chapron rouge,,Doku,
+mpg_division_match_SRMEG7VW_1_1_8_1_6_5,8,5,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_8_2_1_2,8,2,ext,Capitaine,+0.5pt,Bruno Guimarães,captain_icon
+mpg_division_match_SRMEG7VW_1_1_8_2_1_2,8,2,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_8_3_0_4,8,0,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_8_3_0_4,8,4,ext,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_8_3_0_4,8,4,ext,Tonton Pat,,R. tactiques,tonton_pat_icon
+mpg_division_match_SRMEG7VW_1_1_8_4_7_3,8,3,ext,Capitaine,+0.5pt,Eze,captain_icon
+mpg_division_match_SRMEG7VW_1_1_9_1_3_6,9,3,dom,Capitaine,+0.5pt,Eze,captain_icon
+mpg_division_match_SRMEG7VW_1_1_9_1_3_6,9,3,dom,Suarez,-1pt,Ederson,suarez_icon
+mpg_division_match_SRMEG7VW_1_1_9_1_3_6,9,6,ext,Capitaine,+0.5pt,van Dijk,captain_icon
+mpg_division_match_SRMEG7VW_1_1_9_1_3_6,9,6,ext,Tonton Pat,,R. tactiques,tonton_pat_icon
+mpg_division_match_SRMEG7VW_1_1_9_2_4_7,9,4,dom,Capitaine,+0.5pt,Fernández,captain_icon
+mpg_division_match_SRMEG7VW_1_1_9_2_4_7,9,4,dom,Chapron rouge,,Vardy,
+mpg_division_match_SRMEG7VW_1_1_9_3_2_0,9,2,dom,Capitaine,+0.5pt,Gravenberch,captain_icon
+mpg_division_match_SRMEG7VW_1_1_9_3_2_0,9,2,dom,Suarez,-1pt,Sels,suarez_icon
+mpg_division_match_SRMEG7VW_1_1_9_3_2_0,9,0,ext,Capitaine,+0.5pt,Mitoma,captain_icon
+mpg_division_match_SRMEG7VW_1_1_9_3_2_0,9,0,ext,McDo+,+1pt,Kudus,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_9_3_2_0,9,0,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_9_4_5_1,9,5,dom,Capitaine,+0.5pt,De Bruyne,captain_icon
+mpg_division_match_SRMEG7VW_1_1_9_4_5_1,9,5,dom,Tonton Pat,,R. tactiques,tonton_pat_icon
+mpg_division_match_SRMEG7VW_1_1_9_4_5_1,9,5,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_9_4_5_1,9,1,ext,Capitaine,+0.5pt,Lewis-Potter,captain_icon
+mpg_division_match_SRMEG7VW_1_1_10_1_7_2,10,2,ext,Capitaine,+0.5pt,Iwobi,captain_icon
+mpg_division_match_SRMEG7VW_1_1_10_1_7_2,10,2,ext,McDo+,+1pt,Bruno Guimarães,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_10_1_7_2,10,2,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_10_2_6_4,10,4,ext,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_10_2_6_4,10,4,ext,McDo+,+1pt,Fernández,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_10_3_5_3,10,5,dom,Capitaine,+0.5pt,De Bruyne,captain_icon
+mpg_division_match_SRMEG7VW_1_1_10_3_5_3,10,5,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_10_3_5_3,10,3,ext,Capitaine,+0.5pt,Mbeumo,captain_icon
+mpg_division_match_SRMEG7VW_1_1_10_3_5_3,10,3,ext,McDo+,+1pt,Tonali,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_10_4_1_0,10,1,dom,Capitaine,+0.5pt,Lewis-Potter,captain_icon
+mpg_division_match_SRMEG7VW_1_1_10_4_1_0,10,1,dom,Zahia,+0.5pt,Titulaires,zahia_icon
+mpg_division_match_SRMEG7VW_1_1_10_4_1_0,10,0,ext,Capitaine,+0.5pt,Kudus,captain_icon
+mpg_division_match_SRMEG7VW_1_1_10_4_1_0,10,0,ext,Suarez,-1pt,Alisson Becker,suarez_icon
+mpg_division_match_SRMEG7VW_1_1_10_4_1_0,10,0,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_11_1_4_5,11,4,dom,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_11_1_4_5,11,4,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_11_1_4_5,11,5,ext,Capitaine,+0.5pt,Foden,captain_icon
+mpg_division_match_SRMEG7VW_1_1_11_1_4_5,11,5,ext,McDo+,+1pt,Hudson-Odoi,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_11_1_4_5,11,5,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_11_2_2_6,11,2,dom,Capitaine,+0.5pt,Kulusevski,captain_icon
+mpg_division_match_SRMEG7VW_1_1_11_2_2_6,11,2,dom,Miroir,,,
+mpg_division_match_SRMEG7VW_1_1_11_2_2_6,11,2,dom,La valise à Nanard,+5M,Rice,
+mpg_division_match_SRMEG7VW_1_1_11_2_2_6,11,6,ext,Capitaine,+0.5pt,Rice,captain_icon
+mpg_division_match_SRMEG7VW_1_1_11_2_2_6,11,6,ext,La valise à Nanard,,Gibbs-White,
+mpg_division_match_SRMEG7VW_1_1_11_3_0_7,11,0,dom,Capitaine,+0.5pt,Gordon,captain_icon
+mpg_division_match_SRMEG7VW_1_1_11_3_0_7,11,0,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_11_4_3_1,11,3,dom,Capitaine,+0.5pt,Tonali,captain_icon
+mpg_division_match_SRMEG7VW_1_1_11_4_3_1,11,3,dom,Zahia,+0.5pt,Titulaires,zahia_icon
+mpg_division_match_SRMEG7VW_1_1_11_4_3_1,11,1,ext,Capitaine,+0.5pt,Ndiaye,captain_icon
+mpg_division_match_SRMEG7VW_1_1_11_4_3_1,11,1,ext,McDo+,+1pt,Tielemans,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_12_1_5_2,12,5,dom,Capitaine,+0.5pt,Havertz,captain_icon
+mpg_division_match_SRMEG7VW_1_1_12_1_5_2,12,5,dom,McDo+,+1pt,Foden,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_12_1_5_2,12,5,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_12_1_5_2,12,2,ext,Capitaine,+0.5pt,Trossard,captain_icon
+mpg_division_match_SRMEG7VW_1_1_12_1_5_2,12,2,ext,McDo+,+1pt,Gibbs-White,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_12_2_3_4,12,3,dom,Capitaine,+0.5pt,Tonali,captain_icon
+mpg_division_match_SRMEG7VW_1_1_12_2_3_4,12,3,dom,Tonton Pat,,R. tactiques,tonton_pat_icon
+mpg_division_match_SRMEG7VW_1_1_12_2_3_4,12,4,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_12_4_6_0,12,0,ext,Capitaine,+0.5pt,Son Heung-Min,captain_icon
+mpg_division_match_SRMEG7VW_1_1_12_4_6_0,12,0,ext,Chapron rouge,,Gordon,
+mpg_division_match_SRMEG7VW_1_1_12_4_6_0,12,0,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_13_1_0_5,13,0,dom,Capitaine,+0.5pt,Andreas Pereira,captain_icon
+mpg_division_match_SRMEG7VW_1_1_13_1_0_5,13,0,dom,Tonton Pat,,R. tactiques,tonton_pat_icon
+mpg_division_match_SRMEG7VW_1_1_13_1_0_5,13,5,ext,Capitaine,+0.5pt,Ødegaard,captain_icon
+mpg_division_match_SRMEG7VW_1_1_13_1_0_5,13,5,ext,McDo+,+1pt,Foden,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_13_1_0_5,13,5,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_13_3_1_4,13,1,dom,Capitaine,+0.5pt,Bernardo Silva,captain_icon
+mpg_division_match_SRMEG7VW_1_1_13_3_1_4,13,1,dom,La valise à Nanard,+5M,Solanke,
+mpg_division_match_SRMEG7VW_1_1_13_3_1_4,13,4,ext,Capitaine,+0.5pt,Mac Allister,captain_icon
+mpg_division_match_SRMEG7VW_1_1_13_3_1_4,13,4,ext,McDo+,+1pt,Fernández,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_13_3_1_4,13,4,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_13_4_2_3,13,2,dom,Capitaine,+0.5pt,Gibbs-White,captain_icon
+mpg_division_match_SRMEG7VW_1_1_13_4_2_3,13,2,dom,Tonton Pat,,R. tactiques,tonton_pat_icon
+mpg_division_match_SRMEG7VW_1_1_13_4_2_3,13,2,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_13_4_2_3,13,3,ext,Capitaine,+0.5pt,Tonali,captain_icon
+mpg_division_match_SRMEG7VW_1_1_13_4_2_3,13,3,ext,McDo+,+1pt,Eze,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_14_1_4_2,14,4,dom,Capitaine,+0.5pt,Bruno Fernandes,captain_icon
+mpg_division_match_SRMEG7VW_1_1_14_1_4_2,14,4,dom,McDo+,+1pt,Mac Allister,mcdo_icon
+mpg_division_match_SRMEG7VW_1_1_14_1_4_2,14,4,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_14_1_4_2,14,2,ext,Capitaine,+0.5pt,Gibbs-White,captain_icon
+mpg_division_match_SRMEG7VW_1_1_14_1_4_2,14,2,ext,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_14_2_5_7,14,5,dom,Capitaine,+0.5pt,Foden,captain_icon
+mpg_division_match_SRMEG7VW_1_1_14_2_5_7,14,5,dom,La valise à Nanard,+5M,Palmer,
+mpg_division_match_SRMEG7VW_1_1_14_2_5_7,14,5,dom,4 défenseurs,+0.5pt,Déf. titulaires,4_def_icon
+mpg_division_match_SRMEG7VW_1_1_14_3_3_0,14,3,dom,Capitaine,+0.5pt,Tonali,captain_icon
+mpg_division_match_SRMEG7VW_1_1_14_3_3_0,14,0,ext,Capitaine,+0.5pt,Gordon,captain_icon
+mpg_division_match_SRMEG7VW_1_1_14_3_3_0,14,0,ext,Zahia,+0.5pt,Titulaires,zahia_icon
+mpg_division_match_SRMEG7VW_1_1_14_4_6_1,14,6,dom,Capitaine,+0.5pt,Matheus Cunha,captain_icon
+mpg_division_match_SRMEG7VW_1_1_14_4_6_1,14,6,dom,Zahia,+0.5pt,Titulaires,zahia_icon
+mpg_division_match_SRMEG7VW_1_1_14_4_6_1,14,1,ext,Capitaine,+0.5pt,Lewis-Potter,captain_icon
+mpg_division_match_SRMEG7VW_1_1_14_4_6_1,14,1,ext,Tonton Pat,,R. tactiques,tonton_pat_icon

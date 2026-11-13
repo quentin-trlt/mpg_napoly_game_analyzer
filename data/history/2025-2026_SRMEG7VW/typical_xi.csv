@@ -1,0 +1,90 @@
+team_id,slot,poste,note_moy,joueur_affiche,prochain_adversaire_club,player_key
+0,1,G,,Pope,,nick_pope__newcastle
+0,2,DL,4.5,Cash,,matty_cash__aston_villa
+0,4,DL,5.0,Williams,,neco_williams__nottingham_forest
+0,5,MO,5.6,Kudus,,mohammed_kudus__tottenham
+0,6,MO,5.4,McGinn,,john_mcginn__aston_villa
+0,7,MO,5.3,Pedro Neto,,pedro_neto__chelsea
+0,8,MD,5.4,Xhaka,,granit_xhaka__sunderland
+0,9,A,6.2,Evanilson,,francisco_evanilson_evanilson__bournemouth
+0,10,A,4.8,Strand Larsen,,j_rgen_strand_larsen__wolverhampton
+0,11,A,5.0,Tel,,mathys_tel__tottenham
+1,1,G,5.4,Alisson Becker,,alisson_ramses_alisson_becker__liverpool
+1,2,DC,5.3,van de Ven,,micky_van_de_ven__tottenham
+1,3,MD,5.1,Lewis-Skelly,,myles_lewis_skelly__arsenal
+1,4,DL,4.7,Robinson,,antonee_robinson__fulham
+1,5,MO,5.0,Merino,,mikel_merino__arsenal
+1,6,MO,5.6,Murphy,,jacob_murphy__newcastle
+1,7,MO,5.9,Semenyo,,antoine_semenyo__bournemouth
+1,8,MO,4.8,Johnson,,brennan_johnson__tottenham
+1,9,A,5.8,Isak,,alexander_isak__liverpool
+1,10,A,4.5,Talbi,,chemsdine_talbi__sunderland
+1,11,A,5.3,Elanga,,anthony_elanga__newcastle
+2,1,G,5.7,Martínez,,emiliano_martinez__aston_villa
+2,2,DC,5.4,Guéhi,,marc_guehi__crystal_palace
+2,3,DC,4.9,Timber,,jurrien_timber__arsenal
+2,6,MD,4.8,Zubimendi,,martin_zubimendi__arsenal
+2,9,A,6.2,Haaland,,erling_haaland__man_city
+2,10,MO,6.1,Saka,,bukayo_saka__arsenal
+2,11,A,,Gittens,,jamie_gittens__chelsea
+3,2,DC,5.6,Gabriel Magalhães,,gabriel_magalhaes__arsenal
+3,3,DC,5.0,Lacroix,,maxence_lacroix__crystal_palace
+3,4,DC,5.6,Collins,,nathan_collins__brentford
+3,5,MO,5.5,Barnes,,harvey_barnes__newcastle
+3,6,MD,5.2,Tonali,,sandro_tonali__newcastle
+3,7,MD,5.5,Bruno Guimarães,,bruno_guimaraes__newcastle
+3,8,MO,5.4,Mac Allister,,alexis_mac_allister__liverpool
+3,9,A,,Ekitiké,,hugo_ekitike__liverpool
+3,10,A,5.8,Gakpo,,cody_gakpo__liverpool
+3,11,A,3.0,Richarlison,,richarlison__tottenham
+4,1,G,5.1,Petrovic,,djordje_petrovic__bournemouth
+4,2,DL,4.9,Kerkez,,milos_kerkez__liverpool
+4,3,DL,4.9,Wan-Bissaka,,aaron_wan_bissaka__west_ham
+4,4,DL,5.3,Livramento,,tino_livramento__newcastle
+4,5,MO,4.9,Diallo,,amad_diallo__man_united
+4,7,MO,5.5,Matheus Cunha,,matheus_cunha__man_united
+4,8,MO,5.8,Le Fée,,enzo_le_fee__sunderland
+4,9,A,3.8,Mateta,,jean_philippe_mateta__crystal_palace
+4,10,A,5.4,Mbeumo,,bryan_mbeumo__man_united
+5,1,G,5.8,Raya,,david_raya__arsenal
+5,2,DC,5.1,Gvardiol,,josko_gvardiol__man_city
+5,4,DL,5.1,James,,reece_james__chelsea
+5,5,MO,5.8,Szoboszlai,,dominik_szoboszlai__liverpool
+5,6,MD,5.8,Caicedo,,moises_caicedo__chelsea
+5,7,MD,5.1,Fernández,,enzo_fernandez__chelsea
+5,8,MO,5.5,Kluivert,,justin_kluivert__bournemouth
+5,10,A,5.5,Schade,,kevin_schade__brentford
+5,11,A,5.7,Barry,,thierno_barry__everton
+6,1,G,5.6,Pickford,,jordan_pickford__everton
+6,2,DC,5.6,van Dijk,,virgil_van_dijk__liverpool
+6,4,DC,5.0,Keane,,michael_keane__everton
+6,5,MO,5.4,Foden,,phil_foden__man_city
+6,6,MO,6.0,Palmer,,cole_palmer__chelsea
+6,7,MD,5.7,Rice,,declan_rice__arsenal
+6,9,A,4.3,Welbeck,,danny_welbeck__brighton
+6,10,A,4.6,Nketiah,,eddie_nketiah__crystal_palace
+7,1,G,5.1,Henderson,,dean_henderson__crystal_palace
+7,2,DC,5.8,Konsa,,ezri_konsa__aston_villa
+7,3,DL,4.8,Sessegnon,,ryan_sessegnon__fulham
+7,4,DC,4.4,Torres,,pau_torres__aston_villa
+7,5,MO,5.4,Ouattara,,dango_ouattara__brentford
+7,6,MD,5.5,Tielemans,,youri_tielemans__aston_villa
+7,7,MO,6.2,Rogers,,morgan_rogers__aston_villa
+7,8,MO,5.7,Gibbs-White,,morgan_gibbs_white__nottingham_forest
+7,9,A,6.3,João Pedro,,joao_pedro__chelsea
+7,10,A,4.4,Hudson-Odoi,,callum_hudson_odoi__nottingham_forest
+8,2,DC,4.8,Rúben Dias,,ruben_dias__man_city
+8,3,DL,4.8,Muñoz,,daniel_munoz__crystal_palace
+8,4,MO,5.0,Eze,,eberechi_eze__arsenal
+8,6,MO,5.9,Bruno Fernandes,,bruno_miguel_bruno_fernandes__man_united
+8,7,MO,5.8,Ødegaard,,martin_degaard__arsenal
+8,8,A,4.8,Gyökeres,,viktor_gyokeres__arsenal
+8,9,A,4.8,Nmecha,,lukas_nmecha__leeds
+9,2,DC,5.5,van Hecke,,jan_paul_van_hecke__brighton
+9,3,DL,5.4,Calafiori,,riccardo_calafiori__arsenal
+9,4,DL,4.7,Porro,,pedro_porro__tottenham
+9,5,MD,5.0,Gravenberch,,ryan_gravenberch__liverpool
+9,6,MO,4.9,Smith Rowe,,emile_smith_rowe__fulham
+9,7,MO,5.7,Doku,,jeremy_doku__man_city
+9,8,MD,5.1,Kamara,,boubacar_kamara__aston_villa
+9,11,MO,4.5,Minteh,,yankuba_minteh__brighton

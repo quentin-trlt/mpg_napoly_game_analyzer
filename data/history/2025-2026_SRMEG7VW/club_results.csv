@@ -1,0 +1,181 @@
+pl_match_id,pl_gw,date,home_club,away_club,home_club_short,away_club_short,home_score,away_score,statut
+mpg_championship_match_2561895,1,2025-08-15T19:00:00.000Z,Liverpool,Bournemouth,LIV,BOU,4,2,joue
+mpg_championship_match_2561896,1,2025-08-16T11:30:00.000Z,Aston Villa,Newcastle,AVL,NEW,0,0,joue
+mpg_championship_match_2561897,1,2025-08-16T14:00:00.000Z,Brighton,Fulham,BHA,FUL,1,1,joue
+mpg_championship_match_2561899,1,2025-08-16T14:00:00.000Z,Sunderland,West Ham,SUN,WHU,3,0,joue
+mpg_championship_match_2561900,1,2025-08-16T14:00:00.000Z,Tottenham,Burnley,TOT,BUR,3,0,joue
+mpg_championship_match_2561901,1,2025-08-16T16:30:00.000Z,Wolverhampton,Man. City,WOL,MCI,0,4,joue
+mpg_championship_match_2561898,1,2025-08-17T13:00:00.000Z,Nottingham Forest,Brentford,NFO,BRE,3,1,joue
+mpg_championship_match_2561902,1,2025-08-17T13:00:00.000Z,Chelsea,Crystal Palace,CHE,CRY,0,0,joue
+mpg_championship_match_2561903,1,2025-08-17T15:30:00.000Z,Man. United,Arsenal,MUN,ARS,0,1,joue
+mpg_championship_match_2561904,1,2025-08-18T19:00:00.000Z,Leeds,Everton,LEE,EVE,1,0,joue
+mpg_championship_match_2561914,2,2025-08-22T19:00:00.000Z,West Ham,Chelsea,WHU,CHE,1,5,joue
+mpg_championship_match_2561912,2,2025-08-23T11:30:00.000Z,Man. City,Tottenham,MCI,TOT,0,2,joue
+mpg_championship_match_2561905,2,2025-08-23T14:00:00.000Z,Bournemouth,Wolverhampton,BOU,WOL,1,0,joue
+mpg_championship_match_2561907,2,2025-08-23T14:00:00.000Z,Brentford,Aston Villa,BRE,AVL,1,0,joue
+mpg_championship_match_2561908,2,2025-08-23T14:00:00.000Z,Burnley,Sunderland,BUR,SUN,2,0,joue
+mpg_championship_match_2561906,2,2025-08-23T16:30:00.000Z,Arsenal,Leeds,ARS,LEE,5,0,joue
+mpg_championship_match_2561909,2,2025-08-24T13:00:00.000Z,Crystal Palace,Nottingham Forest,CRY,NFO,1,1,joue
+mpg_championship_match_2561910,2,2025-08-24T13:00:00.000Z,Everton,Brighton,EVE,BHA,2,0,joue
+mpg_championship_match_2561911,2,2025-08-24T15:30:00.000Z,Fulham,Man. United,FUL,MUN,1,1,joue
+mpg_championship_match_2561913,2,2025-08-25T19:00:00.000Z,Newcastle,Liverpool,NEW,LIV,2,3,joue
+mpg_championship_match_2561917,3,2025-08-30T11:30:00.000Z,Chelsea,Fulham,CHE,FUL,2,0,joue
+mpg_championship_match_2561920,3,2025-08-30T14:00:00.000Z,Man. United,Burnley,MUN,BUR,3,2,joue
+mpg_championship_match_2561922,3,2025-08-30T14:00:00.000Z,Sunderland,Brentford,SUN,BRE,2,1,joue
+mpg_championship_match_2561923,3,2025-08-30T14:00:00.000Z,Tottenham,Bournemouth,TOT,BOU,0,1,joue
+mpg_championship_match_2561924,3,2025-08-30T14:00:00.000Z,Wolverhampton,Everton,WOL,EVE,2,3,joue
+mpg_championship_match_2561918,3,2025-08-30T16:30:00.000Z,Leeds,Newcastle,LEE,NEW,0,0,joue
+mpg_championship_match_2561916,3,2025-08-31T13:00:00.000Z,Brighton,Man. City,BHA,MCI,2,1,joue
+mpg_championship_match_2561921,3,2025-08-31T13:00:00.000Z,Nottingham Forest,West Ham,NFO,WHU,0,3,joue
+mpg_championship_match_2561919,3,2025-08-31T15:30:00.000Z,Liverpool,Arsenal,LIV,ARS,1,0,joue
+mpg_championship_match_2561915,3,2025-08-31T18:00:00.000Z,Aston Villa,Crystal Palace,AVL,CRY,0,3,joue
+mpg_championship_match_2561926,4,2025-09-13T11:30:00.000Z,Arsenal,Nottingham Forest,ARS,NFO,3,0,joue
+mpg_championship_match_2561925,4,2025-09-13T14:00:00.000Z,Bournemouth,Brighton,BOU,BHA,2,1,joue
+mpg_championship_match_2561929,4,2025-09-13T14:00:00.000Z,Crystal Palace,Sunderland,CRY,SUN,0,0,joue
+mpg_championship_match_2561930,4,2025-09-13T14:00:00.000Z,Everton,Aston Villa,EVE,AVL,0,0,joue
+mpg_championship_match_2561931,4,2025-09-13T14:00:00.000Z,Fulham,Leeds,FUL,LEE,1,0,joue
+mpg_championship_match_2561933,4,2025-09-13T14:00:00.000Z,Newcastle,Wolverhampton,NEW,WOL,1,0,joue
+mpg_championship_match_2561934,4,2025-09-13T16:30:00.000Z,West Ham,Tottenham,WHU,TOT,0,3,joue
+mpg_championship_match_2561927,4,2025-09-13T19:00:00.000Z,Brentford,Chelsea,BRE,CHE,2,2,joue
+mpg_championship_match_2561928,4,2025-09-14T13:00:00.000Z,Burnley,Liverpool,BUR,LIV,0,1,joue
+mpg_championship_match_2561932,4,2025-09-14T15:30:00.000Z,Man. City,Man. United,MCI,MUN,3,0,joue
+mpg_championship_match_2561940,5,2025-09-20T11:30:00.000Z,Liverpool,Everton,LIV,EVE,2,1,joue
+mpg_championship_match_2561937,5,2025-09-20T14:00:00.000Z,Brighton,Tottenham,BHA,TOT,2,2,joue
+mpg_championship_match_2561938,5,2025-09-20T14:00:00.000Z,Burnley,Nottingham Forest,BUR,NFO,1,1,joue
+mpg_championship_match_2561943,5,2025-09-20T14:00:00.000Z,West Ham,Crystal Palace,WHU,CRY,1,2,joue
+mpg_championship_match_2561944,5,2025-09-20T14:00:00.000Z,Wolverhampton,Leeds,WOL,LEE,1,3,joue
+mpg_championship_match_2561941,5,2025-09-20T16:30:00.000Z,Man. United,Chelsea,MUN,CHE,2,1,joue
+mpg_championship_match_2561939,5,2025-09-20T19:00:00.000Z,Fulham,Brentford,FUL,BRE,3,1,joue
+mpg_championship_match_2561935,5,2025-09-21T13:00:00.000Z,Bournemouth,Newcastle,BOU,NEW,0,0,joue
+mpg_championship_match_2561942,5,2025-09-21T13:00:00.000Z,Sunderland,Aston Villa,SUN,AVL,1,1,joue
+mpg_championship_match_2561936,5,2025-09-21T15:30:00.000Z,Arsenal,Man. City,ARS,MCI,1,1,joue
+mpg_championship_match_2561946,6,2025-09-27T11:30:00.000Z,Brentford,Man. United,BRE,MUN,3,1,joue
+mpg_championship_match_2561947,6,2025-09-27T14:00:00.000Z,Chelsea,Brighton,CHE,BHA,1,3,joue
+mpg_championship_match_2561948,6,2025-09-27T14:00:00.000Z,Crystal Palace,Liverpool,CRY,LIV,2,1,joue
+mpg_championship_match_2561950,6,2025-09-27T14:00:00.000Z,Leeds,Bournemouth,LEE,BOU,2,2,joue
+mpg_championship_match_2561951,6,2025-09-27T14:00:00.000Z,Man. City,Burnley,MCI,BUR,5,1,joue
+mpg_championship_match_2561953,6,2025-09-27T16:30:00.000Z,Nottingham Forest,Sunderland,NFO,SUN,0,1,joue
+mpg_championship_match_2561954,6,2025-09-27T19:00:00.000Z,Tottenham,Wolverhampton,TOT,WOL,1,1,joue
+mpg_championship_match_2561945,6,2025-09-28T13:00:00.000Z,Aston Villa,Fulham,AVL,FUL,3,1,joue
+mpg_championship_match_2561952,6,2025-09-28T15:30:00.000Z,Newcastle,Arsenal,NEW,ARS,1,2,joue
+mpg_championship_match_2561949,6,2025-09-29T19:00:00.000Z,Everton,West Ham,EVE,WHU,1,1,joue
+mpg_championship_match_2561955,7,2025-10-03T19:00:00.000Z,Bournemouth,Fulham,BOU,FUL,3,1,joue
+mpg_championship_match_2561961,7,2025-10-04T11:30:00.000Z,Leeds,Tottenham,LEE,TOT,1,2,joue
+mpg_championship_match_2561956,7,2025-10-04T14:00:00.000Z,Arsenal,West Ham,ARS,WHU,2,0,joue
+mpg_championship_match_2561962,7,2025-10-04T14:00:00.000Z,Man. United,Sunderland,MUN,SUN,2,0,joue
+mpg_championship_match_2561959,7,2025-10-04T16:30:00.000Z,Chelsea,Liverpool,CHE,LIV,2,1,joue
+mpg_championship_match_2561957,7,2025-10-05T13:00:00.000Z,Aston Villa,Burnley,AVL,BUR,2,1,joue
+mpg_championship_match_2561960,7,2025-10-05T13:00:00.000Z,Everton,Crystal Palace,EVE,CRY,2,1,joue
+mpg_championship_match_2561963,7,2025-10-05T13:00:00.000Z,Newcastle,Nottingham Forest,NEW,NFO,2,0,joue
+mpg_championship_match_2561964,7,2025-10-05T13:00:00.000Z,Wolverhampton,Brighton,WOL,BHA,1,1,joue
+mpg_championship_match_2561958,7,2025-10-05T15:30:00.000Z,Brentford,Man. City,BRE,MCI,0,1,joue
+mpg_championship_match_2561971,8,2025-10-18T11:30:00.000Z,Nottingham Forest,Chelsea,NFO,CHE,0,3,joue
+mpg_championship_match_2561965,8,2025-10-18T14:00:00.000Z,Brighton,Newcastle,BHA,NEW,2,1,joue
+mpg_championship_match_2561966,8,2025-10-18T14:00:00.000Z,Burnley,Leeds,BUR,LEE,2,0,joue
+mpg_championship_match_2561967,8,2025-10-18T14:00:00.000Z,Crystal Palace,Bournemouth,CRY,BOU,3,3,joue
+mpg_championship_match_2561970,8,2025-10-18T14:00:00.000Z,Man. City,Everton,MCI,EVE,2,0,joue
+mpg_championship_match_2561972,8,2025-10-18T14:00:00.000Z,Sunderland,Wolverhampton,SUN,WOL,2,0,joue
+mpg_championship_match_2561968,8,2025-10-18T16:30:00.000Z,Fulham,Arsenal,FUL,ARS,0,1,joue
+mpg_championship_match_2561973,8,2025-10-19T13:00:00.000Z,Tottenham,Aston Villa,TOT,AVL,1,2,joue
+mpg_championship_match_2561969,8,2025-10-19T15:30:00.000Z,Liverpool,Man. United,LIV,MUN,1,2,joue
+mpg_championship_match_2561974,8,2025-10-20T19:00:00.000Z,West Ham,Brentford,WHU,BRE,0,2,joue
+mpg_championship_match_2561981,9,2025-10-24T19:00:00.000Z,Leeds,West Ham,LEE,WHU,2,1,joue
+mpg_championship_match_2561979,9,2025-10-25T14:00:00.000Z,Chelsea,Sunderland,CHE,SUN,1,2,joue
+mpg_championship_match_2561983,9,2025-10-25T14:00:00.000Z,Newcastle,Fulham,NEW,FUL,2,1,joue
+mpg_championship_match_2561982,9,2025-10-25T16:30:00.000Z,Man. United,Brighton,MUN,BHA,4,2,joue
+mpg_championship_match_2561978,9,2025-10-25T19:00:00.000Z,Brentford,Liverpool,BRE,LIV,3,2,joue
+mpg_championship_match_2561975,9,2025-10-26T14:00:00.000Z,Bournemouth,Nottingham Forest,BOU,NFO,2,0,joue
+mpg_championship_match_2561976,9,2025-10-26T14:00:00.000Z,Arsenal,Crystal Palace,ARS,CRY,1,0,joue
+mpg_championship_match_2561977,9,2025-10-26T14:00:00.000Z,Aston Villa,Man. City,AVL,MCI,1,0,joue
+mpg_championship_match_2561984,9,2025-10-26T14:00:00.000Z,Wolverhampton,Burnley,WOL,BUR,2,3,joue
+mpg_championship_match_2561980,9,2025-10-26T16:30:00.000Z,Everton,Tottenham,EVE,TOT,0,3,joue
+mpg_championship_match_2561985,10,2025-11-01T15:00:00.000Z,Brighton,Leeds,BHA,LEE,3,0,joue
+mpg_championship_match_2561986,10,2025-11-01T15:00:00.000Z,Burnley,Arsenal,BUR,ARS,0,2,joue
+mpg_championship_match_2561987,10,2025-11-01T15:00:00.000Z,Crystal Palace,Brentford,CRY,BRE,2,0,joue
+mpg_championship_match_2561988,10,2025-11-01T15:00:00.000Z,Fulham,Wolverhampton,FUL,WOL,3,0,joue
+mpg_championship_match_2561991,10,2025-11-01T15:00:00.000Z,Nottingham Forest,Man. United,NFO,MUN,2,2,joue
+mpg_championship_match_2561993,10,2025-11-01T17:30:00.000Z,Tottenham,Chelsea,TOT,CHE,0,1,joue
+mpg_championship_match_2561989,10,2025-11-01T20:00:00.000Z,Liverpool,Aston Villa,LIV,AVL,2,0,joue
+mpg_championship_match_2561994,10,2025-11-02T14:00:00.000Z,West Ham,Newcastle,WHU,NEW,3,1,joue
+mpg_championship_match_2561990,10,2025-11-02T16:30:00.000Z,Man. City,Bournemouth,MCI,BOU,3,1,joue
+mpg_championship_match_2561992,10,2025-11-03T20:00:00.000Z,Sunderland,Everton,SUN,EVE,1,1,joue
+mpg_championship_match_2562003,11,2025-11-08T12:30:00.000Z,Tottenham,Man. United,TOT,MUN,2,2,joue
+mpg_championship_match_2561999,11,2025-11-08T15:00:00.000Z,Everton,Fulham,EVE,FUL,2,0,joue
+mpg_championship_match_2562004,11,2025-11-08T15:00:00.000Z,West Ham,Burnley,WHU,BUR,3,2,joue
+mpg_championship_match_2562002,11,2025-11-08T17:30:00.000Z,Sunderland,Arsenal,SUN,ARS,2,2,joue
+mpg_championship_match_2561997,11,2025-11-08T20:00:00.000Z,Chelsea,Wolverhampton,CHE,WOL,3,0,joue
+mpg_championship_match_2561995,11,2025-11-09T14:00:00.000Z,Aston Villa,Bournemouth,AVL,BOU,4,0,joue
+mpg_championship_match_2561996,11,2025-11-09T14:00:00.000Z,Brentford,Newcastle,BRE,NEW,3,1,joue
+mpg_championship_match_2561998,11,2025-11-09T14:00:00.000Z,Crystal Palace,Brighton,CRY,BHA,0,0,joue
+mpg_championship_match_2562001,11,2025-11-09T14:00:00.000Z,Nottingham Forest,Leeds,NFO,LEE,3,1,joue
+mpg_championship_match_2562000,11,2025-11-09T16:30:00.000Z,Man. City,Liverpool,MCI,LIV,3,0,joue
+mpg_championship_match_2562008,12,2025-11-22T12:30:00.000Z,Burnley,Chelsea,BUR,CHE,0,2,joue
+mpg_championship_match_2562005,12,2025-11-22T15:00:00.000Z,Bournemouth,West Ham,BOU,WHU,2,2,joue
+mpg_championship_match_2562007,12,2025-11-22T15:00:00.000Z,Brighton,Brentford,BHA,BRE,2,1,joue
+mpg_championship_match_2562009,12,2025-11-22T15:00:00.000Z,Fulham,Sunderland,FUL,SUN,1,0,joue
+mpg_championship_match_2562011,12,2025-11-22T15:00:00.000Z,Liverpool,Nottingham Forest,LIV,NFO,0,3,joue
+mpg_championship_match_2562014,12,2025-11-22T15:00:00.000Z,Wolverhampton,Crystal Palace,WOL,CRY,0,2,joue
+mpg_championship_match_2562013,12,2025-11-22T17:30:00.000Z,Newcastle,Man. City,NEW,MCI,2,1,joue
+mpg_championship_match_2562010,12,2025-11-23T14:00:00.000Z,Leeds,Aston Villa,LEE,AVL,1,2,joue
+mpg_championship_match_2562006,12,2025-11-23T16:30:00.000Z,Arsenal,Tottenham,ARS,TOT,4,1,joue
+mpg_championship_match_2562012,12,2025-11-24T20:00:00.000Z,Man. United,Everton,MUN,EVE,0,1,joue
+mpg_championship_match_2562016,13,2025-11-29T15:00:00.000Z,Brentford,Burnley,BRE,BUR,3,1,joue
+mpg_championship_match_2562020,13,2025-11-29T15:00:00.000Z,Man. City,Leeds,MCI,LEE,3,2,joue
+mpg_championship_match_2562022,13,2025-11-29T15:00:00.000Z,Sunderland,Bournemouth,SUN,BOU,3,2,joue
+mpg_championship_match_2562019,13,2025-11-29T17:30:00.000Z,Everton,Newcastle,EVE,NEW,1,4,joue
+mpg_championship_match_2562023,13,2025-11-29T20:00:00.000Z,Tottenham,Fulham,TOT,FUL,1,2,joue
+mpg_championship_match_2562018,13,2025-11-30T12:00:00.000Z,Crystal Palace,Man. United,CRY,MUN,1,2,joue
+mpg_championship_match_2562015,13,2025-11-30T14:05:00.000Z,Aston Villa,Wolverhampton,AVL,WOL,1,0,joue
+mpg_championship_match_2562021,13,2025-11-30T14:05:00.000Z,Nottingham Forest,Brighton,NFO,BHA,0,2,joue
+mpg_championship_match_2562024,13,2025-11-30T14:05:00.000Z,West Ham,Liverpool,WHU,LIV,0,2,joue
+mpg_championship_match_2562017,13,2025-11-30T16:30:00.000Z,Chelsea,Arsenal,CHE,ARS,1,1,joue
+mpg_championship_match_2562025,14,2025-12-02T19:30:00.000Z,Bournemouth,Everton,BOU,EVE,0,1,joue
+mpg_championship_match_2562029,14,2025-12-02T19:30:00.000Z,Fulham,Man. City,FUL,MCI,4,5,joue
+mpg_championship_match_2562033,14,2025-12-02T20:15:00.000Z,Newcastle,Tottenham,NEW,TOT,2,2,joue
+mpg_championship_match_2562026,14,2025-12-03T19:30:00.000Z,Arsenal,Brentford,ARS,BRE,2,0,joue
+mpg_championship_match_2562027,14,2025-12-03T19:30:00.000Z,Brighton,Aston Villa,BHA,AVL,3,4,joue
+mpg_championship_match_2562028,14,2025-12-03T19:30:00.000Z,Burnley,Crystal Palace,BUR,CRY,0,1,joue
+mpg_championship_match_2562034,14,2025-12-03T19:30:00.000Z,Wolverhampton,Nottingham Forest,WOL,NFO,0,1,joue
+mpg_championship_match_2562030,14,2025-12-03T20:15:00.000Z,Leeds,Chelsea,LEE,CHE,3,1,joue
+mpg_championship_match_2562031,14,2025-12-03T20:15:00.000Z,Liverpool,Sunderland,LIV,SUN,1,1,joue
+mpg_championship_match_2562032,14,2025-12-04T20:00:00.000Z,Man. United,West Ham,MUN,WHU,1,1,joue
+mpg_championship_match_2562036,15,2025-12-06T12:30:00.000Z,Aston Villa,Arsenal,AVL,ARS,2,1,joue
+mpg_championship_match_2562035,15,2025-12-06T15:00:00.000Z,Bournemouth,Chelsea,BOU,CHE,0,0,joue
+mpg_championship_match_2562038,15,2025-12-06T15:00:00.000Z,Everton,Nottingham Forest,EVE,NFO,3,0,joue
+mpg_championship_match_2562041,15,2025-12-06T15:00:00.000Z,Man. City,Sunderland,MCI,SUN,3,0,joue
+mpg_championship_match_2562042,15,2025-12-06T15:00:00.000Z,Newcastle,Burnley,NEW,BUR,2,1,joue
+mpg_championship_match_2562043,15,2025-12-06T15:00:00.000Z,Tottenham,Brentford,TOT,BRE,2,0,joue
+mpg_championship_match_2562040,15,2025-12-06T17:30:00.000Z,Leeds,Liverpool,LEE,LIV,3,3,joue
+mpg_championship_match_2562037,15,2025-12-07T14:00:00.000Z,Brighton,West Ham,BHA,WHU,1,1,joue
+mpg_championship_match_2562039,15,2025-12-07T16:30:00.000Z,Fulham,Crystal Palace,FUL,CRY,1,2,joue
+mpg_championship_match_2562044,15,2025-12-08T20:00:00.000Z,Wolverhampton,Man. United,WOL,MUN,1,4,joue
+mpg_championship_match_2562048,16,2025-12-13T15:00:00.000Z,Chelsea,Everton,CHE,EVE,2,0,joue
+mpg_championship_match_2562050,16,2025-12-13T15:00:00.000Z,Liverpool,Brighton,LIV,BHA,2,0,joue
+mpg_championship_match_2562047,16,2025-12-13T17:30:00.000Z,Burnley,Fulham,BUR,FUL,2,3,joue
+mpg_championship_match_2562045,16,2025-12-13T20:00:00.000Z,Arsenal,Wolverhampton,ARS,WOL,2,1,joue
+mpg_championship_match_2562049,16,2025-12-14T14:00:00.000Z,Crystal Palace,Man. City,CRY,MCI,0,3,joue
+mpg_championship_match_2562052,16,2025-12-14T14:00:00.000Z,Nottingham Forest,Tottenham,NFO,TOT,3,0,joue
+mpg_championship_match_2562053,16,2025-12-14T14:00:00.000Z,Sunderland,Newcastle,SUN,NEW,1,0,joue
+mpg_championship_match_2562054,16,2025-12-14T14:00:00.000Z,West Ham,Aston Villa,WHU,AVL,2,3,joue
+mpg_championship_match_2562046,16,2025-12-14T16:30:00.000Z,Brentford,Leeds,BRE,LEE,1,1,joue
+mpg_championship_match_2562051,16,2025-12-15T20:00:00.000Z,Man. United,Bournemouth,MUN,BOU,4,4,joue
+mpg_championship_match_2562062,17,2025-12-20T12:30:00.000Z,Newcastle,Chelsea,NEW,CHE,2,2,joue
+mpg_championship_match_2562055,17,2025-12-20T15:00:00.000Z,Bournemouth,Burnley,BOU,BUR,1,1,joue
+mpg_championship_match_2562057,17,2025-12-20T15:00:00.000Z,Brighton,Sunderland,BHA,SUN,0,0,joue
+mpg_championship_match_2562061,17,2025-12-20T15:00:00.000Z,Man. City,West Ham,MCI,WHU,3,0,joue
+mpg_championship_match_2562064,17,2025-12-20T15:00:00.000Z,Wolverhampton,Brentford,WOL,BRE,0,2,joue
+mpg_championship_match_2562063,17,2025-12-20T17:30:00.000Z,Tottenham,Liverpool,TOT,LIV,1,2,joue
+mpg_championship_match_2562058,17,2025-12-20T20:00:00.000Z,Everton,Arsenal,EVE,ARS,0,1,joue
+mpg_championship_match_2562060,17,2025-12-20T20:00:00.000Z,Leeds,Crystal Palace,LEE,CRY,4,1,joue
+mpg_championship_match_2562056,17,2025-12-21T16:30:00.000Z,Aston Villa,Man. United,AVL,MUN,2,1,joue
+mpg_championship_match_2562059,17,2025-12-22T20:00:00.000Z,Fulham,Nottingham Forest,FUL,NFO,1,0,joue
+mpg_championship_match_2562071,18,2025-12-26T20:00:00.000Z,Man. United,Newcastle,MUN,NEW,1,0,joue
+mpg_championship_match_2562072,18,2025-12-27T12:30:00.000Z,Nottingham Forest,Man. City,NFO,MCI,1,2,joue
+mpg_championship_match_2562065,18,2025-12-27T15:00:00.000Z,Arsenal,Brighton,ARS,BHA,2,1,joue
+mpg_championship_match_2562066,18,2025-12-27T15:00:00.000Z,Brentford,Bournemouth,BRE,BOU,4,1,joue
+mpg_championship_match_2562067,18,2025-12-27T15:00:00.000Z,Burnley,Everton,BUR,EVE,0,0,joue
+mpg_championship_match_2562070,18,2025-12-27T15:00:00.000Z,Liverpool,Wolverhampton,LIV,WOL,2,1,joue
+mpg_championship_match_2562074,18,2025-12-27T15:00:00.000Z,West Ham,Fulham,WHU,FUL,0,1,joue
+mpg_championship_match_2562068,18,2025-12-27T17:30:00.000Z,Chelsea,Aston Villa,CHE,AVL,1,2,joue
+mpg_championship_match_2562073,18,2025-12-28T14:00:00.000Z,Sunderland,Leeds,SUN,LEE,1,1,joue
+mpg_championship_match_2562069,18,2025-12-28T16:30:00.000Z,Crystal Palace,Tottenham,CRY,TOT,0,1,joue

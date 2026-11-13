@@ -1,0 +1,301 @@
+match_id,gw,team_id,titulaire_sortant,type,note_titulaire,remplacant_entre,note_remplacant
+mpg_division_match_SRMEG7VW_2_1_1_1_6_0,1,6,Trossard,remplacement_tactique,,Gueye,5
+mpg_division_match_SRMEG7VW_2_1_1_1_6_0,1,6,Foden,remplacement_tactique,,Bernardo Silva,7
+mpg_division_match_SRMEG7VW_2_1_1_1_6_0,1,6,Nketiah,absence,,Agbadou,0
+mpg_division_match_SRMEG7VW_2_1_1_1_6_0,1,0,Andreas Pereira,remplacement_tactique,,Xhaka,5.5
+mpg_division_match_SRMEG7VW_2_1_1_1_6_0,1,0,Strand Larsen,remplacement_tactique,3.5,Tel,4
+mpg_division_match_SRMEG7VW_2_1_1_2_8_7,1,8,Ederson,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_1_2_8_7,1,7,Torres,remplacement_tactique,,O'Brien,4
+mpg_division_match_SRMEG7VW_2_1_1_3_2_9,1,2,Martínez,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_1_3_2_9,1,9,Porro,remplacement_tactique,5,Kayode,3.5
+mpg_division_match_SRMEG7VW_2_1_1_3_2_9,1,9,Smith Rowe,remplacement_tactique,5,Ugarte,4.5
+mpg_division_match_SRMEG7VW_2_1_1_3_2_9,1,9,Füllkrug,remplacement_tactique,3,Minteh,5
+mpg_division_match_SRMEG7VW_2_1_1_4_3_1,1,3,Collins,remplacement_tactique,3.5,Lacroix,5.5
+mpg_division_match_SRMEG7VW_2_1_1_4_3_1,1,1,Antonee Robinson,absence,,Aguerd,3.5
+mpg_division_match_SRMEG7VW_2_1_1_4_3_1,1,1,Maddison,absence,,Merino,5
+mpg_division_match_SRMEG7VW_2_1_1_4_3_1,1,1,Isak,absence,,Lewis,6
+mpg_division_match_SRMEG7VW_2_1_1_5_4_5,1,4,Yoro,remplacement_tactique,4.5,Livramento,6
+mpg_division_match_SRMEG7VW_2_1_1_5_4_5,1,4,Wan-Bissaka,remplacement_tactique,4.5,Dorgu,5
+mpg_division_match_SRMEG7VW_2_1_1_5_4_5,1,4,Mateta,remplacement_tactique,5,Mbeumo,5.5
+mpg_division_match_SRMEG7VW_2_1_1_5_4_5,1,4,Wissa,absence,,Mount,4
+mpg_division_match_SRMEG7VW_2_1_1_5_4_5,1,5,James,remplacement_tactique,5.5,Gusto,5
+mpg_division_match_SRMEG7VW_2_1_1_5_4_5,1,5,Gvardiol,remplacement_tactique,,Tete,6
+mpg_division_match_SRMEG7VW_2_1_1_5_4_5,1,5,Kulusevski,absence,,Caicedo,5.5
+mpg_division_match_SRMEG7VW_2_1_2_1_7_6,2,6,Palmer,absence,,Gueye,6
+mpg_division_match_SRMEG7VW_2_1_2_1_7_6,2,6,Gabriel Jesus,absence,,Bernardo Silva,3
+mpg_division_match_SRMEG7VW_2_1_2_1_7_6,2,6,Nketiah,absence,,Keane,4
+mpg_division_match_SRMEG7VW_2_1_2_2_1_4,2,1,Jacob Murphy,absence,,Rodri,5
+mpg_division_match_SRMEG7VW_2_1_2_2_1_4,2,4,Wan-Bissaka,remplacement_tactique,3,Dorgu,4.5
+mpg_division_match_SRMEG7VW_2_1_2_3_9_3,2,9,Porro,remplacement_tactique,5,van Hecke,3.5
+mpg_division_match_SRMEG7VW_2_1_2_3_9_3,2,9,Kamara,remplacement_tactique,4.5,Mitoma,4.5
+mpg_division_match_SRMEG7VW_2_1_2_3_9_3,2,9,Doku,remplacement_tactique,4,Diarra,4
+mpg_division_match_SRMEG7VW_2_1_2_3_9_3,2,9,Rutter,absence,,Bowen,4
+mpg_division_match_SRMEG7VW_2_1_2_3_9_3,2,9,Füllkrug,remplacement_tactique,4,Minteh,5.5
+mpg_division_match_SRMEG7VW_2_1_2_3_9_3,2,3,Omar Marmoush,remplacement_tactique,4.5,Tonali,4.5
+mpg_division_match_SRMEG7VW_2_1_2_3_9_3,2,3,Mac Allister,absence,,Collins,5
+mpg_division_match_SRMEG7VW_2_1_2_3_9_3,2,3,Adingra,remplacement_tactique,5,Richarlison,6
+mpg_division_match_SRMEG7VW_2_1_2_4_0_2,2,0,Andreas Pereira,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_2_4_0_2,2,2,Gabriel Martinelli,absence,,Nwaneri,5.5
+mpg_division_match_SRMEG7VW_2_1_2_5_5_8,2,5,Szoboszlai,remplacement_tactique,4.5,Caicedo,7
+mpg_division_match_SRMEG7VW_2_1_2_5_5_8,2,8,Onana,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_2_5_5_8,2,8,Eze,absence,,Muñoz,5
+mpg_division_match_SRMEG7VW_2_1_2_5_5_8,2,8,Havertz,absence,,Nmecha,4.5
+mpg_division_match_SRMEG7VW_2_1_3_1_6_5,3,6,Palmer,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_3_1_6_5,3,6,Trossard,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_3_1_6_5,3,6,Foden,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_3_1_6_5,3,6,Gabriel Jesus,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_3_1_6_5,3,6,Nketiah,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_3_1_6_5,3,5,Cherki,remplacement_tactique,,Kluivert,4
+mpg_division_match_SRMEG7VW_2_1_3_1_6_5,3,5,Schade,remplacement_tactique,3.5,Watkins,3.5
+mpg_division_match_SRMEG7VW_2_1_3_2_8_1,3,8,Onana,absence,,Rotaldo,1.5
+mpg_division_match_SRMEG7VW_2_1_3_2_8_1,3,8,Havertz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_3_2_8_1,3,1,Lewis-Skelly,absence,,Robinson,5
+mpg_division_match_SRMEG7VW_2_1_3_2_8_1,3,1,Jacob Murphy,remplacement_tactique,5,Rodri,5
+mpg_division_match_SRMEG7VW_2_1_3_3_2_7,3,2,Martínez,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_3_3_2_7,3,2,Nwaneri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_3_3_2_7,3,2,Delap,remplacement_tactique,4,Gittens,4.5
+mpg_division_match_SRMEG7VW_2_1_3_3_2_7,3,7,Gibbs-White,remplacement_tactique,4.0,Rogers,4
+mpg_division_match_SRMEG7VW_2_1_3_3_2_7,3,7,Onana,absence,,Tielemans,4.5
+mpg_division_match_SRMEG7VW_2_1_3_4_0_9,3,0,Strand Larsen,remplacement_tactique,,Evanilson,6.5
+mpg_division_match_SRMEG7VW_2_1_3_4_0_9,3,0,Solanke,absence,,Tel,4.5
+mpg_division_match_SRMEG7VW_2_1_3_4_0_9,3,9,Porro,remplacement_tactique,5,Kayode,4
+mpg_division_match_SRMEG7VW_2_1_3_4_0_9,3,9,Doku,remplacement_tactique,4.5,Mitoma,6
+mpg_division_match_SRMEG7VW_2_1_3_5_4_3,3,4,Wan-Bissaka,absence,,Livramento,4.5
+mpg_division_match_SRMEG7VW_2_1_3_5_4_3,3,3,Ballard,remplacement_tactique,,Lacroix,7
+mpg_division_match_SRMEG7VW_2_1_3_5_4_3,3,3,Schär,remplacement_tactique,5,Collins,5.5
+mpg_division_match_SRMEG7VW_2_1_3_5_4_3,3,3,Richarlison,remplacement_tactique,4,Adingra,4.5
+mpg_division_match_SRMEG7VW_2_1_4_1_7_0,4,7,Ouattara,remplacement_tactique,4.5,Gibbs-White,3.5
+mpg_division_match_SRMEG7VW_2_1_4_1_7_0,4,7,Wood,remplacement_tactique,4,Beto,3.5
+mpg_division_match_SRMEG7VW_2_1_4_1_7_0,4,0,Solanke,absence,,Tel,5
+mpg_division_match_SRMEG7VW_2_1_4_2_3_8,4,3,Richarlison,remplacement_tactique,4.5,Adingra,5
+mpg_division_match_SRMEG7VW_2_1_4_2_3_8,4,8,Onana,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_4_2_3_8,4,8,Saliba,absence,,Muñoz,5
+mpg_division_match_SRMEG7VW_2_1_4_3_1_6,4,1,Aït-Nouri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_4_3_1_6,4,1,Lewis,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_4_3_1_6,4,1,Estêvão,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_4_3_1_6,4,6,Gabriel Jesus,absence,,Bernardo Silva,6
+mpg_division_match_SRMEG7VW_2_1_4_3_1_6,4,6,Nketiah,absence,,Gueye,5
+mpg_division_match_SRMEG7VW_2_1_4_4_9_4,4,9,Füllkrug,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_4_4_9_4,4,4,Yoro,remplacement_tactique,4.0,Dorgu,4.5
+mpg_division_match_SRMEG7VW_2_1_4_4_9_4,4,4,Wan-Bissaka,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_4_4_9_4,4,4,Le Fée,absence,,Mainoo,5.5
+mpg_division_match_SRMEG7VW_2_1_4_5_5_2,4,5,Gusto,remplacement_tactique,,James,5
+mpg_division_match_SRMEG7VW_2_1_4_5_5_2,4,5,Barry,remplacement_tactique,4.5,Watkins,4.5
+mpg_division_match_SRMEG7VW_2_1_5_1_6_3,5,6,Tarkowski,remplacement_tactique,5,Agbadou,4.5
+mpg_division_match_SRMEG7VW_2_1_5_1_6_3,5,6,Trossard,remplacement_tactique,5,Gueye,6
+mpg_division_match_SRMEG7VW_2_1_5_1_6_3,5,6,Gabriel Jesus,absence,,Bernardo Silva,4
+mpg_division_match_SRMEG7VW_2_1_5_1_6_3,5,3,Lacroix,remplacement_tactique,5,Collins,3.0
+mpg_division_match_SRMEG7VW_2_1_5_1_6_3,5,3,Schär,absence,,Rotaldo,2.0
+mpg_division_match_SRMEG7VW_2_1_5_1_6_3,5,3,Bruno Guimarães,absence,,Rotaldo,2.0
+mpg_division_match_SRMEG7VW_2_1_5_2_8_4,5,8,Onana,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_5_2_8_4,5,8,Ødegaard,absence,,Muñoz,4
+mpg_division_match_SRMEG7VW_2_1_5_2_8_4,5,8,Sarr,absence,,Lewis-Potter,2.5
+mpg_division_match_SRMEG7VW_2_1_5_2_8_4,5,4,Wan-Bissaka,absence,,Dorgu,5.0
+mpg_division_match_SRMEG7VW_2_1_5_3_7_9,5,7,Rogers,remplacement_tactique,4.5,Gibbs-White,6
+mpg_division_match_SRMEG7VW_2_1_5_3_7_9,5,7,Wood,remplacement_tactique,4.5,Beto,4
+mpg_division_match_SRMEG7VW_2_1_5_4_2_1,5,2,Frimpong,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_5_4_2_1,5,2,James,remplacement_tactique,,Nwaneri,5
+mpg_division_match_SRMEG7VW_2_1_5_4_2_1,5,2,Gittens,absence,,Saka,5
+mpg_division_match_SRMEG7VW_2_1_5_4_2_1,5,1,Robinson,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_5_4_2_1,5,1,Lewis-Skelly,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_5_4_2_1,5,1,Elanga,remplacement_tactique,4.5,Estêvão,5
+mpg_division_match_SRMEG7VW_2_1_5_5_0_5,5,0,Trippier,absence,,Maatsen,5
+mpg_division_match_SRMEG7VW_2_1_5_5_0_5,5,0,Tel,absence,,Strand Larsen,4
+mpg_division_match_SRMEG7VW_2_1_6_1_3_2,6,3,Schär,absence,,Collins,4.5
+mpg_division_match_SRMEG7VW_2_1_6_1_3_2,6,3,Omar Marmoush,remplacement_tactique,,Tonali,6
+mpg_division_match_SRMEG7VW_2_1_6_1_3_2,6,3,Adingra,remplacement_tactique,4.5,Zirkzee,4
+mpg_division_match_SRMEG7VW_2_1_6_2_1_0,6,1,Rodri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_6_2_1_0,6,0,Tel,remplacement_tactique,4.5,Strand Larsen,4
+mpg_division_match_SRMEG7VW_2_1_6_3_9_8,6,9,Porro,remplacement_tactique,5,Botman,5
+mpg_division_match_SRMEG7VW_2_1_6_3_9_8,6,8,Onana,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_6_3_9_8,6,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_6_4_5_7,6,5,Gusto,remplacement_tactique,4.5,James,4
+mpg_division_match_SRMEG7VW_2_1_6_4_5_7,6,5,Tete,remplacement_tactique,,Milenkovic,5
+mpg_division_match_SRMEG7VW_2_1_6_4_5_7,6,5,Barry,remplacement_tactique,4.5,Schade,6
+mpg_division_match_SRMEG7VW_2_1_6_4_5_7,6,7,Wood,remplacement_tactique,3.5,Beto,4
+mpg_division_match_SRMEG7VW_2_1_6_5_4_6,6,6,Konaté,remplacement_tactique,5,Keane,6
+mpg_division_match_SRMEG7VW_2_1_6_5_4_6,6,6,Tarkowski,remplacement_tactique,5,Agbadou,5
+mpg_division_match_SRMEG7VW_2_1_6_5_4_6,6,6,Gabriel Jesus,absence,,Bernardo Silva,4
+mpg_division_match_SRMEG7VW_2_1_7_1_6_8,7,6,Gabriel Jesus,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_7_1_6_8,7,8,Onana,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_7_1_6_8,7,8,Chalobah,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_7_1_6_8,7,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_7_2_7_1,7,7,Wirtz,remplacement_tactique,4.5,Ouattara,4
+mpg_division_match_SRMEG7VW_2_1_7_2_7_1,7,7,Wood,remplacement_tactique,3.5,Beto,4
+mpg_division_match_SRMEG7VW_2_1_7_2_7_1,7,1,Alisson Becker,absence,,Rotaldo,1.5
+mpg_division_match_SRMEG7VW_2_1_7_2_7_1,7,1,Robinson,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_7_3_2_4,7,2,Frimpong,absence,,Danso,4.5
+mpg_division_match_SRMEG7VW_2_1_7_3_2_4,7,4,Livramento,absence,,Yoro,5.5
+mpg_division_match_SRMEG7VW_2_1_7_3_2_4,7,4,Le Fée,remplacement_tactique,4.5,Mount,7
+mpg_division_match_SRMEG7VW_2_1_7_4_0_3,7,3,Schär,remplacement_tactique,,Collins,4.5
+mpg_division_match_SRMEG7VW_2_1_7_4_0_3,7,3,Ekitiké,remplacement_tactique,4.5,Adingra,5
+mpg_division_match_SRMEG7VW_2_1_7_5_5_9,7,9,Porro,remplacement_tactique,4.5,Botman,6
+mpg_division_match_SRMEG7VW_2_1_7_5_5_9,7,9,Jiménez,absence,,Savinho,4
+mpg_division_match_SRMEG7VW_2_1_7_5_5_9,7,9,Bowen,remplacement_tactique,5,Rutter,5
+mpg_division_match_SRMEG7VW_2_1_8_1_6_9,8,6,Gabriel Jesus,absence,,Bernardo Silva,4.5
+mpg_division_match_SRMEG7VW_2_1_8_2_8_2,8,8,Ødegaard,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_8_2_8_2,8,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_8_2_8_2,8,2,Romero,absence,,Danso,4
+mpg_division_match_SRMEG7VW_2_1_8_3_3_7,8,3,Schär,absence,,Rotaldo,2.0
+mpg_division_match_SRMEG7VW_2_1_8_3_3_7,8,7,O'Brien,remplacement_tactique,3.5,Andersen,5.5
+mpg_division_match_SRMEG7VW_2_1_8_3_3_7,8,7,Wood,remplacement_tactique,4.5,Beto,4
+mpg_division_match_SRMEG7VW_2_1_8_4_1_5,8,1,Robinson,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_8_4_1_5,8,1,Lewis-Skelly,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_8_4_1_5,8,1,Rodri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_8_4_1_5,8,5,Gvardiol,absence,,James,8
+mpg_division_match_SRMEG7VW_2_1_8_4_1_5,8,5,Kluivert,remplacement_tactique,4.5,Cherki,5.5
+mpg_division_match_SRMEG7VW_2_1_8_4_1_5,8,5,Fernández,remplacement_tactique,,Janelt,4.5
+mpg_division_match_SRMEG7VW_2_1_8_5_4_0,8,4,Matheus Cunha,remplacement_tactique,5,Diallo,6.5
+mpg_division_match_SRMEG7VW_2_1_8_5_4_0,8,0,Evanilson,absence,,Soucek,3.5
+mpg_division_match_SRMEG7VW_2_1_8_5_4_0,8,0,Tel,remplacement_tactique,3.5,Strand Larsen,4
+mpg_division_match_SRMEG7VW_2_1_9_1_7_4,9,7,Wood,absence,,Beto,3.5
+mpg_division_match_SRMEG7VW_2_1_9_1_7_4,9,4,Diallo,remplacement_tactique,5,Le Fée,5.5
+mpg_division_match_SRMEG7VW_2_1_9_2_2_6,9,2,Frimpong,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_9_2_2_6,9,6,Gabriel Jesus,absence,,Bernardo Silva,4
+mpg_division_match_SRMEG7VW_2_1_9_3_9_1,9,9,Botman,remplacement_tactique,5,Porro,6.5
+mpg_division_match_SRMEG7VW_2_1_9_3_9_1,9,9,Gravenberch,absence,,Kamara,5.5
+mpg_division_match_SRMEG7VW_2_1_9_3_9_1,9,1,Robinson,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_9_3_9_1,9,1,Rodri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_9_3_9_1,9,1,Isak,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_9_4_0_8,9,8,Ødegaard,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_9_4_0_8,9,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_10_1_0_6,10,0,Castagne,absence,,Digne,4
+mpg_division_match_SRMEG7VW_2_1_10_1_0_6,10,0,Trippier,absence,,Maatsen,5
+mpg_division_match_SRMEG7VW_2_1_10_1_0_6,10,0,Tel,absence,,Evanilson,4
+mpg_division_match_SRMEG7VW_2_1_10_1_0_6,10,6,Gabriel Jesus,absence,,Bernardo Silva,3.5
+mpg_division_match_SRMEG7VW_2_1_10_1_0_6,10,6,Nketiah,absence,,Tarkowski,2.5
+mpg_division_match_SRMEG7VW_2_1_10_2_7_8,10,7,Wood,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_10_2_7_8,10,8,Ødegaard,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_10_4_1_3,10,1,Robinson,absence,,Rotaldo,2.0
+mpg_division_match_SRMEG7VW_2_1_10_4_1_3,10,1,Isak,absence,,Rotaldo,2.0
+mpg_division_match_SRMEG7VW_2_1_10_4_1_3,10,3,Omar Marmoush,remplacement_tactique,4.5,Barnes,4
+mpg_division_match_SRMEG7VW_2_1_10_5_5_4,10,5,Schade,remplacement_tactique,4,Watkins,4.5
+mpg_division_match_SRMEG7VW_2_1_10_5_5_4,10,4,Kerkez,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_11_1_6_7,11,6,Gabriel Jesus,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_11_1_6_7,11,6,Nketiah,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_11_1_6_7,11,7,Hudson-Odoi,absence,,Beto,4.5
+mpg_division_match_SRMEG7VW_2_1_11_2_4_1,11,1,Robinson,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_11_2_4_1,11,1,Lewis-Skelly,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_11_2_4_1,11,1,Rodri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_11_2_4_1,11,1,Isak,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_11_3_3_9,11,3,Omar Marmoush,remplacement_tactique,4.5,Barnes,6
+mpg_division_match_SRMEG7VW_2_1_11_4_2_0,11,2,Guéhi,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_11_4_2_0,11,2,Gordon,absence,,James,5
+mpg_division_match_SRMEG7VW_2_1_11_4_2_0,11,0,Castagne,absence,,Digne,6.5
+mpg_division_match_SRMEG7VW_2_1_11_4_2_0,11,0,Kudus,absence,,Soucek,6.5
+mpg_division_match_SRMEG7VW_2_1_11_5_8_5,11,8,Ødegaard,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_11_5_8_5,11,8,Gyökeres,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_11_5_8_5,11,5,Szoboszlai,remplacement_tactique,3.5,Kluivert,4.5
+mpg_division_match_SRMEG7VW_2_1_12_1_5_6,12,5,Caicedo,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_1_5_6,12,6,Gabriel Jesus,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_2_1_8,12,1,Mamardashvili,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_2_1_8,12,1,Robinson,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_2_1_8,12,1,Semenyo,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_2_1_8,12,1,Rodri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_2_1_8,12,1,Estêvão,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_2_1_8,12,8,Ødegaard,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_2_1_8,12,8,Gyökeres,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_2_1_8,12,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_3_7_2,12,7,Onana,absence,,Tielemans,5.5
+mpg_division_match_SRMEG7VW_2_1_12_3_7_2,12,2,Gordon,absence,,James,5.5
+mpg_division_match_SRMEG7VW_2_1_12_4_9_0,12,0,Trippier,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_4_9_0,12,0,Tel,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_12_5_3_4,12,4,Matheus Cunha,remplacement_tactique,,Mount,5.5
+mpg_division_match_SRMEG7VW_2_1_13_1_0_7,13,0,Pope,absence,,Ramsdale,5
+mpg_division_match_SRMEG7VW_2_1_13_1_0_7,13,7,Murillo,absence,,O'Brien,3
+mpg_division_match_SRMEG7VW_2_1_13_2_8_3,13,8,Saliba,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_13_2_8_3,13,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_13_2_8_3,13,3,Barnes,remplacement_tactique,5,Omar Marmoush,4
+mpg_division_match_SRMEG7VW_2_1_13_3_6_1,13,6,Trossard,absence,,Foden,7.5
+mpg_division_match_SRMEG7VW_2_1_13_3_6_1,13,6,Gueye,absence,,Bernardo Silva,4
+mpg_division_match_SRMEG7VW_2_1_13_3_6_1,13,6,Gabriel Jesus,absence,,van Dijk,4
+mpg_division_match_SRMEG7VW_2_1_13_3_6_1,13,1,Mamardashvili,absence,,Rotaldo,1.5
+mpg_division_match_SRMEG7VW_2_1_13_3_6_1,13,1,Robinson,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_13_3_6_1,13,1,Jacob Murphy,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_13_3_6_1,13,1,Johnson,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_13_3_6_1,13,1,Rodri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_13_4_4_9,13,4,Mohamed Salah,absence,,Mount,6
+mpg_division_match_SRMEG7VW_2_1_13_4_4_9,13,9,Botman,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_14_1_3_6,14,6,Tuanzebe,remplacement_tactique,,van Dijk,5.5
+mpg_division_match_SRMEG7VW_2_1_14_1_3_6,14,6,Keane,remplacement_tactique,,Agbadou,5
+mpg_division_match_SRMEG7VW_2_1_14_1_3_6,14,6,Trossard,remplacement_tactique,,Bernardo Silva,5
+mpg_division_match_SRMEG7VW_2_1_14_1_3_6,14,6,Gabriel Jesus,absence,,Palmer,3.5
+mpg_division_match_SRMEG7VW_2_1_14_2_4_8,14,4,Le Fée,remplacement_tactique,5,Mount,5
+mpg_division_match_SRMEG7VW_2_1_14_2_4_8,14,4,Matheus Cunha,remplacement_tactique,4.5,Diallo,5
+mpg_division_match_SRMEG7VW_2_1_14_2_4_8,14,8,Saliba,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_14_2_4_8,14,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_14_3_9_7,14,9,Botman,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_14_3_9_7,14,7,Murillo,remplacement_tactique,,O'Brien,6.5
+mpg_division_match_SRMEG7VW_2_1_14_4_1_2,14,1,van de Ven,absence,,O'Nien,5
+mpg_division_match_SRMEG7VW_2_1_14_4_1_2,14,1,Aït-Nouri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_14_4_1_2,14,1,Lewis-Skelly,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_14_4_1_2,14,1,Estêvão,remplacement_tactique,5.0,Talbi,6
+mpg_division_match_SRMEG7VW_2_1_14_4_1_2,14,2,Martínez,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_14_4_1_2,14,2,Delap,remplacement_tactique,4,Gittens,6
+mpg_division_match_SRMEG7VW_2_1_14_5_5_0,14,5,James,absence,,Tete,3.5
+mpg_division_match_SRMEG7VW_2_1_14_5_5_0,14,0,Pope,absence,,Ramsdale,4
+mpg_division_match_SRMEG7VW_2_1_14_5_5_0,14,0,Strand Larsen,remplacement_tactique,4,Tel,5
+mpg_division_match_SRMEG7VW_2_1_15_1_2_3,15,2,Gittens,remplacement_tactique,,Delap,4.5
+mpg_division_match_SRMEG7VW_2_1_15_1_2_3,15,3,Barnes,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_15_2_0_1,15,0,Pope,absence,,Ramsdale,5.5
+mpg_division_match_SRMEG7VW_2_1_15_2_0_1,15,0,Digne,absence,,Maatsen,5
+mpg_division_match_SRMEG7VW_2_1_15_2_0_1,15,1,Aït-Nouri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_15_2_0_1,15,1,Johnson,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_15_2_0_1,15,1,Jacob Murphy,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_15_3_8_9,15,8,Saliba,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_15_3_8_9,15,8,Muñoz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_15_3_8_9,15,8,Nmecha,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_15_3_8_9,15,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_15_3_8_9,15,9,Botman,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_15_3_8_9,15,9,Kroupi,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_15_4_7_5,15,7,Murillo,remplacement_tactique,,Torres,5
+mpg_division_match_SRMEG7VW_2_1_15_4_7_5,15,7,Gibbs-White,remplacement_tactique,3.5,Wirtz,5
+mpg_division_match_SRMEG7VW_2_1_15_5_6_4,15,6,Gabriel Jesus,absence,,Palmer,5
+mpg_division_match_SRMEG7VW_2_1_15_5_6_4,15,4,Mohamed Salah,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_16_1_8_6,16,8,Muñoz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_16_1_8_6,16,8,Sarr,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_16_1_8_6,16,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_16_1_8_6,16,8,Havertz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_16_2_1_7,16,7,Torres,remplacement_tactique,,Andersen,4.5
+mpg_division_match_SRMEG7VW_2_1_16_3_4_2,16,4,Le Fée,remplacement_tactique,5,Mount,4.5
+mpg_division_match_SRMEG7VW_2_1_16_3_4_2,16,2,Martínez,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_16_3_4_2,16,2,Danso,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_16_4_3_0,16,3,Gakpo,absence,,Zirkzee,4.5
+mpg_division_match_SRMEG7VW_2_1_16_5_9_5,16,9,Sels,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_16_5_9_5,16,9,Botman,absence,,Rotaldo,2.0
+mpg_division_match_SRMEG7VW_2_1_16_5_9_5,16,9,Calafiori,absence,,Rotaldo,2.0
+mpg_division_match_SRMEG7VW_2_1_16_5_9_5,16,9,Doku,absence,,Rotaldo,2.0
+mpg_division_match_SRMEG7VW_2_1_17_1_9_6,17,9,Sels,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_1_9_6,17,9,van Hecke,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_1_9_6,17,9,Botman,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_1_9_6,17,9,Baleba,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_1_9_6,17,9,Doku,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_1_9_6,17,6,Welbeck,absence,,Gabriel Jesus,4
+mpg_division_match_SRMEG7VW_2_1_17_2_2_8,17,2,Gittens,absence,,Frimpong,3.5
+mpg_division_match_SRMEG7VW_2_1_17_2_2_8,17,8,Eze,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_2_2_8,17,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_3_7_3,17,7,Konsa,remplacement_tactique,5,Andersen,5.5
+mpg_division_match_SRMEG7VW_2_1_17_3_7_3,17,7,Ouattara,absence,,Gibbs-White,4.5
+mpg_division_match_SRMEG7VW_2_1_17_3_7_3,17,3,Gakpo,absence,,Zirkzee,4.5
+mpg_division_match_SRMEG7VW_2_1_17_4_5_1,17,1,Aït-Nouri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_4_5_1,17,1,Lewis-Skelly,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_4_5_1,17,1,Estêvão,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_5_0_4,17,0,Castagne,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_5_0_4,17,4,Wan-Bissaka,absence,,Yoro,4.5
+mpg_division_match_SRMEG7VW_2_1_17_5_0_4,17,4,Livramento,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_17_5_0_4,17,4,Mainoo,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_1_4_7,18,4,Mainoo,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_2_6_2,18,2,Timber,absence,,Frimpong,6
+mpg_division_match_SRMEG7VW_2_1_18_3_1_9,18,1,Aït-Nouri,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_3_1_9,18,1,Elanga,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_3_1_9,18,1,Isak,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_3_1_9,18,9,Sels,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_3_1_9,18,9,Botman,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_3_1_9,18,9,Calafiori,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_3_1_9,18,9,Baleba,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_3_1_9,18,9,Doku,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_4_8_0,18,8,Eze,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_4_8_0,18,8,Bruno Fernandes,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_4_8_0,18,8,Rodrigo Muniz,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_4_8_0,18,8,Traoré,absence,,Rotaldo,2.5
+mpg_division_match_SRMEG7VW_2_1_18_5_3_5,18,3,Ballard,absence,,Schär,5

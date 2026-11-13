@@ -1,0 +1,62 @@
+team_id,slot,poste,note_moy,joueur_affiche,prochain_adversaire_club,player_key
+0,1,G,4.9,Sels,,matz_sels__nottingham_forest
+0,2,DC,5.4,Schär,,fabian_schar__newcastle
+0,3,DC,5.2,Burn,,dan_burn__newcastle
+0,6,MO,5.6,Kudus,,mohammed_kudus__west_ham
+0,8,MO,,Mitoma,,kaoru_mitoma__brighton
+0,9,A,5.8,Isak,,alexander_isak__newcastle
+0,10,A,5.8,Jackson,,nicolas_jackson__chelsea
+0,11,A,4.8,Delap,,liam_delap__ipswich_town
+1,1,G,5.4,Alisson Becker,,alisson_ramses_alisson_becker__liverpool
+1,3,DL,5.0,Castagne,,timothy_castagne__fulham
+1,4,DC,5.8,Konsa,,ezri_konsa__aston_villa
+1,6,MO,5.5,Madueke,,noni_madueke__chelsea
+1,7,MO,4.8,Joelinton,,joelinton_cassio_joelinton__newcastle
+1,8,MD,5.5,Tielemans,,youri_tielemans__aston_villa
+1,10,A,6.2,Haaland,,erling_haaland__man_city
+1,11,DL,5.3,Lewis-Potter,,keane_lewis_potter__brentford
+2,2,DC,5.6,Gabriel Magalhães,,gabriel_magalhaes__arsenal
+2,3,DC,5.4,Guéhi,,marc_guehi__crystal_palace
+2,4,DL,5.3,Robertson,,andy_robertson__liverpool
+2,5,MD,5.5,Bruno Guimarães,,bruno_guimaraes__newcastle
+2,6,MO,5.9,Iwobi,,alex_iwobi__fulham
+2,7,MO,5.0,Kulusevski,,dejan_kulusevski__tottenham
+2,9,A,4.7,Wissa,,yoane_wissa__brentford
+2,11,A,4.6,Nketiah,,eddie_nketiah__crystal_palace
+3,2,DC,,Saliba,,william_saliba__arsenal
+3,3,DL,4.5,Aina,,ola_aina__nottingham_forest
+3,6,MO,5.5,Maddison,,james_maddison__tottenham
+3,7,MO,5.0,Eze,,eberechi_eze__crystal_palace
+3,8,MD,4.8,Longstaff,,sean_longstaff__newcastle
+3,9,A,5.4,Mbeumo,,bryan_mbeumo__brentford
+4,1,G,5.3,Leno,,bernd_leno__fulham
+4,2,DC,4.9,Timber,,jurrien_timber__arsenal
+4,3,MD,4.0,Lewis,,rico_lewis__man_city
+4,4,DL,4.8,Mazraoui,,noussair_mazraoui__man_united
+4,5,MO,5.4,Mac Allister,,alexis_mac_allister__liverpool
+4,6,MO,4.8,Johnson,,brennan_johnson__tottenham
+4,7,MO,5.9,Bruno Fernandes,,bruno_miguel_bruno_fernandes__man_united
+4,8,MD,5.8,Caicedo,,moises_caicedo__chelsea
+4,9,A,4.9,Solanke,,dominic_solanke__tottenham
+5,2,DC,4.7,O'Shea,,dara_o_shea__ipswich_town
+5,3,DC,5.4,Dunk,,lewis_dunk__brighton
+5,5,MO,5.8,Ødegaard,,martin_degaard__arsenal
+5,7,MO,5.4,Foden,,phil_foden__man_city
+5,9,A,5.0,Havertz,,kai_havertz__arsenal
+5,10,MO,6.1,Saka,,bukayo_saka__arsenal
+5,11,A,4.4,Hudson-Odoi,,callum_hudson_odoi__nottingham_forest
+6,2,DC,5.1,Gvardiol,,josko_gvardiol__man_city
+6,3,DC,5.6,van Dijk,,virgil_van_dijk__liverpool
+6,5,MO,4.6,Garnacho,,alejandro_garnacho__man_united
+6,7,MD,5.7,Rice,,declan_rice__arsenal
+6,8,MD,5.5,Kovacic,,mateo_kovacic__man_city
+6,9,A,4.4,Wood,,chris_wood__nottingham_forest
+6,10,MO,5.5,Matheus Cunha,,matheus_santos_matheus_cunha__wolverhampton
+6,11,A,3.8,Mateta,,jean_philippe_mateta__crystal_palace
+7,2,DC,4.7,Milenkovic,,nikola_milenkovic__nottingham_forest
+7,3,DL,,Aït-Nouri,,rayan_ait_nouri__wolverhampton
+7,4,DL,4.5,Cash,,matty_cash__aston_villa
+7,6,MO,5.8,Szoboszlai,,dominik_szoboszlai__liverpool
+7,7,MO,6.0,Palmer,,cole_palmer__chelsea
+7,8,MD,4.7,João Gomes,,joao_victor_joao_gomes__wolverhampton
+7,11,A,6.2,Evanilson,,francisco_evanilson_evanilson__bournemouth

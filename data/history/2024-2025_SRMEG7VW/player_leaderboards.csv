@@ -1,0 +1,44 @@
+categorie,rang,joueur,club,poste,equipe_abrev,achat,buts,valeur,team_id,player_key
+ratio_achat_par_but,1,Keane Lewis-Potter,Brentford,A,CFR,9.0,3,3.0,1,keane_lewis_potter__brentford
+ratio_achat_par_but,2,Chris Wood,Nottingham Forest,A,L69,25.0,8,3.13,6,chris_wood__nottingham_forest
+ratio_achat_par_but,3,Alex Iwobi,Fulham,MO,SPR,26.0,8,3.25,2,alex_iwobi__fulham
+ratio_achat_par_but,4,Alexander Isak,Newcastle,A,COL,50.0,13,3.85,0,alexander_isak__newcastle
+ratio_achat_par_but,5,Matheus Cunha,Wolverhampton,A,L69,31.0,8,3.88,6,matheus_santos_matheus_cunha__wolverhampton
+ratio_achat_par_but,6,Bryan Mbeumo,Brentford,A,FCR,40.0,10,4.0,3,bryan_mbeumo__brentford
+ratio_achat_par_but,7,Dejan Kulusevski,Tottenham,MO,SPR,16.0,4,4.0,2,dejan_kulusevski__tottenham
+ratio_achat_par_but,8,Emerson,West Ham,DL,COL,8.0,2,4.0,0,emerson__west_ham
+ratio_achat_par_but,9,Iliman Ndiaye,Everton,MO,CFR,13.0,3,4.33,1,iliman_ndiaye__everton
+ratio_achat_par_but,10,Yoane Wissa,Brentford,A,SPR,35.0,8,4.38,2,yoane_wissa__brentford
+meilleurs_gardiens,1,Matz Sels,Nottingham Forest,G,COL,25.0,,6.28,0,matz_sels__nottingham_forest
+meilleurs_gardiens,2,Guglielmo Vicario,Tottenham,G,COL,16.0,,5.6,0,guglielmo_vicario__tottenham
+meilleurs_gardiens,3,Caoimhín Kelleher,Liverpool,G,CFR,10.0,,5.29,1,caoimhin_kelleher__liverpool
+meilleurs_defenseurs,1,Gabriel Magalhães,Arsenal,DC,SPR,51.0,,5.67,2,gabriel_magalhaes__arsenal
+meilleurs_defenseurs,2,Ola Aina,Nottingham Forest,DL,FCR,11.0,,5.54,3,ola_aina__nottingham_forest
+meilleurs_defenseurs,3,Rúben Dias,Man. City,DC,L69,13.0,,5.5,6,ruben_dias__man_city
+meilleurs_defenseurs,4,Pedro Porro,Tottenham,DL,CFR,17.0,,5.45,1,pedro_porro__tottenham
+meilleurs_defenseurs,5,Nikola Milenkovic,Nottingham Forest,DC,GTF,33.0,,5.43,7,nikola_milenkovic__nottingham_forest
+meilleurs_defenseurs,6,Virgil van Dijk,Liverpool,DC,L69,32.0,,5.43,6,virgil_van_dijk__liverpool
+meilleurs_defenseurs,7,William Saliba,Arsenal,DC,FCR,62.0,,5.42,3,william_saliba__arsenal
+meilleurs_defenseurs,8,Toti Gomes,Wolverhampton,DC,FCM,8.0,,5.4,5,tote_antonio_toti_gomes__wolverhampton
+meilleurs_defenseurs,9,Dan Burn,Newcastle,DC,COL,25.0,,5.35,0,dan_burn__newcastle
+meilleurs_defenseurs,10,Trent Alexander-Arnold,Liverpool,DL,L69,18.0,,5.35,6,trent_alexander_arnold__liverpool
+meilleurs_milieux,1,Eberechi Eze,Crystal Palace,MO,FCR,35.0,,6.44,3,eberechi_eze__crystal_palace
+meilleurs_milieux,2,Alex Iwobi,Fulham,MO,SPR,26.0,,6.44,2,alex_iwobi__fulham
+meilleurs_milieux,3,Cole Palmer,Chelsea,MO,GTF,100.0,,6.39,7,cole_palmer__chelsea
+meilleurs_milieux,4,Morgan Gibbs-White,Nottingham Forest,MO,SPR,21.0,,6.33,2,morgan_gibbs_white__nottingham_forest
+meilleurs_milieux,5,Bruno Fernandes,Man. United,MO,RSH,44.0,,6.04,4,bruno_miguel_bruno_fernandes__man_united
+meilleurs_milieux,6,Anthony Gordon,Newcastle,MO,COL,28.0,,6.0,0,anthony_gordon__newcastle
+meilleurs_milieux,7,Bruno Guimarães,Newcastle,MD,SPR,26.0,,6.0,2,bruno_guimaraes__newcastle
+meilleurs_milieux,8,Declan Rice,Arsenal,MD,L69,35.0,,5.95,6,declan_rice__arsenal
+meilleurs_milieux,9,Mohammed Kudus,West Ham,MO,COL,27.0,,5.92,0,mohammed_kudus__west_ham
+meilleurs_milieux,10,James Maddison,Tottenham,MO,FCR,40.0,,5.79,3,james_maddison__tottenham
+meilleurs_attaquants,1,Mohamed Mohamed Salah,Liverpool,A,CFR,71.0,,7.11,1,mohamed_salah__liverpool
+meilleurs_attaquants,2,Alexander Isak,Newcastle,A,COL,50.0,,6.58,0,alexander_isak__newcastle
+meilleurs_attaquants,3,Matheus Cunha,Wolverhampton,A,L69,31.0,,6.42,6,matheus_santos_matheus_cunha__wolverhampton
+meilleurs_attaquants,4,Bukayo Saka,Arsenal,A,FCM,103.0,,6.11,5,bukayo_saka__arsenal
+meilleurs_attaquants,5,Yoane Wissa,Brentford,A,SPR,35.0,,6.05,2,yoane_wissa__brentford
+meilleurs_attaquants,6,Bryan Mbeumo,Brentford,A,FCR,40.0,,6.0,3,bryan_mbeumo__brentford
+meilleurs_attaquants,7,Chris Wood,Nottingham Forest,A,L69,25.0,,5.82,6,chris_wood__nottingham_forest
+meilleurs_attaquants,8,Marcus Rashford,Man. United,A,RSH,27.0,,5.8,4,marcus_rashford__man_united
+meilleurs_attaquants,9,Nicolas Jackson,Chelsea,A,COL,36.0,,5.7,0,nicolas_jackson__chelsea
+meilleurs_attaquants,10,Callum Hudson-Odoi,Nottingham Forest,A,FCM,17.0,,5.69,5,callum_hudson_odoi__nottingham_forest

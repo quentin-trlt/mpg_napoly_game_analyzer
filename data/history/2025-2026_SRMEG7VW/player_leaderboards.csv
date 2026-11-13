@@ -1,0 +1,44 @@
+categorie,rang,joueur,club,poste,equipe_abrev,achat,buts,valeur,team_id,player_key
+ratio_achat_par_but,1,Danny Welbeck,Brighton,A,IOO,14.0,8,1.75,6,danny_welbeck__brighton
+ratio_achat_par_but,2,Eddie Nketiah,Crystal Palace,A,IOO,7.0,4,1.75,6,eddie_nketiah__crystal_palace
+ratio_achat_par_but,3,Antoine Semenyo,Bournemouth,MO,VFC,20.0,10,2.0,1,antoine_semenyo__bournemouth
+ratio_achat_par_but,4,Micky van de Ven,Tottenham,DC,VFC,8.0,4,2.0,1,micky_van_de_ven__tottenham
+ratio_achat_par_but,5,Richarlison,Tottenham,A,FCR,12.0,5,2.4,3,richarlison__tottenham
+ratio_achat_par_but,6,Mason Mount,Man. United,MO,ABG,5.0,2,2.5,4,mason_mount__man_united
+ratio_achat_par_but,7,Michael Keane,Everton,DC,IOO,9.0,3,3.0,6,michael_keane__everton
+ratio_achat_par_but,8,Jérémy Doku,Man. City,MO,BDW,14.0,4,3.5,9,jeremy_doku__man_city
+ratio_achat_par_but,9,Trevoh Chalobah,Chelsea,DC,BRD,14.0,4,3.5,8,trevoh_chalobah__chelsea
+ratio_achat_par_but,10,Estêvão,Chelsea,A,VFC,16.0,4,4.0,1,estevao_willian_estevao__chelsea
+meilleurs_gardiens,1,Emiliano Martínez,Aston Villa,G,BLG,42.0,,5.82,2,emiliano_martinez__aston_villa
+meilleurs_gardiens,2,Nick Pope,Newcastle,G,COL,30.0,,5.75,0,nick_pope__newcastle
+meilleurs_gardiens,3,David Raya,Arsenal,G,L69,42.0,,5.67,5,david_raya__arsenal
+meilleurs_defenseurs,1,Gabriel Magalhães,Arsenal,DC,FCR,40.0,,5.91,3,gabriel_magalhaes__arsenal
+meilleurs_defenseurs,2,Pedro Porro,Tottenham,DL,BDW,22.0,,5.83,9,pedro_porro__tottenham
+meilleurs_defenseurs,3,Daniel Muñoz,Crystal Palace,DL,BRD,23.0,,5.71,8,daniel_munoz__crystal_palace
+meilleurs_defenseurs,4,Reece James,Chelsea,DL,L69,13.0,,5.67,5,reece_james__chelsea
+meilleurs_defenseurs,5,Josko Gvardiol,Man. City,DC,L69,22.0,,5.63,5,josko_gvardiol__man_city
+meilleurs_defenseurs,6,Marc Guéhi,Crystal Palace,DC,BLG,16.0,,5.62,2,marc_guehi__crystal_palace
+meilleurs_defenseurs,7,Rúben Dias,Man. City,DC,BRD,34.0,,5.59,8,ruben_dias__man_city
+meilleurs_defenseurs,8,Trevoh Chalobah,Chelsea,DC,BRD,14.0,,5.56,8,trevoh_chalobah__chelsea
+meilleurs_defenseurs,9,Keane Lewis-Potter,Brentford,DL,BRD,22.0,,5.5,8,keane_lewis_potter__brentford
+meilleurs_defenseurs,10,Malo Gusto,Chelsea,DL,L69,12.0,,5.5,5,malo_gusto__chelsea
+meilleurs_milieux,1,Phil Foden,Man. City,MO,IOO,62.0,,6.16,6,phil_foden__man_city
+meilleurs_milieux,2,Jérémy Doku,Man. City,MO,BDW,14.0,,6.15,9,jeremy_doku__man_city
+meilleurs_milieux,3,Declan Rice,Arsenal,MD,IOO,38.0,,6.14,6,declan_rice__arsenal
+meilleurs_milieux,4,Morgan Rogers,Aston Villa,MO,POL,40.0,,6.04,7,morgan_rogers__aston_villa
+meilleurs_milieux,5,Rayan Cherki,Man. City,MO,L69,28.0,,6.04,5,rayan_cherki__man_city
+meilleurs_milieux,6,Vitaly Janelt,Brentford,MD,L69,15.0,,6.0,5,vitaly_janelt__brentford
+meilleurs_milieux,7,Dominik Szoboszlai,Liverpool,MO,L69,27.0,,5.96,5,dominik_szoboszlai__liverpool
+meilleurs_milieux,8,Amadou Onana,Aston Villa,MD,POL,29.0,,5.94,7,amadou_onana__aston_villa
+meilleurs_milieux,9,Pedro Neto,Chelsea,MO,COL,32.0,,5.92,0,pedro_neto__chelsea
+meilleurs_milieux,10,Moisés Caicedo,Chelsea,MD,L69,27.0,,5.88,5,moises_caicedo__chelsea
+meilleurs_attaquants,1,Erling Haaland,Man. City,A,BLG,87.0,,6.33,2,erling_haaland__man_city
+meilleurs_attaquants,2,Bukayo Saka,Arsenal,A,BLG,78.0,,5.97,2,bukayo_saka__arsenal
+meilleurs_attaquants,3,Kevin Schade,Brentford,A,L69,31.0,,5.9,5,kevin_schade__brentford
+meilleurs_attaquants,4,Bryan Mbeumo,Man. United,A,ABG,61.0,,5.69,4,bryan_mbeumo__man_united
+meilleurs_attaquants,5,Georginio Rutter,Brighton,A,BDW,13.0,,5.67,9,georginio_rutter__brighton
+meilleurs_attaquants,6,Yankuba Minteh,Brighton,A,BDW,22.0,,5.64,9,yankuba_minteh__brighton
+meilleurs_attaquants,7,João Pedro,Chelsea,A,POL,30.0,,5.53,7,joao_pedro__chelsea
+meilleurs_attaquants,8,Cody Gakpo,Liverpool,A,FCR,44.0,,5.47,3,cody_gakpo__liverpool
+meilleurs_attaquants,9,Hugo Ekitiké,Liverpool,A,FCR,45.0,,5.34,3,hugo_ekitike__liverpool
+meilleurs_attaquants,10,Richarlison,Tottenham,A,FCR,12.0,,5.3,3,richarlison__tottenham

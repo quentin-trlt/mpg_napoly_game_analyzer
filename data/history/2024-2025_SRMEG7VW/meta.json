@@ -1,0 +1,150 @@
+{
+  "saison": "2024-2025",
+  "championnat": "Premier League",
+  "code_ligue": "SRMEG7VW",
+  "nom_ligue": "EFL League 2",
+  "nb_equipes": 8,
+  "nb_journees": 14,
+  "mode_remplacements": "tactique",
+  "bonus": {
+    "McDo+": 3,
+    "La valise à Nanard": 1,
+    "Suarez": 1,
+    "Chapron rouge": 1,
+    "Zahia": 1,
+    "Miroir": 1,
+    "424": 1,
+    "Tonton Pat": 1
+  },
+  "regles_particulieres": "8 équipes, 14 journées MPG = journées 8 à 21 de PL (octobre 2024 à janvier 2025). Un seul Suarez (une équipe de moins). Chapron rouge (un titulaire adverse tiré au sort est remplacé par Rotaldo) est utilisé par 5 équipes et Cheat Code 18-26 n'apparaît jamais : Chapron rouge occupait sa place dans la dotation. 424 n'a jamais été posé, sa dotation de 1 est supposée. Les fiches équipes du site omettent la J8 dans le bilan et la forme (13 matchs) alors que les 4 matchs de J8 existent et comptent dans le classement général, recalculé à l'identique.",
+  "players_csv": "effectif de fin de saison",
+  "recupere_le": "2026-11-13",
+  "source": [
+    "https://mpg.football/league/mpg_league_SRMEG7VW/history?season=1",
+    "https://mpg.football/mpgMatchDetails/mpg_division_match_SRMEG7VW_1_1_<journee>_<n>_<dom>_<ext>",
+    "https://mpg.football/mpg-team-sheet/mpg_team_SRMEG7VW_1_1_<team_id>?divisionId=mpg_division_SRMEG7VW_1_1"
+  ],
+  "couverture_pl": {
+    "journees_pl": [
+      8,
+      21
+    ],
+    "matchs_pl": 140
+  },
+  "anomalies": [
+    "players.csv : effectif de fin de saison reconstruit depuis les identifiants de la fiche équipe (enchère comprise). cote, valeur_effectif_meur et total_cote sont vides : pour une saison passée, MPG n'affiche que la cote actuelle des joueurs encore en PL. club = club du joueur à la dernière journée PL couverte.",
+    "Colonnes de l'onglet Data (nom_data, note_moy_reelle, buts_reels_saison, pct_titularisations, cartons, matchs, points_mpg_moy, statut_performance), flag_point_interrogation, variation_rang et forme : non disponibles pour une saison passée, laissées vides.",
+    "Les joueurs sortis des effectifs en cours de saison (départ de PL) n'apparaissent pas dans players.csv. Leurs lignes de lineups/goals gardent une player_key construite sur le même modèle (nom complet + club du moment) et le mpg_player_id reste la clé fiable entre saisons.",
+    "player_match_notes, club_results et pl_goals couvrent uniquement les journées PL rattachées aux journées MPG (les fiches joueurs des saisons passées sont vides pour les joueurs partis de PL). statut 'non_convoque' = absent de la feuille de match du club, sans distinction blessé/suspendu. Levi Colwill (saison 2) n'est sur aucune feuille de match : 'non_convoque' sur les 18 journées.",
+    "Note PL (player_match_notes.note) = note MPG sans bonus : identique à la note brute des compositions MPG pour 100 % des joueurs alignés.",
+    "goals.csv : un but annulé par La valise à Nanard est typé 'bloque' (le but adverse retiré par le bonus), au même titre que les buts arrêtés par le gardien. Le bonus correspondant est dans bonus.csv.",
+    "bonus.csv : un bonus renvoyé par le Miroir garde sa ligne avec un effet vide (comme un Capitaine sans effet) ; l'équipe qui pose Miroir a une ligne 'Miroir' suivie du bonus renvoyé, avec sa cible réelle. La valise à Nanard a pour effet '+5M', comme affiché par le site.",
+    "substitutions.csv : un titulaire expulsé par Chapron rouge est noté comme une absence (type 'absence', remplaçant 'Rotaldo') ; il a le statut 'titulaire_absent' dans lineups. Les 5 cas sont en saison 1, repérables dans bonus.csv.",
+    "ligne_terrain/position_ligne : déduites du numéro de poste MPG et de la composition, avec la même grille que l'affichage du site (vérifiée sur la saison en cours pour 3-4-3, 4-3-3, 3-5-2, 4-4-2, 5-3-2, 4-5-1 et à l'écran pour 4-2-4).",
+    "best_players.csv : en-tête seul. Les pages de match des saisons passées n'affichent plus les meilleurs joueurs.",
+    "typical_xi.csv : 11 type affiché par le site, de 6 à 9 joueurs par équipe (le site laisse vide le poste des joueurs qui ne sont plus en PL). prochain_adversaire_club vide.",
+    "mpg_scorers_ranking.csv et player_leaderboards.csv : repris des onglets Buteurs et Joueurs de l'historique ; buts réels/MPG par joueur identiques à goals.csv."
+  ],
+  "controles": {
+    "statut": "ok",
+    "echecs": [],
+    "detail": [
+      {
+        "controle": "8 équipes, 14 journées, 4 matchs par journée",
+        "ok": true
+      },
+      {
+        "controle": "chaque équipe joue 1 fois par journée",
+        "ok": true
+      },
+      {
+        "controle": "player_key unique dans players",
+        "ok": true
+      },
+      {
+        "controle": "id MPG trouvé pour tous les joueurs de l'effectif final",
+        "ok": true
+      },
+      {
+        "controle": "enchères <= budget de 500",
+        "ok": true
+      },
+      {
+        "controle": "11 joueurs sur le terrain par équipe et par match",
+        "ok": true
+      },
+      {
+        "controle": "note_avec_bonus renseignée pour tous les joueurs sur le terrain",
+        "ok": true
+      },
+      {
+        "controle": "ligne_terrain renseignée pour tous les joueurs sur le terrain",
+        "ok": true
+      },
+      {
+        "controle": "player_key renseignée hors Rotaldo",
+        "ok": true
+      },
+      {
+        "controle": "un seul capitaine max par équipe",
+        "ok": true
+      },
+      {
+        "controle": "buts listés (hors bloqués) = score",
+        "ok": true
+      },
+      {
+        "controle": "classement g recalculé = site",
+        "ok": true
+      },
+      {
+        "controle": "classement n recalculé = site",
+        "ok": true
+      },
+      {
+        "controle": "classement p recalculé = site",
+        "ok": true
+      },
+      {
+        "controle": "classement pts recalculé = site",
+        "ok": true
+      },
+      {
+        "controle": "diff de buts recalculée = site",
+        "ok": true
+      },
+      {
+        "controle": "ordre du classement (pts puis diff) = site",
+        "ok": true
+      },
+      {
+        "controle": "buts pour (reel) = onglet Equipes",
+        "ok": true
+      },
+      {
+        "controle": "buts pour (mpg) = onglet Equipes",
+        "ok": true
+      },
+      {
+        "controle": "moyennes +B. recalculées = site",
+        "ok": true
+      },
+      {
+        "controle": "Rotaldos alignés = onglet Equipes",
+        "ok": true
+      },
+      {
+        "controle": "buts PL listés = score (hors VAR)",
+        "ok": true
+      },
+      {
+        "controle": "journées PL complètes (10 matchs)",
+        "ok": true
+      },
+      {
+        "controle": "player_match_notes : 1 ligne par joueur et journée PL couverte",
+        "ok": true
+      }
+    ]
+  }
+}

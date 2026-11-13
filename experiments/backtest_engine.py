@@ -6,6 +6,9 @@ blessure du jour et `chance_of_playing_next_round` sont exclus (non archivés). 
 toutes les variantes : la note moyenne PL de la saison (a priori des notes rétrécies) et, pour Elo et le Poisson
 de référence, l'indice de force calculé sur les effectifs du jour.
 
+L'instantané FPL de `data/` est retiré des ligues rejouées : « Structurel sans fuite (actuel) » reste le modèle
+d'avant le modèle de temps de jeu, qui sert de référence.
+
 Usage : uv run python -m experiments.backtest_engine
 """
 
@@ -103,7 +106,12 @@ def snapshot(a: Analysis, g: int, mapping: pd.DataFrame, hist: dict[int, pd.Data
     players["taux_jeu"] = players["player_key"].map(rate).fillna(rate.median())
     players["statut_performance"] = "ok"
     sub_league = dataclasses.replace(
-        league, players=players, club_results=cr, goals=league.goals[league.goals["gw"] < g]
+        league,
+        players=players,
+        club_results=cr,
+        goals=league.goals[league.goals["gw"] < g],
+        fpl_players=None,
+        fpl_history=None,
     )
     lu = a.lineups[a.lineups["gw"] < g]
     ps = mplayers.player_stats(sub_league, lu)

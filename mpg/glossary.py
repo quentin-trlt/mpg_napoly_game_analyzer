@@ -121,6 +121,19 @@ GLOSSARY: dict[str, str] = {
         "les plus gros achats."
     ),
     "shrinkage": (
+        "**Note estimée.** La note MPG d'un joueur varie beaucoup d'un match à l'autre (écart-type d'environ 1,1 point "
+        "pour un titulaire), alors que les joueurs d'un même poste se ressemblent (0,2 à 0,6 point d'écart de niveau). "
+        "On l'estime donc sur toutes ses notes de Premier League (fiche joueur MPG), en trois morceaux :\n\n"
+        "- sa moyenne quand il est titulaire, tirée vers celle des titulaires de son poste : "
+        "(n × moyenne + k × moyenne du poste) / (n + k), avec k = {k_postes} matchs fictifs selon le poste ;\n"
+        "- sa probabilité d'être titulaire quand il joue, tirée de la même façon vers celle de son poste ;\n"
+        "- la note d'un remplaçant entré en jeu, commune au poste, plus basse et plus resserrée.\n\n"
+        "Note estimée = p × note de titulaire + (1 − p) × note de remplaçant : c'est la note attendue quand il joue. "
+        "k est le rapport entre la variance d'un match à l'autre et la variance entre joueurs : un k élevé (gardiens) "
+        "veut dire que dix matchs en disent peu de plus que le poste. Chaque journée prédite avec les précédentes, "
+        "cette estimation prédit mieux la note suivante que la moyenne brute ou une moyenne unique rétrécie."
+    ),
+    "shrinkage_compos": (
         "**Note rétrécie.** Après quelques matchs, une note moyenne MPG est très bruitée. On la combine avec une note "
         "a priori, la moyenne de saison du joueur en Premier League (à défaut, la médiane de son poste) :\n\n"
         "note rétrécie = (n × moyenne MPG + k × a priori) / (n + k)\n\n"
@@ -130,7 +143,7 @@ GLOSSARY: dict[str, str] = {
     ),
     "residu_valeur": (
         "**Rendement par rapport au prix.** Dans chaque poste, on ajuste par régression de Theil–Sen (médiane des pentes, "
-        "robuste aux valeurs extrêmes) la note rétrécie sur log(enchère). Le résidu est la note du joueur moins la note "
+        "robuste aux valeurs extrêmes) la note estimée sur log(enchère). Le résidu est la note du joueur moins la note "
         "attendue pour son prix. Positif : il rend plus que ce que son prix laissait espérer."
     ),
     "concentration": (
@@ -171,9 +184,9 @@ GLOSSARY: dict[str, str] = {
         "ne décide pas du classement."
     ),
     "points_mpg": (
-        "**Points MPG moyens et note réelle.** Les deux sont des moyennes de saison. Pour l'a priori de la note rétrécie, "
-        "on a retenu la note réelle parce qu'elle prédit mieux les notes observées dans la ligue (RMSE {rmse_note_reelle:.2f} "
-        "contre {rmse_points_mpg:.2f} pour les points MPG)."
+        "**Points MPG moyens et note réelle.** Les deux sont des moyennes de saison. La note réelle prédit mieux "
+        "les notes observées dans la ligue (RMSE {rmse_note_reelle:.2f} contre {rmse_points_mpg:.2f} pour les points "
+        "MPG)."
     ),
     "discipline": (
         "**Discipline.** Cartons jaunes et rouges reçus en Premier League par les joueurs de l'effectif. Un rouge entraîne "
@@ -211,8 +224,11 @@ GLOSSARY: dict[str, str] = {
         "**Modèle structurel.** On simule chaque match au niveau des joueurs : le 11 probable dans la formation habituelle "
         "et un banc de 7, la probabilité que chacun joue (modèle de temps de jeu estimé sur l'historique FPL des joueurs "
         "de la ligue : part des 5 dernières journées jouées, a joué la dernière, titularisations, taux de la saison ; "
-        "0 pendant 2 journées pour un blessé, 1 pour un suspendu), un Rotaldo à {rotaldo:.1f} si un poste reste vide, puis la note de chaque joueur (sa note rétrécie "
-        "plus un aléa de match d'écart-type {sigma:.2f}). L'écart de note moyenne entre les deux équipes donne les "
+        "0 pendant 2 journées pour un blessé, 1 pour un suspendu), un Rotaldo à {rotaldo:.1f} si un poste reste vide, puis la note de chaque joueur. Titulaire en PL "
+        "(selon sa part de titularisations), il reçoit sa moyenne de titulaire, tirée vers celle des titulaires de son "
+        "poste tant qu'il a peu de matchs, plus un aléa de match d'environ 1 point ; entré en cours de match, la note "
+        "d'un remplaçant de son poste, plus basse et plus resserrée. Les écarts de niveau entre joueurs sont faibles "
+        "devant l'aléa d'un match, d'où un rappel fort vers la moyenne du poste. L'écart de note moyenne entre les deux équipes donne les "
         "probabilités V/N/D via un logit ordonné ajusté sur les matchs joués. C'est le seul modèle qui voit les blessures "
         "et le temps de jeu."
     ),
@@ -227,10 +243,11 @@ GLOSSARY: dict[str, str] = {
     ),
     "fuite_backtest": (
         "**Rejeu du passé et ses limites.** Chaque journée est prédite avec un modèle ajusté uniquement sur les "
-        "journées précédentes. La probabilité de jouer est elle aussi recalculée avec les seules journées PL "
-        "antérieures, mais les autres données joueurs (moyennes PL, statut) sont celles d'aujourd'hui : le modèle "
-        "structurel « connaît » un peu le futur et son score est optimiste. La seule évaluation sans biais "
-        "est celle des pronostics figés avant chaque journée, plus bas."
+        "journées précédentes. Les données joueurs (moyennes PL, matchs joués, probabilité de jouer) et l'indice de "
+        "force sont recalculés avec les seuls matchs de PL joués avant la journée. Restent du jour la cote MPG et "
+        "le statut (blessé, suspendu), inconnu pour le passé et compté « ok ». Les réglages des modèles ayant été "
+        "choisis en regardant ces mêmes matchs, la seule évaluation sans biais reste celle des pronostics figés "
+        "avant chaque journée, plus bas."
     ),
     "et_si": (
         "**Mode « et si ».** Fixez l'issue de matchs à venir : ils sont imposés dans toutes les saisons simulées, les "

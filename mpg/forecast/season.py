@@ -4,6 +4,8 @@ from functools import cached_property
 import numpy as np
 import pandas as pd
 
+from mpg import mercato, strength
+from mpg import players as mplayers
 from mpg.analysis import Analysis
 from mpg.coaching import remaining_bonuses
 from mpg.forecast.bonus import apply_shift, bonus_shifts, fit_goal_note_slope, past_bonus_effects, tactical_gains
@@ -17,6 +19,7 @@ from mpg.forecast.models import (
     default_models,
 )
 from mpg.playing_time import league_play_probabilities
+from mpg.point_in_time import league_before
 
 POINTS = np.array([[3, 1, 0], [0, 1, 3]])
 REFERENCE = BaselineModel.name
@@ -25,11 +28,13 @@ REFERENCE = BaselineModel.name
 def build_context(a: Analysis, upto_gw: int | None = None) -> Context:
     """Contexte de prédiction avec les matchs joués jusqu'à `upto_gw` (par défaut la dernière journée).
 
-    La probabilité de jouer de chaque joueur vient du modèle de temps de jeu sur l'instantané FPL
-    (`mpg.playing_time`), recalculée avec les seules journées PL antérieures ; sans instantané, c'est le taux de jeu
-    de la saison. Les autres données joueurs (moyennes PL, notes rétrécies, statut) sont celles du jour : en
-    rejouant le passé, elles contiennent de l'information postérieure à la journée prédite. Tout le reste (résultats, bonus posés,
-    stock de bonus restant, pentes estimées) est limité aux journées ≤ `upto_gw`.
+    Pour une journée passée (`upto_gw` < dernière journée jouée), les données joueurs sont celles d'avant la journée
+    `upto_gw` + 1 (`mpg.point_in_time`) : moyennes et taux de jeu PL recalculés sur les matchs de PL antérieurs,
+    notes rétrécies sur les compos MPG des journées ≤ `upto_gw`, statut « ok », et l'indice de force qui en découle.
+    Sans player_match_notes.csv, ce sont celles du jour, qui contiennent de l'information postérieure.
+    La probabilité de jouer vient du modèle de temps de jeu sur l'instantané FPL (`mpg.playing_time`), recalculée
+    avec les seules journées PL antérieures ; sans instantané, c'est le taux de jeu ci-dessus. Tout le reste
+    (résultats, bonus posés, stock de bonus restant, pentes estimées) est limité aux journées ≤ `upto_gw`.
     """
     league = a.league
     upto = league.last_gw if upto_gw is None else upto_gw
@@ -47,7 +52,13 @@ def build_context(a: Analysis, upto_gw: int | None = None) -> Context:
     delta = (home["note_moy_brute"] - home["note_moy_brute_adv"]).to_numpy(float)
     note_slope = OrderedLogit(b0=2.0).fit(delta, home["resultat"].map(RESULT_TO_IDX).to_numpy()).b
 
-    players = a.player_value
+    past = league_before(league, upto + 1) if upto < league.last_gw else None
+    if past is None:
+        players = a.player_value
+        force = a.favourites.set_index("team_id")["indice_force"]
+    else:
+        players = mercato.player_value(mplayers.player_stats(past, lu))
+        force = strength.strength_index(strength.squad_features(past)).set_index("team_id")["indice_force"]
     rates = league_play_probabilities(league, upto + 1)
     if rates is not None:
         players = players.assign(taux_jeu=players["player_key"].map(rates).fillna(players["taux_jeu"]))
@@ -56,7 +67,7 @@ def build_context(a: Analysis, upto_gw: int | None = None) -> Context:
     remaining = remaining_bonuses(bonus_used, league.bonus_stock, team_ids) if league.bonus_stock is not None else None
     return Context(
         tm=tm,
-        strength=a.favourites.set_index("team_id")["indice_force"],
+        strength=force,
         players=players,
         lineups=lu,
         team_ids=team_ids,

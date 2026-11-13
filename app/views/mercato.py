@@ -12,8 +12,10 @@ PLAYER_COLS = {
     "enchere": st.column_config.NumberColumn("Enchère", format="%d M€"),
     "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
     "surpaiement_x": st.column_config.NumberColumn("× cote", format="%.2f"),
-    "n_notes": st.column_config.NumberColumn("Notes MPG", help="Nombre de matchs notés dans la ligue"),
-    "note_retrecie": st.column_config.NumberColumn("Note rétrécie", format="%.2f"),
+    "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note estimée"),
+    "note_retrecie": st.column_config.NumberColumn(
+        "Note estimée", format="%.2f", help="Note attendue quand il joue, tirée vers son poste"
+    ),
     "note_attendue": st.column_config.NumberColumn("Attendue pour le prix", format="%.2f"),
     "residu_valeur": st.column_config.NumberColumn("Écart au prix", format="%+.2f"),
     "ga_saison": st.column_config.NumberColumn("G+A PL", format="%d"),
@@ -104,7 +106,7 @@ def render(a: Analysis, team_id: int) -> None:
 
     section("Rendement par rapport au prix")
     charts.show(charts.price_note_facets(pv, team_id))
-    how(["residu_valeur", "shrinkage"], meta)
+    how(["residu_valeur", "shrinkage" if meta.get("k_postes") else "shrinkage_compos"], meta)
     cols = ["joueur", "team_name", "poste", "enchere", "n_notes", "note_retrecie", "note_attendue", "residu_valeur"]
     rated = pv[pv["n_notes"] >= 2]
     st.caption("Joueurs avec au moins 2 matchs notés.")

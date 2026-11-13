@@ -556,7 +556,7 @@ def price_note_facets(pv: pd.DataFrame, team_id: int) -> go.Figure:
                 customdata=np.stack([d["joueur"], d["team_name"], d["residu_valeur"]], axis=1),
                 showlegend=False,
                 hovertemplate="<b>%{customdata[0]}</b> · %{customdata[1]}<br>Enchère : %{x:.0f} M€<br>"
-                "Note rétrécie : %{y:.2f}<br>Écart au prix : %{customdata[2]:+.2f}<extra></extra>",
+                "Note estimée : %{y:.2f}<br>Écart au prix : %{customdata[2]:+.2f}<extra></extra>",
             ),
             row=row,
             col=col,
@@ -583,7 +583,7 @@ def price_note_facets(pv: pd.DataFrame, team_id: int) -> go.Figure:
             title_text="Enchère (M€, log)" if i == 4 - n_cols else None,
         )
         if col == 1:
-            fig.update_yaxes(title_text="Note rétrécie", row=row, col=col)
+            fig.update_yaxes(title_text="Note estimée", row=row, col=col)
     for ann in fig.layout.annotations:
         ann.font = dict(color=TEXT_2, size=12)
     fig.update_layout(

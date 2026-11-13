@@ -156,9 +156,11 @@ def render(a: Analysis, team_id: int) -> None:
             "enchere": st.column_config.NumberColumn("Prix", format="%d M€"),
             "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
             "surpaiement_x": st.column_config.NumberColumn("× cote", format="%.2f"),
-            "n_notes": "Notes",
-            "note_moy": st.column_config.NumberColumn("Moy. MPG", format="%.2f"),
-            "note_retrecie": st.column_config.NumberColumn("Note rétrécie", format="%.2f"),
+            "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note estimée"),
+            "note_moy": st.column_config.NumberColumn("Moy. brute", format="%.2f", help="Moyenne de ces notes"),
+            "note_retrecie": st.column_config.NumberColumn(
+                "Note estimée", format="%.2f", help="Note attendue quand il joue, tirée vers son poste"
+            ),
             "note_moy_reelle": st.column_config.NumberColumn("Moy. PL", format="%.1f"),
             "buts_reels": "Buts ligue",
             "buts_mpg": "Buts MPG",

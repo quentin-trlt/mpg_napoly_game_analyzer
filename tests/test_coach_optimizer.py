@@ -1,3 +1,5 @@
+import dataclasses
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -38,6 +40,25 @@ def test_note_model_parameters_are_plausible(analysis):
     assert 0.3 < m.sigma_player < 1.5 and 0 <= m.sigma_club < 1.0
     assert 0.5 < m.goal_bump < 2.5
     assert m.beta_against["G"] < 0 and m.beta_for["A"] > 0
+
+
+def test_forecast_calibration_is_a_bounded_slope(analysis):
+    results = analysis.league.club_results
+    assert 0 < pr.forecast_calibration(results) <= 1
+    assert pr.forecast_calibration(results.assign(statut="a_venir")) == 0.0
+    flat = results.assign(home_score=pd.array([1] * len(results), dtype="Int64"), away_score=1)
+    assert pr.forecast_calibration(flat) == pytest.approx(0.0, abs=1e-9)
+
+
+def test_opponent_adjustment_is_scaled(analysis):
+    league = analysis.league
+    model = pr.fit_note_model(analysis)
+    strength = pr.fit_club_strength(league.club_results)
+    pl_gw = pl_gw_for(league, league.last_gw + 1)
+    full = pr.project_players(analysis, [0, 1], pl_gw, dataclasses.replace(model, adj_scale=1.0), strength)
+    scaled = pr.project_players(analysis, [0, 1], pl_gw, model, strength)
+    assert np.abs(full["ajustement_adversaire"]).max() > 0
+    assert np.allclose(scaled["ajustement_adversaire"], model.adj_scale * full["ajustement_adversaire"])
 
 
 def test_draws_are_consistent(analysis):

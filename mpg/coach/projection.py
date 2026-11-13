@@ -2,9 +2,12 @@
 
 - P(joue) : disponibilité FPL (`chance_of_playing_next_round`, statut) × part des 5 dernières journées FPL avec du
   temps de jeu, rétrécie vers le taux de jeu de la saison. Sans appariement FPL : taux de jeu et statut MPG.
-- Note | joue : note rétrécie du joueur + effet du match attendu de son club (buts pour et contre attendus,
-  modèle de Poisson attaque/défense sur les résultats de PL), choc commun aux joueurs d'un même club, bruit
-  individuel, décalage des buteurs. Arrondie à 0,5.
+- Note | joue, avec player_match_notes.csv (`mpg.notes`) : titulaire en PL avec la probabilité du joueur, il reçoit
+  sa note de titulaire estimée + effet du match attendu de son club (buts pour et contre attendus, modèle de Poisson
+  attaque/défense sur les résultats de PL, voir `NoteModel.adj_scale`), choc commun aux joueurs d'un même club, bruit individuel, décalage des
+  buteurs ; remplaçant, la note des remplaçants de son poste + décalage des buteurs. Le choc de club, le bruit et
+  les décalages sont estimés sur les titularisations de PL. Sans ce fichier : note rétrécie des compos MPG pour
+  tous, paramètres estimés sur les compos. Arrondie à 0,5.
 - Buts réels | joue : Poisson de paramètre xG/90 × minutes attendues × difficulté de l'adversaire. L'xG/90 de la
   saison est rétréci vers la médiane du poste (450 minutes fictives), puis l'xG/90 récent vers celui de la saison.
 """
@@ -27,7 +30,8 @@ XG_PRIOR_MINUTES = 450.0
 DEFAULT_MINUTES = 75.0
 DOUBTFUL_CHANCE = 0.5
 BETA_RIDGE = 10.0
-STRENGTH_RIDGE = 2.0
+STRENGTH_RIDGE = 8.0
+MIN_CALIBRATION_MATCHES = 20
 NOTE_BOUNDS = (0.5, 10.0)
 UNAVAILABLE_GWS = {"blesse": 2, "suspendu": 1, "i": 2, "s": 1}
 OVERRIDE_LEVELS = {"sûr": 1.0, "probable": 0.8, "incertain": 0.5, "absent": 0.0}
@@ -78,12 +82,20 @@ class ClubStrength:
 
 
 def fit_club_strength(results: pd.DataFrame, ridge: float = STRENGTH_RIDGE) -> ClubStrength:
+    """Attaque et défense de chaque club, pénalité `ridge` × (‖attaque‖² + ‖défense‖²).
+
+    La pénalité équivaut à un a priori N(0, 1/(2 × ridge)) sur chaque force. `STRENGTH_RIDGE` = 8 (écart-type a
+    priori 0,25) maximise la vraisemblance des buts de la journée suivante, chaque journée de PL 2 à 10 prédite avec
+    les précédentes : +0,031 par but [IC 90 % −0,002 ; +0,064] face à 2, valeur précédente ; 16 donne autant. Avec 2,
+    les buts attendus étaient deux fois trop dispersés (un but attendu de plus annonçait 0,46 but réel sur les journées
+    6 à 10, contre 0,86 avec 8).
+    """
     played = results[results["statut"] == "joue"].dropna(subset=["home_score", "away_score"])
     clubs = sorted(set(results["home_club"]) | set(results["away_club"]))
     idx = {c: i for i, c in enumerate(clubs)}
     n = len(clubs)
-    hi = played["home_club"].map(idx).to_numpy()
-    ai = played["away_club"].map(idx).to_numpy()
+    hi = played["home_club"].map(idx).to_numpy(int)
+    ai = played["away_club"].map(idx).to_numpy(int)
     hs = played["home_score"].to_numpy(float)
     as_ = played["away_score"].to_numpy(float)
 
@@ -102,9 +114,43 @@ def fit_club_strength(results: pd.DataFrame, ridge: float = STRENGTH_RIDGE) -> C
     )
 
 
+def forecast_calibration(results: pd.DataFrame) -> float:
+    """Pente des buts réels sur les buts attendus d'avant-match, clippée à [0, 1].
+
+    Chaque journée de PL jouée (sauf la première) est prédite par `fit_club_strength` ajusté sur les journées
+    précédentes ; la pente de la régression des buts marqués sur ces buts attendus mesure ce qu'un but attendu de plus
+    annonce réellement (1 = prévision bien calibrée, 0 = aucune information). 0 avec moins de
+    `MIN_CALIBRATION_MATCHES` matchs.
+    """
+    played = results[results["statut"] == "joue"].dropna(subset=["home_score", "away_score"])
+    expected, real = [], []
+    for gw in sorted(played["pl_gw"].unique())[1:]:
+        past = results.copy()
+        later = past["pl_gw"] >= gw
+        past.loc[later, "statut"] = "a_venir"
+        strength = fit_club_strength(past)
+        for m in played[played["pl_gw"] == gw].itertuples():
+            gf, ga = strength.expected(m.home_club, m.away_club, True)
+            expected += [gf, ga]
+            real += [m.home_score, m.away_score]
+    if len(real) < 2 * MIN_CALIBRATION_MATCHES:
+        return 0.0
+    x, y = np.asarray(expected, float), np.asarray(real, float)
+    slope = np.cov(x, y, ddof=0)[0, 1] / max(np.var(x), 1e-9)
+    return float(np.clip(slope, 0.0, 1.0))
+
+
 @dataclass
 class NoteModel:
-    """Paramètres de note estimés sur les matchs joués de la ligue."""
+    """Paramètres de note estimés sur les matchs joués de la ligue.
+
+    `beta_for` et `beta_against` relient les notes aux buts réellement marqués et encaissés par le club. Les buts
+    attendus de `ClubStrength` sont plus dispersés que ce qu'ils annoncent : l'effet du match attendu est donc
+    β × `adj_scale` × (buts attendus − moyenne), où `adj_scale` est la pente des buts réels sur les buts attendus
+    (`forecast_calibration`), faible en début de saison. Rejoué sur J1-J5 sans information postérieure, cette mise à
+    l'échelle améliore le moteur (RPS 0,231 → 0,227 avec les compos optimisées, 0,237 → 0,227 avec le 11 réaliste) ;
+    sur les titularisations des journées PL 3 à 10 (1 022 notes), l'ajustement n'a pas d'effet mesurable sur la note.
+    """
 
     sigma_player: float
     sigma_club: float
@@ -114,9 +160,19 @@ class NoteModel:
     beta_against: dict[str, float]
     goals_mean: float
     k_shrink: float
+    adj_scale: float = 1.0
+
+
+def _with_residuals(app: pd.DataFrame) -> pd.DataFrame:
+    """Écart de chaque note à la moyenne du joueur, corrigé du degré de liberté (joueurs notés au moins 2 fois)."""
+    counts = app.groupby("player_key")["note_brute"].transform("size")
+    app["resid"] = app["note_brute"] - app.groupby("player_key")["note_brute"].transform("mean")
+    app["resid"] *= np.sqrt(counts / (counts - 1).where(counts > 1))
+    return app[counts > 1].dropna(subset=["resid"])
 
 
 def _appearances_with_pl(a: Analysis) -> pd.DataFrame:
+    """Joueurs notés dans les compos MPG, avec le score du match de PL de leur club et `marque` (buts.csv)."""
     league = a.league
     lu = a.lineups
     app = lu[lu["a_joue_irl"] & lu["player_key"].notna()].copy()
@@ -124,25 +180,52 @@ def _appearances_with_pl(a: Analysis) -> pd.DataFrame:
     app["pl_gw"] = app["gw"].map({g: pl_gw_for(league, g) for g in app["gw"].unique()})
     v = club_view(league.club_results).sort_values("date").groupby(["club", "pl_gw"]).head(1)
     app = app.merge(v[["club", "pl_gw", "bp", "bc"]], on=["club", "pl_gw"], how="left")
-    counts = app.groupby("player_key")["note_brute"].transform("size")
-    app["resid"] = app["note_brute"] - app.groupby("player_key")["note_brute"].transform("mean")
-    app["resid"] *= np.sqrt(counts / (counts - 1).where(counts > 1))
-    return app[counts > 1].dropna(subset=["resid"])
+    real = league.goals[league.goals["type_but"].isin(["reel", "bloque"])]
+    scorers = set(zip(real["match_id"], real["player_key"].dropna()))
+    app["marque"] = [(m, k) in scorers for m, k in zip(app["match_id"], app["player_key"])]
+    app["match_key"] = app["gw"]
+    return _with_residuals(app)
+
+
+def _starts_from_notes(league: League, notes: pd.DataFrame) -> pd.DataFrame:
+    """Titularisations de PL des joueurs de la ligue (player_match_notes), avec le score du club et `marque`."""
+    poste = league.players.set_index("player_key")["poste_groupe"]
+    app = notes[notes["note"].notna() & (notes["titulaire"] == 1)].copy()
+    app["poste_groupe"] = app["player_key"].map(poste)
+    app = app[app["poste_groupe"].notna()]
+    v = club_view(league.club_results)[["pl_match_id", "club", "bp", "bc"]]
+    app = app.merge(v, on=["pl_match_id", "club"], how="left")
+    app["note_brute"] = app["note"]
+    app["marque"] = app["buts"] > 0
+    app["match_key"] = app["pl_match_id"]
+    return _with_residuals(app)
 
 
 def _ridge(x: np.ndarray, y: np.ndarray, lam: float) -> np.ndarray:
     return np.linalg.solve(x.T @ x + lam * np.eye(x.shape[1]), x.T @ y)
 
 
-def fit_note_model(a: Analysis) -> NoteModel:
+def fit_note_model(a: Analysis, notes: pd.DataFrame | None = None) -> NoteModel:
     """Le décalage des buteurs est estimé d'abord, puis retiré des résidus avant la décomposition de variance
-    (choc de club + bruit individuel) : sinon la variance due aux buts serait comptée deux fois au tirage."""
-    league = a.league
-    app = _appearances_with_pl(a)
+    (choc de club + bruit individuel) : sinon la variance due aux buts serait comptée deux fois au tirage.
 
-    real = league.goals[league.goals["type_but"].isin(["reel", "bloque"])]
-    scorers = set(zip(real["match_id"], real["player_key"].dropna()))
-    app["marque"] = [(m, k) in scorers for m, k in zip(app["match_id"], app["player_key"])]
+    `notes` : player_match_notes à utiliser (celui de la ligue par défaut). Avec lui, tout est estimé sur les
+    titularisations de PL ; sans lui, sur les joueurs notés dans les compos MPG.
+    """
+    league = a.league
+    notes = league.player_match_notes if notes is None else notes
+    if notes is not None:
+        app = _starts_from_notes(league, notes)
+        played = notes[notes["note"].notna()]
+        field_apps = int(
+            (played["player_key"].map(league.players.set_index("player_key")["poste_groupe"]) != "G").sum()
+        )
+        own_goal_rate = int(played["csc"].sum()) / max(field_apps, 1)
+    else:
+        app = _appearances_with_pl(a)
+        on_pitch = a.lineups[a.lineups["sur_terrain"] & (a.lineups["poste_groupe"] != "G")]
+        own_goal_rate = int((league.goals["type_but"] == "csc").sum()) / max(len(on_pitch), 1)
+
     field = app[app["poste_groupe"] != "G"]
     scored = field["marque"].to_numpy()
     goal_bump = float(field["resid"][scored].mean() - field["resid"][~scored].mean()) if scored.any() else 1.0
@@ -150,17 +233,13 @@ def fit_note_model(a: Analysis) -> NoteModel:
     app["resid"] = app["resid"] - goal_bump * (app["marque"] - scored_rate)
     sigma_total = float(np.sqrt((app["resid"] ** 2).mean())) if len(app) else 1.0
 
-    grp = app.groupby(["club", "gw"])["resid"]
+    grp = app.groupby(["club", "match_key"])["resid"]
     sizes = grp.size()
     multi = sizes[sizes >= 2].index
     within = grp.var(ddof=1).loc[multi].mean()
     between = grp.mean().loc[multi].var(ddof=1) - within / sizes.loc[multi].mean()
     sigma_club = float(np.sqrt(np.clip(between, 0.0, 0.5 * sigma_total**2))) if len(multi) > 2 else 0.0
     sigma_player = float(np.sqrt(sigma_total**2 - sigma_club**2))
-
-    on_pitch = a.lineups[a.lineups["sur_terrain"] & (a.lineups["poste_groupe"] != "G")]
-    own = int((league.goals["type_but"] == "csc").sum())
-    own_goal_rate = own / max(len(on_pitch), 1)
 
     goals_mean = float(np.nanmean(np.r_[app["bp"], app["bc"]])) if app["bp"].notna().any() else 1.4
     beta_for, beta_against = {}, {}
@@ -178,6 +257,7 @@ def fit_note_model(a: Analysis) -> NoteModel:
         beta_against=beta_against,
         goals_mean=goals_mean,
         k_shrink=float(a.meta["k_shrinkage"]),
+        adj_scale=forecast_calibration(league.club_results),
     )
 
 
@@ -226,6 +306,9 @@ def project_players(
     pv = a.player_value
     cols = ["player_key", "joueur", "team_id", "club", "poste_groupe", "cote", "note_retrecie", "n_notes"]
     cols += ["taux_jeu", "statut_performance", "buts_reels_saison", "matchs_joues"]
+    mixture = "note_titulaire" in pv
+    if mixture:
+        cols += ["note_titulaire", "note_titulaire_sd", "p_titulaire_si_joue", "note_remplacant", "sigma_remplacant"]
     p = pv.loc[pv["team_id"].isin(team_ids), cols].copy()
     if fpl_players is not None:
         fcols = ["player_key", "element_id", "status", "chance_next", "news", "xg90", "minutes", "web_name"]
@@ -265,6 +348,7 @@ def project_players(
         line = row["poste_groupe"]
         adj = model.beta_for.get(line, 0.0) * (gf - model.goals_mean)
         adj += model.beta_against.get(line, 0.0) * (ga - model.goals_mean)
+        adj *= model.adj_scale
 
         if line == "G":
             lam = 0.0
@@ -281,6 +365,14 @@ def project_players(
             per_match = (row["buts_reels_saison"] or 0) / max(row["matchs_joues"] or 0, 1)
             lam = float(per_match) * opp_factor
 
+        if mixture:
+            start_note = row["note_titulaire"] + adj
+            q, sub_note, sub_sd = row["p_titulaire_si_joue"], row["note_remplacant"], row["sigma_remplacant"]
+            sd_mean = row["note_titulaire_sd"]
+        else:
+            start_note, q, sub_note, sub_sd = row["note_retrecie"] + adj, 1.0, np.nan, 0.0
+            sd_mean = model.sigma_player / np.sqrt(row["n_notes"] + model.k_shrink)
+
         override = overrides.get(row["player_key"])
         rows.append(
             {
@@ -292,9 +384,13 @@ def project_players(
                 "minutes_attendues": minutes,
                 "buts_attendus_club": gf,
                 "buts_encaisses_club": ga,
-                "note_attendue": row["note_retrecie"] + adj,
+                "note_attendue": q * start_note + (1 - q) * sub_note if q < 1 else start_note,
+                "note_titulaire_attendue": start_note,
+                "p_titulaire": q,
+                "note_remplacant_attendue": sub_note,
+                "sigma_remplacant_note": sub_sd,
                 "ajustement_adversaire": adj,
-                "note_sd_mean": model.sigma_player / np.sqrt(row["n_notes"] + model.k_shrink),
+                "note_sd_mean": sd_mean,
                 "lambda_buts": lam,
                 "source": "FPL" if pd.notna(eid) else "MPG",
             }
@@ -303,12 +399,18 @@ def project_players(
 
 
 def sample_draws(proj: pd.DataFrame, model: NoteModel, n_draws: int = 4000, seed: int = 0) -> Draws:
-    """Tirages communs (nombres aléatoires communs) pour tous les joueurs projetés."""
+    """Tirages communs (nombres aléatoires communs) pour tous les joueurs projetés.
+
+    Un joueur qui joue est titulaire en PL avec la probabilité `p_titulaire` : note de titulaire (moyenne tirée
+    selon son incertitude, choc de club, bruit individuel), sinon note de remplaçant de son poste. Les deux reçoivent
+    le décalage des buteurs.
+    """
     rng = np.random.default_rng(seed)
     n_p = len(proj)
     p_play = proj["p_joue"].clip(0, 1).to_numpy(float)
     lam = proj["lambda_buts"].clip(lower=0).to_numpy(float)
-    mu = proj["note_attendue"].to_numpy(float)
+    mu = proj["note_titulaire_attendue"].to_numpy(float)
+    q = proj["p_titulaire"].clip(0, 1).to_numpy(float)
     sd = np.sqrt(proj["note_sd_mean"].to_numpy(float) ** 2 + model.sigma_player**2)
     field = (proj["poste_groupe"] != "G").to_numpy()
     club_codes, clubs = pd.factorize(proj["club"])
@@ -318,6 +420,10 @@ def sample_draws(proj: pd.DataFrame, model: NoteModel, n_draws: int = 4000, seed
     p_score = 1 - np.exp(-lam)
     shock = model.sigma_club * rng.standard_normal((len(clubs), n_draws))
     raw = mu[:, None] + sd[:, None] * rng.standard_normal((n_p, n_draws)) + shock[club_codes]
+    if (q < 1).any():
+        sub = proj["note_remplacant_attendue"].fillna(0).to_numpy(float)[:, None]
+        sub = sub + proj["sigma_remplacant_note"].to_numpy(float)[:, None] * rng.standard_normal((n_p, n_draws))
+        raw = np.where(rng.random((n_p, n_draws)) < q[:, None], raw, sub)
     raw += model.goal_bump * ((goals > 0) - p_score[:, None])
     note = np.clip(np.round(raw * 2) / 2, *NOTE_BOUNDS)
     own = (rng.random((n_p, n_draws)) < model.own_goal_rate) & field[:, None]

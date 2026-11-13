@@ -104,6 +104,9 @@ def run(data_dir: Path | str = DEFAULT_DATA_DIR, n_sim: int = 10_000, seed: int 
             "bande_nul": lk.attrs["bande_nul"],
             "concordance_regle_note": lk.attrs["concordance"],
             "k_shrinkage": ps.attrs["k_shrinkage"],
+            "k_postes": ", ".join(f"{g} {k:.0f}" for g, k in ps.attrs["k_postes"].items())
+            if ps.attrs.get("k_postes")
+            else None,
             "n_sim": n_sim,
             "corr_fiabilite_absents": f"corrélation avec les absences MPG {corr_fiab}",
             "corr_absents_attendus": f"corrélation entre absences attendues et réelles {corr_abs}",

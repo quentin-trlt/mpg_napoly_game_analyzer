@@ -14,6 +14,7 @@ GOAL_TYPES = ("reel", "mpg", "csc", "rotaldo_csc", "bloque")
 PL_GOAL_TYPES = ("but", "penalty", "csc", "annule_var")
 PL_COUNTED = ("but", "penalty")
 PL_STATUSES = ("joue", "a_venir", "en_cours")
+NOTE_STATUSES = ("non_entre", "blesse", "suspendu", "non_convoque", "pas_encore_au_club")
 
 REQUIRED_COLUMNS: dict[str, list[str]] = {
     "teams": [
@@ -136,6 +137,20 @@ OPTIONAL_FILES: dict[str, list[str]] = {
     ],
     "fpl_players": ["player_key", "element_id", "status", "chance_next", "minutes", "xg90", "prochaine_journee_pl"],
     "fpl_history": ["player_key", "element_id", "round", "minutes", "starts", "goals_scored", "own_goals", "xg"],
+    "player_match_notes": [
+        "player_key",
+        "pl_gw",
+        "pl_match_id",
+        "club",
+        "note",
+        "a_joue",
+        "titulaire",
+        "minutes",
+        "buts",
+        "passes_decisives",
+        "csc",
+        "statut",
+    ],
 }
 
 
@@ -161,6 +176,7 @@ class League:
     pl_goals: pd.DataFrame | None = None
     fpl_players: pd.DataFrame | None = None
     fpl_history: pd.DataFrame | None = None
+    player_match_notes: pd.DataFrame | None = None
 
     @property
     def played(self) -> pd.DataFrame:
@@ -202,7 +218,7 @@ def _read(data_dir: Path, name: str) -> pd.DataFrame:
     return df
 
 
-def _derive_player_columns(players: pd.DataFrame) -> pd.DataFrame:
+def derive_player_columns(players: pd.DataFrame) -> pd.DataFrame:
     """Colonnes de saison PL facultatives (NaN si absentes de l'export) et taux dérivés."""
     p = players.copy()
     for col in OPTIONAL_PLAYER_COLUMNS:
@@ -286,6 +302,31 @@ def _read_pl_goals(data_dir: Path) -> pd.DataFrame | None:
     return df
 
 
+def _read_player_match_notes(data_dir: Path, club_results: pd.DataFrame | None) -> pd.DataFrame | None:
+    """Note MPG de chaque joueur de la ligue à chaque journée de PL (fiche joueur MPG), une ligne par joueur et par
+    match de son club, même s'il n'a pas joué. `date` est le coup d'envoi du match (NaT sans club_results)."""
+    df = _read_optional(data_dir, "player_match_notes")
+    if df is None:
+        return None
+    _check_values(df, "statut", NOTE_STATUSES, "player_match_notes.csv")
+    for col in ("a_joue", "titulaire", "buts", "passes_decisives", "csc"):
+        df[col] = pd.to_numeric(df[col], errors="raise").fillna(0).astype(int)
+    df["note"] = pd.to_numeric(df["note"], errors="raise")
+    df["minutes"] = pd.to_numeric(df["minutes"], errors="raise")
+    dups = df.duplicated(["player_key", "pl_gw", "pl_match_id"])
+    if dups.any():
+        raise DataSchemaError(f"player_match_notes.csv : lignes en double {df.loc[dups, 'player_key'].tolist()[:5]}")
+    incoherent = df["note"].notna() != (df["a_joue"] == 1)
+    if incoherent.any():
+        keys = df.loc[incoherent, ["player_key", "pl_gw"]].to_records(index=False).tolist()[:5]
+        raise DataSchemaError(f"player_match_notes.csv : note renseignée si et seulement si a_joue = 1 {keys}")
+    if club_results is None:
+        df["date"] = pd.NaT
+    else:
+        df = df.merge(club_results[["pl_match_id", "date"]], on="pl_match_id", how="left")
+    return df
+
+
 def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
     data_dir = Path(data_dir)
     raw = {name: _read(data_dir, name) for name in REQUIRED_COLUMNS}
@@ -296,7 +337,7 @@ def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
         dups = players.loc[players["player_key"].duplicated(), "player_key"].tolist()
         raise DataSchemaError(f"players.csv : player_key dupliqués {dups}")
 
-    players = _derive_player_columns(players)
+    players = derive_player_columns(players)
 
     fixtures = raw["fixtures"].copy()
     fixtures["date"] = pd.to_datetime(fixtures["date"])
@@ -313,6 +354,7 @@ def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
     _check_values(raw["goals"], "type_but", GOAL_TYPES, "goals.csv")
 
     fpl_players, fpl_history = _read_fpl(data_dir)
+    club_results = _read_club_results(data_dir)
     bonus = raw["bonus"].copy()
     bonus["effet_pts"] = pd.to_numeric(bonus["effet"].str.replace("pt", "", regex=False), errors="coerce")
 
@@ -329,8 +371,9 @@ def load_league(data_dir: Path | str = DEFAULT_DATA_DIR) -> League:
         scorers=raw["mpg_scorers_ranking"],
         leaderboards=raw["player_leaderboards"],
         bonus_stock=_read_bonus_stock(data_dir),
-        club_results=_read_club_results(data_dir),
+        club_results=club_results,
         pl_goals=_read_pl_goals(data_dir),
         fpl_players=fpl_players,
         fpl_history=fpl_history,
+        player_match_notes=_read_player_match_notes(data_dir, club_results),
     )

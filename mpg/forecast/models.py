@@ -315,9 +315,13 @@ class StructuralModel:
     Pour chaque équipe : 11 probable dans sa formation la plus utilisée (meilleures notes rétrécies) et un banc de
     7 joueurs (1 G, 2 D, 2 M, 2 A). Chaque joueur joue avec une probabilité égale à son taux de jeu PL, mise à 0
     pendant 2 journées s'il est blessé, 1 s'il est suspendu, divisée par deux à la prochaine journée s'il est
-    incertain. Un poste sans joueur disponible reçoit la note moyenne d'un Rotaldo. Notes : moyenne du joueur
-    (tirée une fois par saison simulée selon son incertitude a posteriori) + bruit de match d'écart-type σ.
-    Le lien écart de note moyenne → résultat est un logit ordonné ajusté sur les matchs joués.
+    incertain. Un poste sans joueur disponible reçoit la note moyenne d'un Rotaldo.
+
+    Notes, avec player_match_notes.csv (`mpg.notes`) : le joueur qui joue est titulaire en PL avec sa probabilité
+    `p_titulaire_si_joue` et reçoit alors sa moyenne de titulaire (tirée une fois par saison simulée selon son
+    incertitude a posteriori) + un bruit de match d'écart-type σ_t du poste ; sinon la note des remplaçants de son
+    poste. Le 11 probable est choisi sur la note espérée. Sans ce fichier : note rétrécie des compos MPG + bruit σ
+    commun. Le lien écart de note moyenne → résultat est un logit ordonné ajusté sur les matchs joués.
     """
 
     name: str = "Structurel (joueurs)"
@@ -340,6 +344,8 @@ class StructuralModel:
 
         formations = ctx.tm.groupby("team_id")["formation"].agg(lambda s: s.mode().iloc[0] if len(s) else "3-4-3")
         median_play = float(ctx.players["taux_jeu"].median()) if ctx.players["taux_jeu"].notna().any() else 0.8
+        mixture = "note_titulaire" in ctx.players
+        rank_by = "note_esperee" if mixture else "note_retrecie"
         self.teams = {}
         for t in ctx.team_ids:
             roster = ctx.players[ctx.players["team_id"] == t]
@@ -347,16 +353,34 @@ class StructuralModel:
             slots = {"G": 1, "D": d, "M": m, "A": a}
             groups = {}
             for g in GROUPES:
-                cand = roster[roster["poste_groupe"] == g].sort_values("note_retrecie", ascending=False)
+                cand = roster[roster["poste_groupe"] == g].sort_values(rank_by, ascending=False)
                 cand = cand.head(slots[g] + BENCH[g])
-                groups[g] = {
+                n_c = len(cand)
+                grp = {
                     "k": slots[g],
-                    "mean": cand["note_retrecie"].to_numpy(float),
-                    "sd_mean": self.sigma_match / np.sqrt(cand["n_notes"].to_numpy(float) + self.k_shrink),
                     "p": cand["taux_jeu"].fillna(median_play).clip(0, 1).to_numpy(float),
                     "statut": cand["statut_performance"].to_numpy(),
                     "names": cand["joueur"].tolist(),
                 }
+                if mixture:
+                    grp |= {
+                        "mean": cand["note_titulaire"].to_numpy(float),
+                        "sd_mean": cand["note_titulaire_sd"].to_numpy(float),
+                        "sigma": cand["sigma_titulaire"].to_numpy(float),
+                        "q": cand["p_titulaire_si_joue"].to_numpy(float),
+                        "sub_mean": cand["note_remplacant"].to_numpy(float),
+                        "sub_sigma": cand["sigma_remplacant"].to_numpy(float),
+                    }
+                else:
+                    grp |= {
+                        "mean": cand["note_retrecie"].to_numpy(float),
+                        "sd_mean": self.sigma_match / np.sqrt(cand["n_notes"].to_numpy(float) + self.k_shrink),
+                        "sigma": np.full(n_c, self.sigma_match),
+                        "q": np.ones(n_c),
+                        "sub_mean": np.zeros(n_c),
+                        "sub_sigma": np.zeros(n_c),
+                    }
+                groups[g] = grp
             self.teams[t] = groups
 
         home = ctx.home_rows
@@ -386,7 +410,11 @@ class StructuralModel:
             p = np.stack([self._play_prob(grp, int(g)) for g in gws])
             avail = rng.random((n_draws, len(gws), n_c)) < p[None, :, :]
             chosen = avail & (np.cumsum(avail, axis=2) <= k)
-            notes = true_mean[:, None, :] + self.sigma_match * rng.standard_normal((n_draws, len(gws), n_c))
+            shape = (n_draws, len(gws), n_c)
+            notes = true_mean[:, None, :] + grp["sigma"] * rng.standard_normal(shape)
+            if (grp["q"] < 1).any():
+                starts = rng.random(shape) < grp["q"]
+                notes = np.where(starts, notes, grp["sub_mean"] + grp["sub_sigma"] * rng.standard_normal(shape))
             notes = np.clip(notes, 1.0, 10.0)
             n_chosen = chosen.sum(axis=2)
             total += (notes * chosen).sum(axis=2) + (k - n_chosen) * self.rotaldo_note

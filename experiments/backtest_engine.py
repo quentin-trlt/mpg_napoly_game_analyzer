@@ -2,9 +2,10 @@
 
 Chaque journée MPG g est rejouée avec ce qui était connu avant elle : notes MPG des journées < g, historique FPL
 des journées PL < r (r = journée PL de g), résultats de PL avant le premier coup d'envoi de r. Les statuts de
-blessure du jour et `chance_of_playing_next_round` sont exclus (non archivés). Restent deux fuites, communes à
-toutes les variantes : la note moyenne PL de la saison (a priori des notes rétrécies) et, pour Elo et le Poisson
-de référence, l'indice de force calculé sur les effectifs du jour.
+blessure du jour et `chance_of_playing_next_round` sont exclus (non archivés). La note moyenne PL (a priori des
+notes rétrécies) et l'indice de force d'Elo et du Poisson sont recalculés sur les matchs de PL d'avant la journée
+(`mpg.point_in_time`, depuis player_match_notes.csv), de même que la loi des notes du modèle structurel
+(`mpg.notes`). Reste la cote MPG du jour, qui entre dans l'indice de force.
 
 L'instantané FPL de `data/` est retiré des ligues rejouées : « Structurel sans fuite (actuel) » reste le modèle
 d'avant le modèle de temps de jeu, qui sert de référence.
@@ -21,6 +22,8 @@ import pandas as pd
 from mpg import fpl
 from mpg import players as mplayers
 from mpg import playing_time as pt
+from mpg import point_in_time as pit
+from mpg import strength as mstrength
 from mpg.analysis import Analysis, run
 from mpg.coach import optimizer as op
 from mpg.coach import projection as pr
@@ -102,7 +105,8 @@ def snapshot(a: Analysis, g: int, mapping: pd.DataFrame, hist: dict[int, pd.Data
     cr.loc[later, ["home_score", "away_score"]] = pd.NA
 
     fpl_pit, rate = point_in_time_fpl(mapping, hist, r)
-    players = league.players.copy()
+    players = pit.players_before(league, g)
+    players = league.players.copy() if players is None else players
     players["taux_jeu"] = players["player_key"].map(rate).fillna(rate.median())
     players["statut_performance"] = "ok"
     sub_league = dataclasses.replace(
@@ -110,20 +114,24 @@ def snapshot(a: Analysis, g: int, mapping: pd.DataFrame, hist: dict[int, pd.Data
         players=players,
         club_results=cr,
         goals=league.goals[league.goals["gw"] < g],
+        best_players=league.best_players[league.best_players["gw"] < g],
         fpl_players=None,
         fpl_history=None,
+        player_match_notes=None,
     )
     lu = a.lineups[a.lineups["gw"] < g]
-    ps = mplayers.player_stats(sub_league, lu)
+    notes = pit.notes_before(league, g)
+    ps = mplayers.player_stats(dataclasses.replace(sub_league, player_match_notes=notes), lu)
     sub = dataclasses.replace(
         a,
         league=sub_league,
         lineups=lu,
         player_stats=ps,
         player_value=ps,
+        favourites=mstrength.strength_index(mstrength.squad_features(sub_league)),
         meta={**a.meta, "k_shrinkage": ps.attrs["k_shrinkage"]},
     )
-    model = pr.fit_note_model(sub) if g >= 3 else PRIOR_MODEL
+    model = pr.fit_note_model(sub, notes=notes) if notes is not None or g >= 3 else PRIOR_MODEL
     strength = pr.fit_club_strength(cr)
     play_model = pt.fit_play_model(fpl_pit, hist, players.set_index("player_key")["taux_jeu"], r)
     proj = pr.project_players(sub, sorted(league.team_names), r, model, strength, fpl_pit, hist, play_model=play_model)
@@ -137,7 +145,10 @@ def structural_probs(snap: Snapshot, fx: pd.DataFrame, play: bool, adjust: bool)
     if play:
         p["taux_jeu"] = p["player_key"].map(proj["p_joue"]).fillna(p["taux_jeu"])
     if adjust:
-        p["note_retrecie"] = p["note_retrecie"] + p["player_key"].map(proj["ajustement_adversaire"]).fillna(0.0)
+        shift = p["player_key"].map(proj["ajustement_adversaire"]).fillna(0.0)
+        for col in ("note_retrecie", "note_titulaire", "note_esperee"):
+            if col in p:
+                p[col] = p[col] + shift
     ctx = dataclasses.replace(ctx, players=p)
     model = StructuralModel().fit(ctx)
     return model.sample_probs(fx, N_DRAWS, np.random.default_rng(SEED)).mean(axis=0)
@@ -278,7 +289,7 @@ def note_check(snaps: dict[int, Snapshot], a: Analysis) -> pd.DataFrame:
         adj = cur["player_key"].map(proj["note_attendue"])
         rows.append(
             pd.DataFrame(
-                {"gw": g, "note": cur["note_brute"], "Note rétrécie (actuel)": base, "+ ajustement adversaire": adj}
+                {"gw": g, "note": cur["note_brute"], "Note estimée (actuel)": base, "+ ajustement adversaire": adj}
             )
         )
     return pd.concat(rows, ignore_index=True)
@@ -321,7 +332,7 @@ def main() -> None:
     for name in ("Elo", "Poisson bayésien", "Structurel (joueurs)"):
         rows = bt[bt["modele"] == name].set_index("match_id").loc[played["match_id"]]
         ref[name] = rows[["p_dom", "p_nul", "p_ext"]].to_numpy()
-    probs["Structurel (backtest actuel, avec fuite)"] = ref.pop("Structurel (joueurs)")
+    probs["Structurel (backtest de l'app)"] = ref.pop("Structurel (joueurs)")
     probs.update(ref)
     combos = {
         "Ensemble actuel (Elo + Poisson + structurel)": ["Elo", "Poisson bayésien", "Structurel sans fuite (actuel)"],

@@ -444,6 +444,13 @@ def render(a: Analysis) -> None:
             if pm is not None
             else "la part des 5 dernières journées jouées, rétrécie vers le taux de la saison"
         )
+        notes = (
+            "S'il est titulaire en PL (selon sa part de titularisations), il reçoit sa note estimée de titulaire, tirée "
+            "vers celle des titulaires de son poste ; s'il entre en cours de match, la note des remplaçants de son "
+            "poste, plus basse et plus resserrée. Le choc de club et le bruit sont estimés sur les titularisations de PL."
+            if "p_titulaire_si_joue" in rec.proj
+            else f"Note si le joueur joue : note rétrécie (k = {m.k_shrink:.1f})."
+        )
         st.markdown(
             f"""
 **Moteur de match.** Chaque compo est jouée selon les règles MPG : remplacements tactiques puis automatiques
@@ -451,10 +458,12 @@ def render(a: Analysis) -> None:
 bonus, buts réels, arrêt du gardien noté 8 ou plus, buts MPG (lignes franchies, −1 puis −0,5, égalité au
 domicile), CSC et Rotaldos. Rejoué sur les notes réelles, il retrouve le score exact de tous les matchs déjà joués.
 
-**Joueurs.** P(joue) = disponibilité FPL × {play}. MPG note tout joueur entré en jeu, même une minute. Note si le
-joueur joue : note rétrécie (k = {m.k_shrink:.1f}) + effet du match attendu du club (buts pour : A {m.beta_for.get("A", 0):+.2f},
-M {m.beta_for.get("M", 0):+.2f}, D {m.beta_for.get("D", 0):+.2f} par but ; buts contre : D {m.beta_against.get("D", 0):+.2f},
-G {m.beta_against.get("G", 0):+.2f}), choc commun au club (σ = {m.sigma_club:.2f}), bruit individuel
+**Joueurs.** P(joue) = disponibilité FPL × {play}. MPG note tout joueur entré en jeu, même une minute. {notes}
+Effet du match attendu du club (par but réel pour : A {m.beta_for.get("A", 0):+.2f},
+M {m.beta_for.get("M", 0):+.2f}, D {m.beta_for.get("D", 0):+.2f} ; contre : D {m.beta_against.get("D", 0):+.2f},
+G {m.beta_against.get("G", 0):+.2f}), multiplié par {m.adj_scale:.2f}, ce qu'un but attendu de plus a rapporté en
+moyenne en buts réels cette saison (les prévisions de début de saison, faites sur peu de matchs, en annoncent
+moins qu'elles ne promettent), choc commun au club (σ = {m.sigma_club:.2f}), bruit individuel
 (σ = {m.sigma_player:.2f}), +{m.goal_bump:.2f} pour un buteur. Buts réels : xG/90 FPL rétréci × minutes attendues ×
 difficulté de l'adversaire (Poisson attaque/défense sur les résultats de PL).
 
@@ -463,7 +472,7 @@ sur {rec.holdout.n} autres tirages. Les remplacements tactiques qui ne rapporten
 sont retirés.
 
 **Limite connue.** Rejoué sur J1-J5 sans information postérieure (`experiments/backtest_engine.py`), le moteur
-simule 2,3 buts par équipe et par match contre 2,0 observés, même avec les compos réellement posées, et prédit moins
+simule 2,2 buts par équipe et par match contre 2,0 observés (2,3 avec les compos réellement posées), et prédit moins
 bien l'issue des matchs que le modèle structurel de l'app principale. Les comparaisons entre compos d'un même match
 restent valables (mêmes tirages, règles exactes) ; les probabilités affichées sont à lire comme des ordres de grandeur.
 """

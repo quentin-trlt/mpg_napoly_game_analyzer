@@ -34,7 +34,8 @@ def _played_outcomes(fixtures: pd.DataFrame) -> np.ndarray:
 def backtest(a: Analysis, n_draws: int = 1500, seed: int = 0) -> pd.DataFrame:
     """Rejoue chaque journée jouée : modèles ajustés sur les journées précédentes, prédiction de la journée.
 
-    Les données joueurs du modèle structurel sont celles du jour (fuite d'information) : son score est optimiste.
+    Avec player_match_notes.csv, chaque journée ne voit que les données joueurs connues avant elle
+    (`build_context`). Sans ce fichier, les données joueurs sont celles du jour et les scores sont optimistes.
     """
     rows = []
     played = a.league.played

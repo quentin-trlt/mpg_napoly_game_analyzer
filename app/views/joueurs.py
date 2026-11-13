@@ -10,8 +10,8 @@ from app.theme import AXIS, HIGHLIGHT, LINE_LABELS, SERIES, SURFACE
 from mpg.analysis import Analysis
 
 SORTS = {
-    "note_retrecie": "Note rétrécie",
-    "note_moy": "Note MPG brute",
+    "note_retrecie": "Note estimée",
+    "note_moy": "Moyenne brute",
     "buts_total": "Buts dans la ligue",
     "ga_saison": "G+A en PL",
     "residu_valeur": "Écart au prix",
@@ -42,15 +42,15 @@ def _shrink_chart(ps, team_id: int) -> go.Figure:
             ),
             customdata=np.stack([d["joueur"], d["team_name"], d["n_notes"], d["note_prior"]], axis=1),
             showlegend=False,
-            hovertemplate="<b>%{customdata[0]}</b>, %{customdata[1]}<br>Moyenne MPG : %{x:.2f} sur %{customdata[2]} matchs"
-            "<br>Moyenne PL (a priori) : %{customdata[3]:.2f}<br>Note rétrécie : %{y:.2f}<extra></extra>",
+            hovertemplate="<b>%{customdata[0]}</b>, %{customdata[1]}<br>Moyenne brute : %{x:.2f} sur %{customdata[2]} "
+            "matchs<br>A priori : %{customdata[3]:.2f}<br>Note estimée : %{y:.2f}<extra></extra>",
         )
     )
     fig.update_layout(
-        title="Moyenne MPG observée et note retenue",
+        title="Moyenne observée et note retenue",
         height=420,
-        xaxis_title="Moyenne MPG observée (note brute)",
-        yaxis_title="Note rétrécie",
+        xaxis_title="Moyenne des notes observées",
+        yaxis_title="Note estimée",
     )
     fig.update_xaxes(range=[lo, hi])
     fig.update_yaxes(range=[lo + 1, hi - 1])
@@ -77,8 +77,11 @@ def render(a: Analysis, team_id: int) -> None:
     hero(
         "Joueurs",
         "Les classements individuels",
-        f"{len(ps)} joueurs achetés. Les notes MPG sont rétrécies vers la moyenne de saison PL pour ne pas récompenser "
-        "un seul gros match.",
+        f"{len(ps)} joueurs achetés. Les notes sont tirées vers la moyenne du poste pour ne pas récompenser un seul "
+        "gros match."
+        if meta.get("k_postes")
+        else f"{len(ps)} joueurs achetés. Les notes MPG sont rétrécies vers la "
+        "moyenne de saison PL pour ne pas récompenser un seul gros match.",
     )
 
     mvp = ps.sort_values(["mvp_match", "top3_match"], ascending=False).iloc[0]
@@ -88,7 +91,7 @@ def render(a: Analysis, team_id: int) -> None:
     kpi_row(
         [
             {
-                "label": "Meilleure note rétrécie",
+                "label": "Meilleure note estimée",
                 "value": best["joueur"],
                 "small": True,
                 "sub": f"{best['note_retrecie']:.2f}, {best['team_name']}",
@@ -182,10 +185,12 @@ def render(a: Analysis, team_id: int) -> None:
             "club": "Club",
             "enchere": st.column_config.NumberColumn("Enchère", format="%d M€"),
             "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
-            "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés dans la ligue"),
-            "note_moy": st.column_config.NumberColumn("Moy. MPG", format="%.2f"),
+            "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note estimée"),
+            "note_moy": st.column_config.NumberColumn("Moy. brute", format="%.2f", help="Moyenne de ces notes"),
             "note_ecart_type": st.column_config.NumberColumn("Écart-type", format="%.2f", help="Régularité"),
-            "note_retrecie": st.column_config.NumberColumn("Note rétrécie", format="%.2f"),
+            "note_retrecie": st.column_config.NumberColumn(
+                "Note estimée", format="%.2f", help="Note attendue quand il joue, tirée vers son poste"
+            ),
             "note_moy_reelle": st.column_config.NumberColumn("Moy. PL", format="%.1f"),
             "points_mpg_moy": st.column_config.NumberColumn("Pts MPG moy.", format="%.2f"),
             "buts_reels": st.column_config.NumberColumn("Buts ligue"),
@@ -202,16 +207,20 @@ def render(a: Analysis, team_id: int) -> None:
         },
         height=520,
     )
-    how(["shrinkage", "production_pl"], meta)
+    shrinkage = "shrinkage" if meta.get("k_postes") else "shrinkage_compos"
+    how([shrinkage, "production_pl"], meta)
 
-    section("Top 5 par poste", "Note rétrécie, au moins 2 matchs notés.")
+    section("Top 5 par poste", "Note estimée, au moins 2 matchs notés.")
     st.html(_top5_panel(ps, team_id))
 
     left, right = st.columns([1.3, 1], gap="medium")
     with left:
         charts.show(_shrink_chart(ps, team_id))
         st.caption(
-            f"k = {meta['k_shrinkage']:.1f} : chaque joueur reçoit l'équivalent de {meta['k_shrinkage']:.0f} "
+            f"k = {meta['k_postes']} selon le poste : chaque titulaire reçoit l'équivalent de k matchs à la moyenne "
+            "des titulaires de son poste. Taille du point = nombre de matchs notés."
+            if meta.get("k_postes")
+            else f"k = {meta['k_shrinkage']:.1f} : chaque joueur reçoit l'équivalent de {meta['k_shrinkage']:.0f} "
             "matchs à sa moyenne PL. Taille du point = nombre de matchs notés."
         )
     with right:

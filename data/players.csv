@@ -38,7 +38,7 @@ team_id,joueur,club,poste_groupe,cote,enchere,flag_point_interrogation,player_ke
 1,João Pedro,Chelsea,A,30.0,71.0,0,joao_pedro__chelsea,João Pedro,6.3,5,A,60.0,3,mpg_championship_player_475168,1,0,10,6,6,6.55,ok
 1,Kai Havertz,Arsenal,A,14.0,30.0,0,kai_havertz__arsenal,K. Havertz,5.0,3,A,90.0,0,mpg_championship_player_219847,1,0,10,10,9,5.01,ok
 1,Nicolas Jackson,Aston Villa,A,8.0,18.0,0,nicolas_jackson__aston_villa,N. Jackson,5.8,6,A,82.0,1,mpg_championship_player_517052,2,0,11,9,9,5.92,ok
-1,Chuba Akpom,Ipswich Town,A,8.0,10.0,0,chuba_akpom__ipswich_town,C. Akpom,4.8,1,A,0.0,0,mpg_championship_player_147675,0,0,10,7,0,4.61,ok
+1,Chuba Akpom,Ipswich Town,A,8.0,10.0,0,chuba_akpom__ipswich_town,C. Akpom,4.8,1,A,0.0,0,mpg_championship_player_147675,0,0,10,8,0,4.61,ok
 2,Gianluigi Donnarumma,Man. City,G,16.0,32.0,0,gianluigi_donnarumma__man_city,G. Donnarumma,5.2,0,G,100.0,0,mpg_championship_player_204936,0,0,10,10,10,5.2,ok
 2,Melker Ellborg,Sunderland,G,7.0,10.0,0,melker_ellborg__sunderland,M. Ellborg,,0,G,0.0,0,mpg_championship_player_515046,0,0,10,0,0,,ok
 2,Nico O'Reilly,Man. City,D,13.0,33.0,0,nico_o_reilly__man_city,N. O'Reilly,4.8,0,DL,40.0,0,mpg_championship_player_472769,1,0,10,8,4,5.07,ok

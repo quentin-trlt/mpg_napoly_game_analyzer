@@ -205,9 +205,11 @@ GLOSSARY: dict[str, str] = {
         "dont on connaît mal le niveau a une distribution de points plus large."
     ),
     "ensemble": (
-        "**Ensemble.** Moyenne à poids égaux des probabilités des trois modèles (Elo, Poisson, structurel). Avec "
-        "{matchs_backtest} matchs pour évaluer, on ne peut pas choisir le meilleur modèle de façon fiable ; la moyenne "
-        "est plus robuste que n'importe quel modèle seul quand ceux-ci se trompent différemment."
+        "**Ensemble.** Moyenne à poids égaux des probabilités des trois modèles (Elo, Poisson, structurel), sauf pour "
+        "les journées 1 à 3 : seul le structurel compte alors, car Elo et Poisson n'ont encore presque aucun résultat. "
+        "Rejoué sur trois saisons (171 matchs), le structurel est le meilleur modèle en début de saison et le moins bon "
+        "ensuite ; aucun modèle ne bat durablement la moyenne, plus robuste quand ils se trompent différemment. "
+        "Les bonus restants de chaque équipe sont ensuite répartis au hasard sur ses matchs restants."
     ),
     "modele_elo": (
         "**Elo.** Chaque équipe part de 1 500 + 100 × son indice de force a priori. Après chaque match, la note bouge "
@@ -229,8 +231,9 @@ GLOSSARY: dict[str, str] = {
         "poste tant qu'il a peu de matchs, plus un aléa de match d'environ 1 point ; entré en cours de match, la note "
         "d'un remplaçant de son poste, plus basse et plus resserrée. Les écarts de niveau entre joueurs sont faibles "
         "devant l'aléa d'un match, d'où un rappel fort vers la moyenne du poste. L'écart de note moyenne entre les deux équipes donne les "
-        "probabilités V/N/D via un logit ordonné ajusté sur les matchs joués. C'est le seul modèle qui voit les blessures "
-        "et le temps de jeu."
+        "probabilités V/N/D via un logit ordonné ajusté sur les matchs joués. Un effet d'équipe corrige l'écart durable "
+        "entre la note réelle d'une équipe et celle de ses joueurs (absents, Rotaldos, compos du coach), tiré vers 0 "
+        "tant qu'elle a peu de matchs. C'est le seul modèle qui voit les blessures et le temps de jeu."
     ),
     "scores_prevision": (
         "**Mesurer une prévision probabiliste.**\n\n"

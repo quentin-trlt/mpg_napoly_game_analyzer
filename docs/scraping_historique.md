@@ -5,7 +5,7 @@ Contexte : les modèles de prédiction sont calés sur 25 matchs seulement ; il 
 complet des notes par joueur.
 
 État au 2026-11-13 : tâche 2 livrée (`data/player_match_notes.csv`, PL J1 à J10, contrôles passés ; une correction
-manuelle à conserver, voir plus bas). Tâches 1 et 3 à faire.
+manuelle à conserver, voir plus bas). Tâche 3 livrée le 2026-11-13 : 2024-2025 et 2025-2026 de la ligue SRMEG7VW (préférence 2, autre ligue du compte), contrôles passés. Tâche 1 à faire.
 
 ## Tâche 1 : à chaque export, instantané FPL (obligatoire)
 

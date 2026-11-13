@@ -48,6 +48,12 @@ players.club ──< club_results (home_club / away_club) ──< pl_goals (pl_m
 
 Les deux fichiers FPL se régénèrent après chaque export MPG avec `uv run python build_fpl.py`. Le script archive aussi `fpl_players.csv` dans `fpl_snapshots/fpl_players_PL<journée>.csv` : `chance_next` n'est plus consultable une fois la journée passée, et ces copies permettront de mesurer ce qu'elle apporte.
 
+## Saisons passées
+
+`data/history/<saison>_<code_ligue>/` contient d'autres saisons au même format que `data/` (et un `meta.json` qui décrit leur couverture et leurs écarts), chargeables avec `load_league` et `mpg.analysis.run`. Aujourd'hui : 2024-2025 (8 équipes, 14 journées, PL J8-J21) et 2025-2026 (10 équipes, 18 journées, PL J1-J18) de la ligue SRMEG7VW, où jouaient 7 des 10 coachs actuels. Le moteur de règles y retrouve les 146 scores (`tests/test_coach_rules.py`). Pas de cote MPG (l'indice de force se calcule alors sur les enchères, `strength.price_column`), pas d'instantané FPL, effectifs de fin de saison.
+
+`uv run python -m experiments.backtest_seasons` rejoue chaque journée de chaque saison sans information postérieure (171 matchs) et compare les modèles par bootstrap apparié par saison. Le modèle structurel est le meilleur des journées 1 à 3 (RPS 0,247 contre 0,260 pour Poisson) mais le moins bon ensuite (0,253 contre 0,233) : il ne voit les équipes qu'à travers leurs joueurs. Son effet d'équipe (écart persistant de note dû à la gestion du coach, rétréci avec 8 matchs fictifs) le fait passer de 0,256 à 0,251 au total. L'ensemble n'utilise donc que le structurel pour prédire les journées 1 à 3, puis les trois modèles à poids égaux, ajustés des bonus restants (`ensemble_weights`) : 0,243 → 0,240 au total, 0,258 → 0,247 sur les journées 1 à 3. Choisi sur deux saisons et évalué sur la troisième, ce choix gagne 0,003 [IC 90 % −0,007 ; +0,001] ; des poids qui décroissent continûment, plus souples, font moins bien que les poids égaux hors échantillon.
+
 ## Points d'attention
 
 - **Probabilité de jouer.** Le modèle structurel des prédictions ne prend plus le taux de jeu de la saison mais un logit de P(minutes > 0) estimé sur `fpl_history.csv` (`mpg.playing_time`), recalculé à chaque journée avec les seules journées PL antérieures. Rejoué sur J1-J5 sans information postérieure, il réduit le RPS du modèle structurel (0,209 → 0,199) ; `experiments/backtest_engine.py` refait la comparaison. Sans les fichiers FPL, le taux de la saison reste utilisé.

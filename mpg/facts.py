@@ -198,8 +198,8 @@ def line_ratings(lu: pd.DataFrame, note: str = "note_brute") -> pd.DataFrame:
     )
     out = pd.DataFrame(index=by_line.index)
     for g in ("G", "D", "M", "A"):
-        out[g] = by_line[("mean", g)]
-        out[f"n_{g}"] = by_line[("size", g)].astype(int)
+        out[g] = by_line[("mean", g)] if ("mean", g) in by_line else float("nan")
+        out[f"n_{g}"] = by_line[("size", g)].fillna(0).astype(int) if ("size", g) in by_line else 0
     out["globale"] = pitch.groupby("team_id")[note].mean()
     out["globale_mediane"] = pitch.groupby("team_id")[note].median()
     return out.reset_index()

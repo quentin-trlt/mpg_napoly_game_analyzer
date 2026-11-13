@@ -102,7 +102,7 @@ def team_components(pv: pd.DataFrame) -> pd.DataFrame:
                 "part_top3": e.head(3).sum() / total,
                 "gini_enchere": gini(e),
                 "hhi_enchere": hhi(e),
-                "surpaiement_global_x": total / r["cote"].sum(),
+                "surpaiement_global_x": total / r["cote"].sum(min_count=1),
                 "surpaiement_median_x": float(np.exp(r["surpaiement_log"].median())),
                 "surpaiement_log_median": r["surpaiement_log"].median(),
                 "residu_moy_tronque": trimmed_mean(r["residu_valeur"]),

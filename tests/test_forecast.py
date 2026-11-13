@@ -1,10 +1,20 @@
+import dataclasses
+
 import numpy as np
 import pytest
 
 from mpg.analysis import run
 from mpg.forecast import evaluation
 from mpg.forecast.models import BaselineModel, EloModel, PoissonModel, StructuralModel, ordered_probs
-from mpg.forecast.season import build_context, ensemble_draws, fixtures_after, simulate_season, title_odds_history
+from mpg.forecast.season import (
+    STRUCTURAL_ONLY_GWS,
+    build_context,
+    ensemble_draws,
+    ensemble_weights,
+    fixtures_after,
+    simulate_season,
+    title_odds_history,
+)
 
 
 @pytest.fixture(scope="module")
@@ -142,3 +152,36 @@ def test_freeze_never_overwrites_and_track_record(analysis, draws, tmp_path, mon
     assert scored["rps"].between(0, 1).all()
     assert not evaluation.scored_summary(fm).empty
     assert len(evaluation.frozen_seasons()) == len(analysis.league.teams)
+
+
+def test_team_effect_follows_persistent_note_gaps(ctx):
+    m = StructuralModel().fit(ctx)
+    assert set(m.team_effect) <= set(ctx.team_ids) and m.team_effect
+    weak = ctx.team_ids[0]
+    tm = ctx.tm.copy()
+    tm.loc[tm["team_id"] == weak, "note_moy_brute"] -= 1.0
+    shifted = StructuralModel().fit(dataclasses.replace(ctx, tm=tm))
+    n = int((tm["team_id"] == weak).sum())
+    assert shifted.team_effect[weak] - m.team_effect[weak] < -0.5 * n / (n + shifted.team_k)
+    assert StructuralModel(team_k=float("inf")).fit(ctx).team_effect == {}
+
+
+def test_team_effect_is_zero_before_any_match(analysis):
+    assert StructuralModel().fit(build_context(analysis, 0)).team_effect == {}
+
+
+def test_ensemble_weights_follow_the_season():
+    names = ["Référence (fréquences)", "Elo", "Poisson bayésien", StructuralModel.name]
+    early = ensemble_weights(names, 0)
+    assert early == {"Elo": 0.0, "Poisson bayésien": 0.0, StructuralModel.name: 1.0}
+    late = ensemble_weights(names, STRUCTURAL_ONLY_GWS)
+    assert set(late) == set(names[1:]) and np.allclose(list(late.values()), 1 / 3)
+    assert np.allclose(list(ensemble_weights(names[:3], 0).values()), 0.5)
+
+
+def test_early_ensemble_is_the_structural_model(analysis, fixtures):
+    d = ensemble_draws(build_context(analysis, 1), fixtures.head(5), n_draws=100, seed=0)
+    assert np.allclose(d.ensemble_raw, d.by_model[StructuralModel.name])
+    late = ensemble_draws(build_context(analysis), fixtures.head(5), n_draws=100, seed=0)
+    others = [v for k, v in late.by_model.items() if k != "Référence (fréquences)"]
+    assert np.allclose(late.ensemble_raw, np.mean(others, axis=0))

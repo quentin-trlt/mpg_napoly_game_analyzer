@@ -63,25 +63,36 @@ def best_xi(roster: pd.DataFrame, value: str, formations: list[str] = FORMATIONS
     return best_f, best_xi_df
 
 
+def price_column(players: pd.DataFrame) -> str:
+    """Prix des joueurs pour l'indice de force : la cote MPG, à défaut l'enchère.
+
+    MPG n'affiche plus la cote d'une saison passée. Sur la saison 2026-2027, l'indice calculé sur les enchères classe
+    les équipes comme celui sur les cotes (Spearman 0,94) et ne change pas le backtest de l'ensemble (Δ RPS −0,0001).
+    """
+    return "cote" if players["cote"].notna().any() else "enchere"
+
+
 def squad_features(league: League) -> pd.DataFrame:
+    """Caractéristiques d'effectif par équipe. Les colonnes `cote_*` portent sur `price_column` (`attrs["prix"]`)."""
     players = league.players.copy()
+    price = price_column(players)
     players["note_reelle_imp"] = players["note_moy_reelle"].fillna(
         players.groupby("poste_groupe")["note_moy_reelle"].transform("median")
     )
-    xi_type = league.typical_xi.merge(players[["player_key", "cote"]], on="player_key", how="left")
+    xi_type = league.typical_xi.merge(players[["player_key", price]], on="player_key", how="left")
     rows = []
     for team_id, roster in players.groupby("team_id"):
-        formation, xi = best_xi(roster, "cote")
+        formation, xi = best_xi(roster, price)
         _, xi_note = best_xi(roster, "note_reelle_imp")
         row = {
             "team_id": team_id,
             "nb_joueurs": len(roster),
-            "total_cote": roster["cote"].sum(),
+            "total_cote": roster[price].sum(),
             "total_enchere": roster["enchere"].sum(),
-            "cote_mediane": roster["cote"].median(),
-            "cote_11_max": xi["cote"].sum(),
+            "cote_mediane": roster[price].median(),
+            "cote_11_max": xi[price].sum(),
             "formation_11_max": formation,
-            "cote_11_type": xi_type.loc[xi_type["team_id"] == team_id, "cote"].sum(),
+            "cote_11_type": xi_type.loc[xi_type["team_id"] == team_id, price].sum(),
             "note_reelle_11": xi_note["note_reelle_imp"].mean(),
             "note_reelle_effectif_mediane": roster["note_moy_reelle"].median(),
             "taux_titu_11": xi["taux_titu"].mean(),
@@ -92,16 +103,20 @@ def squad_features(league: League) -> pd.DataFrame:
         }
         row["cote_banc"] = row["total_cote"] - row["cote_11_max"]
         for g in GROUPES:
-            row[f"cote_{g}"] = roster.loc[roster["poste_groupe"] == g, "cote"].sum()
+            row[f"cote_{g}"] = roster.loc[roster["poste_groupe"] == g, price].sum()
             row[f"nb_{g}"] = int((roster["poste_groupe"] == g).sum())
         rows.append(row)
     feats = pd.DataFrame(rows)
     feats = feats.merge(league.teams[["team_id", "team_name", "valeur_effectif_meur", "budget_restant"]], on="team_id")
+    feats.attrs["prix"] = price
     return feats
 
 
 def strength_index(feats: pd.DataFrame, weights: dict[str, float] | None = None) -> pd.DataFrame:
-    """Indice de force a priori = moyenne pondérée des z-scores robustes des caractéristiques d'effectif."""
+    """Indice de force a priori = moyenne pondérée des z-scores robustes des caractéristiques d'effectif.
+
+    Une caractéristique inconnue (par exemple la note PL avant tout match noté) compte comme la médiane : z = 0.
+    """
     weights = {k: w for k, w in (weights or DEFAULT_WEIGHTS).items() if w > 0}
     if not weights:
         raise ValueError("au moins un poids strictement positif est requis")
@@ -112,7 +127,7 @@ def strength_index(feats: pd.DataFrame, weights: dict[str, float] | None = None)
     out = feats.copy()
     out["indice_force"] = 0.0
     for col, w in weights.items():
-        out[f"z_{col}"] = robust_z(out[col])
+        out[f"z_{col}"] = robust_z(out[col]).fillna(0.0)
         out["indice_force"] += w / total_w * out[f"z_{col}"]
     out["rang_attendu"] = out["indice_force"].rank(ascending=False, method="min").astype(int)
     return out

@@ -306,6 +306,8 @@ class PoissonModel:
 
 BENCH = {"G": 1, "D": 2, "M": 2, "A": 2}
 UNAVAILABLE_GWS = {"blesse": 2, "suspendu": 1}
+TEAM_EFFECT_K = 8.0
+TEAM_BASE_DRAWS = 1000
 
 
 @dataclass
@@ -322,6 +324,12 @@ class StructuralModel:
     incertitude a posteriori) + un bruit de match d'écart-type σ_t du poste ; sinon la note des remplaçants de son
     poste. Le 11 probable est choisi sur la note espérée. Sans ce fichier : note rétrécie des compos MPG + bruit σ
     commun. Le lien écart de note moyenne → résultat est un logit ordonné ajusté sur les matchs joués.
+
+    Effet d'équipe : la gestion du coach (absents, Rotaldos, choix de compo) décale durablement la note d'une équipe
+    par rapport à celle de ses joueurs. Sur les matchs déjà joués, l'écart entre la note moyenne réelle (brute) et la
+    note prévue hors blessures et suspensions du moment, centré sur la ligue, est rétréci vers 0 avec `team_k` matchs
+    fictifs, puis ajouté à la note simulée de l'équipe. Sur le backtest des trois saisons (171 matchs), k = 8 réduit le
+    RPS du structurel de 0,256 à 0,251 (Δ −0,005 [IC 90 % −0,010 ; +0,000]) ; k = 4 à 16 donnent autant.
     """
 
     name: str = "Structurel (joueurs)"
@@ -331,6 +339,21 @@ class StructuralModel:
     teams: dict[int, dict] = field(default_factory=dict)
     link: OrderedLogit = field(default_factory=lambda: OrderedLogit(b0=2.0))
     next_gw: int = 1
+    team_k: float = TEAM_EFFECT_K
+    team_effect: dict[int, float] = field(default_factory=dict)
+
+    def _fit_team_effect(self, tm: pd.DataFrame) -> dict[int, float]:
+        """Écart persistant de note moyenne de chaque équipe, rétréci (0 sans match joué)."""
+        played = tm.dropna(subset=["note_moy_brute"])
+        if played.empty or not np.isfinite(self.team_k):
+            return {}
+        rng = np.random.default_rng(0)
+        neutral = np.array([self.next_gw + max(UNAVAILABLE_GWS.values())])
+        base = {t: float(self.team_notes(t, neutral, TEAM_BASE_DRAWS, rng).mean()) for t in self.teams}
+        resid = played["note_moy_brute"] - played["team_id"].map(base)
+        resid = resid - resid.mean()
+        by_team = resid.groupby(played["team_id"]).agg(["sum", "size"])
+        return {int(t): float(r["sum"] / (r["size"] + self.team_k)) for t, r in by_team.iterrows()}
 
     def fit(self, ctx: Context) -> "StructuralModel":
         lu = ctx.lineups
@@ -382,6 +405,8 @@ class StructuralModel:
                     }
                 groups[g] = grp
             self.teams[t] = groups
+        self.team_effect = {}
+        self.team_effect = self._fit_team_effect(ctx.tm)
 
         home = ctx.home_rows
         delta = (home["note_moy_brute"] - home["note_moy_brute_adv"]).to_numpy(float)
@@ -418,7 +443,7 @@ class StructuralModel:
             notes = np.clip(notes, 1.0, 10.0)
             n_chosen = chosen.sum(axis=2)
             total += (notes * chosen).sum(axis=2) + (k - n_chosen) * self.rotaldo_note
-        return total / 11.0
+        return total / 11.0 + self.team_effect.get(team_id, 0.0)
 
     def sample_probs(self, fixtures: pd.DataFrame, n_draws: int, rng: np.random.Generator) -> np.ndarray:
         notes = {}

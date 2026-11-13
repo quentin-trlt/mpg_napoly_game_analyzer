@@ -11,6 +11,7 @@ from mpg.forecast.bonus import (
     apply_shift,
     bonus_shifts,
     note_value,
+    past_bonus_effects,
     valise_shift,
 )
 from mpg.forecast.season import build_context, ensemble_draws, fixtures_after, simulate_season
@@ -99,3 +100,32 @@ def test_use_bonus_flag(analysis, ctx, fixtures):
     without = simulate_season(analysis, d, seed=4, use_bonus=False).summary.set_index("team_id")
     assert not np.allclose(with_b["pts_moy"], without["pts_moy"].reindex(with_b.index))
     assert np.isclose(with_b["p_titre"].sum(), 1)
+
+
+def _mirror_case(reflected: str, effect: str) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Match m : l'équipe 0 pose `reflected`, l'équipe 1 le renvoie avec un Miroir (convention des saisons passées)."""
+    bonus = pd.DataFrame(
+        {
+            "match_id": ["m"] * 3,
+            "gw": [1] * 3,
+            "team_id": [0, 1, 1],
+            "bonus": [reflected, "Miroir", reflected],
+            "effet": [None, None, effect],
+            "cible_affiche": [None, None, "X"],
+        }
+    )
+    bonus["effet_pts"] = pd.to_numeric(bonus["effet"].str.replace("pt", "", regex=False), errors="coerce")
+    tm = pd.DataFrame({"match_id": ["m", "m"], "team_id": [0, 1], "opp_id": [1, 0]})
+    return bonus, tm
+
+
+def test_mirrored_valise_cancels_one_goal_of_the_original_poster():
+    bonus, tm = _mirror_case("La valise à Nanard", "+5M")
+    pb = past_bonus_effects(bonus, tm, {}, {}, 0.8).set_index("team_id")
+    assert pb.loc[0, "buts_annules"] == 1 and pb.loc[1, "buts_annules"] == 0
+
+
+def test_mirrored_note_bonus_counts_once_for_the_mirror_poser():
+    bonus, tm = _mirror_case("Suarez", "-1pt")
+    pb = past_bonus_effects(bonus, tm, {}, {}, 0.8).set_index("team_id")
+    assert pb.loc[1, "d_note"] == pytest.approx(1 / 11) and pb.loc[0, "d_note"] == pytest.approx(-1 / 11)

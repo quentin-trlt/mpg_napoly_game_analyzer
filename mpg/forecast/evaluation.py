@@ -5,8 +5,9 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from mpg.analysis import Analysis
-from mpg.forecast.season import EnsembleDraws, SeasonSimulation, build_context, ensemble_draws
+from mpg.analysis import Analysis, run
+from mpg.forecast.season import EnsembleDraws, SeasonSimulation, build_context, ensemble_draws, fixtures_after
+from mpg.loader import DEFAULT_DATA_DIR
 
 FROZEN_DIR = Path(os.environ.get("MPG_PRONOSTICS_DIR", Path(__file__).resolve().parents[2] / "content" / "pronostics"))
 PROB_COLS = ["p_dom", "p_nul", "p_ext"]
@@ -34,18 +35,24 @@ def _played_outcomes(fixtures: pd.DataFrame) -> np.ndarray:
 def backtest(a: Analysis, n_draws: int = 1500, seed: int = 0) -> pd.DataFrame:
     """Rejoue chaque journée jouée : modèles ajustés sur les journées précédentes, prédiction de la journée.
 
+    Comme en prédiction réelle, les tirages portent sur tous les matchs restants : les bonus restants de chaque équipe
+    sont répartis sur toute la fin de saison, pas concentrés sur la journée prédite.
+
     Avec player_match_notes.csv, chaque journée ne voit que les données joueurs connues avant elle
     (`build_context`). Sans ce fichier, les données joueurs sont celles du jour et les scores sont optimistes.
     """
     rows = []
     played = a.league.played
+    keys = ["gw", "home_team_id", "away_team_id"]
     for g in sorted(played["gw"].unique()):
         ctx = build_context(a, int(g) - 1)
-        fx = played[played["gw"] == g].reset_index(drop=True)
+        remaining = fixtures_after(a, int(g) - 1)
+        draws = ensemble_draws(ctx, remaining, n_draws=n_draws, seed=seed)
+        sel = (remaining["gw"] == g).to_numpy()
+        fx = remaining[sel][keys].merge(played[[*keys, "match_id", "home_goals", "away_goals"]], on=keys)
         outcome = _played_outcomes(fx)
-        draws = ensemble_draws(ctx, fx, n_draws=n_draws, seed=seed)
-        models = {name: d.mean(axis=0) for name, d in draws.by_model.items()}
-        models["Ensemble"] = draws.ensemble.mean(axis=0)
+        models = {name: d[:, sel].mean(axis=0) for name, d in draws.by_model.items()}
+        models["Ensemble"] = draws.ensemble[:, sel].mean(axis=0)
         for name, p in models.items():
             s = scores(p, outcome)
             rows.append(
@@ -60,6 +67,45 @@ def backtest(a: Analysis, n_draws: int = 1500, seed: int = 0) -> pd.DataFrame:
                 )
             )
     return pd.concat(rows, ignore_index=True)
+
+
+def season_dirs(current: Path = DEFAULT_DATA_DIR) -> dict[str, Path]:
+    """Saisons passées (`history/<saison>_<ligue>/` avec un meta.json), de la plus ancienne à la plus récente, puis la
+    saison en cours (`current`)."""
+    history = sorted(d for d in (current / "history").glob("*") if (d / "meta.json").exists())
+    return {**{d.name: d for d in history}, "en cours": current}
+
+
+def backtest_seasons(dirs: dict[str, Path], n_draws: int = 1500, seed: int = 0) -> pd.DataFrame:
+    """`backtest` de chaque saison, concaténé avec une colonne `saison`."""
+    return pd.concat(
+        [
+            backtest(run(d, n_sim=50, seed=seed), n_draws=n_draws, seed=seed).assign(saison=name)
+            for name, d in dirs.items()
+        ],
+        ignore_index=True,
+    )
+
+
+def paired_delta(
+    bt: pd.DataFrame, model: str, ref: str, metric: str = "rps", n_boot: int = 10_000, level: float = 0.9, seed: int = 0
+) -> tuple[float, float, float]:
+    """Écart moyen de `metric` entre deux modèles sur les mêmes matchs, et son intervalle par bootstrap apparié.
+
+    Les matchs sont rééchantillonnés à l'intérieur de chaque saison (colonne `saison` si présente) pour garder le
+    poids de chaque saison.
+    """
+    cols = ["match_id", metric] + (["saison"] if "saison" in bt else [])
+    m = bt.loc[bt["modele"] == model, cols].merge(
+        bt.loc[bt["modele"] == ref, ["match_id", metric]], on="match_id", suffixes=("", "_ref")
+    )
+    m["d"] = m[metric] - m[f"{metric}_ref"]
+    groups = [g["d"].to_numpy() for _, g in m.groupby("saison")] if "saison" in m else [m["d"].to_numpy()]
+    rng = np.random.default_rng(seed)
+    total = sum(len(g) for g in groups)
+    boot = sum(rng.choice(g, (n_boot, len(g))).sum(axis=1) for g in groups) / total
+    alpha = (1 - level) / 2
+    return float(m["d"].mean()), float(np.quantile(boot, alpha)), float(np.quantile(boot, 1 - alpha))
 
 
 def backtest_summary(bt: pd.DataFrame) -> pd.DataFrame:

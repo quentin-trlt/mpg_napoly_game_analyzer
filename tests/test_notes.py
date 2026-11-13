@@ -89,6 +89,7 @@ def test_structural_model_uses_the_mixture_when_notes_exist(analysis):
 
 def test_substitutes_are_simulated_with_the_substitute_note(analysis):
     m = StructuralModel().fit(build_context(analysis))
+    m.team_effect = {}
     team = next(iter(m.teams))
     for grp in m.teams[team].values():
         n = len(grp["p"])

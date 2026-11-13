@@ -16,6 +16,7 @@ from mpg.forecast.models import (
     Context,
     OrderedLogit,
     PoissonModel,
+    StructuralModel,
     default_models,
 )
 from mpg.playing_time import league_play_probabilities
@@ -23,6 +24,22 @@ from mpg.point_in_time import league_before
 
 POINTS = np.array([[3, 1, 0], [0, 1, 3]])
 REFERENCE = BaselineModel.name
+STRUCTURAL_ONLY_GWS = 3
+
+
+def ensemble_weights(names: list[str], upto_gw: int) -> dict[str, float]:
+    """Poids des modèles de l'ensemble (hors référence) quand `upto_gw` journées ont été jouées.
+
+    Pour prédire les journées 1 à `STRUCTURAL_ONLY_GWS`, seul le modèle structurel compte : Elo et Poisson n'ont
+    encore presque aucun résultat, le structurel voit déjà les joueurs. Ensuite, poids égaux. Sur le backtest des
+    trois saisons, choisi sur deux saisons et évalué sur la troisième, ce choix bat les poids égaux de 0,003 de RPS
+    [IC 90 % −0,007 ; +0,001], et les trois découpages retiennent le même poids ; des poids qui décroissent
+    continûment ou fixes, plus souples, font moins bien hors échantillon.
+    """
+    models = [n for n in names if n != REFERENCE]
+    if upto_gw < STRUCTURAL_ONLY_GWS and StructuralModel.name in models:
+        return {n: float(n == StructuralModel.name) for n in models}
+    return dict.fromkeys(models, 1 / len(models))
 
 
 def build_context(a: Analysis, upto_gw: int | None = None) -> Context:
@@ -97,11 +114,14 @@ class EnsembleDraws:
     score_matrix: np.ndarray
     models: list = field(default_factory=list)
     bonus_shift: np.ndarray | None = None
+    weights: dict[str, float] | None = None
 
     @cached_property
     def ensemble_raw(self) -> np.ndarray:
-        """Moyenne à poids égaux des modèles, hors référence, sans les bonus à venir."""
-        return np.mean([d for name, d in self.by_model.items() if name != REFERENCE], axis=0)
+        """Moyenne pondérée des modèles (`weights`, poids égaux hors référence à défaut), sans les bonus à venir."""
+        weights = self.weights or ensemble_weights(list(self.by_model), STRUCTURAL_ONLY_GWS)
+        total = sum(weights.values())
+        return sum(w / total * self.by_model[name] for name, w in weights.items() if w > 0)
 
     @cached_property
     def ensemble(self) -> np.ndarray:
@@ -132,6 +152,7 @@ def ensemble_draws(
         score_matrix=score_matrix,
         models=models,
         bonus_shift=bonus_shifts(ctx, fixtures, score_matrix, n_draws, rng),
+        weights=ensemble_weights(list(by_model), ctx.upto_gw),
     )
 
 

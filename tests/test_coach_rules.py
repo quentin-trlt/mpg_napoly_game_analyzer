@@ -14,15 +14,19 @@ from mpg.coach.rules import (
     simulate,
 )
 from mpg.forecast.bonus import CHEAT, F424, MCDO, MIROIR, SUAREZ, TONTON, VALISE, ZAHIA
+from mpg.forecast.evaluation import season_dirs
 from mpg.loader import load_league
 
 FIELD_LINE = {0: "G", 1: "D", 2: "M", 3: "M", 4: "A"}
 
 
 def _sheet_from_rows(rows: pd.DataFrame, goals: dict[str, int], own_goals: int) -> Sheet:
+    """`ligne_terrain` est la rangée à l'écran : la plus haute est l'attaque (rangée 3 en 4-2-4, 4 sinon)."""
     rows = rows.sort_values("ligne_terrain")
+    level = rows["ligne_terrain"].astype(int)
+    top = level.max()
     return Sheet(
-        line=tuple(rows["ligne_terrain"].astype(int).map(FIELD_LINE)),
+        line=tuple("A" if r == top and r >= 3 else FIELD_LINE[r] for r in level),
         note=rows["note_avec_bonus"].to_numpy(float)[:, None],
         goals=np.array([goals.get(k, 0) if isinstance(k, str) else 0 for k in rows["player_key"]])[:, None],
         rotaldo=(rows["statut"] == "rotaldo").to_numpy()[:, None],
@@ -30,14 +34,16 @@ def _sheet_from_rows(rows: pd.DataFrame, goals: dict[str, int], own_goals: int) 
     )
 
 
-def test_replay_matches_every_played_score():
-    league = load_league()
+@pytest.mark.parametrize("data_dir", list(season_dirs().values()), ids=list(season_dirs()))
+def test_replay_matches_every_played_score(data_dir):
+    league = load_league(data_dir)
     lu = league.lineups
     pitch = lu[lu["statut"].isin(["titulaire", "remplacant_entre", "rotaldo"])]
     g = league.goals
     real = g[g["type_but"].isin(["reel", "bloque"])]
     csc = g[g["type_but"] == "csc"]
-    valise = league.bonus[league.bonus["bonus"].str.contains("valise", case=False)]
+    bonus = league.bonus
+    valise = bonus[bonus["bonus"].str.contains("valise", case=False) & bonus["effet"].notna()]
     mismatches = []
     for fx in league.played.itertuples():
         sheets = {}

@@ -168,7 +168,10 @@ def past_bonus_effects(
     """Avantage de note net des bonus de stock déjà posés, par équipe et par match, et buts annulés par une Valise.
 
     Sert à ne pas créditer Elo et Poisson d'une force qui venait d'un bonus consommé. Un bonus posé sans effet
-    (effet vide dans bonus.csv) ne compte pas.
+    (effet vide dans bonus.csv) ne compte pas. Un bonus renvoyé par un Miroir est compté une fois, au profit de
+    l'équipe qui a posé le Miroir : c'est la ligne qui suit son Miroir (saisons passées) ou, à défaut, le bonus posé
+    par l'adversaire. Chapron rouge (saison 2024-2025) n'est pas chiffré : son Rotaldo est déjà dans
+    les notes du match.
     """
     keys = ["match_id", "team_id"]
     b = bonus.assign(cle=bonus["bonus"].map(bonus_key))
@@ -179,20 +182,21 @@ def past_bonus_effects(
     if b.empty:
         return out
     opp = tm.set_index(keys)["opp_id"]
-    posted = b.groupby(keys)["cle"].first()
-    for (match_id, team_id), key in posted.items():
+    posted = b.groupby(keys, sort=False)["cle"].agg(list)
+    for (match_id, team_id), mine in posted.items():
         if (match_id, team_id) not in opp.index:
             continue
         rival = int(opp.loc[(match_id, team_id)])
-        rival_key = posted.get((match_id, rival))
-        beneficiary, applied = team_id, key
-        if key == MIROIR:
-            if rival_key is None or rival_key == MIROIR:
+        theirs = posted.get((match_id, rival), [])
+        if MIROIR in theirs and MIROIR not in mine:
+            continue
+        applied = mine[0]
+        if MIROIR in mine:
+            reflected = [k for k in mine if k != MIROIR] or [k for k in theirs if k != MIROIR]
+            if not reflected:
                 continue
-            applied = rival_key
-        elif rival_key == MIROIR:
-            beneficiary, applied = rival, key
-        target = rival if beneficiary == team_id else team_id
+            applied = reflected[0]
+        beneficiary, target = team_id, rival
         if applied == VALISE:
             out.loc[(out["match_id"] == match_id) & (out["team_id"] == target), "buts_annules"] += 1
             continue

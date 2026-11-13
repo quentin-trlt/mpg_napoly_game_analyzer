@@ -224,7 +224,7 @@ def derive_player_columns(players: pd.DataFrame) -> pd.DataFrame:
     for col in OPTIONAL_PLAYER_COLUMNS:
         if col not in p:
             p[col] = pd.NA
-    p["statut_performance"] = p["statut_performance"].fillna("inconnu")
+    p["statut_performance"] = p["statut_performance"].astype("str").where(p["statut_performance"].notna(), "inconnu")
     num = [c for c in OPTIONAL_PLAYER_COLUMNS if c != "statut_performance"]
     p[num] = p[num].apply(pd.to_numeric, errors="coerce")
     not_ok = p["statut_performance"].isin(UNAVAILABLE)

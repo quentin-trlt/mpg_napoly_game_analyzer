@@ -70,7 +70,9 @@ def captain_report(lu: pd.DataFrame, bonus: pd.DataFrame) -> pd.DataFrame:
 
 
 def bonus_usage(bonus: pd.DataFrame, tm: pd.DataFrame) -> pd.DataFrame:
-    used = bonus[(bonus["bonus"] != "Capitaine") & bonus["effet_pts"].notna()]
+    """Bonus posés avec un effet chiffré, hors capitaine. Un bonus renvoyé par un Miroir n'est pas attribué à celui qui
+    le renvoie : il reste à son auteur (voir `mirrored_bonuses`)."""
+    used = bonus[(bonus["bonus"] != "Capitaine") & bonus["effet_pts"].notna() & ~mirrored_bonuses(bonus)]
     flagged = tm[KEYS + ["gw", "pts", "resultat", "opp_name"]].merge(
         used[KEYS + ["bonus", "effet", "cible_affiche"]], on=KEYS, how="inner"
     )
@@ -128,6 +130,8 @@ def coaching_table(lu: pd.DataFrame, tm: pd.DataFrame, bonus: pd.DataFrame, subs
         )
         .reset_index()
     )
+    mirrored = bonus[mirrored_bonuses(bonus)].groupby("team_id").size()
+    out["bonus_utilises"] -= out["team_id"].map(mirrored).fillna(0).astype(int)
     out["pct_absents"] = out["absents_total"] / (11 * out["matchs"]) * 100
     out["absents_vs_attendus"] = out["absents_total"] - out["absents_attendus"]
     out = out.merge(
@@ -158,6 +162,7 @@ def coaching_table(lu: pd.DataFrame, tm: pd.DataFrame, bonus: pd.DataFrame, subs
 
 
 NOT_STOCKED = {"capitaine", "4 defenseurs", "5 defenseurs"}
+MIRROR = "miroir"
 
 
 def bonus_key(name: str) -> str:
@@ -167,11 +172,43 @@ def bonus_key(name: str) -> str:
     return re.sub(r"\s+", " ", s)
 
 
-def remaining_bonuses(bonus: pd.DataFrame, stock: pd.DataFrame, team_ids: list[int]) -> pd.DataFrame:
+def mirrored_bonuses(bonus: pd.DataFrame) -> pd.Series:
+    """Marque les lignes de bonus renvoyées par un Miroir adverse (booléens, même index que `bonus`).
+
+    Quand l'équipe M pose Miroir dans un match, chaque bonus de dotation X posé par son adversaire O dans ce match
+    est renvoyé : le fichier le recopie alors au nom de M, avec l'effet et la cible réels. Le nombre de lignes X de M
+    qui sont des renvois vaut min(lignes X de M, lignes X de O) ; si M a aussi posé son propre X, une ligne reste à
+    son compte. Sans colonne `match_id`, aucune ligne n'est marquée.
+    """
+    flags = pd.Series(False, index=bonus.index)
+    if "match_id" not in bonus.columns:
+        return flags
+    cles = bonus["bonus"].map(bonus_key)
+    stocked = ~cles.isin(NOT_STOCKED | {MIRROR})
+    for _, match in bonus.assign(cle=cles).groupby("match_id"):
+        for team in match.loc[match["cle"] == MIRROR, "team_id"].unique():
+            mine = match[(match["team_id"] == team) & stocked.loc[match.index]]
+            theirs = match[(match["team_id"] != team) & stocked.loc[match.index]]
+            their_count = theirs["cle"].value_counts()
+            for cle, lines in mine.groupby("cle"):
+                n = min(len(lines), int(their_count.get(cle, 0)))
+                flags.loc[lines.index[:n]] = True
+    return flags
+
+
+def remaining_bonuses(
+    bonus: pd.DataFrame, stock: pd.DataFrame, team_ids: list[int], ignore_mirrored: bool = True
+) -> pd.DataFrame:
     """Bonus restants par équipe : dotation − bonus posés (un bonus posé est consommé, même sans effet).
+
+    Un bonus renvoyé par un Miroir est décompté chez celui qui l'a posé, pas chez celui qui le renvoie : avec
+    `ignore_mirrored=True` (défaut), les lignes marquées par `mirrored_bonuses` ne comptent pas chez l'équipe au Miroir,
+    qui ne consomme que son Miroir. Avec `False`, toutes les lignes sont comptées.
 
     Les bonus posés absents de la dotation sont conservés avec une dotation nulle pour que l'écart soit visible.
     """
+    if ignore_mirrored:
+        bonus = bonus[~mirrored_bonuses(bonus)]
     used = bonus.assign(cle=bonus["bonus"].map(bonus_key))
     used = used[~used["cle"].isin(NOT_STOCKED)]
     st_ = stock.assign(cle=stock["bonus"].map(bonus_key))

@@ -10,7 +10,6 @@ import streamlit as st
 
 from app.components import callout, hero, kpi_row, prob_bar, section, table_height
 from app.state import data_signature, get_analysis
-from app.theme import BORDER, DISPLAY, LINE_COLORS, MUTED, SURFACE, SURFACE_2, TEXT, TEXT_2
 from mpg import fpl
 from mpg.analysis import Analysis
 from mpg.coach.projection import OVERRIDE_LEVELS
@@ -25,37 +24,6 @@ FPL_OVERRIDES = "fpl_overrides.csv"
 AUTO = "auto"
 DRAW_CHOICES = (2000, 4000, 8000)
 LINE_ORDER = ("A", "M", "D", "G")
-
-CSS = f"""
-<style>
-.pitch {{ background: linear-gradient(180deg, rgba(25,158,112,0.10), rgba(25,158,112,0.04)); border: 1px solid {BORDER};
-    border-radius: 14px; padding: 14px 12px; display: flex; flex-direction: column; gap: 12px; }}
-.pitch .line {{ display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }}
-.pp {{ background: {SURFACE}; border: 1px solid {BORDER}; border-radius: 12px; padding: 8px 10px 7px; width: 132px;
-    min-width: 0; border-top: 3px solid var(--tone); position: relative; }}
-.pp .nm {{ color: {TEXT}; font-weight: 600; font-size: .86rem; line-height: 1.2; overflow: hidden; text-overflow: ellipsis;
-    white-space: nowrap; }}
-.pp .mt {{ color: {MUTED}; font-size: .72rem; line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
-.pp .nb {{ display: flex; justify-content: space-between; align-items: baseline; margin-top: 3px; }}
-.pp .nt {{ font-family: {DISPLAY}; font-size: 1.25rem; font-weight: 600; color: {TEXT}; font-variant-numeric: tabular-nums; }}
-.pp .pj {{ font-size: .74rem; font-weight: 600; color: var(--tone); }}
-.pp .badge {{ position: absolute; top: -9px; right: 8px; font-size: .68rem; font-weight: 700; border-radius: 999px;
-    padding: 1px 7px; background: {TEXT}; color: #0B1120; }}
-.pp .badge.mcdo {{ background: #FAB219; right: auto; left: 8px; }}
-.bench {{ background: {SURFACE}; border: 1px solid {BORDER}; border-radius: 14px; padding: 6px 16px; }}
-.bench .b {{ display: grid; grid-template-columns: 22px 30px minmax(0, 1fr) auto auto; gap: 10px; align-items: center;
-    padding: 8px 0; border-top: 1px solid {BORDER}; font-size: .86rem; color: {TEXT}; }}
-.bench .b:first-child {{ border-top: none; }}
-.bench .ix {{ color: {MUTED}; font-variant-numeric: tabular-nums; }}
-.bench .ln {{ font-size: .7rem; font-weight: 700; border-radius: 5px; text-align: center; padding: 1px 0; color: #0B1120; }}
-.bench .sub {{ color: {MUTED}; font-size: .74rem; }}
-.bench .v {{ font-variant-numeric: tabular-nums; color: {TEXT_2}; font-size: .8rem; }}
-.tac {{ background: {SURFACE_2}; border: 1px solid {BORDER}; border-radius: 10px; padding: 8px 12px; margin-top: 8px;
-    font-size: .85rem; color: {TEXT}; }}
-.tac b {{ font-family: {DISPLAY}; font-size: 1rem; }}
-@media (max-width: 640px) {{ .pp {{ width: 104px; padding: 7px 8px 6px; }} .pp .nt {{ font-size: 1.1rem; }} }}
-</style>
-"""
 
 
 def _read_json(name: str, default):
@@ -110,7 +78,7 @@ def _fmt(x: float, digits: int = 2) -> str:
 
 
 def _tone(p: float) -> str:
-    return "#22C55E" if p >= 0.85 else "#FAB219" if p >= 0.5 else "#E66767"
+    return "tone-good" if p >= 0.85 else "tone-warn" if p >= 0.5 else "tone-bad"
 
 
 def _short(name: str) -> str:
@@ -131,7 +99,7 @@ def _card(rec: Recommendation, r: int, lu: Lineup) -> str:
         else f"{row['club']} · sans match"
     )
     return (
-        f'<div class="pp" style="--tone:{_tone(row["p_joue"])}" title="{escape(str(row["joueur"]))}">{badges}'
+        f'<div class="pp {_tone(row["p_joue"])}" title="{escape(str(row["joueur"]))}">{badges}'
         f'<div class="nm">{escape(_short(str(row["joueur"])))}</div><div class="mt">{escape(vs)}</div>'
         f'<div class="nb"><span class="nt">{_fmt(row["note_attendue"], 1)}</span>'
         f'<span class="pj">{row["p_joue"]:.0%}</span></div></div>'
@@ -154,10 +122,10 @@ def _bench(rec: Recommendation, lu: Lineup) -> str:
         line = p["poste_groupe"]
         rows.append(
             f'<div class="b"><span class="ix">{i}</span>'
-            f'<span class="ln" style="background:{LINE_COLORS[line]}">{line}</span>'
+            f'<span class="ln {line}">{line}</span>'
             f'<span>{escape(str(p["joueur"]))}<div class="sub">{escape(str(p["club"]))}</div></span>'
             f'<span class="v">{_fmt(p["note_attendue"], 1)}</span>'
-            f'<span class="v" style="color:{_tone(p["p_joue"])}">{p["p_joue"]:.0%}</span></div>'
+            f'<span class="v {_tone(p["p_joue"])}">{p["p_joue"]:.0%}</span></div>'
         )
     return f'<div class="bench">{"".join(rows)}</div>'
 
@@ -265,7 +233,6 @@ def _freeze(rec: Recommendation, a: Analysis) -> Path:
 
 
 def render(a: Analysis) -> None:
-    st.html(CSS)
     names = a.league.team_names
     with st.sidebar:
         team_id = _team_selector(a)
@@ -327,7 +294,7 @@ def render(a: Analysis) -> None:
             {"label": "Formation", "value": lu.formation, "sub": f"Capitaine : {rec.name(lu.captain)}"},
         ]
     )
-    st.html(prob_bar(s["p_v"], s["p_n"], s["p_d"]) if rec.home else prob_bar(s["p_d"], s["p_n"], s["p_v"]))
+    st.html(prob_bar(s["p_v"], s["p_n"], s["p_d"], labels=("Toi", "Nul", "Adversaire")))
 
     section("Feuille de match", "Note attendue si le joueur joue · probabilité qu'il joue (au moins une minute en PL).")
     left, right = st.columns([3, 2], gap="medium")

@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import callout, fixture_grid, fmt_pct, hero, how, kpi_row, prob_bar, section, table_height
+from app.components import callout, chip, fixture_grid, fmt_pct, hero, how, kpi_row, prob_bar, section, table_height
 from app.state import get_forecast
 from mpg.analysis import Analysis
 from mpg.forecast.evaluation import calibration, rps_by_gameweek, scored_summary, season_moves
@@ -17,19 +17,15 @@ MIN_CALIBRATION = 30
 def _match_card(r: pd.Series, team_id: int) -> str:
     me = team_id in (r["home_team_id"], r["away_team_id"])
     if not r["joue"]:
-        result = '<div class="meta" style="margin-top:8px">En attente du résultat</div>'
+        result = '<div class="meta mt-8">En attente du résultat</div>'
     else:
         ok = bool(r["favori_gagne"])
-        badge = (
-            '<span class="chip" style="border-color:rgba(12,163,12,.6)">Favori vainqueur</span>'
-            if ok
-            else '<span class="chip" style="border-color:rgba(208,59,59,.7)">Surprise</span>'
-        )
+        badge = chip("Favori vainqueur", tone="good") if ok else chip("Surprise", tone="bad")
         exact = f"{int(r['home_goals'])}-{int(r['away_goals'])}"
         exact_note = " · score exact trouvé" if exact == r["score_probable"] else ""
         result = (
-            f'<div class="row" style="margin-top:12px"><div class="score">{exact}</div>{badge}</div>'
-            f'<div class="meta" style="margin-top:6px">On donnait {r["p_issue_reelle"]:.0%} à la '
+            f'<div class="row mt-12"><div class="score">{exact}</div>{badge}</div>'
+            f'<div class="meta mt-6">On donnait {r["p_issue_reelle"]:.0%} à la '
             f"{ISSUES[int(r['issue'])]}. Score prédit : {escape(str(r['score_probable']))}{exact_note}.</div>"
         )
     return (

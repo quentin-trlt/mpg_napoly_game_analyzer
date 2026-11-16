@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import fixture_grid, hero, how, section
+from app.components import chip, fixture_grid, hero, how, section
 from mpg.analysis import Analysis
 
 
@@ -23,14 +23,14 @@ def _match_card(row: pd.Series, away: pd.Series, goals: pd.DataFrame, team_id: i
     def bonus(r: pd.Series) -> str:
         if not r["bonus_poses"]:
             return ""
-        return "".join(f'<span class="chip">{escape(b.strip())}</span>' for b in r["bonus_poses"].split(","))
+        return "".join(chip(b.strip()) for b in r["bonus_poses"].split(","))
 
     return (
         f'<div class="fixture result{" me" if me else ""}">'
-        f'<div class="row top"><div style="flex:1;min-width:0"><div class="team">{escape(row["team_name"])}</div>'
+        f'<div class="row top"><div class="grow"><div class="team">{escape(row["team_name"])}</div>'
         f'<div class="meta">{escape(str(row["formation"]))}, note {row["note_moy"]:.2f}</div></div>'
         f'<div class="score">{int(row["bp"])} – {int(away["bp"])}</div>'
-        f'<div class="right" style="flex:1;min-width:0"><div class="team">{escape(away["team_name"])}</div>'
+        f'<div class="right grow"><div class="team">{escape(away["team_name"])}</div>'
         f'<div class="meta">note {away["note_moy"]:.2f}, {escape(str(away["formation"]))}</div></div></div>'
         f'<div class="scorers"><div class="meta">{scorers(row["team_id"])}</div>'
         f'<div class="meta right">{scorers(away["team_id"])}</div></div>'

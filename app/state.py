@@ -167,6 +167,11 @@ def _sync_coach_url(coach: str) -> None:
         del st.query_params[COACH_KEY]
 
 
+def selected_coach() -> str:
+    """Clé du coach choisi dans la barre latérale, posée par `coach_selector`."""
+    return str(st.session_state[COACH_KEY])
+
+
 def coach_selector(a: Analysis, season: Season) -> int:
     """Affiche « Mon équipe » et renvoie l'équipe correspondante dans la saison affichée.
 

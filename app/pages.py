@@ -14,6 +14,7 @@ from app.views import (
     predictions,
     suivi,
 )
+from app.views.palmares import render as render_palmares
 from mpg.analysis import Analysis
 
 
@@ -44,6 +45,10 @@ def page_ligue(a: Analysis, team_id: int) -> None:
         ligue.render(a, team_id)
     else:
         matchs.render(a, team_id)
+
+
+def palmares(a: Analysis, team_id: int) -> None:
+    render_palmares(a, team_id)
 
 
 def pronostics(a: Analysis, team_id: int) -> None:

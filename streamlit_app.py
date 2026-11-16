@@ -9,7 +9,7 @@ st.set_page_config(
 
 from app import theme  # noqa: E402
 from app.navigation import register  # noqa: E402
-from app.pages import joueurs_mercato, ma_journee, mon_equipe, page_ligue, pourquoi, pronostics  # noqa: E402
+from app.pages import joueurs_mercato, ma_journee, mon_equipe, page_ligue, palmares, pourquoi, pronostics  # noqa: E402
 from app.state import coach_selector, get_analysis, season_selector  # noqa: E402
 from mpg.loader import DataSchemaError  # noqa: E402
 
@@ -48,6 +48,7 @@ pages = {
     "pronostics": page(pronostics, "Pronostics", "query_stats", "pronostics"),
     "pourquoi": page(pourquoi, "Pourquoi ce classement ?", "balance", "pourquoi"),
     "joueurs-mercato": page(joueurs_mercato, "Joueurs et mercato", "payments", "joueurs-mercato"),
+    "palmares": page(palmares, "Palmarès", "emoji_events", "palmares"),
 }
 my_season = [pages["mon-equipe"]]
 if season.current:
@@ -59,6 +60,7 @@ nav = st.navigation(
     pages={
         "Ma saison": my_season,
         "La ligue": [pages["ligue"], pages["pronostics"], pages["pourquoi"], pages["joueurs-mercato"]],
+        "Histoire": [pages["palmares"]],
     },
 )
 nav.run()

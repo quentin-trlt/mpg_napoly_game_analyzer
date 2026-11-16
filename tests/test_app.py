@@ -15,6 +15,7 @@ PAGES = {
     "pronostics": ["predictions", "suivi"],
     "pourquoi": ["favoris", "chance", "coaching"],
     "joueurs_mercato": ["joueurs", "mercato", "analyse-mercato"],
+    "palmares": [None],
 }
 CASES = [(page, volet) for page, volets in PAGES.items() for volet in volets]
 SEASONS = list(season_dirs())
@@ -22,11 +23,16 @@ POSITIONS = {"premier": 0, "dernier": -1}
 
 
 def _page(page: str, data_dir: str, position: int) -> None:
+    import streamlit as st
+
     from app import pages
+    from app.state import COACH_KEY
     from mpg.analysis import run
+    from mpg.seasons import coach_by_team
 
     a = run(data_dir, n_sim=200)
     team_id = int(a.standings.iloc[position]["team_id"])
+    st.session_state[COACH_KEY] = coach_by_team(a.league)[team_id]
     getattr(pages, page)(a, team_id)
 
 
@@ -234,11 +240,11 @@ def _titles(at: AppTest) -> list[str]:
     return [m.value for m in at.get("html") if 'class="volet-title"' in m.value]
 
 
-def test_navigation_of_the_current_season_has_six_pages():
+def test_navigation_of_the_current_season_has_seven_pages():
     at = _entrypoint()
     assert not at.exception
     urls = {info["url_pathname"] for info in at._registered_pages.values()}
-    assert urls == {"", "ligue", "mon-equipe", "pronostics", "pourquoi", "joueurs-mercato"}
+    assert urls == {"", "ligue", "mon-equipe", "pronostics", "pourquoi", "joueurs-mercato", "palmares"}
     assert "Journée " in _eyebrow(at)
     assert "Ligue · 2026-2027" not in _eyebrow(at)
 
@@ -253,11 +259,11 @@ def test_ma_journee_is_the_default_page_of_the_current_season():
     assert "Ligue · 2026-2027" in _eyebrow(ligue)
 
 
-def test_navigation_of_a_past_season_has_five_pages_and_no_ma_journee():
+def test_navigation_of_a_past_season_has_six_pages_and_no_ma_journee():
     at = _entrypoint(saison="2024-2025")
     assert not at.exception
     urls = {info["url_pathname"] for info in at._registered_pages.values()}
-    assert urls == {"", "mon-equipe", "pronostics", "pourquoi", "joueurs-mercato"}
+    assert urls == {"", "mon-equipe", "pronostics", "pourquoi", "joueurs-mercato", "palmares"}
     assert "ma-journee" not in urls
     assert "Ligue · 2024-2025" in _eyebrow(at)
 
@@ -282,3 +288,38 @@ def test_invalid_volet_falls_back_to_first():
     assert not at.exception
     assert at.get("button_group")[0].value == "favoris"
     assert "volet" not in at.query_params
+
+
+def _html(at: AppTest, marker: str) -> list[str]:
+    return [m.value for m in at.get("html") if marker in m.value]
+
+
+@pytest.mark.parametrize("query", [{}, {"saison": "2024-2025"}])
+def test_palmares_is_listed_and_covers_every_season(query):
+    at = _entrypoint(**query)
+    page = _open_page(at, "palmares").run()
+    assert not page.exception
+    assert "Palmarès · 3 saisons, 13 coachs" in _eyebrow(page)
+    assert [s.value for s in page.sidebar.selectbox if s.label == "Saison"] == [query.get("saison", "2026-2027")]
+    champs = _html(page, 'class="champs"')[0]
+    assert champs.count('<div class="champ">') == 3
+    assert champs.index("leader") < champs.index("champion")
+
+
+def test_palmares_follows_the_chosen_coach():
+    page = _open_page(_entrypoint(coach="ketXfentanyl"), "palmares").run()
+    assert not page.exception
+    assert any("ketXfentanyl, toutes saisons" in m for m in _html(page, 'class="stats"'))
+    assert len(page.get("plotly_chart")) == 2
+    assert page.main.selectbox[-1].label == "Voir les matchs contre"
+    page.sidebar.selectbox[1].select("Victor_RM").run()
+    assert not page.exception
+    assert any("Victor_RM, toutes saisons" in m for m in _html(page, 'class="stats"'))
+
+
+def test_palmares_for_a_coach_with_a_single_short_season():
+    page = _open_page(_entrypoint(coach="Jiboti"), "palmares").run()
+    assert not page.exception
+    assert any("Tu ne jouais pas cette saison" in m for m in _html(page, 'class="champs"'))
+    assert any("n'a joué que 5 matchs" in c.value for c in page.caption)
+    assert page.main.selectbox[-1].label == "Voir les matchs contre"

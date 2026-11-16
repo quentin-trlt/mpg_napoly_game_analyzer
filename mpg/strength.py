@@ -133,6 +133,15 @@ def strength_index(feats: pd.DataFrame, weights: dict[str, float] | None = None)
     return out
 
 
+def available_features(feats: pd.DataFrame) -> list[str]:
+    """Caractéristiques de `FEATURE_LABELS` présentes dans `feats` avec au moins une valeur renseignée.
+
+    Sur une saison passée, la note PL, le taux de titularisation, la disponibilité, les points MPG et la valeur de
+    l'effectif sont vides : `strength_index` les compte alors comme z = 0, sans le dire.
+    """
+    return [c for c in FEATURE_LABELS if c in feats.columns and feats[c].notna().any()]
+
+
 def strength_scenarios(
     feats: pd.DataFrame, pts: pd.Series, scenarios: dict[str, dict[str, float]] | None = None
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -141,20 +150,32 @@ def strength_scenarios(
 
     Avec 10 équipes, choisir le scénario le mieux corrélé revient à sur-ajuster : ces corrélations servent à
     juger de la sensibilité, pas à sélectionner une pondération.
+
+    Un scénario dont une caractéristique de poids > 0 est vide dans `feats` est écarté : il classerait les équipes
+    avec une caractéristique neutre au lieu de celle qu'il annonce.
     """
     scenarios = scenarios or SCENARIOS
+    empty = {c for c in FEATURE_LABELS if c in feats.columns} - set(available_features(feats))
     ranks, fit = {}, []
     for name, w in scenarios.items():
+        if any(col in empty for col, weight in w.items() if weight > 0):
+            continue
         idx = strength_index(feats, w).set_index("team_id")
         ranks[name] = idx["rang_attendu"]
         c = spearman(idx["indice_force"], pts.reindex(idx.index))
         fit.append({"scenario": name, "rho": c.rho, "p_value": c.p_value, "n": c.n})
-    return pd.DataFrame(ranks).reset_index(names="team_id"), pd.DataFrame(fit)
+    ranks_df = pd.DataFrame(ranks).reset_index(names="team_id") if ranks else feats[["team_id"]].reset_index(drop=True)
+    return ranks_df, pd.DataFrame(fit, columns=["scenario", "rho", "p_value", "n"])
 
 
 def favourites_vs_reality(
     league: League, tm: pd.DataFrame, standings: pd.DataFrame, weights: dict[str, float] | None = None
 ) -> pd.DataFrame:
+    """Indice de force et rang attendu de chaque équipe face au classement réel.
+
+    `effectif_incomplet` est vrai quand l'effectif ne permet aucune formation (par exemple sans gardien) : sa cote du
+    meilleur 11 vaut alors 0 et son rang attendu est le dernier par construction, pas par niveau.
+    """
     idx = strength_index(squad_features(league), weights)
     aligned = (
         tm.groupby("team_id")
@@ -169,6 +190,7 @@ def favourites_vs_reality(
     out = out.merge(standings[["team_id", "rang", "pts", "diff"]], on="team_id", how="left")
     out["ecart_rang"] = out["rang_attendu"] - out["rang"]
     out["taux_utilisation_11"] = out["cote_11_aligne_moy"] / out["cote_11_max"]
+    out["effectif_incomplet"] = out["formation_11_max"].isna()
     ranks, _ = strength_scenarios(idx, out.set_index("team_id")["pts"])
     ranks = ranks.set_index("team_id")
     out["rang_attendu_min"] = out["team_id"].map(ranks.min(axis=1))

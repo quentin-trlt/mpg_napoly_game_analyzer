@@ -7,7 +7,7 @@ from mpg.luck import schedule_permutation
 
 
 @st.cache_data(show_spinner=False)
-def _simulations(tm, band: float, n_sim: int):
+def _simulations(season: str, tm, band: float, n_sim: int):
     return schedule_permutation(tm, band, n_sim=n_sim)
 
 
@@ -93,7 +93,7 @@ def render(a: Analysis, team_id: int) -> None:
         )
 
     section("Le calendrier a-t-il aidé ?")
-    summary, totals = _simulations(a.team_match, meta["bande_nul"], meta["n_sim"])
+    summary, totals = _simulations(meta["saison"], a.team_match, meta["bande_nul"], meta["n_sim"])
     team_ids = summary["team_id"].astype(int).tolist()
     real = lk.set_index("team_id")["pts_regle"]
     charts.show(charts.sim_distribution(totals, team_ids, a.league.team_names, real, team_id))

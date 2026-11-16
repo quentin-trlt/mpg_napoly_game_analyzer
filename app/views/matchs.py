@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import chip, fixture_grid, hero, how, section
+from app.components import chip, empty_state, fixture_grid, hero, how, section
 from mpg.analysis import Analysis
 
 
@@ -41,15 +41,23 @@ def _match_card(row: pd.Series, away: pd.Series, goals: pd.DataFrame, team_id: i
 def render(a: Analysis, team_id: int) -> None:
     meta = a.meta
     tm = a.team_match
+    finished = meta["capacites"].terminee
     hero(
         "Matchs et calendrier",
         "Résultats, journée par journée",
-        "Buteurs, buts MPG, bonus posés et difficulté du calendrier à venir.",
+        "Buteurs, buts MPG et bonus posés, match par match."
+        if finished
+        else "Buteurs, buts MPG, bonus posés et difficulté du calendrier à venir.",
     )
 
     gws = sorted(tm["gw"].unique().tolist())
     gw = st.segmented_control(
-        "Journée", options=gws, default=gws[-1], required=True, format_func=lambda g: f"J{g}", key="match_gw"
+        "Journée",
+        options=gws,
+        default=gws[-1],
+        required=True,
+        format_func=lambda g: f"J{g}",
+        key=f"match_gw_{meta['saison']}",
     )
     day = tm[tm["gw"] == gw]
     home = day[day["domicile"]].sort_values("team_id")
@@ -65,6 +73,14 @@ def render(a: Analysis, team_id: int) -> None:
         "Couleur de la barre : vert victoire, jaune nul, rouge défaite. Le résultat est aussi écrit sous chaque barre.",
     )
     charts.show(charts.gw_points(tm, team_id))
+
+    if finished:
+        empty_state(
+            "La saison est finie",
+            "Il n'y a plus de match à jouer, donc plus de calendrier à comparer. Les résultats sont dans les "
+            "journées ci-dessus.",
+        )
+        return
 
     section(
         "Calendrier restant",

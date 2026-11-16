@@ -1,13 +1,14 @@
 import streamlit as st
 
 from app import charts
-from app.components import hero, how, kpi_row, section, table_height
+from app.components import callout, hero, how, kpi_row, section, table_height
 from mpg.analysis import Analysis
 from mpg.coaching import bonus_effect
 
 
 def render(a: Analysis, team_id: int) -> None:
     meta = a.meta
+    stats_pl = meta["capacites"].stats_pl
     co = a.coaching
     hero(
         "Coaching",
@@ -43,12 +44,20 @@ def render(a: Analysis, team_id: int) -> None:
             {
                 "label": me["team_name"],
                 "value": f"{me['regret_moy']:.1f} pts/match",
-                "sub": f"{int(me['absents_total'])} absents ({me['absents_attendus']:.1f} attendus), "
-                f"{int(me['capitaines_manques'])} capitaine(s) manqué(s)",
+                "sub": f"{int(me['absents_total'])} absents"
+                + (f" ({me['absents_attendus']:.1f} attendus)" if stats_pl else "")
+                + f", {int(me['capitaines_manques'])} capitaine(s) manqué(s)",
                 "me": True,
             },
         ]
     )
+
+    if (a.league.bonus["bonus"] == "Chapron rouge").any():
+        callout(
+            "Cette saison, des bonus « Chapron rouge » ont été posés : il expulse un titulaire adverse, remplacé "
+            "par un Rotaldo, et ce titulaire compte comme absent. Ces cas font monter les absents de l'équipe visée "
+            "sans que son coach y soit pour quelque chose."
+        )
 
     left, right = st.columns(2, gap="medium")
     with left:
@@ -67,19 +76,39 @@ def render(a: Analysis, team_id: int) -> None:
         )
         how("regret", meta)
     with right:
-        d = co.assign(absents_total=co["absents_total"].astype(float))
-        fig = charts.dumbbell_ranks(
-            d.rename(columns={"absents_attendus": "att", "absents_total": "reel"}),
-            "att",
-            "reel",
-            "Absences attendues",
-            "Absences réelles",
-            team_id,
-            "Titulaires absents : attendu et réel",
-        )
-        fig.update_xaxes(autorange=True, dtick=None, title="Nombre de titulaires absents")
-        charts.show(fig)
-        how(["absents_attendus", "absents"], meta)
+        if stats_pl:
+            d = co.assign(absents_total=co["absents_total"].astype(float))
+            fig = charts.dumbbell_ranks(
+                d.rename(columns={"absents_attendus": "att", "absents_total": "reel"}),
+                "att",
+                "reel",
+                "Absences attendues",
+                "Absences réelles",
+                team_id,
+                "Titulaires absents : attendu et réel",
+            )
+            fig.update_xaxes(autorange=True, dtick=None, title="Nombre de titulaires absents")
+            charts.show(fig)
+            how(["absents_attendus", "absents"], meta)
+        else:
+            charts.show(
+                charts.ranked_bars(
+                    co.assign(absents_total=co["absents_total"].astype(float)),
+                    "absents_total",
+                    "team_name",
+                    team_id,
+                    "Titulaires absents sur la saison",
+                    fmt=".0f",
+                    ascending=False,
+                    x_title="Nombre de titulaires absents",
+                ),
+                height=440,
+            )
+            st.caption(
+                "Sans les statistiques de Premier League de cette saison, on ne peut pas estimer combien d'absences "
+                "étaient attendues : seules les absences réelles sont affichées."
+            )
+            how("absents", meta)
 
     section(f"Le banc de {me['team_name']}, match par match")
     opt = a.optimal_lineups[a.optimal_lineups["team_id"] == team_id].merge(

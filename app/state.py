@@ -147,7 +147,21 @@ def _follow_leader(coaches: list[str], leader_coach: str) -> None:
         st.session_state[COACH_KEY] = leader_coach
 
 
+def _sync_coach_url(coach: str) -> None:
+    chosen = st.session_state[_COACH_CHOSEN]
+    if chosen and st.query_params.get(COACH_KEY) != coach:
+        st.query_params[COACH_KEY] = coach
+    elif not chosen and COACH_KEY in st.query_params:
+        del st.query_params[COACH_KEY]
+
+
 def coach_selector(a: Analysis, season: Season) -> int:
+    """Affiche « Mon équipe » et renvoie l'équipe correspondante dans la saison affichée.
+
+    Le widget n'est pas lié à l'adresse (`bind="query-params"`) : Streamlit y écrirait le libellé affiché
+    et non la clé du coach. L'adresse est lue à l'arrivée, puis réécrite à chaque exécution pour que le coach
+    survive aux changements de page.
+    """
     signature = tuple((str(s.path), (s.path / "teams.csv").stat().st_mtime) for s in seasons())
     coaches = _all_coaches(signature)
     leader_id, leader_coach = _leader(a)
@@ -167,10 +181,10 @@ def coach_selector(a: Analysis, season: Season) -> int:
         options=coaches,
         format_func=label,
         key=COACH_KEY,
-        bind="query-params",
         on_change=_mark_coach_chosen,
         help="Retenue dans l'adresse de la page : un favori rouvre l'app sur ton équipe.",
     )
+    _sync_coach_url(coach)
     if coach in team_of_coach:
         return team_of_coach[coach]
     champion = "le leader" if season.current else "le champion"

@@ -55,11 +55,10 @@ def team_selector(a: Analysis) -> int:
 
 
 @st.cache_resource(show_spinner="Simulation de la fin de saison…", max_entries=2)
-def _forecast(signature: tuple, frozen_signature: tuple, data_dir: str) -> dict:
+def _forecast_light(signature: tuple, data_dir: str) -> dict:
     a = _cached(signature, data_dir)
     fixtures = fixtures_after(a, a.league.last_gw)
     draws = ensemble_draws(build_context(a), fixtures, n_draws=4000) if not fixtures.empty else None
-    bt = backtest(a)
     baseline = simulate_season(a, draws) if draws is not None else None
     bonus_effect = None
     if draws is not None and draws.bonus_shift is not None:
@@ -76,10 +75,14 @@ def _forecast(signature: tuple, frozen_signature: tuple, data_dir: str) -> dict:
                 "effet_dernier": (adj["p_dernier"] - raw["p_dernier"].reindex(adj.index)).to_numpy(),
             }
         ).sort_values("effet_pts", ascending=False)
+    return {"draws": draws, "baseline": baseline, "bonus_effect": bonus_effect}
+
+
+@st.cache_resource(show_spinner="Historique et fiabilité des pronostics…", max_entries=2)
+def _forecast_heavy(signature: tuple, frozen_signature: tuple, data_dir: str) -> dict:
+    a = _cached(signature, data_dir)
+    bt = backtest(a)
     return {
-        "draws": draws,
-        "baseline": baseline,
-        "bonus_effect": bonus_effect,
         "history": title_odds_history(a),
         "backtest": bt,
         "backtest_summary": backtest_summary(bt),
@@ -88,16 +91,25 @@ def _forecast(signature: tuple, frozen_signature: tuple, data_dir: str) -> dict:
     }
 
 
-def get_forecast(data_dir: Path = DEFAULT_DATA_DIR) -> dict:
+def _current_season_signature(data_dir: Path) -> tuple:
     current = seasons()[-1]
     if Path(data_dir).resolve() != current.path:
         raise ValueError(
             f"Les pronostics figés ne valent que pour la saison en cours ({current.key}) : "
             f"pas de simulation pour {data_dir}."
         )
+    return _data_signature(data_dir)
+
+
+def get_forecast_light(data_dir: Path = DEFAULT_DATA_DIR) -> dict:
+    return _forecast_light(_current_season_signature(data_dir), str(data_dir))
+
+
+def get_forecast(data_dir: Path = DEFAULT_DATA_DIR) -> dict:
+    signature = _current_season_signature(data_dir)
     d = evaluation.FROZEN_DIR
     frozen = tuple(sorted((p.name, p.stat().st_mtime) for p in d.glob("*.csv"))) if d.exists() else ()
-    return _forecast(_data_signature(data_dir), frozen, str(data_dir))
+    return {**_forecast_light(signature, str(data_dir)), **_forecast_heavy(signature, frozen, str(data_dir))}
 
 
 @st.cache_resource(max_entries=1)

@@ -97,6 +97,59 @@ def test_entrypoint_alias_coach_is_the_same_person():
     assert _sidebar(at)["Mon équipe"].value == "vincentmouly"
 
 
+def test_entrypoint_chosen_coach_is_in_the_address():
+    at = _entrypoint(coach="ketXfentanyl", saison="2025-2026")
+    assert _sidebar(at)["Mon équipe"].value == "ketXfentanyl"
+    assert at.query_params["coach"] == "ketXfentanyl"
+    assert at.query_params["saison"] == "2025-2026"
+
+
+def test_entrypoint_chosen_coach_survives_a_reload():
+    at = _entrypoint(coach="ketXfentanyl", saison="2025-2026")
+    at.run()
+    assert _sidebar(at)["Mon équipe"].value == "ketXfentanyl"
+    assert at.query_params["coach"] == "ketXfentanyl"
+    reloaded = _entrypoint(**{"coach": at.query_params["coach"], "saison": at.query_params["saison"]})
+    assert _sidebar(reloaded)["Mon équipe"].value == "ketXfentanyl"
+
+
+def test_entrypoint_chosen_coach_survives_a_season_change():
+    at = _entrypoint(coach="ketXfentanyl", saison="2025-2026")
+    at.sidebar.selectbox[0].select("2024-2025").run()
+    assert not at.exception
+    assert _sidebar(at)["Saison"].value == "2024-2025"
+    assert _sidebar(at)["Mon équipe"].value == "ketXfentanyl"
+    assert at.query_params["coach"] == "ketXfentanyl"
+
+
+def test_entrypoint_without_coach_follows_the_leader_and_keeps_the_address_clean():
+    at = _entrypoint(saison="2024-2025")
+    assert _sidebar(at)["Mon équipe"].value == "Victor_RM"
+    assert "coach" not in at.query_params
+    at.sidebar.selectbox[0].select("2025-2026").run()
+    assert _sidebar(at)["Mon équipe"].value != "Victor_RM"
+    assert "coach" not in at.query_params
+
+
+def test_entrypoint_invalid_coach_follows_the_leader_and_is_removed_from_the_address():
+    at = _entrypoint(coach="inconnu")
+    assert not at.exception
+    assert not at.warning
+    assert _sidebar(at)["Mon équipe"].value == "Emilinho_"
+    assert "coach" not in at.query_params
+
+
+def test_entrypoint_picking_a_coach_puts_its_key_in_the_address():
+    at = _entrypoint(saison="2025-2026")
+    at.sidebar.selectbox[1].select("Victor_RM").run()
+    assert not at.exception
+    assert _sidebar(at)["Mon équipe"].value == "Victor_RM"
+    assert at.query_params["coach"] == "Victor_RM"
+    at.sidebar.selectbox[0].select("2024-2025").run()
+    assert _sidebar(at)["Mon équipe"].value == "Victor_RM"
+    assert at.query_params["coach"] == "Victor_RM"
+
+
 def test_entrypoint_loads_a_season_only_when_selected():
     loaded: list[str] = []
     real_run = analysis_module.run

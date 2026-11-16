@@ -1,3 +1,4 @@
+import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -38,6 +39,26 @@ class Analysis:
     strength_scenarios_fit: pd.DataFrame
     feature_set: pd.DataFrame
     meta: dict = field(default_factory=dict)
+
+
+def _season_meta(league: League, data_dir: Path) -> dict:
+    """Saison du dossier, son statut et ce que ses données permettent (voir `mpg.seasons`).
+
+    `mpg.seasons` importe `mpg.forecast.evaluation`, qui importe ce module : l'import se fait ici, à l'appel, pour
+    rompre le cycle sans déplacer de code.
+    """
+    from mpg.seasons import capabilities, limits, list_seasons
+
+    meta_file = data_dir / "meta.json"
+    meta_json = json.loads(meta_file.read_text(encoding="utf-8")) if meta_file.exists() else {}
+    seasons = list_seasons()
+    known = next((s for s in seasons if s.path == data_dir), None)
+    if known is not None:
+        key, current = known.key, known.current
+    else:
+        key, current = meta_json.get("saison") or seasons[-1].key, not meta_json
+    caps = capabilities(league, meta_json)
+    return {"saison": key, "saison_en_cours": current, "capacites": caps, "limites": limits(caps)}
 
 
 def run(data_dir: Path | str = DEFAULT_DATA_DIR, n_sim: int = 10_000, seed: int = 0) -> Analysis:
@@ -113,6 +134,7 @@ def run(data_dir: Path | str = DEFAULT_DATA_DIR, n_sim: int = 10_000, seed: int 
             "corr_absents_attendus": f"corrélation entre absences attendues et réelles {corr_abs}",
             "rmse_note_reelle": rmse["note_moy_reelle"],
             "rmse_points_mpg": rmse["points_mpg_moy"],
+            **_season_meta(league, Path(data_dir).resolve()),
         },
     )
 

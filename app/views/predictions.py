@@ -4,11 +4,22 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import callout, fixture_grid, fmt_pct, hero, how, kpi_row, prob_bar, section, table_height
+from app.components import (
+    callout,
+    empty_state,
+    fixture_grid,
+    fmt_pct,
+    hero,
+    how,
+    kpi_row,
+    prob_bar,
+    section,
+    table_height,
+)
 from app.state import data_signature, get_forecast
 from mpg.analysis import Analysis
 from mpg.forecast.evaluation import frozen_frames
-from mpg.forecast.season import simulate_season
+from mpg.forecast.season import REFERENCE, simulate_season
 from mpg.glossary import explain
 
 OPTIONS = ["—", "H", "D", "A"]
@@ -28,7 +39,7 @@ def _next_gw(a: Analysis, fc: dict, team_id: int) -> None:
         f'<div class="meta mt-8">Score le plus probable : <b>{m["score_probable"]}</b></div></div></div>'
         for _, m in nxt.iterrows()
     ]
-    fixture_grid(cards, min(len(cards), 5))
+    fixture_grid(cards, len(cards))
     with st.expander("Ce que dit chaque modèle"):
         by_model = fc["draws"].mean_probs()
         by_model = by_model[by_model["gw"] == gw]
@@ -319,7 +330,22 @@ def _bonus_effect(fc: dict, team_id: int, meta: dict) -> None:
     how("bonus_prevision", meta)
 
 
+def _past_season(a: Analysis) -> None:
+    hero(
+        "Prédictions",
+        f"Saison {a.meta['saison']}, terminée",
+        "Les prédictions servent à anticiper les matchs qui restent à jouer.",
+    )
+    empty_state(
+        "Saison terminée : rien à prédire.",
+        "Il n'y a plus de match à venir. Le classement final est sur la page Ligue.",
+    )
+
+
 def render(a: Analysis, team_id: int) -> None:
+    if not a.meta["saison_en_cours"]:
+        _past_season(a)
+        return
     fc = get_forecast()
     names = a.league.team_names
     hero(
@@ -334,7 +360,7 @@ def render(a: Analysis, team_id: int) -> None:
 
     sim = fc["baseline"]
     draws = fc["draws"]
-    models = {m.name: m for m in draws.models}
+    n_models = sum(m.name != REFERENCE for m in draws.models)
     poisson = next(m for m in draws.models if hasattr(m, "tau"))
     struct = next(m for m in draws.models if hasattr(m, "rotaldo_note"))
     meta = {
@@ -352,6 +378,7 @@ def render(a: Analysis, team_id: int) -> None:
     danger = sim.summary.sort_values("p_dernier").iloc[-1]
     me = s.loc[team_id]
     remaining = len(draws.fixtures)
+    remaining_gws = draws.fixtures["gw"].nunique()
     kpi_row(
         [
             {
@@ -385,8 +412,8 @@ def render(a: Analysis, team_id: int) -> None:
 
     section(
         "Fin de saison simulée",
-        f"{remaining} matchs restants sur {remaining // 5} journées, {meta['n_saisons']} saisons simulées par "
-        f"{len(models)} modèles.",
+        f"{remaining} matchs restants sur {remaining_gws} journées, {meta['n_saisons']} saisons simulées par "
+        f"{n_models} modèles.",
     )
     _season_table(sim, names, team_id)
     how(["simulation_saison", "ensemble"], meta)

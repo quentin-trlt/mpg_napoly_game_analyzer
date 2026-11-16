@@ -4,9 +4,76 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import fmt_m, fmt_pct, form_badges, hero, how, kpi_row, rank_tone, section, stat_grid, table_height
+from app.components import (
+    fmt_m,
+    fmt_pct,
+    form_badges,
+    hero,
+    how,
+    kpi_row,
+    limit_banner,
+    rank_tone,
+    section,
+    stat_grid,
+    table_height,
+)
 from mpg.analysis import Analysis, team_card
 from mpg.premier_league import club_form
+
+SQUAD_COLUMNS = [
+    "joueur",
+    "poste",
+    "club",
+    "forme_club",
+    "prochain_match",
+    "enchere",
+    "cote",
+    "surpaiement_x",
+    "n_notes",
+    "note_moy",
+    "note_retrecie",
+    "note_moy_reelle",
+    "buts_reels",
+    "buts_mpg",
+    "buts_reels_saison",
+    "passes_decisives_saison",
+    "cartons_jaunes",
+    "cartons_rouges",
+    "taux_jeu",
+    "statut_performance",
+    "choisi_titulaire",
+    "residu_valeur",
+]
+SQUAD_CONFIG = {
+    "joueur": st.column_config.TextColumn("Joueur", pinned=True),
+    "poste": "Poste",
+    "club": "Club",
+    "forme_club": st.column_config.TextColumn(
+        "Forme du club", help="5 derniers résultats du club en PL, du plus ancien au plus récent"
+    ),
+    "prochain_match": st.column_config.TextColumn(
+        "Prochain match", help="Adversaire du club, lieu et date (heure de Paris)"
+    ),
+    "enchere": st.column_config.NumberColumn("Prix", format="%d M€"),
+    "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
+    "surpaiement_x": st.column_config.NumberColumn("× cote", format="%.2f"),
+    "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note estimée"),
+    "note_moy": st.column_config.NumberColumn("Moy. brute", format="%.2f", help="Moyenne de ces notes"),
+    "note_retrecie": st.column_config.NumberColumn(
+        "Note estimée", format="%.2f", help="Note attendue quand il joue, tirée vers son poste"
+    ),
+    "note_moy_reelle": st.column_config.NumberColumn("Moy. PL", format="%.1f"),
+    "buts_reels": "Buts ligue",
+    "buts_mpg": "Buts MPG",
+    "buts_reels_saison": "Buts PL",
+    "passes_decisives_saison": st.column_config.NumberColumn("Passes PL", format="%d"),
+    "cartons_jaunes": st.column_config.NumberColumn("Jaunes", format="%d"),
+    "cartons_rouges": st.column_config.NumberColumn("Rouges", format="%d"),
+    "taux_jeu": st.column_config.ProgressColumn("Taux de jeu PL", min_value=0, max_value=1, format="percent"),
+    "statut_performance": "Statut",
+    "choisi_titulaire": st.column_config.NumberColumn("Titularisé (MPG)"),
+    "residu_valeur": st.column_config.NumberColumn("Écart au prix", format="%+.2f"),
+}
 
 
 def _with_club_form(roster: pd.DataFrame, results: pd.DataFrame | None) -> pd.DataFrame:
@@ -21,71 +88,137 @@ def _with_club_form(roster: pd.DataFrame, results: pd.DataFrame | None) -> pd.Da
     return out.fillna({"forme_club": "", "prochain_match": ""})
 
 
-def _profile(a: Analysis, team_id: int) -> list[tuple[str, int, str]]:
-    def rank(df, col, ascending=False):
-        return int(df.set_index("team_id")[col].rank(ascending=ascending, method="min").loc[team_id])
+def _profile(a: Analysis, team_id: int, expected_rank: int | None) -> tuple[list[tuple[str, int, str]], list[str]]:
+    """Rangs calculables de l'équipe, et les dimensions écartées avec leur raison."""
 
-    return [
-        ("Classement", int(a.standings.set_index("team_id").loc[team_id, "rang"]), "points"),
+    def rank(df, col, ascending=False) -> int | None:
+        values = df.set_index("team_id")[col]
+        if pd.isna(values.loc[team_id]):
+            return None
+        return int(values.rank(ascending=ascending, method="min").loc[team_id])
+
+    dimensions = [
+        ("Classement", int(a.standings.set_index("team_id").loc[team_id, "rang"]), "points", ""),
+        ("Force a priori", expected_rank, "effectif sur le papier", "effectif incomplet"),
+        ("Mercato", int(a.mercato.set_index("team_id").loc[team_id, "rang"]), "score composite", ""),
+        ("Niveau de jeu", rank(a.standings, "note_moy"), "note moyenne", ""),
+        ("Chance", rank(a.luck, "indice_chance"), "1 = le plus chanceux", ""),
+        ("Coaching", rank(a.coaching, "regret_moy", ascending=True), "moins de points sur le banc", ""),
         (
-            "Force a priori",
-            int(a.favourites.set_index("team_id").loc[team_id, "rang_attendu"]),
-            "effectif sur le papier",
+            "Fiabilité",
+            rank(a.mercato, "disponibilite_ponderee"),
+            "joueurs qui jouent en PL",
+            "pas de statistiques de Premier League",
         ),
-        ("Mercato", int(a.mercato.set_index("team_id").loc[team_id, "rang"]), "score composite"),
-        ("Niveau de jeu", rank(a.standings, "note_moy"), "note moyenne"),
-        ("Chance", rank(a.luck, "indice_chance"), "1 = le plus chanceux"),
-        ("Coaching", rank(a.coaching, "regret_moy", ascending=True), "moins de points sur le banc"),
-        ("Fiabilité", rank(a.mercato, "disponibilite_ponderee"), "joueurs qui jouent en PL"),
-        ("Attaque", rank(a.standings, "bp"), "buts marqués"),
-        ("Défense", rank(a.standings, "bc", ascending=True), "buts encaissés"),
+        ("Attaque", rank(a.standings, "bp"), "buts marqués", ""),
+        ("Défense", rank(a.standings, "bc", ascending=True), "buts encaissés", ""),
     ]
+    kept = [(label, r, hint) for label, r, hint, _ in dimensions if r is not None]
+    skipped = [f"{label} ({reason or 'donnée absente'})" for label, r, _, reason in dimensions if r is None]
+    return kept, skipped
+
+
+def _hero_subtitle(team: pd.Series, form: str) -> str:
+    parts = []
+    if pd.notna(team["president"]):
+        parts.append(f"Président {escape(str(team['president']))}")
+    if pd.notna(team["stade"]):
+        parts.append(f"stade « {escape(str(team['stade']))} »")
+    if form:
+        parts.append(f"Forme {form_badges(form)}")
+    return ", ".join(parts)
+
+
+def _kpis(card: dict) -> list[dict]:
+    top3 = f"{fmt_pct(card['part_top3'])} sur les 3 plus gros achats"
+    has_value = card["valeur_actuelle"] is not None
+    budget_sub = (
+        f"valeur actuelle {fmt_m(card['valeur_actuelle'])} ({card['ratio_valeur_prix']:.0%}), {top3}"
+        if has_value
+        else top3
+    )
+    if card["note_reelle_mediane"] is not None:
+        level = {
+            "label": "Niveau de l'effectif",
+            "value": f"{card['note_reelle_mediane']:.1f}",
+            "sub": f"note PL médiane, {card['note_mpg_moy']:.2f} en MPG",
+        }
+    else:
+        level = {
+            "label": "Niveau de jeu",
+            "value": f"{card['note_mpg_moy']:.2f}",
+            "sub": "note moyenne en MPG, bonus compris",
+        }
+    if card["disponibilite"] is not None:
+        fourth = {
+            "label": "Fiabilité",
+            "value": fmt_pct(card["disponibilite"]),
+            "sub": f"taux de jeu PL pondéré, {card['indisponibles']} indisponible(s)",
+        }
+    elif card["rang_attendu"] is not None:
+        fourth = {
+            "label": "Force de l'effectif",
+            "value": f"{card['rang_attendu']}e",
+            "sub": "rang d'après les prix payés",
+        }
+    else:
+        fourth = {
+            "label": "Force de l'effectif",
+            "value": "Non calculée",
+            "small": True,
+            "sub": "l'effectif est incomplet : il manque au moins un poste",
+        }
+    return [
+        {
+            "label": "Classement",
+            "value": f"{card['rang']}e",
+            "sub": f"{card['pts']} pts, série {card['serie']}",
+            "me": True,
+        },
+        {"label": "Budget payé", "value": fmt_m(card["budget_paye"]), "sub": budget_sub},
+        level,
+        fourth,
+    ]
+
+
+def _limits(a: Analysis) -> list[str]:
+    caps = a.meta["capacites"]
+    messages = [
+        (
+            caps.effectif_fin_saison,
+            "Effectif de fin de saison : les joueurs partis en cours de route n'y figurent plus, les totaux "
+            "(prix payés, force de l'effectif) peuvent donc être incomplets.",
+        ),
+        (
+            not caps.cote,
+            "Pas de cote MPG : la valeur actuelle de l'effectif et son écart avec le prix payé sont masqués.",
+        ),
+        (
+            not caps.stats_pl,
+            "Pas de statistiques de Premier League : la note réelle, la fiabilité et les indisponibles sont masquées.",
+        ),
+    ]
+    return [text for active, text in messages if active]
 
 
 def render(a: Analysis, team_id: int) -> None:
     meta = a.meta
+    caps = meta["capacites"]
     card = team_card(a, team_id)
     team = a.league.teams.set_index("team_id").loc[team_id]
     stand = a.standings.set_index("team_id").loc[team_id]
-    hero(
-        f"Fiche équipe, coach {team['coach']}",
-        team["team_name"],
-        f"Président {escape(str(team['president']))}, stade « {escape(str(team['stade']))} ». "
-        f"Forme {form_badges(stand['forme'])}",
-    )
+    form = stand["forme"] if isinstance(stand["forme"], str) else ""
+    hero(f"Fiche équipe, coach {team['coach']}", team["team_name"], _hero_subtitle(team, form))
+    limit_banner(_limits(a))
 
-    kpi_row(
-        [
-            {
-                "label": "Classement",
-                "value": f"{card['rang']}e",
-                "sub": f"{card['pts']} pts, série {card['serie']}",
-                "me": True,
-            },
-            {
-                "label": "Budget payé",
-                "value": fmt_m(card["budget_paye"]),
-                "sub": f"valeur actuelle {fmt_m(card['valeur_actuelle'])} ({card['ratio_valeur_prix']:.0%}), "
-                f"{fmt_pct(card['part_top3'])} sur les 3 plus gros achats",
-            },
-            {
-                "label": "Niveau de l'effectif",
-                "value": f"{card['note_reelle_mediane']:.1f}",
-                "sub": f"note PL médiane, {card['note_mpg_moy']:.2f} en MPG",
-            },
-            {
-                "label": "Fiabilité",
-                "value": fmt_pct(card["disponibilite"]),
-                "sub": f"taux de jeu PL pondéré, {card['indisponibles']} indisponible(s)",
-            },
-        ]
-    )
+    kpi_row(_kpis(card))
 
-    section(
-        "Profil",
-        "Rang de l'équipe dans chaque dimension, 1 = meilleur de la ligue. Vert : top 3, rouge : 3 derniers.",
-    )
-    st.html(_profile_panel(_profile(a, team_id), len(a.league.teams)))
+    profile, skipped = _profile(a, team_id, card["rang_attendu"])
+    caption = "Rang de l'équipe dans chaque dimension, 1 = meilleur de la ligue. Vert : top 3, rouge : 3 derniers."
+    if skipped:
+        caption += f" {len(profile)} dimensions sur 9 affichées, non calculée(s) : {', '.join(skipped)}."
+    section("Profil", caption)
+    st.html(_profile_panel(profile, len(a.league.teams)))
 
     _bonus_section(a, team_id, meta)
 
@@ -94,10 +227,44 @@ def render(a: Analysis, team_id: int) -> None:
     lines = a.lines.set_index("team_id").loc[team_id]
     st.caption(
         "Force par ligne (note brute) : "
-        + ", ".join(f"{lab} {lines[g]:.2f}" for g, lab in [("G", "G"), ("D", "D"), ("M", "M"), ("A", "A")])
+        + ", ".join(f"{lab} {lines[lab]:.2f}" if pd.notna(lines[lab]) else f"{lab} aucun joueur" for lab in "GDMA")
     )
 
     roster = a.player_value[a.player_value["team_id"] == team_id]
+    _price_section(roster, team_id, caps.cote, meta)
+
+    section("Effectif")
+    squad = _with_club_form(roster, a.league.club_results)
+    columns = [c for c in SQUAD_COLUMNS if squad[c].replace("", pd.NA).notna().any()]
+    st.dataframe(
+        squad.sort_values(["poste_groupe", "enchere"], ascending=[True, False])[columns],
+        hide_index=True,
+        column_config={c: SQUAD_CONFIG[c] for c in columns if c in SQUAD_CONFIG},
+        height=table_height(len(roster)),
+    )
+    explained = [
+        key for key, column in (("residu_valeur", "residu_valeur"), ("fiabilite", "taux_jeu")) if column in columns
+    ]
+    if explained:
+        how(explained, meta)
+
+
+def _price_section(roster: pd.DataFrame, team_id: int, has_cote: bool, meta: dict) -> None:
+    if not has_cote:
+        section("Prix payé", "Pas de cote MPG sur cette saison : on montre ce que chaque joueur a coûté.")
+        charts.show(
+            charts.ranked_bars(
+                roster,
+                "enchere",
+                "joueur",
+                team_id,
+                "Prix payé, joueur par joueur",
+                fmt=".0f",
+                ascending=True,
+                x_title="M€",
+            )
+        )
+        return
     section("Prix payé et cote actuelle")
     charts.show(
         charts.paired_bars(
@@ -113,86 +280,26 @@ def render(a: Analysis, team_id: int) -> None:
     )
     how("surpaiement", meta)
 
-    section("Effectif")
-    squad = _with_club_form(roster, a.league.club_results)
-    st.dataframe(
-        squad.sort_values(["poste_groupe", "enchere"], ascending=[True, False])[
-            [
-                "joueur",
-                "poste",
-                "club",
-                "forme_club",
-                "prochain_match",
-                "enchere",
-                "cote",
-                "surpaiement_x",
-                "n_notes",
-                "note_moy",
-                "note_retrecie",
-                "note_moy_reelle",
-                "buts_reels",
-                "buts_mpg",
-                "buts_reels_saison",
-                "passes_decisives_saison",
-                "cartons_jaunes",
-                "cartons_rouges",
-                "taux_jeu",
-                "statut_performance",
-                "choisi_titulaire",
-                "residu_valeur",
-            ]
-        ],
-        hide_index=True,
-        column_config={
-            "joueur": st.column_config.TextColumn("Joueur", pinned=True),
-            "poste": "Poste",
-            "club": "Club",
-            "forme_club": st.column_config.TextColumn(
-                "Forme du club", help="5 derniers résultats du club en PL, du plus ancien au plus récent"
-            ),
-            "prochain_match": st.column_config.TextColumn(
-                "Prochain match", help="Adversaire du club, lieu et date (heure de Paris)"
-            ),
-            "enchere": st.column_config.NumberColumn("Prix", format="%d M€"),
-            "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
-            "surpaiement_x": st.column_config.NumberColumn("× cote", format="%.2f"),
-            "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note estimée"),
-            "note_moy": st.column_config.NumberColumn("Moy. brute", format="%.2f", help="Moyenne de ces notes"),
-            "note_retrecie": st.column_config.NumberColumn(
-                "Note estimée", format="%.2f", help="Note attendue quand il joue, tirée vers son poste"
-            ),
-            "note_moy_reelle": st.column_config.NumberColumn("Moy. PL", format="%.1f"),
-            "buts_reels": "Buts ligue",
-            "buts_mpg": "Buts MPG",
-            "buts_reels_saison": "Buts PL",
-            "passes_decisives_saison": st.column_config.NumberColumn("Passes PL", format="%d"),
-            "cartons_jaunes": st.column_config.NumberColumn("Jaunes", format="%d"),
-            "cartons_rouges": st.column_config.NumberColumn("Rouges", format="%d"),
-            "taux_jeu": st.column_config.ProgressColumn("Taux de jeu PL", min_value=0, max_value=1, format="percent"),
-            "statut_performance": "Statut",
-            "choisi_titulaire": st.column_config.NumberColumn("Titularisé (MPG)"),
-            "residu_valeur": st.column_config.NumberColumn("Écart au prix", format="%+.2f"),
-        },
-        height=table_height(len(roster)),
-    )
-    how(["residu_valeur", "fiabilite"], meta)
 
-
-def _bonus_cell(r) -> str:
+def _bonus_cell(r, finished: bool) -> str:
     total = max(r.dotation, r.utilises)
-    dots = "".join(f'<span class="dot {"on" if i < r.restants else "off"}"></span>' for i in range(total))
+    count = r.utilises if finished else max(r.restants, 0)
+    off = count <= 0 if finished else r.restants <= 0
+    lit = r.utilises if finished else r.restants
+    dots = "".join(f'<span class="dot {"on" if i < lit else "off"}"></span>' for i in range(total))
     if r.utilises:
         detail = f"Utilisé : {escape(r.journees)}"
         if r.cibles and r.cibles != "—":
             detail += f", {escape(r.cibles)}"
     else:
-        detail = "Pas encore utilisé"
+        detail = "Jamais utilisé" if finished else "Pas encore utilisé"
     warn = '<div class="sub warn">Absent de la dotation</div>' if r.hors_dotation else ""
+    state = f"{r.utilises} utilisé(s)" if finished else f"{r.restants} restant(s)"
     return (
-        f'<div class="stat{" empty" if r.restants <= 0 else ""}" role="group" '
-        f'aria-label="{escape(r.bonus)} : {r.restants} restant(s) sur {r.dotation}">'
+        f'<div class="stat{" empty" if off else ""}" role="group" '
+        f'aria-label="{escape(r.bonus)} : {state} sur {r.dotation}">'
         f'<div class="label">{escape(r.bonus)}</div>'
-        f'<div class="value">{max(r.restants, 0)}<span class="of">/{r.dotation}</span></div>'
+        f'<div class="value">{count}<span class="of">/{r.dotation}</span></div>'
         f'<div class="dots" aria-hidden="true">{dots}</div><div class="sub">{detail}</div>{warn}</div>'
     )
 
@@ -213,7 +320,8 @@ def _profile_panel(prof: list[tuple[str, int, str]], n: int) -> str:
 
 def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
     br = a.bonus_remaining
-    section("Bonus restants")
+    finished = meta["capacites"].terminee
+    section("Bonus utilisés" if finished else "Bonus restants")
     if br is None:
         st.info(
             "Ajoutez un fichier `data/bonus_stock.csv` (colonnes `bonus`, `quantite`) avec la dotation de début "
@@ -221,25 +329,32 @@ def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
         )
         return
     mine = br[br["team_id"] == team_id]
-    left_total = int(mine["restants"].clip(lower=0).sum())
     total = int(mine["dotation"].sum())
-    remaining_gw = a.league.n_gw - a.league.last_gw
-    league_left = br.groupby("team_id")["restants"].apply(lambda s: s.clip(lower=0).sum())
-    rank = int(league_left.rank(ascending=False, method="min").loc[team_id])
-    st.caption(
-        f"{left_total} bonus restants sur {total} pour {remaining_gw} journées à jouer, "
-        f"{rank}e réserve de la ligue (médiane : {league_left.median():.0f}). Capitaine et bonus défensifs ne sont pas "
-        "comptés : ils ne s'épuisent pas."
-    )
-    if (mine["restants"] < 0).any():
-        st.warning(
-            "Certains bonus ont été utilisés plus souvent que la dotation ne le permet : vérifiez "
-            "`data/bonus_stock.csv`."
+    if finished:
+        st.caption(
+            f"{int(mine['utilises'].sum())} bonus utilisés sur {total} de dotation en {meta['nb_journees']} journées. "
+            "Capitaine et bonus défensifs ne sont pas comptés : ils ne s'épuisent pas."
         )
-    st.html(stat_grid([_bonus_cell(r) for r in mine.itertuples()], per_row=4))
+    else:
+        left_total = int(mine["restants"].clip(lower=0).sum())
+        remaining_gw = a.league.n_gw - a.league.last_gw
+        league_left = br.groupby("team_id")["restants"].apply(lambda s: s.clip(lower=0).sum())
+        rank = int(league_left.rank(ascending=False, method="min").loc[team_id])
+        st.caption(
+            f"{left_total} bonus restants sur {total} pour {remaining_gw} journées à jouer, "
+            f"{rank}e réserve de la ligue (médiane : {league_left.median():.0f}). Capitaine et bonus défensifs ne sont "
+            "pas comptés : ils ne s'épuisent pas."
+        )
+        if (mine["restants"] < 0).any():
+            st.warning(
+                "Certains bonus ont été utilisés plus souvent que la dotation ne le permet : vérifiez "
+                "`data/bonus_stock.csv`."
+            )
+    st.html(stat_grid([_bonus_cell(r, finished) for r in mine.itertuples()], per_row=4))
 
-    with st.expander("Bonus restants de toutes les équipes"):
-        pivot = br.pivot(index="team_id", columns="bonus", values="restants")
+    value = "utilises" if finished else "restants"
+    with st.expander("Bonus utilisés par toutes les équipes" if finished else "Bonus restants de toutes les équipes"):
+        pivot = br.pivot(index="team_id", columns="bonus", values=value)
         pivot = pivot[[b for b in dict.fromkeys(br["bonus"]) if b in pivot.columns]]
         pivot.insert(0, "Total", pivot.clip(lower=0).sum(axis=1))
         pivot.insert(0, "Équipe", pivot.index.map(a.league.team_names))
@@ -247,8 +362,15 @@ def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
             pivot.sort_values("Total", ascending=False),
             hide_index=True,
             column_config={
-                "Total": st.column_config.ProgressColumn("Total", min_value=0, max_value=total, format="%d")
+                "Total": st.column_config.ProgressColumn(
+                    "Total",
+                    min_value=0,
+                    max_value=max(int(pivot["Total"].max()), 1) if finished else total,
+                    format="%d",
+                )
             },
         )
-        st.caption("Utile pour anticiper : un adversaire qui a encore son Suarez peut viser votre gardien.")
-    how("bonus_restants", meta)
+        if not finished:
+            st.caption("Utile pour anticiper : un adversaire qui a encore son Suarez peut viser votre gardien.")
+    if not finished:
+        how("bonus_restants", meta)

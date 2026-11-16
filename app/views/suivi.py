@@ -4,7 +4,19 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import callout, chip, fixture_grid, fmt_pct, hero, how, kpi_row, prob_bar, section, table_height
+from app.components import (
+    callout,
+    chip,
+    empty_state,
+    fixture_grid,
+    fmt_pct,
+    hero,
+    how,
+    kpi_row,
+    prob_bar,
+    section,
+    table_height,
+)
 from app.state import get_forecast
 from mpg.analysis import Analysis
 from mpg.forecast.evaluation import calibration, rps_by_gameweek, scored_summary, season_moves
@@ -286,7 +298,6 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
 
 
 def render(a: Analysis, team_id: int) -> None:
-    fc = get_forecast()
     meta = a.meta
     hero(
         "Suivi des pronostics",
@@ -294,6 +305,14 @@ def render(a: Analysis, team_id: int) -> None:
         "Les pronostics sont figés avant chaque journée puis confrontés aux résultats. On suit aussi comment le "
         "classement final prédit évolue, semaine après semaine.",
     )
+    if not meta["saison_en_cours"]:
+        empty_state(
+            f"Aucun pronostic figé pour la saison {meta['saison']}",
+            "Les pronostics sont figés avant chaque journée de la saison en cours. Cette saison est terminée et "
+            "n'en a pas : il n'y a rien à comparer aux résultats.",
+        )
+        return
+    fc = get_forecast()
     fm = fc["frozen_matches"]
 
     section("Pronostics contre résultats")

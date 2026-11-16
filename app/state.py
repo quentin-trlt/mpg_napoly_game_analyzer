@@ -8,15 +8,19 @@ from mpg.forecast import evaluation
 from mpg.forecast.evaluation import backtest, backtest_summary, frozen_matches, frozen_seasons
 from mpg.forecast.season import build_context, ensemble_draws, fixtures_after, simulate_season, title_odds_history
 from mpg.loader import DEFAULT_DATA_DIR
+from mpg.seasons import Season, coach_by_team, coach_key, list_seasons, season_by_key
 
 TEAM_KEY = "team_id"
+SEASON_KEY = "saison"
+COACH_KEY = "coach"
+_COACH_CHOSEN = "_coach_choisi"
 
 
 def _data_signature(data_dir: Path) -> tuple[tuple[str, float], ...]:
     return tuple(sorted((p.name, p.stat().st_mtime) for p in data_dir.glob("*.csv")))
 
 
-@st.cache_resource(show_spinner="Calcul des statistiques…")
+@st.cache_resource(show_spinner="Calcul des statistiques…", max_entries=4)
 def _cached(signature: tuple, data_dir: str) -> Analysis:
     return run(data_dir)
 
@@ -50,7 +54,7 @@ def team_selector(a: Analysis) -> int:
     return int(st.session_state[TEAM_KEY])
 
 
-@st.cache_resource(show_spinner="Simulation de la fin de saison…")
+@st.cache_resource(show_spinner="Simulation de la fin de saison…", max_entries=2)
 def _forecast(signature: tuple, frozen_signature: tuple, data_dir: str) -> dict:
     a = _cached(signature, data_dir)
     fixtures = fixtures_after(a, a.league.last_gw)
@@ -85,6 +89,90 @@ def _forecast(signature: tuple, frozen_signature: tuple, data_dir: str) -> dict:
 
 
 def get_forecast(data_dir: Path = DEFAULT_DATA_DIR) -> dict:
+    current = seasons()[-1]
+    if Path(data_dir).resolve() != current.path:
+        raise ValueError(
+            f"Les pronostics figés ne valent que pour la saison en cours ({current.key}) : "
+            f"pas de simulation pour {data_dir}."
+        )
     d = evaluation.FROZEN_DIR
     frozen = tuple(sorted((p.name, p.stat().st_mtime) for p in d.glob("*.csv"))) if d.exists() else ()
     return _forecast(_data_signature(data_dir), frozen, str(data_dir))
+
+
+@st.cache_resource(max_entries=1)
+def seasons() -> list[Season]:
+    return list_seasons()
+
+
+@st.cache_data(max_entries=1)
+def _all_coaches(signature: tuple[tuple[str, float], ...]) -> list[str]:
+    coaches = {
+        coach_key(str(c))
+        for path, _ in signature
+        for c in pd.read_csv(Path(path) / "teams.csv", usecols=["coach"])["coach"]
+    }
+    return sorted(coaches, key=str.lower)
+
+
+def season_selector() -> Season:
+    all_seasons = seasons()
+    keys = [s.key for s in reversed(all_seasons)]
+    key = st.selectbox(
+        "Saison",
+        options=keys,
+        key=SEASON_KEY,
+        bind="query-params",
+        help="La saison en cours est la plus récente.",
+    )
+    return season_by_key(key, all_seasons)
+
+
+def _leader(a: Analysis) -> tuple[int, str]:
+    team_id = int(a.standings.iloc[0]["team_id"])
+    return team_id, coach_by_team(a.league)[team_id]
+
+
+def _mark_coach_chosen() -> None:
+    st.session_state[_COACH_CHOSEN] = True
+
+
+def _follow_leader(coaches: list[str], leader_coach: str) -> None:
+    if _COACH_CHOSEN not in st.session_state:
+        asked = st.query_params.get(COACH_KEY)
+        st.session_state[_COACH_CHOSEN] = asked is not None and coach_key(asked) in coaches
+        if st.session_state[_COACH_CHOSEN]:
+            st.session_state[COACH_KEY] = coach_key(asked)
+    if not st.session_state[_COACH_CHOSEN]:
+        st.session_state[COACH_KEY] = leader_coach
+
+
+def coach_selector(a: Analysis, season: Season) -> int:
+    signature = tuple((str(s.path), (s.path / "teams.csv").stat().st_mtime) for s in seasons())
+    coaches = _all_coaches(signature)
+    leader_id, leader_coach = _leader(a)
+    _follow_leader(coaches, leader_coach)
+    team_of_coach = {c: t for t, c in coach_by_team(a.league).items()}
+    names = a.league.team_names
+
+    def label(coach: str) -> str:
+        return (
+            f"{names[team_of_coach[coach]]} ({coach})"
+            if coach in team_of_coach
+            else f"{coach} (absent en {season.key})"
+        )
+
+    coach = st.selectbox(
+        "Mon équipe",
+        options=coaches,
+        format_func=label,
+        key=COACH_KEY,
+        bind="query-params",
+        on_change=_mark_coach_chosen,
+        help="Retenue dans l'adresse de la page : un favori rouvre l'app sur ton équipe.",
+    )
+    if coach in team_of_coach:
+        return team_of_coach[coach]
+    champion = "le leader" if season.current else "le champion"
+    st.sidebar.caption(f"{coach} n'a pas joué en {season.key} : tu vois {champion}.")
+    return leader_id

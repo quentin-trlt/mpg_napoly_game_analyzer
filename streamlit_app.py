@@ -8,7 +8,7 @@ st.set_page_config(
 )
 
 from app import theme  # noqa: E402
-from app.state import get_analysis, team_selector  # noqa: E402
+from app.state import coach_selector, get_analysis, season_selector  # noqa: E402
 from app.views import (  # noqa: E402
     analyse_mercato,
     chance,
@@ -27,18 +27,24 @@ from mpg.loader import DataSchemaError  # noqa: E402
 theme.inject_css()
 st.logo("assets/logo.svg", size="large", icon_image="assets/icon.svg")
 
+with st.sidebar:
+    season = season_selector()
+
 try:
-    analysis = get_analysis()
+    analysis = get_analysis(season.path)
 except DataSchemaError as exc:
-    st.error(f"Les fichiers de `data/` ne sont pas au format attendu : {exc}")
+    st.error(f"Les fichiers de `{season.path.name}/` ne sont pas au format attendu : {exc}")
     st.stop()
 
 with st.sidebar:
-    team_id = team_selector(analysis)
-    st.caption(
-        f"Données jusqu'à la J{analysis.meta['derniere_journee']}, "
-        f"{analysis.meta['matchs_joues']} matchs joués sur {len(analysis.league.fixtures)}"
-    )
+    team_id = coach_selector(analysis, season)
+    if analysis.meta["saison_en_cours"]:
+        st.caption(
+            f"Données jusqu'à la J{analysis.meta['derniere_journee']}, "
+            f"{analysis.meta['matchs_joues']} matchs joués sur {len(analysis.league.fixtures)}"
+        )
+    else:
+        st.caption(f"Saison terminée : {analysis.meta['nb_journees']} journées, {analysis.meta['matchs_joues']} matchs")
 
 
 def page(module, title: str, icon: str, url: str, default: bool = False) -> st.Page:

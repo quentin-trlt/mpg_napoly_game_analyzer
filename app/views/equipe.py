@@ -17,7 +17,7 @@ from app.components import (
     table_height,
     volet_title,
 )
-from app.state import get_forecast
+from app.state import get_forecast_light
 from mpg.analysis import Analysis, team_card
 from mpg.premier_league import club_form
 
@@ -256,7 +256,7 @@ def effectif(a: Analysis, team_id: int) -> None:
 def bonus(a: Analysis, team_id: int) -> None:
     _bonus_section(a, team_id, a.meta)
     if a.meta["saison_en_cours"]:
-        _bonus_effect(get_forecast(), team_id, a.meta)
+        _bonus_effect(get_forecast_light(), team_id, a.meta)
 
 
 def _price_section(roster: pd.DataFrame, team_id: int, has_cote: bool, meta: dict) -> None:

@@ -7,6 +7,7 @@ from app.views import (
     equipe,
     favoris,
     joueurs,
+    journee,
     ligue,
     matchs,
     mercato,
@@ -18,6 +19,10 @@ from mpg.analysis import Analysis
 
 def _eyebrow(a: Analysis, name: str) -> str:
     return f"{name} · {a.meta['saison']}"
+
+
+def ma_journee(a: Analysis, team_id: int) -> None:
+    journee.render(a, team_id)
 
 
 def mon_equipe(a: Analysis, team_id: int) -> None:

@@ -9,6 +9,7 @@ from mpg.forecast.evaluation import season_dirs
 
 ENTRYPOINT = Path(__file__).resolve().parent.parent / "streamlit_app.py"
 PAGES = {
+    "ma_journee": [None],
     "mon_equipe": ["profil", "effectif", "bonus"],
     "page_ligue": ["classement", "matchs"],
     "pronostics": ["predictions", "suivi"],
@@ -34,11 +35,36 @@ def _page(page: str, data_dir: str, position: int) -> None:
 @pytest.mark.parametrize("season", SEASONS)
 def test_volet_renders(season, page, volet, position):
     at = AppTest.from_function(_page, args=(page, str(season_dirs()[season]), POSITIONS[position]), default_timeout=180)
-    at.query_params["volet"] = volet
+    if volet is not None:
+        at.query_params["volet"] = volet
     at.run()
     assert not at.exception, at.exception[0].message if at.exception else ""
     assert not at.get("exception")
-    assert at.get("button_group")[0].value == volet
+    if volet is None:
+        assert not at.get("button_group")
+    else:
+        assert at.get("button_group")[0].value == volet
+
+
+def _page_without_optional_data(position: int) -> None:
+    from dataclasses import replace
+
+    from app import pages
+    from mpg.analysis import run
+
+    full = run("data", n_sim=20)
+    a = replace(full, league=replace(full.league, club_results=None, fpl_players=None), bonus_remaining=None)
+    pages.ma_journee(a, int(a.standings.iloc[position]["team_id"]))
+
+
+@pytest.mark.parametrize("position", POSITIONS.values())
+def test_ma_journee_survives_missing_optional_data(position):
+    at = AppTest.from_function(_page_without_optional_data, args=(position,), default_timeout=180).run()
+    assert not at.exception
+    titles = [s.value for s in at.subheader]
+    assert "À savoir avant de valider ta compo" in titles
+    assert "Mes bonus" not in titles
+    assert "Mes joueurs ce week-end" not in titles
 
 
 def _entrypoint(**query: str) -> AppTest:
@@ -208,12 +234,32 @@ def _titles(at: AppTest) -> list[str]:
     return [m.value for m in at.get("html") if 'class="volet-title"' in m.value]
 
 
-def test_navigation_has_five_pages():
+def test_navigation_of_the_current_season_has_six_pages():
     at = _entrypoint()
     assert not at.exception
     urls = {info["url_pathname"] for info in at._registered_pages.values()}
+    assert urls == {"", "ligue", "mon-equipe", "pronostics", "pourquoi", "joueurs-mercato"}
+    assert "Journée " in _eyebrow(at)
+    assert "Ligue · 2026-2027" not in _eyebrow(at)
+
+
+def test_ma_journee_is_the_default_page_of_the_current_season():
+    at = _entrypoint()
+    default = next(info for info in at._registered_pages.values() if info["url_pathname"] == "")
+    assert default["page_name"] == "Ma journée"
+    assert next(m for m in at.get("html") if 'class="hero"' in m.value)
+    ligue = _open_page(at, "ligue").run()
+    assert not ligue.exception
+    assert "Ligue · 2026-2027" in _eyebrow(ligue)
+
+
+def test_navigation_of_a_past_season_has_five_pages_and_no_ma_journee():
+    at = _entrypoint(saison="2024-2025")
+    assert not at.exception
+    urls = {info["url_pathname"] for info in at._registered_pages.values()}
     assert urls == {"", "mon-equipe", "pronostics", "pourquoi", "joueurs-mercato"}
-    assert "Ligue · 2026-2027" in _eyebrow(at)
+    assert "ma-journee" not in urls
+    assert "Ligue · 2024-2025" in _eyebrow(at)
 
 
 def test_volet_chance_opens_on_pourquoi_page():

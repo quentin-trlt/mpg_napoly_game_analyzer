@@ -9,7 +9,7 @@ st.set_page_config(
 
 from app import theme  # noqa: E402
 from app.navigation import register  # noqa: E402
-from app.pages import joueurs_mercato, mon_equipe, page_ligue, pourquoi, pronostics  # noqa: E402
+from app.pages import joueurs_mercato, ma_journee, mon_equipe, page_ligue, pourquoi, pronostics  # noqa: E402
 from app.state import coach_selector, get_analysis, season_selector  # noqa: E402
 from mpg.loader import DataSchemaError  # noqa: E402
 
@@ -44,16 +44,20 @@ def page(render, title: str, icon: str, url: str, default: bool = False) -> st.P
 
 pages = {
     "mon-equipe": page(mon_equipe, "Mon équipe", "shield", "mon-equipe"),
-    "ligue": page(page_ligue, "Ligue", "leaderboard", "ligue", default=True),
+    "ligue": page(page_ligue, "Ligue", "leaderboard", "ligue", default=not season.current),
     "pronostics": page(pronostics, "Pronostics", "query_stats", "pronostics"),
     "pourquoi": page(pourquoi, "Pourquoi ce classement ?", "balance", "pourquoi"),
     "joueurs-mercato": page(joueurs_mercato, "Joueurs et mercato", "payments", "joueurs-mercato"),
 }
+my_season = [pages["mon-equipe"]]
+if season.current:
+    pages["ma-journee"] = page(ma_journee, "Ma journée", "today", "ma-journee", default=True)
+    my_season.insert(0, pages["ma-journee"])
 register(pages)
 
 nav = st.navigation(
     pages={
-        "Ma saison": [pages["mon-equipe"]],
+        "Ma saison": my_season,
         "La ligue": [pages["ligue"], pages["pronostics"], pages["pourquoi"], pages["joueurs-mercato"]],
     },
 )

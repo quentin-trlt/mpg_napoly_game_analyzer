@@ -6,7 +6,7 @@ import streamlit as st
 
 from app import charts
 from app.components import hero, how, kpi_row, section
-from app.theme import AXIS, HIGHLIGHT, LINE_LABELS, SERIES, SURFACE
+from app.theme import AXIS, CONTEXT_LIGHT, HIGHLIGHT, LINE_LABELS, SERIES, SURFACE
 from mpg.analysis import Analysis
 
 SORTS = {
@@ -36,7 +36,7 @@ def _shrink_chart(ps, team_id: int) -> go.Figure:
             mode="markers",
             marker=dict(
                 size=np.clip(d["n_notes"] * 3 + 3, 5, 16),
-                color=[HIGHLIGHT if m else "#8FA3BF" for m in me],
+                color=[HIGHLIGHT if m else CONTEXT_LIGHT for m in me],
                 opacity=[1 if m else 0.55 for m in me],
                 line=dict(color=SURFACE, width=1),
             ),
@@ -62,7 +62,7 @@ def _top5_panel(ps, team_id: int) -> str:
     for g in "GDMA":
         top = ps[(ps["poste_groupe"] == g) & (ps["n_notes"] >= 2)].sort_values("note_retrecie", ascending=False).head(5)
         rows = "".join(
-            f'<div class="p{" me" if r.team_id == team_id else ""}"><div style="min-width:0">'
+            f'<div class="p{" me" if r.team_id == team_id else ""}"><div class="minw0">'
             f'<div class="who">{escape(r.joueur)}</div><div class="club">{escape(r.team_name)}</div></div>'
             f'<div class="note">{r.note_retrecie:.2f}</div></div>'
             for r in top.itertuples()

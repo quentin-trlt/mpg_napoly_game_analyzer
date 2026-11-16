@@ -8,6 +8,8 @@ import streamlit as st
 from app.theme import (
     AXIS,
     CONTEXT,
+    CONTEXT_DIM,
+    CONTEXT_LIGHT,
     DIVERGING,
     HIGHLIGHT,
     LINE_COLORS,
@@ -21,6 +23,7 @@ from app.theme import (
     SURFACE,
     TEXT,
     TEXT_2,
+    rgba,
 )
 
 CONFIG = {"displayModeBar": False, "scrollZoom": False}
@@ -210,7 +213,7 @@ def luck_scatter(lk: pd.DataFrame, abbrev: dict[int, str], team_id: int) -> go.F
         yanchor="bottom",
         font=dict(color=MUTED, size=11),
     )
-    colors = [HIGHLIGHT if t == team_id else "#8FA3BF" for t in lk["team_id"]]
+    colors = [HIGHLIGHT if t == team_id else CONTEXT_LIGHT for t in lk["team_id"]]
     fig.add_trace(
         go.Scatter(
             x=lk["xpts_allplay"],
@@ -369,7 +372,7 @@ def rank_ranges(df: pd.DataFrame, lo: str, hi: str, cur: str, team_id: int, titl
             base=d[lo] - 0.001,
             orientation="h",
             width=0.42,
-            marker=dict(color=[HIGHLIGHT if t == team_id else "#2A3A55" for t in d["team_id"]], line=dict(width=0)),
+            marker=dict(color=[HIGHLIGHT if t == team_id else CONTEXT_DIM for t in d["team_id"]], line=dict(width=0)),
             customdata=np.stack([d[lo], d[hi]], axis=1),
             name="Plage de rangs",
             hovertemplate="<b>%{y}</b><br>Entre %{customdata[0]}e et %{customdata[1]}e<extra></extra>",
@@ -436,8 +439,8 @@ def sim_distribution(
                 boxpoints=False,
                 whiskerwidth=0.4,
                 line=dict(width=1.2),
-                marker=dict(color=HIGHLIGHT if me else "#5A6B86"),
-                fillcolor="rgba(57,135,229,0.25)" if me else "rgba(90,107,134,0.18)",
+                marker=dict(color=HIGHLIGHT if me else CONTEXT),
+                fillcolor=rgba(HIGHLIGHT, 0.25) if me else rgba(CONTEXT, 0.18),
                 showlegend=False,
                 hoverinfo="skip",
             )
@@ -507,8 +510,8 @@ def team_boxes(
                 boxpoints="all",
                 jitter=0.45,
                 pointpos=0,
-                marker=dict(size=6, color=HIGHLIGHT if me else "#8FA3BF", opacity=0.85, line=dict(width=0)),
-                line=dict(color=HIGHLIGHT if me else "#5A6B86", width=1.3),
+                marker=dict(size=6, color=HIGHLIGHT if me else CONTEXT_LIGHT, opacity=0.85, line=dict(width=0)),
+                line=dict(color=HIGHLIGHT if me else CONTEXT, width=1.3),
                 fillcolor="rgba(0,0,0,0)",
                 customdata=np.stack([g["joueur"], g["poste_groupe"]], axis=1),
                 showlegend=False,
@@ -549,7 +552,7 @@ def price_note_facets(pv: pd.DataFrame, team_id: int) -> go.Figure:
                 mode="markers",
                 marker=dict(
                     size=[10 if m else 7 for m in me],
-                    color=[HIGHLIGHT if m else "#8FA3BF" for m in me],
+                    color=[HIGHLIGHT if m else CONTEXT_LIGHT for m in me],
                     opacity=[1 if m else 0.6 for m in me],
                     line=dict(color=SURFACE, width=1),
                 ),
@@ -833,8 +836,8 @@ def final_points_box(sim, names: dict[int, str], team_id: int) -> go.Figure:
                 orientation="h",
                 name=names[tid],
                 showlegend=False,
-                line=dict(color=HIGHLIGHT if me else "#5A6B86", width=1.3),
-                fillcolor="rgba(57,135,229,0.25)" if me else "rgba(90,107,134,0.18)",
+                line=dict(color=HIGHLIGHT if me else CONTEXT, width=1.3),
+                fillcolor=rgba(HIGHLIGHT, 0.25) if me else rgba(CONTEXT, 0.18),
                 whiskerwidth=0.4,
                 hovertemplate=f"<b>{names[tid]}</b><br>Médiane {q[2]:.0f} pts · 90 % entre {q[0]:.0f} et {q[4]:.0f}<extra></extra>",
             )

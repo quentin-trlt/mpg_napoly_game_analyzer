@@ -25,7 +25,7 @@ def _next_gw(a: Analysis, fc: dict, team_id: int) -> None:
         f'<div class="pair"><div class="team">{escape(m["home_team"])}</div><div class="vs">contre</div>'
         f'<div class="team">{escape(m["away_team"])}</div></div>'
         f'<div class="foot">{prob_bar(m["p_dom"], m["p_nul"], m["p_ext"])}'
-        f'<div class="meta" style="margin-top:8px">Score le plus probable : <b>{m["score_probable"]}</b></div></div></div>'
+        f'<div class="meta mt-8">Score le plus probable : <b>{m["score_probable"]}</b></div></div></div>'
         for _, m in nxt.iterrows()
     ]
     fixture_grid(cards, min(len(cards), 5))
@@ -91,11 +91,10 @@ def _what_if(a: Analysis, fc: dict, team_id: int) -> None:
     names = a.league.team_names
     store = st.session_state.setdefault(STORE, {})
     gws = sorted(fx["gw"].unique().tolist())
-    c1, c2 = st.columns([3, 1])
+    c1, c2 = st.columns([3, 1], vertical_alignment="bottom")
     with c1:
         gw = st.selectbox("Journée à modifier", options=gws, format_func=lambda g: f"Journée {g}", key="etsi_gw")
     with c2:
-        st.html('<div style="height:28px"></div>')
         if st.button("Tout réinitialiser", icon=":material/restart_alt:", disabled=not store, width="stretch"):
             store.clear()
             for k in [k for k in st.session_state if str(k).startswith("etsi_m_")]:
@@ -108,8 +107,7 @@ def _what_if(a: Analysis, fc: dict, team_id: int) -> None:
         c_match, c_ctrl = st.columns([2.2, 1.8])
         with c_match:
             st.html(
-                f'<div style="padding-top:6px"><b>{escape(home)}</b> <span class="muted">contre</span> '
-                f"<b>{escape(away)}</b></div>"
+                f'<div class="pt-6"><b>{escape(home)}</b> <span class="muted">contre</span> <b>{escape(away)}</b></div>'
             )
         with c_ctrl:
             choice = st.segmented_control(

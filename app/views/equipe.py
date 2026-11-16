@@ -201,11 +201,11 @@ def _profile_panel(prof: list[tuple[str, int, str]], n: int) -> str:
     rungs = []
     for label, r, hint in prof:
         tone = rank_tone(r, n)
-        track = "".join(f'<i style="background:{tone}"></i>' if i == r else "<i></i>" for i in range(1, n + 1))
+        track = "".join('<i class="on"></i>' if i == r else "<i></i>" for i in range(1, n + 1))
         rungs.append(
-            f'<div class="rung" role="group" aria-label="{escape(label)} : {r}e sur {n}">'
+            f'<div class="rung {tone}" role="group" aria-label="{escape(label)} : {r}e sur {n}">'
             f'<div><div class="name">{escape(label)}</div><div class="hint">{escape(hint)}</div></div>'
-            f'<div class="rank" style="color:{tone}">{r}<span>/{n}</span></div>'
+            f'<div class="rank">{r}<span>/{n}</span></div>'
             f'<div class="track" aria-hidden="true">{track}</div></div>'
         )
     return f'<div class="panel"><div class="ladder">{"".join(rungs)}</div></div>'

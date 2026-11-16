@@ -10,12 +10,12 @@ from app.components import (
     empty_state,
     fixture_grid,
     fmt_pct,
-    hero,
     how,
     kpi_row,
     prob_bar,
     section,
     table_height,
+    volet_title,
 )
 from app.state import get_forecast
 from mpg.analysis import Analysis
@@ -299,8 +299,7 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
 
 def render(a: Analysis, team_id: int) -> None:
     meta = a.meta
-    hero(
-        "Suivi des pronostics",
+    volet_title(
         "Avait-on vu juste ?",
         "Les pronostics sont figés avant chaque journée puis confrontés aux résultats. On suit aussi comment le "
         "classement final prédit évolue, semaine après semaine.",

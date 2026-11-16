@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from app import charts
-from app.components import empty_state, hero, how, kpi_row, section
+from app.components import empty_state, how, kpi_row, section, volet_title
 from app.theme import AXIS, CONTEXT_LIGHT, HIGHLIGHT, LINE_LABELS, SERIES, SURFACE
 from mpg.analysis import Analysis
 
@@ -108,8 +108,7 @@ def render(a: Analysis, team_id: int) -> None:
     caps = meta["capacites"]
     season = meta["saison"]
     ps = a.player_value
-    hero(
-        "Joueurs",
+    volet_title(
         "Les classements individuels",
         f"{len(ps)} joueurs achetés. Les notes sont tirées vers la moyenne du poste pour ne pas récompenser un seul "
         "gros match."

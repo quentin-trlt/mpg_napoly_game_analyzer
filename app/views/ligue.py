@@ -5,15 +5,17 @@ import streamlit as st
 from app import charts
 from app.components import (
     fixture_grid,
+    fmt_signed,
     form_badges,
-    hero,
     how,
     kpi_row,
     limit_banner,
     names_list,
     section,
     table_height,
+    volet_title,
 )
+from app.navigation import page_link
 from mpg.analysis import Analysis, key_figures
 
 SORT_OPTIONS = {"globale": "Globale", "G": "Gardiens", "D": "Défense", "M": "Milieu", "A": "Attaque"}
@@ -94,15 +96,13 @@ def _next_fixtures(a: Analysis, team_id: int) -> None:
 def _hero(a: Analysis, leader: dict) -> None:
     meta = a.meta
     if meta["capacites"].terminee:
-        hero(
-            "Ligue Napoly Game, Premier League",
+        volet_title(
             f"Saison {meta['saison']}, terminée",
             f"{escape(leader['equipe'])} a gagné la ligue, coach {escape(leader['coach'])}. "
             f"{len(a.standings)} équipes, {meta['nb_journees']} journées, {meta['matchs_joues']} matchs.",
         )
         return
-    hero(
-        "Ligue Napoly Game, Premier League",
+    volet_title(
         f"Journée {meta['derniere_journee']} sur {meta['nb_journees']}",
         f"{meta['matchs_joues']} matchs joués. Le classement et les statistiques se mettent à jour après chaque "
         "journée jouée.",
@@ -168,13 +168,14 @@ def render(a: Analysis, team_id: int) -> None:
     section("Classement final" if finished else "Classement")
     _standings_table(a, team_id)
 
-    left, right = st.columns(2, gap="medium")
-    with left:
-        charts.show(charts.bump_chart(a.standings_by_gw, team_id, len(a.league.teams)), height=440)
-    with right:
-        abbrev = dict(zip(a.league.teams["team_id"], a.league.teams["abrev"]))
-        charts.show(charts.luck_scatter(a.luck.copy(), abbrev, team_id))
-    how(["points_vs_niveau", "all_play"], meta)
+    charts.show(charts.bump_chart(a.standings_by_gw, team_id, len(a.league.teams)), height=440)
+    luck = a.luck.set_index("team_id").loc[team_id]
+    st.markdown(
+        f"**{mine['team_name']}** a {int(luck['pts'])} points ; ses notes en méritaient {luck['xpts_allplay']:.1f} "
+        f"({fmt_signed(luck['pts'] - luck['xpts_allplay'])} pts de chance)."
+    )
+    page_link("pourquoi", "Comprendre ce classement : mérite ou chance ?", icon=":material/casino:", volet="chance")
+    how("all_play", meta)
 
     section("Force par ligne et attaque")
     sort_by = st.segmented_control(

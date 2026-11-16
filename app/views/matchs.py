@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import chip, empty_state, fixture_grid, hero, how, section
+from app.components import chip, empty_state, fixture_grid, how, section, volet_title
 from mpg.analysis import Analysis
 
 
@@ -42,8 +42,7 @@ def render(a: Analysis, team_id: int) -> None:
     meta = a.meta
     tm = a.team_match
     finished = meta["capacites"].terminee
-    hero(
-        "Matchs et calendrier",
+    volet_title(
         "Résultats, journée par journée",
         "Buteurs, buts MPG et bonus posés, match par match."
         if finished
@@ -67,12 +66,6 @@ def render(a: Analysis, team_id: int) -> None:
         aw = day[(day["match_id"] == h["match_id"]) & ~day["domicile"]].iloc[0]
         cards.append(_match_card(h, aw, goals[goals["match_id"] == h["match_id"]], team_id))
     fixture_grid(cards, 2)
-
-    section(
-        f"{a.league.team_names[team_id]}, match par match",
-        "Couleur de la barre : vert victoire, jaune nul, rouge défaite. Le résultat est aussi écrit sous chaque barre.",
-    )
-    charts.show(charts.gw_points(tm, team_id))
 
     if finished:
         empty_state(

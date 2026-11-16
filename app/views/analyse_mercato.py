@@ -4,7 +4,7 @@ from pathlib import Path
 import streamlit as st
 
 from app import charts
-from app.components import callout, empty_state, hero, how, section, table_height
+from app.components import callout, empty_state, how, section, table_height, volet_title
 from mpg.analysis import Analysis
 from mpg.mercato import ALT_WEIGHTS, COMPONENT_LABELS, DEFAULT_WEIGHTS, mercato_ranking
 
@@ -88,8 +88,7 @@ def render(a: Analysis, team_id: int) -> None:
     season = meta["saison"]
     components = _components(caps)
     scenarios, dropped = _usable_scenarios(components)
-    hero(
-        "Analyse des mercatos",
+    volet_title(
         "Le classement des mercatos",
         "Six composantes, plusieurs pondérations possibles, et une lecture équipe par équipe."
         if len(components) == len(DEFAULT_WEIGHTS)
@@ -146,8 +145,6 @@ def render(a: Analysis, team_id: int) -> None:
             "score",
             "rang_min",
             "rang_max",
-            "joueur_plus_cher",
-            "enchere_max",
             "surpaiement_median_x",
             "residu_moy_tronque",
             "disponibilite_ponderee",
@@ -167,8 +164,6 @@ def render(a: Analysis, team_id: int) -> None:
         "surpaiement_median_x",
         "disponibilite_ponderee",
         "gini_enchere",
-        "joueur_plus_cher",
-        "enchere_max",
         "remarque",
     ]
     hidden = {
@@ -191,8 +186,6 @@ def render(a: Analysis, team_id: int) -> None:
                 "Fiabilité", min_value=0, max_value=1, format="percent"
             ),
             "gini_enchere": st.column_config.NumberColumn("Gini", format="%.2f"),
-            "joueur_plus_cher": "Plus gros achat",
-            "enchere_max": st.column_config.NumberColumn("Prix", format="%d M€"),
             "remarque": "Remarque",
         },
         height=table_height(len(table)),

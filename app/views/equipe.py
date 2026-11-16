@@ -8,7 +8,6 @@ from app.components import (
     fmt_m,
     fmt_pct,
     form_badges,
-    hero,
     how,
     kpi_row,
     limit_banner,
@@ -16,7 +15,9 @@ from app.components import (
     section,
     stat_grid,
     table_height,
+    volet_title,
 )
+from app.state import get_forecast
 from mpg.analysis import Analysis, team_card
 from mpg.premier_league import club_form
 
@@ -201,16 +202,18 @@ def _limits(a: Analysis) -> list[str]:
     return [text for active, text in messages if active]
 
 
-def render(a: Analysis, team_id: int) -> None:
-    meta = a.meta
-    caps = meta["capacites"]
-    card = team_card(a, team_id)
+def header(a: Analysis, team_id: int) -> None:
     team = a.league.teams.set_index("team_id").loc[team_id]
     stand = a.standings.set_index("team_id").loc[team_id]
     form = stand["forme"] if isinstance(stand["forme"], str) else ""
-    hero(f"Fiche équipe, coach {team['coach']}", team["team_name"], _hero_subtitle(team, form))
+    subtitle = _hero_subtitle(team, form)
+    coach = f"Coach {escape(str(team['coach']))}"
+    volet_title(team["team_name"], f"{coach}, {subtitle}" if subtitle else coach)
     limit_banner(_limits(a))
 
+
+def profil(a: Analysis, team_id: int) -> None:
+    card = team_card(a, team_id)
     kpi_row(_kpis(card))
 
     profile, skipped = _profile(a, team_id, card["rang_attendu"])
@@ -220,8 +223,6 @@ def render(a: Analysis, team_id: int) -> None:
     section("Profil", caption)
     st.html(_profile_panel(profile, len(a.league.teams)))
 
-    _bonus_section(a, team_id, meta)
-
     section("Match par match")
     charts.show(charts.gw_points(a.team_match, team_id))
     lines = a.lines.set_index("team_id").loc[team_id]
@@ -230,8 +231,11 @@ def render(a: Analysis, team_id: int) -> None:
         + ", ".join(f"{lab} {lines[lab]:.2f}" if pd.notna(lines[lab]) else f"{lab} aucun joueur" for lab in "GDMA")
     )
 
+
+def effectif(a: Analysis, team_id: int) -> None:
+    meta = a.meta
     roster = a.player_value[a.player_value["team_id"] == team_id]
-    _price_section(roster, team_id, caps.cote, meta)
+    _price_section(roster, team_id, meta["capacites"].cote, meta)
 
     section("Effectif")
     squad = _with_club_form(roster, a.league.club_results)
@@ -247,6 +251,12 @@ def render(a: Analysis, team_id: int) -> None:
     ]
     if explained:
         how(explained, meta)
+
+
+def bonus(a: Analysis, team_id: int) -> None:
+    _bonus_section(a, team_id, a.meta)
+    if a.meta["saison_en_cours"]:
+        _bonus_effect(get_forecast(), team_id, a.meta)
 
 
 def _price_section(roster: pd.DataFrame, team_id: int, has_cote: bool, meta: dict) -> None:
@@ -374,3 +384,46 @@ def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
             st.caption("Utile pour anticiper : un adversaire qui a encore son Suarez peut viser votre gardien.")
     if not finished:
         how("bonus_restants", meta)
+
+
+def _bonus_effect(fc: dict, team_id: int, meta: dict) -> None:
+    be = fc.get("bonus_effect")
+    section("Ce que valent les bonus restants")
+    if be is None:
+        st.caption(
+            "Dotation de bonus inconnue (fichier `data/bonus_stock.csv` absent) : les prévisions ignorent les "
+            "bonus à venir."
+        )
+        return
+    struct = next(m for m in fc["draws"].models if hasattr(m, "rotaldo_note"))
+    left, right = st.columns(2, gap="medium")
+    with left:
+        charts.show(
+            charts.diverging_bars(
+                be,
+                "effet_pts",
+                "team_name",
+                team_id,
+                "Effet net des bonus restants sur les points attendus",
+                x_title="Points attendus en fin de saison",
+                fmt="+.2f",
+            )
+        )
+    with right:
+        st.dataframe(
+            be[["team_name", "restants", "effet_pts", "effet_titre", "effet_dernier"]],
+            hide_index=True,
+            column_config={
+                "team_name": "Équipe",
+                "restants": st.column_config.NumberColumn("Restants", width="small"),
+                "effet_pts": st.column_config.NumberColumn("Pts", format="%+.2f", width="small"),
+                "effet_titre": st.column_config.NumberColumn("P(titre)", format="percent", width="small"),
+                "effet_dernier": st.column_config.NumberColumn("P(dernier)", format="percent", width="small"),
+            },
+            height=table_height(len(be)),
+        )
+        st.caption(
+            "Les probabilités des matchs et de fin de saison du volet Prédictions de la page Pronostics incluent déjà l'usage attendu "
+            "des bonus restants."
+        )
+    how("bonus_prevision", {**meta, "note_slope": struct.link.b})

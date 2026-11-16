@@ -8,40 +8,37 @@ from mpg import analysis as analysis_module
 from mpg.forecast.evaluation import season_dirs
 
 ENTRYPOINT = Path(__file__).resolve().parent.parent / "streamlit_app.py"
-VIEWS = [
-    "ligue",
-    "matchs",
-    "equipe",
-    "favoris",
-    "chance",
-    "coaching",
-    "joueurs",
-    "mercato",
-    "analyse_mercato",
-    "predictions",
-    "suivi",
-]
+PAGES = {
+    "mon_equipe": ["profil", "effectif", "bonus"],
+    "page_ligue": ["classement", "matchs"],
+    "pronostics": ["predictions", "suivi"],
+    "pourquoi": ["favoris", "chance", "coaching"],
+    "joueurs_mercato": ["joueurs", "mercato", "analyse-mercato"],
+}
+CASES = [(page, volet) for page, volets in PAGES.items() for volet in volets]
 SEASONS = list(season_dirs())
 POSITIONS = {"premier": 0, "dernier": -1}
 
 
-def _page(view: str, data_dir: str, position: int) -> None:
-    import importlib
-
+def _page(page: str, data_dir: str, position: int) -> None:
+    from app import pages
     from mpg.analysis import run
 
     a = run(data_dir, n_sim=200)
     team_id = int(a.standings.iloc[position]["team_id"])
-    importlib.import_module(f"app.views.{view}").render(a, team_id)
+    getattr(pages, page)(a, team_id)
 
 
 @pytest.mark.parametrize("position", POSITIONS)
-@pytest.mark.parametrize("view", VIEWS)
+@pytest.mark.parametrize(("page", "volet"), CASES)
 @pytest.mark.parametrize("season", SEASONS)
-def test_view_renders(season, view, position):
-    at = AppTest.from_function(_page, args=(view, str(season_dirs()[season]), POSITIONS[position]), default_timeout=180)
+def test_volet_renders(season, page, volet, position):
+    at = AppTest.from_function(_page, args=(page, str(season_dirs()[season]), POSITIONS[position]), default_timeout=180)
+    at.query_params["volet"] = volet
     at.run()
     assert not at.exception, at.exception[0].message if at.exception else ""
+    assert not at.get("exception")
+    assert at.get("button_group")[0].value == volet
 
 
 def _entrypoint(**query: str) -> AppTest:
@@ -142,3 +139,47 @@ def test_analysis_meta_carries_the_season_contract(season):
     assert a.meta["capacites"].terminee is (season != "en cours")
     assert isinstance(a.meta["limites"], list)
     assert bool(a.meta["limites"]) is (season != "en cours")
+
+
+def _open_page(at: AppTest, url_path: str) -> AppTest:
+    page_hash = next(h for h, info in at._registered_pages.items() if info.get("url_pathname") == url_path)
+    at._page_hash = page_hash
+    return at
+
+
+def _eyebrow(at: AppTest) -> str:
+    return next(m.value for m in at.get("html") if 'class="eyebrow"' in m.value)
+
+
+def _titles(at: AppTest) -> list[str]:
+    return [m.value for m in at.get("html") if 'class="volet-title"' in m.value]
+
+
+def test_navigation_has_five_pages():
+    at = _entrypoint()
+    assert not at.exception
+    urls = {info["url_pathname"] for info in at._registered_pages.values()}
+    assert urls == {"", "mon-equipe", "pronostics", "pourquoi", "joueurs-mercato"}
+    assert "Ligue · 2026-2027" in _eyebrow(at)
+
+
+def test_volet_chance_opens_on_pourquoi_page():
+    at = _entrypoint()
+    _open_page(at, "pourquoi")
+    at.query_params["volet"] = "chance"
+    at.run()
+    assert not at.exception
+    assert "Pourquoi ce classement ? · 2026-2027" in _eyebrow(at)
+    assert at.get("button_group")[0].value == "chance"
+    assert any("Qui a eu de la réussite" in title for title in _titles(at))
+    assert at.query_params["volet"] == "chance"
+
+
+def test_invalid_volet_falls_back_to_first():
+    at = _entrypoint()
+    _open_page(at, "pourquoi")
+    at.query_params["volet"] = "nimporte-quoi"
+    at.run()
+    assert not at.exception
+    assert at.get("button_group")[0].value == "favoris"
+    assert "volet" not in at.query_params

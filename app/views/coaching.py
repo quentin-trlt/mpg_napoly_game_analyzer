@@ -1,7 +1,7 @@
 import streamlit as st
 
 from app import charts
-from app.components import callout, hero, how, kpi_row, section, table_height
+from app.components import callout, how, kpi_row, section, table_height, volet_title
 from mpg.analysis import Analysis
 from mpg.coaching import bonus_effect
 
@@ -10,8 +10,7 @@ def render(a: Analysis, team_id: int) -> None:
     meta = a.meta
     stats_pl = meta["capacites"].stats_pl
     co = a.coaching
-    hero(
-        "Coaching",
+    volet_title(
         "Qui compose le mieux ses équipes ?",
         "Points laissés sur le banc, titulaires absents, capitaines et bonus : ce que le coach contrôle, et ce qu'il ne "
         "contrôle pas.",
@@ -19,7 +18,6 @@ def render(a: Analysis, team_id: int) -> None:
 
     best = co.sort_values("regret_moy").iloc[0]
     worst = co.sort_values("regret_moy").iloc[-1]
-    rot = co.sort_values("rotaldos").iloc[-1]
     me = co.set_index("team_id").loc[team_id]
     kpi_row(
         [
@@ -34,12 +32,6 @@ def render(a: Analysis, team_id: int) -> None:
                 "value": worst["team_name"],
                 "small": True,
                 "sub": f"{worst['regret_moy']:.1f} pts de note par match",
-            },
-            {
-                "label": "Roi des Rotaldos",
-                "value": rot["team_name"],
-                "small": True,
-                "sub": f"{int(rot['rotaldos'])} Rotaldos, {rot['pct_absents']:.0f} % de titulaires absents",
             },
             {
                 "label": me["team_name"],

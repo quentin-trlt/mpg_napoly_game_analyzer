@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import callout, empty_state, hero, how, kpi_row, section
+from app.components import callout, empty_state, how, kpi_row, section, volet_title
 from mpg.analysis import Analysis
 from mpg.stats import spearman
 from mpg.strength import (
@@ -104,8 +104,7 @@ def render(a: Analysis, team_id: int) -> None:
     labels = {k: _price_wording(v, prix) for k, v in FEATURE_LABELS.items()}
     features = _usable_features(fav, caps.stats_pl)
     scenarios = _usable_scenarios(features)
-    hero(
-        "Favoris vs réalité",
+    volet_title(
         "Qui aurait dû gagner sur le papier ?",
         "L'indice de force résume l'effectif sans regarder les résultats. On compare le rang qu'il prédit au rang réel.",
     )

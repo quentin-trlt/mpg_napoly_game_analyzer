@@ -107,6 +107,10 @@ h2 {{ font-size: 1.35rem !important; font-weight: 600; margin-top: 1.6rem !impor
 .hero .title {{ font-family: {DISPLAY}; font-size: 2.9rem; font-weight: 700; line-height: 1.02; margin: .25rem 0 .55rem;
     color: {TEXT}; letter-spacing: -.005em; }}
 .hero .subtitle {{ color: {TEXT_2}; font-size: 1rem; max-width: 72ch; line-height: 1.55; }}
+.volet-title {{ margin: .4rem 0 1.2rem; }}
+.volet-title .title {{ font-family: {DISPLAY}; font-size: 2rem; font-weight: 700; line-height: 1.1; color: {TEXT};
+    letter-spacing: -.005em; overflow-wrap: anywhere; }}
+.volet-title .subtitle {{ color: {TEXT_2}; font-size: 1rem; max-width: 72ch; line-height: 1.55; margin-top: .35rem; }}
 
 .stats {{ --n: 4; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 1px; background: {BORDER};
     border: 1px solid {BORDER}; border-radius: {RADIUS_CARD}px; overflow: hidden; margin: .2rem 0 1.1rem; }}
@@ -319,6 +323,9 @@ h2 {{ font-size: 1.35rem !important; font-weight: 600; margin-top: 1.6rem !impor
     .hero {{ margin-bottom: 1.1rem; }}
     .hero .title {{ font-size: 2.15rem; }}
     .hero .subtitle {{ font-size: .94rem; line-height: 1.5; }}
+    .volet-title {{ margin: .3rem 0 1rem; }}
+    .volet-title .title {{ font-size: 1.75rem; }}
+    .volet-title .subtitle {{ font-size: .94rem; line-height: 1.5; }}
 
     .stats {{ grid-template-columns: repeat(2, minmax(0, 1fr)); border-radius: {RADIUS_TABLE}px; }}
     .stats > .stat:last-child:nth-child(odd) {{ grid-column: 1 / -1; }}

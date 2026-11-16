@@ -22,6 +22,11 @@ def hero(eyebrow: str, title: str, subtitle: str = "") -> None:
     )
 
 
+def volet_title(title: str, subtitle: str = "") -> None:
+    sub = f'<div class="subtitle">{subtitle}</div>' if subtitle else ""
+    st.html(f'<div class="volet-title"><div class="title">{escape(title)}</div>{sub}</div>')
+
+
 def _stat(label: str, value: str, sub: str = "", small: bool = False, me: bool = False) -> str:
     cls = "value small" if small else "value"
     sub_html = f'<div class="sub">{escape(sub)}</div>' if sub else ""

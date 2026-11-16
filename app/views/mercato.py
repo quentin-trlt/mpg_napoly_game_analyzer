@@ -1,7 +1,7 @@
 import streamlit as st
 
 from app import charts
-from app.components import callout, empty_state, fmt_m, hero, how, kpi_row, section, table_height
+from app.components import callout, empty_state, fmt_m, how, kpi_row, section, table_height, volet_title
 from mpg.analysis import Analysis
 
 PLAYER_COLS = {
@@ -57,8 +57,7 @@ def render(a: Analysis, team_id: int) -> None:
     caps = meta["capacites"]
     m = a.mercato
     pv = a.player_value
-    hero(
-        "Mercato",
+    volet_title(
         "Qui a bien dépensé son argent ?",
         "Toutes les mesures sont robustes : médianes, log-ratios et moyennes tronquées, pour qu'un seul gros achat "
         "ne fausse pas le tableau.",
@@ -246,12 +245,11 @@ def render(a: Analysis, team_id: int) -> None:
         "enchere_max",
         "joueur_plus_cher",
         "part_top3",
-        "surpaiement_median_x",
         "surpaiement_global_x",
         "ga_saison",
     ]
     hidden = {
-        *(() if caps.cote else ("surpaiement_median_x", "surpaiement_global_x")),
+        *(() if caps.cote else ("surpaiement_global_x",)),
         *(() if caps.stats_pl else ("ga_saison",)),
     }
     st.dataframe(
@@ -267,7 +265,6 @@ def render(a: Analysis, team_id: int) -> None:
             "enchere_max": st.column_config.NumberColumn("Max", format="%d M€"),
             "joueur_plus_cher": "Plus cher",
             "part_top3": st.column_config.ProgressColumn("Part top 3", min_value=0, max_value=1, format="percent"),
-            "surpaiement_median_x": st.column_config.NumberColumn("Surpaiement médian", format="× %.2f"),
             "surpaiement_global_x": st.column_config.NumberColumn("Surpaiement global", format="× %.2f"),
             "ga_saison": st.column_config.NumberColumn("G+A PL", format="%d"),
         },

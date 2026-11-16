@@ -1,7 +1,7 @@
 import streamlit as st
 
 from app import charts
-from app.components import fmt_signed, hero, how, kpi_row, section
+from app.components import fmt_signed, how, kpi_row, section, volet_title
 from mpg.analysis import Analysis
 from mpg.luck import schedule_permutation
 
@@ -14,8 +14,7 @@ def _simulations(season: str, tm, band: float, n_sim: int):
 def render(a: Analysis, team_id: int) -> None:
     meta = a.meta
     lk = a.luck
-    hero(
-        "Chance",
+    volet_title(
         "Qui a eu de la réussite ?",
         "On compare les points pris à ceux que le niveau de jeu (les notes) aurait dû rapporter, puis on sépare "
         "la chance de calendrier de la chance de conversion.",
@@ -56,7 +55,7 @@ def render(a: Analysis, team_id: int) -> None:
     )
     st.caption(
         f"La règle de note retrouve {meta['concordance_regle_note']:.0%} des vrais résultats : c'est la base de tous "
-        "les calculs de cette page."
+        "les calculs de ce volet."
     )
     how("petit_echantillon", meta, "À lire avant d'interpréter")
 

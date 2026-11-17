@@ -1,5 +1,6 @@
 from app.components import hero
 from app.navigation import volet_selector
+from app.state import seasons
 from app.views import (
     analyse_mercato,
     chance,
@@ -16,6 +17,7 @@ from app.views import (
 )
 from app.views.palmares import render as render_palmares
 from mpg.analysis import Analysis
+from mpg.seasons import season_by_key
 
 
 def _eyebrow(a: Analysis, name: str) -> str:
@@ -53,11 +55,21 @@ def palmares(a: Analysis, team_id: int) -> None:
 
 def pronostics(a: Analysis, team_id: int) -> None:
     hero(_eyebrow(a, "Pronostics"), "Qui va gagner, et avait-on vu juste ?")
-    volet = volet_selector({"predictions": "Prédictions", "suivi": "Suivi des pronostics"})
-    if volet == "predictions":
-        predictions.render(a, team_id)
+    if not a.meta["saison_en_cours"]:
+        volet_selector({"fin-de-saison": "Fin de saison"})
+        predictions.render_film(a, team_id, season_by_key(a.meta["saison"], seasons()).path)
+        return
+    volet = volet_selector(
+        {"journee": "Cette journée", "fin-de-saison": "Fin de saison", "et-si": "Et si", "fiabilite": "Fiabilité"}
+    )
+    if volet == "journee":
+        predictions.render_journee(a, team_id)
+    elif volet == "fin-de-saison":
+        predictions.render_fin_de_saison(a, team_id)
+    elif volet == "et-si":
+        predictions.render_et_si(a, team_id)
     else:
-        suivi.render(a, team_id)
+        suivi.render_fiabilite(a, team_id)
 
 
 def pourquoi(a: Analysis, team_id: int) -> None:

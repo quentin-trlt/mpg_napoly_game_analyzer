@@ -12,7 +12,7 @@ PAGES = {
     "ma_journee": [None],
     "mon_equipe": ["profil", "effectif", "bonus"],
     "page_ligue": ["classement", "matchs"],
-    "pronostics": ["predictions", "suivi"],
+    "pronostics": ["journee", "fin-de-saison", "et-si", "fiabilite"],
     "pourquoi": ["favoris", "chance", "coaching"],
     "joueurs_mercato": ["joueurs", "mercato", "analyse-mercato"],
     "palmares": [None],
@@ -40,6 +40,8 @@ def _page(page: str, data_dir: str, position: int) -> None:
 @pytest.mark.parametrize(("page", "volet"), CASES)
 @pytest.mark.parametrize("season", SEASONS)
 def test_volet_renders(season, page, volet, position):
+    if page == "pronostics" and season != "en cours":
+        pytest.skip("saison passée : un seul volet, couvert par test_pronostics.py")
     at = AppTest.from_function(_page, args=(page, str(season_dirs()[season]), POSITIONS[position]), default_timeout=180)
     if volet is not None:
         at.query_params["volet"] = volet

@@ -439,7 +439,7 @@ def _bonus_effect(fc: dict, team_id: int, meta: dict) -> None:
             height=table_height(len(be)),
         )
         st.caption(
-            "Les probabilités des matchs et de fin de saison du volet Prédictions de la page Pronostics incluent déjà l'usage attendu "
-            "des bonus restants."
+            "Les probabilités des matchs et de fin de saison de la page Pronostics (volets Cette journée et Fin de saison) "
+            "incluent déjà l'usage attendu des bonus restants."
         )
     how("bonus_prevision", {**meta, "note_slope": struct.link.b})

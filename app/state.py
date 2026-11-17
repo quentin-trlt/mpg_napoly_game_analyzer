@@ -78,17 +78,21 @@ def _forecast_light(signature: tuple, data_dir: str) -> dict:
     return {"draws": draws, "baseline": baseline, "bonus_effect": bonus_effect}
 
 
-@st.cache_resource(show_spinner="Historique et fiabilité des pronostics…", max_entries=2)
-def _forecast_heavy(signature: tuple, frozen_signature: tuple, data_dir: str) -> dict:
+@st.cache_resource(show_spinner="Fiabilité des pronostics…", max_entries=2)
+def _forecast_heavy(signature: tuple, data_dir: str) -> dict:
+    bt = backtest(_cached(signature, data_dir))
+    return {"backtest": bt, "backtest_summary": backtest_summary(bt)}
+
+
+@st.cache_resource(max_entries=2)
+def _frozen(signature: tuple, frozen_signature: tuple, data_dir: str) -> dict:
     a = _cached(signature, data_dir)
-    bt = backtest(a)
-    return {
-        "history": title_odds_history(a),
-        "backtest": bt,
-        "backtest_summary": backtest_summary(bt),
-        "frozen_matches": frozen_matches(a),
-        "frozen_seasons": frozen_seasons(),
-    }
+    return {"frozen_matches": frozen_matches(a), "frozen_seasons": frozen_seasons()}
+
+
+@st.cache_resource(show_spinner="Film de la saison : chances recalculées après chaque journée…", max_entries=3)
+def _title_history(signature: tuple, data_dir: str) -> pd.DataFrame:
+    return title_odds_history(_cached(signature, data_dir))
 
 
 def _current_season_signature(data_dir: Path) -> tuple:
@@ -101,15 +105,35 @@ def _current_season_signature(data_dir: Path) -> tuple:
     return _data_signature(data_dir)
 
 
+def _frozen_signature() -> tuple:
+    d = evaluation.FROZEN_DIR
+    return tuple(sorted((p.name, p.stat().st_mtime) for p in d.glob("*.csv"))) if d.exists() else ()
+
+
 def get_forecast_light(data_dir: Path = DEFAULT_DATA_DIR) -> dict:
     return _forecast_light(_current_season_signature(data_dir), str(data_dir))
 
 
+def get_frozen(data_dir: Path = DEFAULT_DATA_DIR) -> dict:
+    return _frozen(_current_season_signature(data_dir), _frozen_signature(), str(data_dir))
+
+
+def get_backtest(data_dir: Path = DEFAULT_DATA_DIR) -> dict:
+    return _forecast_heavy(_current_season_signature(data_dir), str(data_dir))
+
+
+def get_title_history(data_dir: Path = DEFAULT_DATA_DIR) -> pd.DataFrame:
+    return _title_history(_data_signature(data_dir), str(data_dir))
+
+
 def get_forecast(data_dir: Path = DEFAULT_DATA_DIR) -> dict:
     signature = _current_season_signature(data_dir)
-    d = evaluation.FROZEN_DIR
-    frozen = tuple(sorted((p.name, p.stat().st_mtime) for p in d.glob("*.csv"))) if d.exists() else ()
-    return {**_forecast_light(signature, str(data_dir)), **_forecast_heavy(signature, frozen, str(data_dir))}
+    return {
+        **_forecast_light(signature, str(data_dir)),
+        "history": _title_history(signature, str(data_dir)),
+        **_forecast_heavy(signature, str(data_dir)),
+        **_frozen(signature, _frozen_signature(), str(data_dir)),
+    }
 
 
 @st.cache_resource(max_entries=1)

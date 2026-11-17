@@ -22,12 +22,18 @@ def _sync_url(chosen: str, first: str) -> None:
 def volet_selector(options: dict[str, str]) -> str:
     """Affiche le choix du volet et renvoie sa clé.
 
+    Avec un seul volet, aucun sélecteur n'est affiché et l'adresse ne garde pas de `volet`.
+
     Le widget n'est pas lié à l'adresse (`bind="query-params"`) : Streamlit y écrirait le libellé affiché
     et non la clé. L'adresse est donc lue au premier affichage de chaque page, puis réécrite à chaque choix.
     """
     if not options:
         raise ValueError("volet_selector exige au moins un volet.")
     first = next(iter(options))
+    if len(options) == 1:
+        st.session_state.pop(_SIGNATURE_KEY, None)
+        _sync_url(first, first)
+        return first
     signature = _page_signature(options)
     if st.session_state.get(_SIGNATURE_KEY) != signature:
         st.session_state[_SIGNATURE_KEY] = signature

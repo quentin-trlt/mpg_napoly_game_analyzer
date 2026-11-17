@@ -149,6 +149,9 @@ def _rank_dtick(n: int) -> int:
     return max(1, math.ceil(n / MAX_TICKS))
 
 
+LABEL_MIN_PEAK = 0.05
+
+
 def _labelled(best_first: list[int], team_id: int, n: int = 3) -> list[int]:
     """Mon équipe et les `n` premières du graphique : au plus quatre étiquettes de fin de ligne."""
     return list(dict.fromkeys([team_id, *best_first[:n]]))
@@ -918,8 +921,8 @@ def title_history(
 ) -> go.Figure:
     fig = go.Figure()
     last = history["apres_journee"].max()
-    top = history[history["apres_journee"] == last].sort_values(col, ascending=False)["team_id"].tolist()
-    labelled = _labelled(top, team_id)
+    peaks = history.groupby("team_id")[col].max().sort_values(ascending=False)
+    labelled = _labelled(peaks[peaks >= LABEL_MIN_PEAK].index.tolist(), team_id)
     items = []
     for tid, grp in sorted(history.groupby("team_id"), key=lambda kv: kv[0] == team_id):
         me = tid == team_id

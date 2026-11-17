@@ -150,6 +150,27 @@ def test_title_history_axis_and_end_labels(n_gw):
     assert NAMES[TEAM] in [a.text for a in labels]
 
 
+def test_title_history_labels_peaks_not_final_values():
+    rows = []
+    for gw in range(11):
+        for tid in NAMES:
+            if tid == 1:
+                p = 0.98 if gw == 9 else 0.0 if gw == 10 else 0.6
+            elif tid == 2:
+                p = 1.0 if gw == 10 else 0.3
+            elif tid == 4:
+                p = 0.0 if gw == 10 else 0.2
+            elif tid == 5:
+                p = 0.0 if gw == 10 else 0.1
+            else:
+                p = 0.0 if gw == 10 else 0.01
+            rows.append({"apres_journee": gw, "team_id": tid, "p_titre": p})
+    fig = charts.title_history(pd.DataFrame(rows), NAMES, TEAM)
+    texts = {a.text for a in _end_labels(fig)}
+    assert texts == {charts._clip(NAMES[t]) for t in (TEAM, 1, 2, 4)}
+    assert len(texts) <= 4
+
+
 def test_title_history_hover_is_rounded():
     fig = charts.title_history(_history(5), NAMES, TEAM)
     assert all(".1f" not in h for h in _hovers(fig))

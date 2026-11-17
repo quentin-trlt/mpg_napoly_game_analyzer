@@ -10,6 +10,15 @@ def _selector_app() -> None:
     st.write(f"volet={chosen}")
 
 
+def _single_app() -> None:
+    import streamlit as st
+
+    from app.navigation import volet_selector
+
+    chosen = volet_selector({"film": "Le film"})
+    st.write(f"volet={chosen}")
+
+
 def _two_pages_app() -> None:
     import streamlit as st
 
@@ -100,6 +109,39 @@ def test_choix_utilisateur_conserve_et_ecrit_dans_l_adresse():
     at.get("button_group")[0].set_value("classement").run()
     assert _shown(at) == "volet=classement"
     assert "volet" not in at.query_params
+
+
+def test_un_seul_volet_n_affiche_pas_de_selecteur():
+    at = _run(_single_app)
+    assert not at.exception
+    assert _shown(at) == "volet=film"
+    assert not at.get("button_group")
+    assert "volet" not in at.query_params
+
+
+def test_un_seul_volet_nettoie_l_adresse():
+    at = _run(_single_app, query="fiabilite", session={"volet": "fiabilite"})
+    assert not at.exception
+    assert _shown(at) == "volet=film"
+    assert "volet" not in at.query_params
+
+
+def test_retour_a_plusieurs_volets_apres_un_seul():
+    def app() -> None:
+        import streamlit as st
+
+        from app.navigation import volet_selector
+
+        pages = {"seul": {"film": "Le film"}, "multi": {"a": "A", "b": "B"}}
+        st.write(f"volet={volet_selector(pages[st.query_params.get('page', 'seul')])}")
+
+    at = AppTest.from_function(app).run()
+    assert _shown(at) == "volet=film"
+    at.query_params["page"] = "multi"
+    at.run()
+    assert not at.exception
+    assert _shown(at) == "volet=a"
+    assert at.get("button_group")[0].value == "a"
 
 
 def test_options_vides_refusees():

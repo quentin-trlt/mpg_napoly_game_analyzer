@@ -253,7 +253,8 @@ GLOSSARY: dict[str, str] = {
     ),
     "scores_prevision": (
         "**Erreur de prévision (plus bas = mieux).** Trois façons de la mesurer pour une prévision en probabilités. "
-        "L'app affiche le RPS ; le log-loss et le Brier sont dans le détail.\n\n"
+        "L'app affiche le RPS sous le nom « erreur de prévision » ; le log-loss et le Brier sont dans « Toutes les "
+        "mesures d'erreur ».\n\n"
         "- *RPS* (ranked probability score) : écart entre les probabilités cumulées prédites et observées dans l'ordre "
         "victoire > nul > défaite. Prédire 60 % de victoire pour un nul est moins grave que pour une défaite. 0 = parfait.\n"
         "- *Log-loss* : −log de la probabilité donnée au résultat réel. Punit fort les certitudes démenties.\n"
@@ -269,7 +270,7 @@ GLOSSARY: dict[str, str] = {
         "force sont recalculés avec les seuls matchs de PL joués avant la journée. Restent du jour la cote MPG et "
         "le statut (blessé, suspendu), inconnu pour le passé et compté « ok ». Les réglages des modèles ayant été "
         "choisis en regardant ces mêmes matchs, la seule évaluation sans biais reste celle des pronostics figés "
-        "avant chaque journée, plus bas."
+        "avant chaque journée, plus haut sur la page."
     ),
     "et_si": (
         "**Mode « et si ».** Fixe l'issue de matchs à venir : ils sont imposés dans toutes les saisons simulées, les "

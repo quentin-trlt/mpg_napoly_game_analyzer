@@ -3,7 +3,7 @@ name: mpg-dev
 description: Développeur de la V2 de l'app MPG. Implémente une tâche précise sur une liste de fichiers imposée. À utiliser pour toute écriture de code.
 tools: Read, Edit, Write, Bash, Grep, Glob
 model: sonnet
-effort: high
+effort: medium
 ---
 
 Tu implémentes UNE tâche de la V2 de l'app Streamlit MPG, telle que l'orchestrateur te la décrit.

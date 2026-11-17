@@ -57,11 +57,15 @@ SQUAD_CONFIG = {
     ),
     "enchere": st.column_config.NumberColumn("Prix", format="%d M€"),
     "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
-    "surpaiement_x": st.column_config.NumberColumn("× cote", format="%.2f"),
-    "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note estimée"),
+    "surpaiement_x": st.column_config.NumberColumn(
+        "Prix ÷ cote", format="%.2f", help="Au-dessus de 1, tu as payé plus cher que la cote"
+    ),
+    "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note fiabilisée"),
     "note_moy": st.column_config.NumberColumn("Moy. brute", format="%.2f", help="Moyenne de ces notes"),
     "note_retrecie": st.column_config.NumberColumn(
-        "Note estimée", format="%.2f", help="Note attendue quand il joue, tirée vers son poste"
+        "Note fiabilisée",
+        format="%.2f",
+        help="Note attendue quand il joue, corrigée pour les joueurs qui ont peu de matchs",
     ),
     "note_moy_reelle": st.column_config.NumberColumn("Moy. PL", format="%.1f"),
     "buts_reels": "Buts ligue",
@@ -100,8 +104,8 @@ def _profile(a: Analysis, team_id: int, expected_rank: int | None) -> tuple[list
 
     dimensions = [
         ("Classement", int(a.standings.set_index("team_id").loc[team_id, "rang"]), "points", ""),
-        ("Force a priori", expected_rank, "effectif sur le papier", "effectif incomplet"),
-        ("Mercato", int(a.mercato.set_index("team_id").loc[team_id, "rang"]), "score composite", ""),
+        ("Force sur le papier", expected_rank, "d'après les prix payés", "effectif incomplet"),
+        ("Mercato", int(a.mercato.set_index("team_id").loc[team_id, "rang"]), "note globale du mercato", ""),
         ("Niveau de jeu", rank(a.standings, "note_moy"), "note moyenne", ""),
         ("Chance", rank(a.luck, "indice_chance"), "1 = le plus chanceux", ""),
         ("Coaching", rank(a.coaching, "regret_moy", ascending=True), "moins de points sur le banc", ""),
@@ -154,7 +158,7 @@ def _kpis(card: dict) -> list[dict]:
         fourth = {
             "label": "Fiabilité",
             "value": fmt_pct(card["disponibilite"]),
-            "sub": f"taux de jeu PL pondéré, {card['indisponibles']} indisponible(s)",
+            "sub": f"taux de jeu PL, pondéré par les prix, {card['indisponibles']} indisponible(s)",
         }
     elif card["rang_attendu"] is not None:
         fourth = {
@@ -334,7 +338,7 @@ def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
     section("Bonus utilisés" if finished else "Bonus restants")
     if br is None:
         st.info(
-            "Ajoutez un fichier `data/bonus_stock.csv` (colonnes `bonus`, `quantite`) avec la dotation de début "
+            "Ajoute un fichier `data/bonus_stock.csv` (colonnes `bonus`, `quantite`) avec la dotation de début "
             "de saison pour suivre les bonus restants."
         )
         return
@@ -357,7 +361,7 @@ def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
         )
         if (mine["restants"] < 0).any():
             st.warning(
-                "Certains bonus ont été utilisés plus souvent que la dotation ne le permet : vérifiez "
+                "Certains bonus ont été utilisés plus souvent que la dotation ne le permet : vérifie "
                 "`data/bonus_stock.csv`."
             )
     st.html(stat_grid([_bonus_cell(r, finished) for r in mine.itertuples()], per_row=4))
@@ -381,7 +385,7 @@ def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
             },
         )
         if not finished:
-            st.caption("Utile pour anticiper : un adversaire qui a encore son Suarez peut viser votre gardien.")
+            st.caption("Utile pour anticiper : un adversaire qui a encore son Suarez peut viser ton gardien.")
     if not finished:
         how("bonus_restants", meta)
 
@@ -404,8 +408,8 @@ def _bonus_effect(fc: dict, team_id: int, meta: dict) -> None:
                 "effet_pts",
                 "team_name",
                 team_id,
-                "Effet net des bonus restants sur les points attendus",
-                x_title="Points attendus en fin de saison",
+                "Effet net des bonus restants sur les points prévus",
+                x_title="Points prévus en fin de saison",
                 fmt="+.2f",
             )
         )
@@ -416,9 +420,11 @@ def _bonus_effect(fc: dict, team_id: int, meta: dict) -> None:
             column_config={
                 "team_name": "Équipe",
                 "restants": st.column_config.NumberColumn("Restants", width="small"),
-                "effet_pts": st.column_config.NumberColumn("Pts", format="%+.2f", width="small"),
-                "effet_titre": st.column_config.NumberColumn("P(titre)", format="percent", width="small"),
-                "effet_dernier": st.column_config.NumberColumn("P(dernier)", format="percent", width="small"),
+                "effet_pts": st.column_config.NumberColumn("Points", format="%+.2f", width="small"),
+                "effet_titre": st.column_config.NumberColumn("Chances de titre", format="percent", width="small"),
+                "effet_dernier": st.column_config.NumberColumn(
+                    "Chances de finir dernier", format="percent", width="small"
+                ),
             },
             height=table_height(len(be)),
         )

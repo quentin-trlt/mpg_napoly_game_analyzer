@@ -101,7 +101,7 @@ def _squad_alerts(a: Analysis, team_id: int) -> list[str]:
             "!",
             f"<b>{escape(p.joueur)}</b> est {STATUS[p.statut_performance]}",
             f"{p.poste}, {p.club}, acheté {p.enchere:.0f} M€"
-            + (f" · Selon la FPL : {news[p.player_key]}" if p.player_key in news else ""),
+            + (f" · Selon Fantasy Premier League : {news[p.player_key]}" if p.player_key in news else ""),
             STATUS_TONES[p.statut_performance],
         )
         for p in absent.itertuples()

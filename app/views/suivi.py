@@ -23,7 +23,13 @@ from mpg.forecast.evaluation import calibration, rps_by_gameweek, scored_summary
 
 ISSUES = {0: "victoire à domicile", 1: "nul", 2: "victoire à l'extérieur"}
 REFERENCE = "Référence (fréquences)"
+BASE_LABEL = "Pronostic de base"
 MIN_CALIBRATION = 30
+NON_BREAKING_HYPHEN = "\u2011"
+
+
+def _score(text: object) -> str:
+    return str(text).replace("-", NON_BREAKING_HYPHEN)
 
 
 def _match_card(r: pd.Series, team_id: int) -> str:
@@ -36,9 +42,9 @@ def _match_card(r: pd.Series, team_id: int) -> str:
         exact = f"{int(r['home_goals'])}-{int(r['away_goals'])}"
         exact_note = " · score exact trouvé" if exact == r["score_probable"] else ""
         result = (
-            f'<div class="row mt-12"><div class="score">{exact}</div>{badge}</div>'
+            f'<div class="row mt-12"><div class="score">{_score(exact)}</div>{badge}</div>'
             f'<div class="meta mt-6">On donnait {r["p_issue_reelle"]:.0%} à la '
-            f"{ISSUES[int(r['issue'])]}. Score prédit : {escape(str(r['score_probable']))}{exact_note}.</div>"
+            f"{ISSUES[int(r['issue'])]}. Score prédit : {escape(_score(r['score_probable']))}{exact_note}.</div>"
         )
     return (
         f'<div class="fixture{" me" if me else ""}"><div class="pair"><div class="team">{escape(r["home_team"])}</div>'
@@ -76,16 +82,20 @@ def _gameweek_review(fm: pd.DataFrame, team_id: int, meta: dict) -> None:
                 "sub": "le résultat le plus probable s'est produit",
             },
             {
-                "label": "Proba. moyenne du vrai résultat",
+                "label": "Probabilité moyenne du vrai résultat",
                 "value": fmt_pct(day["p_issue_reelle"].mean()),
                 "sub": "33 % = pas mieux que le hasard",
             },
             {
-                "label": "RPS de la journée",
+                "label": "Erreur de prévision de la journée",
                 "value": f"{day['rps'].mean():.3f}",
-                "sub": (f"référence {rps_ref:.3f}, {gain:+.0%} " + ("de mieux" if gain > 0 else "de moins bien"))
+                "sub": (
+                    f"plus bas = mieux. {abs(gain):.0%} d'erreur "
+                    + ("en moins" if gain > 0 else "en plus")
+                    + f" que le pronostic de base ({rps_ref:.3f})"
+                )
                 if gain == gain
-                else "plus bas = meilleur",
+                else "plus bas = mieux",
             },
             {
                 "label": "Plus grosse surprise",
@@ -101,9 +111,13 @@ def _gameweek_review(fm: pd.DataFrame, team_id: int, meta: dict) -> None:
         st.caption(f"Pronostics figés en attente de résultat : {', '.join(f'J{g}' for g in pending_gws)}.")
 
     with st.expander("Ce que disait chaque modèle sur cette journée"):
-        d = fm[fm["gw"] == gw].assign(
-            match=lambda x: x["home_team"] + " – " + x["away_team"],
-            score=lambda x: x["home_goals"].astype(int).astype(str) + "-" + x["away_goals"].astype(int).astype(str),
+        d = (
+            fm[fm["gw"] == gw]
+            .replace({"modele": {REFERENCE: BASE_LABEL}})
+            .assign(
+                match=lambda x: x["home_team"] + " – " + x["away_team"],
+                score=lambda x: x["home_goals"].astype(int).astype(str) + "-" + x["away_goals"].astype(int).astype(str),
+            )
         )
         st.dataframe(
             d[["match", "score", "modele", "p_dom", "p_nul", "p_ext", "p_issue_reelle", "rps"]],
@@ -116,33 +130,35 @@ def _gameweek_review(fm: pd.DataFrame, team_id: int, meta: dict) -> None:
                 "p_nul": st.column_config.NumberColumn("Nul", format="percent"),
                 "p_ext": st.column_config.NumberColumn("Ext.", format="percent"),
                 "p_issue_reelle": st.column_config.ProgressColumn(
-                    "Proba. du vrai résultat", min_value=0, max_value=1, format="percent"
+                    "Probabilité du vrai résultat", min_value=0, max_value=1, format="percent"
                 ),
-                "rps": st.column_config.NumberColumn("RPS", format="%.3f"),
+                "rps": st.column_config.NumberColumn("Erreur de prévision ↓", format="%.3f", help="Plus bas = mieux"),
             },
         )
 
     section("Sur toute la saison")
-    summ = scored_summary(fm)
+    summ = scored_summary(fm).replace({"modele": {REFERENCE: BASE_LABEL}})
     left, right = st.columns([1.2, 1], gap="medium")
     with left:
         charts.show(charts.rps_evolution(rps_by_gameweek(fm)))
     with right:
-        st.dataframe(
-            summ,
-            hide_index=True,
-            column_config={
-                "modele": "Modèle",
-                "matchs": "Matchs",
-                "rps": st.column_config.NumberColumn("RPS ↓", format="%.3f"),
-                "log_loss": st.column_config.NumberColumn("Log-loss ↓", format="%.3f"),
-                "brier": st.column_config.NumberColumn("Brier ↓", format="%.3f"),
-                "proba_issue_reelle": st.column_config.ProgressColumn(
-                    "Proba. du vrai résultat", min_value=0, max_value=1, format="percent"
-                ),
-                "favoris_gagnants": st.column_config.NumberColumn("Favoris vainqueurs", format="percent"),
-            },
-        )
+        st.caption("Chaque modèle est noté par son erreur de prévision : plus elle est basse, mieux c'est.")
+        with st.expander("Détail des erreurs de prévision (RPS, log-loss, Brier)"):
+            st.dataframe(
+                summ,
+                hide_index=True,
+                column_config={
+                    "modele": "Modèle",
+                    "matchs": "Matchs",
+                    "rps": st.column_config.NumberColumn("RPS ↓", format="%.3f"),
+                    "log_loss": st.column_config.NumberColumn("Log-loss ↓", format="%.3f"),
+                    "brier": st.column_config.NumberColumn("Brier ↓", format="%.3f"),
+                    "proba_issue_reelle": st.column_config.ProgressColumn(
+                        "Probabilité du vrai résultat", min_value=0, max_value=1, format="percent"
+                    ),
+                    "favoris_gagnants": st.column_config.NumberColumn("Favoris vainqueurs", format="percent"),
+                },
+            )
         how(["scores_prevision", "pronostics_figes"], meta)
     n_scored = int(ens["joue"].sum())
     if n_scored >= MIN_CALIBRATION:
@@ -150,7 +166,8 @@ def _gameweek_review(fm: pd.DataFrame, team_id: int, meta: dict) -> None:
         how("calibration", meta)
     else:
         st.caption(
-            f"La courbe de calibration apparaîtra à partir de {MIN_CALIBRATION} matchs notés "
+            f"La courbe de calibration (les probabilités annoncées se réalisent-elles ?) apparaîtra à partir de "
+            f"{MIN_CALIBRATION} matchs notés "
             f"({n_scored} aujourd'hui) : en dessous, elle ne serait que du bruit."
         )
 
@@ -191,7 +208,7 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
             key="suivi_metric",
             format_func={
                 "rang_moy": "Rang prédit",
-                "pts_moy": "Points attendus",
+                "pts_moy": "Points prévus",
                 "p_titre": "Titre",
                 "p_podium": "Podium",
                 "p_dernier": "Dernier",
@@ -199,7 +216,7 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
         )
         titles = {
             "rang_moy": ("Classement final prédit (rang moyen)", "Rang moyen prédit"),
-            "pts_moy": ("Points attendus en fin de saison", "Points"),
+            "pts_moy": ("Points prévus en fin de saison", "Points"),
             "p_titre": ("Probabilité de titre", "%"),
             "p_podium": ("Probabilité de podium", "%"),
             "p_dernier": ("Probabilité de finir dernier", "%"),
@@ -237,8 +254,8 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
         column_config={
             "rang_predit": st.column_config.NumberColumn("#", width="small"),
             "team_name": "Équipe",
-            "pts_actuels": "Pts à cette date",
-            "pts_moy": st.column_config.NumberColumn("Pts attendus", format="%.1f"),
+            "pts_actuels": "Points à cette date",
+            "pts_moy": st.column_config.NumberColumn("Points prévus", format="%.1f"),
             "rang_moy": st.column_config.NumberColumn("Rang moyen", format="%.1f"),
             "p_titre": st.column_config.ProgressColumn("Titre", min_value=0, max_value=1, format="percent"),
             "p_podium": st.column_config.ProgressColumn("Podium", min_value=0, max_value=1, format="percent"),
@@ -263,7 +280,7 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
                         "team_name",
                         team_id,
                         "Variation de la probabilité de titre",
-                        x_title="Points de %",
+                        x_title="Points de pourcentage",
                         fmt="+.1f",
                     )
                 )
@@ -284,13 +301,13 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
                     column_config={
                         "team_name": "Équipe",
                         "resultats": st.column_config.TextColumn("Résultat(s)", width="medium"),
-                        "delta_pts_moy": st.column_config.NumberColumn("Δ pts attendus", format="%+.1f"),
+                        "delta_pts_moy": st.column_config.NumberColumn("Points prévus (variation)", format="%+.1f"),
                         "delta_rang_moy": st.column_config.NumberColumn(
-                            "Δ rang moyen", format="%+.1f", help="Négatif = l'équipe monte"
+                            "Rang moyen (variation)", format="%+.1f", help="Négatif = l'équipe monte"
                         ),
-                        "delta_p_titre": st.column_config.NumberColumn("Δ titre", format="percent"),
-                        "delta_p_podium": st.column_config.NumberColumn("Δ podium", format="percent"),
-                        "delta_p_dernier": st.column_config.NumberColumn("Δ dernier", format="percent"),
+                        "delta_p_titre": st.column_config.NumberColumn("Titre (variation)", format="percent"),
+                        "delta_p_podium": st.column_config.NumberColumn("Podium (variation)", format="percent"),
+                        "delta_p_dernier": st.column_config.NumberColumn("Dernier (variation)", format="percent"),
                     },
                 )
     else:
@@ -317,8 +334,8 @@ def render(a: Analysis, team_id: int) -> None:
     section("Pronostics contre résultats")
     if fm.empty:
         callout(
-            "Aucun pronostic figé pour l'instant. Lancez <code>python -m mpg.forecast</code> avant la prochaine "
-            "journée, puis commitez le dossier <code>content/pronostics/</code>.",
+            "Aucun pronostic figé pour l'instant. Lance <code>python -m mpg.forecast</code> avant la prochaine "
+            "journée, puis commite le dossier <code>content/pronostics/</code>.",
             warn=True,
         )
     else:

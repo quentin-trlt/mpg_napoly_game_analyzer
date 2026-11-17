@@ -12,9 +12,9 @@ PLAYER_COLS = {
     "enchere": st.column_config.NumberColumn("Enchère", format="%d M€"),
     "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
     "surpaiement_x": st.column_config.NumberColumn("× cote", format="%.2f"),
-    "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note estimée"),
+    "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note fiabilisée"),
     "note_retrecie": st.column_config.NumberColumn(
-        "Note estimée", format="%.2f", help="Note attendue quand il joue, tirée vers son poste"
+        "Note fiabilisée", format="%.2f", help="Note attendue quand il joue, rapprochée de la moyenne de son poste"
     ),
     "note_attendue": st.column_config.NumberColumn("Attendue pour le prix", format="%.2f"),
     "residu_valeur": st.column_config.NumberColumn("Écart au prix", format="%+.2f"),
@@ -59,8 +59,8 @@ def render(a: Analysis, team_id: int) -> None:
     pv = a.player_value
     volet_title(
         "Qui a bien dépensé son argent ?",
-        "Toutes les mesures sont robustes : médianes, log-ratios et moyennes tronquées, pour qu'un seul gros achat "
-        "ne fausse pas le tableau.",
+        "Pour qu'un seul gros achat ne fausse pas le tableau, on regarde les médianes (la valeur du milieu) et les "
+        "moyennes sans les extrêmes.",
     )
 
     top = pv.sort_values("enchere", ascending=False).iloc[0]
@@ -121,10 +121,10 @@ def render(a: Analysis, team_id: int) -> None:
                 "g",
                 "team_name",
                 team_id,
-                "Concentration du budget (Gini des enchères)",
+                "Concentration des dépenses",
                 fmt=".2f",
                 ascending=True,
-                x_title="Gini (0 = budget réparti, 1 = tout sur un joueur)",
+                x_title="Concentration (0 = budget réparti, 1 = tout sur un joueur)",
             ),
             height=480,
         )
@@ -259,9 +259,17 @@ def render(a: Analysis, team_id: int) -> None:
             "team_name": "Équipe",
             "enchere_totale": st.column_config.NumberColumn("Dépensé", format="%d M€"),
             "enchere_mediane": st.column_config.NumberColumn("Médiane", format="%.1f M€"),
-            "enchere_moy_tronquee": st.column_config.NumberColumn("Moy. tronquée", format="%.1f M€"),
-            "enchere_ecart_type": st.column_config.NumberColumn("Écart-type", format="%.1f"),
-            "enchere_iqr": st.column_config.NumberColumn("IQR", format="%.1f"),
+            "enchere_moy_tronquee": st.column_config.NumberColumn("Moy. sans extrêmes", format="%.1f M€"),
+            "enchere_ecart_type": st.column_config.NumberColumn(
+                "Dispersion",
+                format="%.1f",
+                help="Plus c'est haut, plus les enchères sont éloignées les unes des autres",
+            ),
+            "enchere_iqr": st.column_config.NumberColumn(
+                "Écart achats moyens",
+                format="%.1f",
+                help="Écart entre les achats moyens, sans compter les plus petits ni les plus gros",
+            ),
             "enchere_max": st.column_config.NumberColumn("Max", format="%d M€"),
             "joueur_plus_cher": "Plus cher",
             "part_top3": st.column_config.ProgressColumn("Part top 3", min_value=0, max_value=1, format="percent"),

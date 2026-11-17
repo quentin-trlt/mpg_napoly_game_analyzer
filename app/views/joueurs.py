@@ -10,7 +10,7 @@ from app.theme import AXIS, CONTEXT_LIGHT, HIGHLIGHT, LINE_LABELS, SERIES, SURFA
 from mpg.analysis import Analysis
 
 SORTS = {
-    "note_retrecie": "Note estimée",
+    "note_retrecie": "Note fiabilisée",
     "note_moy": "Moyenne brute",
     "buts_total": "Buts dans la ligue",
     "ga_saison": "G+A en PL",
@@ -43,14 +43,14 @@ def _shrink_chart(ps, team_id: int) -> go.Figure:
             customdata=np.stack([d["joueur"], d["team_name"], d["n_notes"], d["note_prior"]], axis=1),
             showlegend=False,
             hovertemplate="<b>%{customdata[0]}</b>, %{customdata[1]}<br>Moyenne brute : %{x:.2f} sur %{customdata[2]} "
-            "matchs<br>A priori : %{customdata[3]:.2f}<br>Note estimée : %{y:.2f}<extra></extra>",
+            "matchs<br>Sur le papier : %{customdata[3]:.2f}<br>Note fiabilisée : %{y:.2f}<extra></extra>",
         )
     )
     fig.update_layout(
-        title="Moyenne observée et note retenue",
+        title="Moyenne observée et note fiabilisée",
         height=420,
         xaxis_title="Moyenne des notes observées",
-        yaxis_title="Note estimée",
+        yaxis_title="Note fiabilisée",
     )
     fig.update_xaxes(range=[lo, hi])
     fig.update_yaxes(range=[lo + 1, hi - 1])
@@ -113,7 +113,7 @@ def render(a: Analysis, team_id: int) -> None:
         f"{len(ps)} joueurs achetés. Les notes sont tirées vers la moyenne du poste pour ne pas récompenser un seul "
         "gros match."
         if meta.get("k_postes")
-        else f"{len(ps)} joueurs achetés. Les notes MPG sont rétrécies vers la "
+        else f"{len(ps)} joueurs achetés. Les notes MPG sont fiabilisées : on les rapproche de la "
         "moyenne de saison PL pour ne pas récompenser un seul gros match.",
     )
 
@@ -123,7 +123,7 @@ def render(a: Analysis, team_id: int) -> None:
     kpi_row(
         [
             {
-                "label": "Meilleure note estimée",
+                "label": "Meilleure note fiabilisée",
                 "value": best["joueur"],
                 "small": True,
                 "sub": f"{best['note_retrecie']:.2f}, {best['team_name']}",
@@ -216,11 +216,15 @@ def render(a: Analysis, team_id: int) -> None:
             "club": "Club",
             "enchere": st.column_config.NumberColumn("Enchère", format="%d M€"),
             "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
-            "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note estimée"),
+            "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note fiabilisée"),
             "note_moy": st.column_config.NumberColumn("Moy. brute", format="%.2f", help="Moyenne de ces notes"),
-            "note_ecart_type": st.column_config.NumberColumn("Écart-type", format="%.2f", help="Régularité"),
+            "note_ecart_type": st.column_config.NumberColumn(
+                "Dispersion", format="%.2f", help="Régularité : plus c'est bas, plus ses notes se ressemblent"
+            ),
             "note_retrecie": st.column_config.NumberColumn(
-                "Note estimée", format="%.2f", help="Note attendue quand il joue, tirée vers son poste"
+                "Note fiabilisée",
+                format="%.2f",
+                help="Note attendue quand il joue, rapprochée de la moyenne de son poste",
             ),
             "note_moy_reelle": st.column_config.NumberColumn("Moy. PL", format="%.1f"),
             "points_mpg_moy": st.column_config.NumberColumn("Pts MPG moy.", format="%.2f"),
@@ -241,18 +245,18 @@ def render(a: Analysis, team_id: int) -> None:
     shrinkage = "shrinkage" if meta.get("k_postes") else "shrinkage_compos"
     how([shrinkage, "production_pl"], meta)
 
-    section("Top 5 par poste", "Note estimée, au moins 2 matchs notés.")
+    section("Top 5 par poste", "Note fiabilisée, au moins 2 matchs notés.")
     st.html(_top5_panel(ps, team_id))
 
     left, right = st.columns([1.3, 1], gap="medium")
     with left:
         charts.show(_shrink_chart(ps, team_id))
         st.caption(
-            f"k = {meta['k_postes']} selon le poste : chaque titulaire reçoit l'équivalent de k matchs à la moyenne "
-            "des titulaires de son poste. Taille du point = nombre de matchs notés."
+            f"Chaque titulaire reçoit en plus l'équivalent de k matchs à la moyenne des titulaires de son poste "
+            f"(k = {meta['k_postes']} selon le poste). Taille du point = nombre de matchs notés."
             if meta.get("k_postes")
-            else f"k = {meta['k_shrinkage']:.1f} : chaque joueur reçoit l'équivalent de {meta['k_shrinkage']:.0f} "
-            "matchs à sa moyenne PL. Taille du point = nombre de matchs notés."
+            else f"Chaque joueur reçoit en plus l'équivalent de k = {meta['k_shrinkage']:.1f} matchs à sa moyenne PL. "
+            "Taille du point = nombre de matchs notés."
         )
     with right:
         if not caps.stats_pl:

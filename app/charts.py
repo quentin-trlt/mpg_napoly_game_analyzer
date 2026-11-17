@@ -126,7 +126,7 @@ def diverging_bars(
     x_title: str = "",
     fmt: str = "+.1f",
 ) -> go.Figure:
-    """Barres divergentes autour de zéro : bleu positif, rouge négatif, IC optionnel en moustaches."""
+    """Barres divergentes autour de zéro : bleu positif, rouge négatif, fourchette optionnelle en moustaches."""
     d = df.sort_values(value)
     colors = [POS if v >= 0 else NEG for v in d[value]]
     widths = [2.5 if t == team_id else 0 for t in d["team_id"]]
@@ -142,7 +142,7 @@ def diverging_bars(
             width=4,
         )
     custom = np.stack([d[low], d[high]], axis=1) if low and high else None
-    ci = "<br>IC 90 % : [%{customdata[0]:+.1f} ; %{customdata[1]:+.1f}]" if custom is not None else ""
+    ci = "<br>Fourchette : entre %{customdata[0]:+.1f} et %{customdata[1]:+.1f}" if custom is not None else ""
     fig = go.Figure(
         go.Bar(
             x=d[value],
@@ -207,7 +207,7 @@ def luck_scatter(lk: pd.DataFrame, abbrev: dict[int, str], team_id: int) -> go.F
     fig.add_annotation(
         x=hi,
         y=hi,
-        text="points = niveau",
+        text="points réels = points mérités",
         showarrow=False,
         xanchor="right",
         yanchor="bottom",
@@ -224,7 +224,7 @@ def luck_scatter(lk: pd.DataFrame, abbrev: dict[int, str], team_id: int) -> go.F
             textfont=dict(color=TEXT_2, size=11),
             marker=dict(size=13, color=colors, line=dict(color=SURFACE, width=2)),
             customdata=np.stack([lk["team_name"], lk["chance_totale"]], axis=1),
-            hovertemplate="<b>%{customdata[0]}</b><br>xPts : %{x:.1f}<br>Points : %{y}<br>Chance : %{customdata[1]:+.1f}<extra></extra>",
+            hovertemplate="<b>%{customdata[0]}</b><br>Points mérités : %{x:.1f}<br>Points réels : %{y}<br>Chance : %{customdata[1]:+.1f}<extra></extra>",
             showlegend=False,
         )
     )
@@ -235,9 +235,9 @@ def luck_scatter(lk: pd.DataFrame, abbrev: dict[int, str], team_id: int) -> go.F
         x=hi - 0.2, y=lo + 0.2, text="↓ Malchanceux", showarrow=False, xanchor="right", font=dict(color=NEG, size=12)
     )
     fig.update_layout(
-        title="Points réels contre points mérités (xPts all-play)",
+        title="Points réels contre points mérités",
         height=440,
-        xaxis_title="xPts — points mérités au vu des notes",
+        xaxis_title="Points mérités (contre toutes les équipes de la journée)",
         yaxis_title="Points réels",
     )
     fig.update_xaxes(range=[lo, hi])
@@ -399,6 +399,7 @@ def corr_bars(corr: dict, labels: dict[str, str]) -> go.Figure:
     d = pd.DataFrame(rows).dropna().sort_values("rho")
     colors = [POS if v >= 0 else NEG for v in d["rho"]]
     opac = [1.0 if p < 0.05 else 0.45 for p in d["p"]]
+    chance = ["peu probable par hasard" if p < 0.05 else "peut venir du hasard" for p in d["p"]]
     fig = go.Figure(
         go.Bar(
             x=d["rho"],
@@ -406,15 +407,15 @@ def corr_bars(corr: dict, labels: dict[str, str]) -> go.Figure:
             orientation="h",
             marker=dict(color=colors, opacity=opac),
             text=[f"{r:+.2f}{' *' if p < 0.05 else ''}" for r, p in zip(d["rho"], d["p"])],
-            customdata=d["p"],
+            customdata=chance,
             textposition="outside",
             cliponaxis=False,
             textfont=dict(color=TEXT_2, size=11),
-            hovertemplate="<b>%{y}</b><br>ρ = %{x:+.2f} · p = %{customdata:.3f}<extra></extra>",
+            hovertemplate="<b>%{y}</b><br>Lien : %{x:+.2f}, %{customdata}<extra></extra>",
         )
     )
     fig.add_vline(x=0, line=dict(color=AXIS, width=1))
-    fig.update_xaxes(range=[-1.25, 1.25], title="Corrélation de Spearman avec les points")
+    fig.update_xaxes(range=[-1.25, 1.25], title="Lien (corrélation) avec les points")
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
     fig.update_layout(
         title="Quelle caractéristique d'effectif suit les points ?", showlegend=False, height=max(320, 36 * len(d) + 80)
@@ -685,9 +686,12 @@ def component_heatmap(m: pd.DataFrame, comps: list[str], labels: dict[str, str])
             xgap=3,
             ygap=3,
             colorbar=dict(
-                title=dict(text="z", font=dict(color=TEXT_2)), tickfont=dict(color=MUTED), thickness=10, outlinewidth=0
+                title=dict(text="Écart", font=dict(color=TEXT_2)),
+                tickfont=dict(color=MUTED),
+                thickness=10,
+                outlinewidth=0,
             ),
-            hovertemplate="<b>%{y}</b><br>%{x} : %{z:+.2f} (z robuste)<extra></extra>",
+            hovertemplate="<b>%{y}</b><br>%{x} : %{z:+.2f} (écart à la médiane)<extra></extra>",
         )
     )
     fig.update_xaxes(side="top", gridcolor="rgba(0,0,0,0)", tickangle=-50 if mobile else 0, tickfont=dict(size=11))
@@ -695,7 +699,7 @@ def component_heatmap(m: pd.DataFrame, comps: list[str], labels: dict[str, str])
     if mobile:
         fig.update_traces(textfont_size=10, colorbar_thickness=8)
     fig.update_layout(
-        title="Composantes du score (z-score robuste, 0 = médiane de la ligue)",
+        title="Composantes du score (écart à la médiane de la ligue, 0 = médiane)",
         height=440,
         margin=dict(t=110),
     )
@@ -764,7 +768,7 @@ def rank_heatmap(rank_probs: pd.DataFrame, names: dict[int, str], order: list[in
     )
     fig.update_xaxes(side="top", gridcolor="rgba(0,0,0,0)", title=None)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
-    fig.update_layout(title="Probabilité de chaque classement final (%)", height=460, margin=dict(t=100))
+    fig.update_layout(title="Chances de finir à chaque place (%)", height=460, margin=dict(t=100))
     return fig
 
 
@@ -773,7 +777,7 @@ def title_history(
     names: dict[int, str],
     team_id: int,
     col: str = "p_titre",
-    label: str = "Probabilité de titre",
+    label: str = "Chances de titre",
 ) -> go.Figure:
     fig = go.Figure()
     last = history["apres_journee"].max()
@@ -839,7 +843,7 @@ def final_points_box(sim, names: dict[int, str], team_id: int) -> go.Figure:
                 line=dict(color=HIGHLIGHT if me else CONTEXT, width=1.3),
                 fillcolor=rgba(HIGHLIGHT, 0.25) if me else rgba(CONTEXT, 0.18),
                 whiskerwidth=0.4,
-                hovertemplate=f"<b>{names[tid]}</b><br>Médiane {q[2]:.0f} pts · 90 % entre {q[0]:.0f} et {q[4]:.0f}<extra></extra>",
+                hovertemplate=f"<b>{names[tid]}</b><br>Médiane {q[2]:.0f} pts · fourchette : entre {q[0]:.0f} et {q[4]:.0f}<extra></extra>",
             )
         )
     cur = sim.summary.set_index("team_id")["pts_actuels"]
@@ -854,7 +858,9 @@ def final_points_box(sim, names: dict[int, str], team_id: int) -> go.Figure:
         )
     )
     fig.update_layout(
-        title="Points en fin de saison (boîte : 50 % central, moustaches : 90 %)", height=440, xaxis_title="Points"
+        title="Points prévus en fin de saison (boîte : la moitié centrale des cas, moustaches : 9 cas sur 10)",
+        height=440,
+        xaxis_title="Points",
     )
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
     return fig
@@ -931,9 +937,11 @@ def snapshot_lines(
 def rps_evolution(g: pd.DataFrame) -> go.Figure:
     fig = go.Figure()
     style = {"Ensemble": (HIGHLIGHT, 3), "Référence (fréquences)": (SERIES[1], 2)}
+    shown = {"Référence (fréquences)": "Pronostic de base"}
     last = g["gw"].max()
     for model, grp in g.groupby("modele"):
         color, width = style.get(model, (CONTEXT, 1.6))
+        model_label = shown.get(model, model)
         grp = grp.sort_values("gw")
         fig.add_trace(
             go.Scatter(
@@ -945,7 +953,7 @@ def rps_evolution(g: pd.DataFrame) -> go.Figure:
                 line=dict(color=color, width=width),
                 marker=dict(size=8, color=color, line=dict(color=SURFACE, width=2)),
                 customdata=grp[["rps", "matchs"]].to_numpy(),
-                hovertemplate=f"<b>{model}</b><br>J%{{x}} : RPS de la journée %{{customdata[0]:.3f}} "
+                hovertemplate=f"<b>{model_label}</b><br>J%{{x}} : erreur de prévision de la journée %{{customdata[0]:.3f}} "
                 "(%{customdata[1]} matchs)<br>Cumulé : %{y:.3f}<extra></extra>",
             )
         )
@@ -953,7 +961,7 @@ def rps_evolution(g: pd.DataFrame) -> go.Figure:
         fig.add_annotation(
             x=end["gw"].iloc[0],
             y=end["rps_cumule"].iloc[0],
-            text=model,
+            text=model_label,
             showarrow=False,
             xanchor="left",
             xshift=10,
@@ -966,7 +974,7 @@ def rps_evolution(g: pd.DataFrame) -> go.Figure:
         gridcolor="rgba(0,0,0,0)",
         range=[min(ticks) - 0.3, last + 0.3],
     )
-    fig.update_yaxes(title="RPS moyen cumulé (plus bas = meilleur)", rangemode="tozero")
+    fig.update_yaxes(title="Erreur de prévision moyenne cumulée (plus bas = mieux)", rangemode="tozero")
     fig.update_layout(title="Qualité des pronostics figés au fil de la saison", height=380, margin=dict(r=190))
     return fig
 
@@ -979,7 +987,7 @@ def calibration_chart(cal: pd.DataFrame) -> go.Figure:
     fig.add_annotation(
         x=0.98,
         y=0.98,
-        text="calibration parfaite",
+        text="prévision parfaite",
         showarrow=False,
         xanchor="right",
         yanchor="bottom",
@@ -999,7 +1007,7 @@ def calibration_chart(cal: pd.DataFrame) -> go.Figure:
             hovertemplate="Annoncé %{customdata[0]} (moy. %{x:.0%})<br>Arrivé : %{y:.0%}<br>%{customdata[1]} cas<extra></extra>",
         )
     )
-    fig.update_xaxes(range=[0, 1], tickformat=".0%", title="Probabilité annoncée")
-    fig.update_yaxes(range=[0, 1], tickformat=".0%", title="Fréquence observée")
-    fig.update_layout(title="Calibration : les 60 % arrivent-ils 60 % du temps ?", height=380)
+    fig.update_xaxes(range=[0, 1], tickformat=".0%", title="Chance annoncée")
+    fig.update_yaxes(range=[0, 1], tickformat=".0%", title="Part réellement arrivée")
+    fig.update_layout(title="Les pronostics à 60 % se réalisent-ils 60 % du temps ?", height=380)
     return fig

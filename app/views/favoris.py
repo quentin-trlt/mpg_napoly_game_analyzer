@@ -159,13 +159,13 @@ def render(a: Analysis, team_id: int) -> None:
                 "sub": f"réellement {int(fav_team['rang'])}e",
             },
             {
-                "label": "Plus grosse surperformance",
+                "label": "Meilleure surprise",
                 "value": over["team_name"],
                 "small": True,
                 "sub": f"attendu {int(over['rang_attendu'])}e → {int(over['rang'])}e",
             },
             {
-                "label": "Plus grosse sous-performance",
+                "label": "Plus grosse déception",
                 "value": under["team_name"],
                 "small": True,
                 "sub": f"attendu {int(under['rang_attendu'])}e → {int(under['rang'])}e",
@@ -181,7 +181,8 @@ def render(a: Analysis, team_id: int) -> None:
         ]
     )
     power = (
-        f"Pouvoir prédictif du scénario : ρ = {corr.rho:+.2f} avec les points (p = {corr.p_value:.2f}, n = {corr.n})."
+        f"Pouvoir prédictif du scénario : lien (corrélation) de {corr.rho:+.2f} avec les points, sur {corr.n} équipes "
+        f"(p = {corr.p_value:.2f} : plus il est bas, moins c'est du hasard)."
         if pd.notna(corr.rho)
         else "Pouvoir prédictif du scénario : non calculable avec ces équipes."
     )
@@ -189,7 +190,7 @@ def render(a: Analysis, team_id: int) -> None:
         horizon = f"après {meta['derniere_journee']} journées" if meta["saison_en_cours"] else "sur la saison"
         stade = "À ce stade" if meta["saison_en_cours"] else "Sur cette saison"
         callout(
-            f"{power} La force de l'effectif n'explique donc pas significativement le classement {horizon}. "
+            f"{power} La force de l'effectif n'explique donc pas clairement le classement {horizon}. "
             f"{stade}, les écarts relèvent autant des absences et du hasard que de la qualité du mercato.",
             warn=True,
         )
@@ -225,8 +226,8 @@ def render(a: Analysis, team_id: int) -> None:
 
     section(
         "Ce qui compte vraiment",
-        "Corrélation de chaque caractéristique avec les points, toutes équipes confondues. "
-        "Les barres pâles ne sont pas significatives (p ≥ 0,05), l'astérisque marque p < 0,05.",
+        "Lien (corrélation) de chaque caractéristique avec les points, toutes équipes confondues. "
+        "Les barres pâles sont trop incertaines pour être retenues ; l'astérisque marque un lien solide.",
     )
     left, right = st.columns([1.3, 1], gap="medium")
     with left:
@@ -252,8 +253,14 @@ def render(a: Analysis, team_id: int) -> None:
                 hide_index=True,
                 column_config={
                     "scenario": "Scénario",
-                    "rho": st.column_config.NumberColumn("ρ avec les points", format="%+.2f"),
-                    "p_value": st.column_config.NumberColumn("p", format="%.3f"),
+                    "rho": st.column_config.NumberColumn(
+                        "Lien avec les points",
+                        format="%+.2f",
+                        help="Lien (corrélation) entre la force du scénario et les points, de −1 à +1",
+                    ),
+                    "p_value": st.column_config.NumberColumn(
+                        "Solidité (p)", format="%.3f", help="Plus il est bas, moins le lien vient du hasard"
+                    ),
                     "n": None,
                 },
             )
@@ -265,7 +272,7 @@ def render(a: Analysis, team_id: int) -> None:
     idx["remarque"] = np.where(idx["effectif_incomplet"], INCOMPLETE, "")
     config = {
         "team_name": "Équipe",
-        "indice_force": st.column_config.NumberColumn("Indice", format="%+.2f"),
+        "indice_force": st.column_config.NumberColumn("Force sur le papier", format="%+.2f"),
         "rang_attendu": st.column_config.NumberColumn("Rang attendu"),
         "rang": st.column_config.NumberColumn("Rang réel"),
         "valeur_effectif_meur": st.column_config.NumberColumn("Valeur effectif", format="%d M€"),
@@ -273,11 +280,13 @@ def render(a: Analysis, team_id: int) -> None:
         "formation_11_max": "Formation",
         "cote_banc": st.column_config.NumberColumn(_price_wording("Cote banc", prix), format="%d M€"),
         "note_reelle_11": st.column_config.NumberColumn("Note PL du 11", format="%.2f"),
-        "taux_titu_11": st.column_config.ProgressColumn("Titu. PL du 11", min_value=0, max_value=1, format="percent"),
+        "taux_titu_11": st.column_config.ProgressColumn(
+            "Titularisations PL du 11", min_value=0, max_value=1, format="percent"
+        ),
         "disponibilite_effectif": st.column_config.ProgressColumn(
             "Taux de jeu effectif", min_value=0, max_value=1, format="percent"
         ),
-        "ga_saison": st.column_config.NumberColumn("G+A PL", format="%d"),
+        "ga_saison": st.column_config.NumberColumn("Buts + passes PL", format="%d"),
         "nb_joueurs": "Joueurs",
         "nb_indisponibles": "Indispos",
         "cote_11_aligne_moy": st.column_config.NumberColumn(

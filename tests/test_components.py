@@ -225,6 +225,15 @@ def test_short_table_shows_listed_columns_then_all_in_expander(shown):
     assert expanders == ["Toutes les colonnes"]
 
 
+def test_short_table_placeholder_reaches_both_tables(shown):
+    calls, _ = shown
+    short_table(_wide(), ["a", "b"])
+    assert [c["placeholder"] for c in calls] == ["—", "—"]
+    calls.clear()
+    short_table(_wide(), ["a", "b"], placeholder="n/a")
+    assert [c["placeholder"] for c in calls] == ["n/a", "n/a"]
+
+
 def test_short_table_without_alt_passes_none(shown):
     calls, _ = shown
     short_table(_wide(), ["a"])

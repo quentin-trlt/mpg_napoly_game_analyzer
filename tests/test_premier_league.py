@@ -4,7 +4,7 @@ import pandas as pd
 import pytest
 
 from mpg.loader import DEFAULT_DATA_DIR, DataSchemaError, load_league
-from mpg.premier_league import club_form, club_view, last_results, next_match, player_totals
+from mpg.premier_league import club_form, club_view, last_results, next_match, next_matches, pl_table, player_totals
 
 
 @pytest.fixture(scope="module")
@@ -82,3 +82,65 @@ def test_last_results_and_next_match(league):
     form = club_form(league.club_results).set_index("club").loc[club]
     assert form["forme_club"] == "".join(last_results(league.club_results, club, n=5)["resultat"].iloc[::-1])
     assert form["prochain_adversaire"] == nxt["adversaire"]
+
+
+def _synthetic() -> pd.DataFrame:
+    rows = [
+        (1, 1, "2026-08-01", "A", "B", 2, 0, "joue"),
+        (2, 1, "2026-08-01", "C", "A", 1, 1, "joue"),
+        (3, 2, "2026-08-08", "B", "C", 1, 1, "joue"),
+        (4, 3, "2026-08-15", "A", "C", None, None, "a_venir"),
+        (5, 4, "2026-08-22", "B", "A", None, None, "a_venir"),
+        (6, 5, "2026-08-29", "A", "B", None, None, "a_venir"),
+        (7, 6, "2026-09-05", "C", "A", None, None, "a_venir"),
+    ]
+    df = pd.DataFrame(
+        rows, columns=["pl_match_id", "pl_gw", "date", "home_club", "away_club", "home_score", "away_score", "statut"]
+    )
+    df["date"] = pd.to_datetime(df["date"], utc=True)
+    df["home_club_short"] = df["home_club"]
+    df["away_club_short"] = df["away_club"]
+    return df
+
+
+def test_next_matches_synthetic():
+    res = _synthetic()
+    nxt = next_matches(res, "A")
+    assert list(nxt["adversaire"]) == ["C", "B", "B"]
+    assert list(nxt["domicile"]) == [True, False, True]
+    assert list(next_matches(res, "A", 2)["pl_gw"]) == [3, 4]
+    assert next_match(res, "A")["adversaire"] == "C"
+    assert next_matches(res.assign(statut="joue"), "A").empty
+    assert next_match(res.assign(statut="joue"), "A") is None
+
+
+def test_pl_table_synthetic():
+    t = pl_table(_synthetic()).set_index("club")
+    assert t.loc["A", ["j", "pts", "diff", "rang"]].tolist() == [2, 4, 2, 1]
+    assert t.loc["C", "rang"] == 2 and t.loc["B", "rang"] == 3
+
+
+def test_next_matches_current_season(league):
+    res = league.club_results
+    nxt = next_matches(res, res["home_club"].iloc[0])
+    assert len(nxt) == 3
+    assert nxt["date"].is_monotonic_increasing
+    assert (nxt["statut"] == "a_venir").all()
+
+
+@pytest.mark.parametrize("season", sorted(p.name for p in (DEFAULT_DATA_DIR / "history").iterdir() if p.is_dir()))
+def test_next_matches_empty_on_finished_season(season):
+    res = load_league(DEFAULT_DATA_DIR / "history" / season).club_results
+    assert next_matches(res, res["home_club"].iloc[0]).empty
+
+
+def test_pl_table_current_season(league):
+    res = league.club_results
+    t = pl_table(res)
+    assert len(t) == 20
+    assert t["rang"].tolist() == list(range(1, 21))
+    v = club_view(res)
+    v = v[v["statut"] == "joue"]
+    expected = v.groupby("club")["resultat"].apply(lambda r: 3 * (r == "V").sum() + (r == "N").sum())
+    assert (t.set_index("club")["pts"] == expected.reindex(t["club"]).to_numpy()).all()
+    assert t["pts"].is_monotonic_decreasing

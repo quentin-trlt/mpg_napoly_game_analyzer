@@ -22,7 +22,7 @@ from app.components import (
 )
 from app.state import get_forecast_light
 from mpg.analysis import Analysis, team_card
-from mpg.premier_league import club_form
+from mpg.premier_league import club_form, next_matches, pl_table
 
 SQUAD_COLUMNS = [
     "joueur",
@@ -94,6 +94,33 @@ def _with_club_form(roster: pd.DataFrame, results: pd.DataFrame | None) -> pd.Da
     form["prochain_match"] = (form["prochain_adversaire_short"] + " (" + lieu + "), " + date).fillna("")
     out = roster.merge(form[["club", "forme_club", "prochain_match"]], on="club", how="left")
     return out.fillna({"forme_club": "", "prochain_match": ""})
+
+
+def _ordinal(rank: int) -> str:
+    return "1er" if rank == 1 else f"{rank}e"
+
+
+def _upcoming_table(roster: pd.DataFrame, results: pd.DataFrame | None) -> pd.DataFrame | None:
+    """Une ligne par joueur : ses 3 prochains matchs (adversaire, lieu, rang PL de l'adversaire). None si rien à venir."""
+    if results is None:
+        return None
+    ranks = pl_table(results).set_index("club")["rang"]
+    cells = {}
+    for club in roster["club"].dropna().unique():
+        nxt = next_matches(results, club)
+        texts = [
+            f"{m.adversaire_short} {'dom.' if m.domicile else 'ext.'} · {_ordinal(ranks[m.adversaire])}"
+            if m.adversaire in ranks.index
+            else f"{m.adversaire_short} {'dom.' if m.domicile else 'ext.'}"
+            for m in nxt.itertuples()
+        ]
+        cells[club] = texts + [""] * (3 - len(texts))
+    if not any(t[0] for t in cells.values()):
+        return None
+    out = roster[["joueur", "club"]].copy()
+    for i in range(3):
+        out[f"m{i + 1}"] = out["club"].map(lambda c, i=i: cells.get(c, [""] * 3)[i])
+    return out
 
 
 def _profile(a: Analysis, team_id: int, expected_rank: int | None) -> tuple[list[tuple[str, int, str]], list[str]]:
@@ -261,6 +288,32 @@ def effectif(a: Analysis, team_id: int) -> None:
     ]
     if explained:
         how(explained, meta)
+    _upcoming_section(squad, a.league.club_results)
+
+
+def _upcoming_section(squad: pd.DataFrame, results: pd.DataFrame | None) -> None:
+    ordered = squad.sort_values(["poste_groupe", "enchere"], ascending=[True, False])
+    upcoming = _upcoming_table(ordered, results)
+    if upcoming is None:
+        return
+    section(
+        "Calendrier de tes joueurs",
+        "Les 3 prochains matchs du club de chaque joueur. Le rang est celui de l'adversaire au classement de la "
+        "Premier League : plus il est petit (1er), plus l'adversaire est fort, donc le match est difficile.",
+    )
+    short_table(
+        upcoming,
+        ["joueur", "m1", "m2", "m3", "club"],
+        column_config={
+            "joueur": st.column_config.TextColumn("Joueur", pinned=True),
+            "m1": st.column_config.TextColumn("Prochain", width=110),
+            "m2": st.column_config.TextColumn("Ensuite", width=110),
+            "m3": st.column_config.TextColumn("Puis", width=110),
+            "club": "Club",
+        },
+        alt="Calendrier de tes joueurs",
+        height=table_height(len(upcoming)),
+    )
 
 
 def bonus(a: Analysis, team_id: int) -> None:

@@ -126,14 +126,12 @@ def _profile(a: Analysis, team_id: int, expected_rank: int | None) -> tuple[list
     return kept, skipped
 
 
-def _hero_subtitle(team: pd.Series, form: str) -> str:
+def _hero_subtitle(team: pd.Series) -> str:
     parts = []
     if pd.notna(team["president"]):
         parts.append(f"Président {escape(str(team['president']))}")
     if pd.notna(team["stade"]):
         parts.append(f"stade « {escape(str(team['stade']))} »")
-    if form:
-        parts.append(f"Forme {form_badges(form)}")
     return ", ".join(parts)
 
 
@@ -213,9 +211,10 @@ def header(a: Analysis, team_id: int) -> None:
     team = a.league.teams.set_index("team_id").loc[team_id]
     stand = a.standings.set_index("team_id").loc[team_id]
     form = stand["forme"] if isinstance(stand["forme"], str) else ""
-    subtitle = _hero_subtitle(team, form)
+    subtitle = _hero_subtitle(team)
     coach = f"Coach {escape(str(team['coach']))}"
-    volet_title(team["team_name"], f"{coach}, {subtitle}" if subtitle else coach)
+    line = f"{coach}, {subtitle}" if subtitle else coach
+    volet_title(team["team_name"], f"{line}<br>{form_badges(form)}" if form else line)
     limit_banner(_limits(a))
 
 

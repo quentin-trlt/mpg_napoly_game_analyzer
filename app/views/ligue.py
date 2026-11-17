@@ -171,8 +171,8 @@ def render(a: Analysis, team_id: int) -> None:
     charts.show(charts.bump_chart(a.standings_by_gw, team_id, len(a.league.teams)), height=440)
     luck = a.luck.set_index("team_id").loc[team_id]
     st.markdown(
-        f"**{mine['team_name']}** a {int(luck['pts'])} points ; ses notes en méritaient {luck['xpts_allplay']:.1f} "
-        f"({fmt_signed(luck['pts'] - luck['xpts_allplay'])} pts de chance)."
+        f"**{mine['team_name']}** : tu as {int(luck['pts'])} points, tes notes en méritaient "
+        f"{luck['xpts_allplay']:.1f} ({fmt_signed(luck['pts'] - luck['xpts_allplay'])} pts de chance)."
     )
     page_link("pourquoi", "Comprendre ce classement : mérite ou chance ?", icon=":material/casino:", volet="chance")
     how("all_play", meta)

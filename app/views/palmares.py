@@ -135,7 +135,7 @@ def _head_to_head(season_list: list[Season], h2h: pd.DataFrame, coach: str) -> N
             "lieu": st.column_config.TextColumn("Lieu", width="small"),
             "opp_name": st.column_config.TextColumn("Son équipe", width="medium"),
             "score": st.column_config.TextColumn("Score", width="small"),
-            "resultat": st.column_config.TextColumn("Rés.", width="small"),
+            "resultat": st.column_config.TextColumn("Résultat", width="small"),
         },
     )
 
@@ -144,7 +144,7 @@ def _merit_charts(totals: pd.DataFrame, coach: str) -> None:
     section(
         "Mérite et réussite",
         f"Coachs avec au moins {MIN_MATCHES} matchs. Les points mérités sont ceux que les notes de l'équipe auraient "
-        "rapportés en moyenne contre tous les adversaires de la journée.",
+        "rapportés en moyenne contre toutes les équipes de la journée.",
     )
     solid = totals[totals["matchs"] >= MIN_MATCHES].reset_index(drop=True)
     if solid.empty:

@@ -24,6 +24,12 @@ from mpg.glossary import explain
 
 OPTIONS = ["—", "H", "D", "A"]
 STORE = "et_si"
+NON_BREAKING_HYPHEN = "\u2011"
+BASE_LABEL = "Pronostic de base"
+
+
+def _score(text: object) -> str:
+    return str(text).replace("-", NON_BREAKING_HYPHEN)
 
 
 def _next_gw(a: Analysis, fc: dict, team_id: int) -> None:
@@ -36,7 +42,7 @@ def _next_gw(a: Analysis, fc: dict, team_id: int) -> None:
         f'<div class="pair"><div class="team">{escape(m["home_team"])}</div><div class="vs">contre</div>'
         f'<div class="team">{escape(m["away_team"])}</div></div>'
         f'<div class="foot">{prob_bar(m["p_dom"], m["p_nul"], m["p_ext"])}'
-        f'<div class="meta mt-8">Score le plus probable : <b>{m["score_probable"]}</b></div></div></div>'
+        f'<div class="meta mt-8">Score le plus probable : <b>{_score(m["score_probable"])}</b></div></div></div>'
         for _, m in nxt.iterrows()
     ]
     fixture_grid(cards, len(cards))
@@ -70,9 +76,11 @@ def _season_table(sim, names: dict[int, str], team_id: int) -> None:
         hide_index=True,
         column_config={
             "team_name": "Équipe",
-            "pts_actuels": "Pts actuels",
-            "pts_moy": st.column_config.NumberColumn("Pts attendus", format="%.1f"),
-            "intervalle": st.column_config.TextColumn("Intervalle 90 %"),
+            "pts_actuels": "Points actuels",
+            "pts_moy": st.column_config.NumberColumn("Points prévus", format="%.1f"),
+            "intervalle": st.column_config.TextColumn(
+                "Fourchette de points", help="Dans 9 cas sur 10, l'équipe finit entre ces deux totaux"
+            ),
             "rang_moy": st.column_config.NumberColumn("Rang moyen", format="%.1f"),
             "p_titre": st.column_config.ProgressColumn("Titre", min_value=0, max_value=1, format="percent"),
             "p_podium": st.column_config.ProgressColumn("Podium", min_value=0, max_value=1, format="percent"),
@@ -137,7 +145,7 @@ def _what_if(a: Analysis, fc: dict, team_id: int) -> None:
             store[int(j)] = choice
 
     if not store:
-        st.caption("Fixez au moins un résultat pour voir son effet sur la fin de saison.")
+        st.caption("Fixe au moins un résultat pour voir son effet sur la fin de saison.")
         return
 
     forced_desc = ", ".join(
@@ -167,17 +175,17 @@ def _what_if(a: Analysis, fc: dict, team_id: int) -> None:
     kpi_row(
         [
             {
-                "label": f"Titre, {me['team_name']}",
+                "label": f"Chances de titre, {me['team_name']}",
                 "value": fmt_pct(me["titre_apres"]),
-                "sub": f"avant : {fmt_pct(me['titre_avant'])} ({me['delta_titre']:+.0f} pts de %)",
+                "sub": f"avant : {fmt_pct(me['titre_avant'])} ({me['delta_titre']:+.0f} points de pourcentage)",
             },
             {
-                "label": "Podium",
+                "label": "Chances de podium",
                 "value": fmt_pct(me["podium_apres"]),
-                "sub": f"avant : {fmt_pct(me['podium_avant'])} ({me['delta_podium']:+.0f} pts de %)",
+                "sub": f"avant : {fmt_pct(me['podium_avant'])} ({me['delta_podium']:+.0f} points de pourcentage)",
             },
             {
-                "label": "Dernière place",
+                "label": "Chances de finir dernier",
                 "value": fmt_pct(me["dernier_apres"]),
                 "sub": f"avant : {fmt_pct(me['dernier_avant'])}",
             },
@@ -221,35 +229,37 @@ def _what_if(a: Analysis, fc: dict, team_id: int) -> None:
                     "Podium après", min_value=0, max_value=1, format="percent"
                 ),
                 "dernier_apres": st.column_config.NumberColumn("Dernier après", format="percent"),
-                "pts_apres": st.column_config.NumberColumn("Pts attendus", format="%.1f"),
+                "pts_apres": st.column_config.NumberColumn("Points prévus", format="%.1f"),
             },
             height=table_height(len(comp)),
         )
 
 
 def _model_quality(a: Analysis, fc: dict, meta: dict) -> None:
-    summ = fc["backtest_summary"]
+    summ = fc["backtest_summary"].replace({"modele": {REFERENCE: BASE_LABEL}})
     left, right = st.columns([1.3, 1], gap="medium")
     with left:
         st.markdown("**Rejeu du passé** (chaque journée prédite avec les seules journées précédentes)")
-        st.dataframe(
-            summ,
-            hide_index=True,
-            column_config={
-                "modele": "Modèle",
-                "matchs": st.column_config.NumberColumn("Matchs", width="small"),
-                "rps": st.column_config.NumberColumn("RPS ↓", format="%.3f", width="small"),
-                "log_loss": st.column_config.NumberColumn("Log-loss ↓", format="%.3f", width="small"),
-                "brier": st.column_config.NumberColumn("Brier ↓", format="%.3f", width="small"),
-                "proba_issue_reelle": st.column_config.ProgressColumn(
-                    "Vrai résultat",
-                    min_value=0,
-                    max_value=1,
-                    format="percent",
-                    help="Probabilité moyenne donnée au résultat qui s'est produit",
-                ),
-            },
-        )
+        st.caption("Chaque modèle est noté par son erreur de prévision : plus elle est basse, mieux c'est.")
+        with st.expander("Détail des erreurs de prévision (RPS, log-loss, Brier)"):
+            st.dataframe(
+                summ,
+                hide_index=True,
+                column_config={
+                    "modele": "Modèle",
+                    "matchs": st.column_config.NumberColumn("Matchs", width="small"),
+                    "rps": st.column_config.NumberColumn("RPS ↓", format="%.3f", width="small"),
+                    "log_loss": st.column_config.NumberColumn("Log-loss ↓", format="%.3f", width="small"),
+                    "brier": st.column_config.NumberColumn("Brier ↓", format="%.3f", width="small"),
+                    "proba_issue_reelle": st.column_config.ProgressColumn(
+                        "Vrai résultat",
+                        min_value=0,
+                        max_value=1,
+                        format="percent",
+                        help="Probabilité moyenne donnée au résultat qui s'est produit",
+                    ),
+                },
+            )
         how(["scores_prevision", "fuite_backtest"], meta)
     with right:
         st.markdown("**Pronostics figés**")
@@ -341,18 +351,18 @@ def render(a: Analysis, team_id: int) -> None:
                 "label": "Favori pour le titre",
                 "value": names[int(fav["team_id"])],
                 "small": True,
-                "sub": f"{fmt_pct(fav['p_titre'])} de chances, {fav['pts_moy']:.0f} pts attendus",
+                "sub": f"{fmt_pct(fav['p_titre'])} de chances, {fav['pts_moy']:.0f} points prévus",
             },
             {
-                "label": f"Titre, {names[team_id]}",
+                "label": f"Chances de titre, {names[team_id]}",
                 "value": fmt_pct(me["p_titre"]),
                 "sub": f"podium {fmt_pct(me['p_podium'])}, rang moyen {me['rang_moy']:.1f}",
                 "me": True,
             },
             {
-                "label": "Points attendus",
+                "label": "Points en fin de saison",
                 "value": f"{me['pts_moy']:.0f}",
-                "sub": f"entre {me['pts_p05']:.0f} et {me['pts_p95']:.0f} (90 %)",
+                "sub": f"entre {me['pts_p05']:.0f} et {me['pts_p95']:.0f} dans 9 cas sur 10",
                 "me": True,
             },
             {
@@ -387,9 +397,9 @@ def render(a: Analysis, team_id: int) -> None:
         format_func={"p_titre": "Titre", "p_podium": "Podium", "p_dernier": "Dernier"}.get,
     )
     label = {
-        "p_titre": "Probabilité de titre",
-        "p_podium": "Probabilité de podium",
-        "p_dernier": "Probabilité de finir dernier",
+        "p_titre": "Chances de titre",
+        "p_podium": "Chances de podium",
+        "p_dernier": "Chances de finir dernier",
     }[metric]
     charts.show(charts.title_history(fc["history"], names, team_id, metric, label))
     st.caption("Recalculé après chaque journée avec les seuls résultats connus à ce moment.")
@@ -401,7 +411,7 @@ def render(a: Analysis, team_id: int) -> None:
     )
     stakes = _stakes(a, draws, data_signature(), team_id)
     focus = "titre" if me["p_titre"] >= 0.05 else "podium" if me["p_podium"] >= 0.05 else "dernier"
-    focus_label = {"titre": "titre", "podium": "podium", "dernier": "dernière place"}[focus]
+    focus_label = {"titre": "titre", "podium": "podium", "dernier": "finir dernier"}[focus]
     stakes["enjeu"] = stakes[[f"{focus}_1", f"{focus}_N", f"{focus}_2"]].max(axis=1) - stakes[
         [f"{focus}_1", f"{focus}_N", f"{focus}_2"]
     ].min(axis=1)
@@ -410,9 +420,9 @@ def render(a: Analysis, team_id: int) -> None:
         hide_index=True,
         column_config={
             "match": "Match",
-            f"{focus}_1": st.column_config.NumberColumn(f"P({focus_label}) si 1", format="percent"),
-            f"{focus}_N": st.column_config.NumberColumn(f"P({focus_label}) si N", format="percent"),
-            f"{focus}_2": st.column_config.NumberColumn(f"P({focus_label}) si 2", format="percent"),
+            f"{focus}_1": st.column_config.NumberColumn(f"Chances de {focus_label} si 1", format="percent"),
+            f"{focus}_N": st.column_config.NumberColumn(f"Chances de {focus_label} si N", format="percent"),
+            f"{focus}_2": st.column_config.NumberColumn(f"Chances de {focus_label} si 2", format="percent"),
             "enjeu": st.column_config.ProgressColumn(
                 "Enjeu",
                 min_value=0,
@@ -423,7 +433,7 @@ def render(a: Analysis, team_id: int) -> None:
         },
     )
 
-    section("Et si…", "Imposez des résultats et regardez la fin de saison bouger.")
+    section("Et si…", "Impose des résultats et regardez la fin de saison bouger.")
     with st.container(border=True):
         _what_if(a, fc, team_id)
     how("et_si", meta)

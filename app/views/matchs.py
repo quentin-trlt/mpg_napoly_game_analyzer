@@ -120,6 +120,6 @@ def render(a: Analysis, team_id: int) -> None:
                 "lieu": "Lieu",
                 "adversaire": "Adversaire",
                 "rang_adv": st.column_config.NumberColumn("Rang actuel"),
-                "force_adv": st.column_config.NumberColumn("Force a priori", format="%+.2f"),
+                "force_adv": st.column_config.NumberColumn("Force sur le papier", format="%+.2f"),
             },
         )

@@ -185,7 +185,11 @@ def render(a: Analysis, team_id: int) -> None:
             "disponibilite_ponderee": st.column_config.ProgressColumn(
                 "Fiabilité", min_value=0, max_value=1, format="percent"
             ),
-            "gini_enchere": st.column_config.NumberColumn("Gini", format="%.2f"),
+            "gini_enchere": st.column_config.NumberColumn(
+                "Concentration",
+                format="%.2f",
+                help="Concentration des dépenses : 0 = budget réparti, 1 = tout sur un joueur",
+            ),
             "remarque": "Remarque",
         },
         height=table_height(len(table)),

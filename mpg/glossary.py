@@ -1,11 +1,12 @@
 GLOSSARY: dict[str, str] = {
     "petit_echantillon": (
         "Après {derniere_journee} journées, chaque équipe n'a joué que {derniere_journee} matchs. Un écart de 2 ou 3 "
-        "points peut venir d'un seul penalty. Les intervalles affichés donnent l'ordre de grandeur de cette "
-        "incertitude : quand ils contiennent 0, l'écart n'est pas distinguable du hasard."
+        "points peut venir d'un seul penalty. Les fourchettes affichées donnent l'ordre de grandeur de cette "
+        "incertitude : ce sont des fourchettes (intervalles à 90 %). Quand elles contiennent 0, l'écart n'est pas "
+        "distinguable du hasard."
     ),
     "indice_force": (
-        "**Indice de force a priori.** Il résume la qualité de l'effectif sans regarder les résultats. "
+        "**Force sur le papier (indice de force a priori).** Il résume la qualité de l'effectif sans regarder les résultats. "
         "Chaque caractéristique est convertie en z-score robuste, (x − médiane) / (1,4826 × MAD), puis pondérée : "
         "cote du meilleur 11 possible (45 %), note réelle moyenne de ce 11 en Premier League (30 %), cote du banc (15 %), "
         "taille de l'effectif (10 %).\n\n"
@@ -17,9 +18,9 @@ GLOSSARY: dict[str, str] = {
     "scenarios_force": (
         "**Scénarios de pondération.** Qui était favori dépend de ce qu'on regarde : la valeur totale, le 11 titulaire, "
         "la profondeur ou le niveau réel des joueurs. Chaque scénario recalcule l'indice avec d'autres poids, et la plage "
-        "de rangs attendus montre à quel point le statut de favori dépend de l'hypothèse. Vous pouvez aussi composer "
-        "votre propre pondération à partir de n'importe quelle caractéristique.\n\n"
-        "La corrélation de chaque scénario avec les points réels est affichée à titre indicatif. Avec 10 équipes, "
+        "de rangs attendus montre à quel point le statut de favori dépend de l'hypothèse. Tu peux aussi composer "
+        "ta propre pondération à partir de n'importe quelle caractéristique.\n\n"
+        "Le lien (corrélation, ρ) de chaque scénario avec les points réels est affiché à titre indicatif. Avec 10 équipes, "
         "retenir le scénario le mieux corrélé serait du sur-ajustement : il gagnerait en partie par hasard."
     ),
     "ecart_rang": (
@@ -32,7 +33,7 @@ GLOSSARY: dict[str, str] = {
         "laisse ses joueurs les plus chers de côté, par choix ou à cause des absences."
     ),
     "spearman": (
-        "**Corrélation de Spearman (ρ).** Corrélation entre les rangs plutôt qu'entre les valeurs, donc insensible "
+        "**Lien (corrélation de Spearman, ρ).** Il va de −1 à +1. Corrélation entre les rangs plutôt qu'entre les valeurs, donc insensible "
         "aux valeurs extrêmes et aux relations non linéaires. ρ = 1 : même ordre ; ρ = 0 : aucun lien monotone. "
         "Avec 10 équipes, il faut |ρ| > 0,64 environ pour atteindre p < 0,05."
     ),
@@ -43,7 +44,7 @@ GLOSSARY: dict[str, str] = {
     ),
     "points_vs_niveau": (
         "**Points contre niveau de jeu.** En abscisse, la note moyenne de l'équipe ; en ordonnée, ses points. "
-        "La diagonale de référence est donnée par les xPts all-play : une équipe au-dessus a pris plus de points que "
+        "La diagonale de référence est donnée par les points mérités (xPts all-play) : une équipe au-dessus a pris plus de points que "
         "son niveau ne le justifie."
     ),
     "note_brute": (
@@ -53,17 +54,17 @@ GLOSSARY: dict[str, str] = {
         "du site pour les équipes n'ayant aligné aucun Rotaldo."
     ),
     "all_play": (
-        "**Classement « contre tout le monde » (all-play).** Chaque journée, on compare la note moyenne de l'équipe "
+        "**Classement « contre toutes les équipes de la journée » (all-play).** Chaque journée, on compare la note moyenne de l'équipe "
         "à celle des 9 autres, pas seulement à celle de son adversaire. Victoire si l'écart dépasse {bande_nul:.2f} "
         "point, nul sinon. Ce seuil est calibré pour reproduire le taux de nuls observé dans la ligue. "
-        "Les points attendus (xPts) sont la moyenne des points de ces 9 matchs fictifs.\n\n"
+        "Les points mérités (xPts) sont la moyenne des points de ces 9 matchs fictifs.\n\n"
         "La règle « à la note » prédit le bon résultat dans {concordance_regle_note:.0%} des matchs réels. MPG décide "
         "en réalité ligne par ligne (attaque contre défense, gardien), d'où l'écart."
     ),
     "chance_decomposition": (
         "**Décomposition de la chance.**\n\n"
-        "- *Chance totale* = points réels − xPts all-play.\n"
-        "- *Chance de calendrier* = points selon la règle de note contre les vrais adversaires − xPts all-play. "
+        "- *Chance totale* = points réels − points mérités (xPts all-play).\n"
+        "- *Chance de calendrier* = points selon la règle de note contre les vrais adversaires − points mérités. "
         "Elle mesure le fait d'avoir croisé les adversaires au bon moment (un jour où ils étaient faibles).\n"
         "- *Chance de conversion* = points réels − points selon la règle de note. Elle mesure ce que la mécanique "
         "MPG (buts MPG, arrêts, Rotaldos) a donné ou repris à notes égales.\n\n"
@@ -72,24 +73,27 @@ GLOSSARY: dict[str, str] = {
     "calendrier_permute": (
         "**Calendriers permutés.** On garde les notes de chaque équipe à chaque journée et on tire {n_sim:,} calendriers "
         "au hasard (appariements uniformes). Le percentile indique la part des calendriers qui auraient rapporté moins "
-        "de points : 90 % veut dire que seuls 10 % des tirages faisaient mieux. La moyenne des tirages égale "
-        "mathématiquement les xPts all-play, la simulation ajoute la dispersion."
+        "de points : 90 % veut dire que seuls 10 % des tirages faisaient mieux. L'app le traduit en « classé Xe sur N "
+        "des calendriers les plus faciles » : 1er = calendrier le plus facile de la ligue. La moyenne des tirages égale "
+        "mathématiquement les points mérités (xPts all-play), la simulation ajoute la dispersion."
     ),
     "pythagore": (
-        "**xPts pythagoriciens (Poisson).** On estime le nombre moyen de buts marqués et encaissés par match, puis on "
+        "**Points attendus d'après les buts (xPts pythagoriciens, Poisson).** On estime le nombre moyen de buts marqués et encaissés par match, puis on "
         "suppose que les buts suivent deux lois de Poisson indépendantes. La différence suit une loi de Skellam, qui "
-        "donne P(victoire) et P(nul). xPts = matchs × (3 P(V) + P(N)). Les taux sont rétrécis vers la moyenne de la "
-        "ligue avec 1 match fictif, pour qu'une équipe muette en attaque n'ait pas un taux strictement nul.\n\n"
-        "Une équipe au-dessus de ses xPts pythagoriciens a gagné ses matchs serrés et perdu les déroutes."
+        "donne P(victoire) et P(nul). xPts = matchs × (3 P(V) + P(N)). Les taux sont fiabilisés (rétrécis vers la "
+        "moyenne de la ligue avec 1 match fictif), pour qu'une équipe muette en attaque n'ait pas un taux "
+        "strictement nul.\n\n"
+        "Une équipe au-dessus de ses points attendus d'après les buts a gagné ses matchs serrés et perdu les déroutes."
     ),
     "sur_regime_adv": (
-        "**Sur-régime adverse.** Note de l'adversaire face à l'équipe, moins sa note moyenne sur ses autres matchs "
+        "**Adversaires au-dessus de leur niveau (sur-régime adverse).** Note de l'adversaire face à l'équipe, moins sa note moyenne sur ses autres matchs "
         "(leave-one-out). Positif : les adversaires ont joué au-dessus de leur niveau habituel contre elle."
     ),
     "indice_chance": (
-        "**Indice de chance.** Moyenne de trois z-scores robustes : chance totale, chance pythagoricienne, et l'opposé "
-        "du sur-régime adverse. Positif = chanceux. Les intervalles bootstrap à 90 % sur la chance totale "
-        "rééchantillonnent les journées : avec {derniere_journee} journées, ils restent larges."
+        "**Indice de chance.** Moyenne de trois z-scores robustes : chance totale, chance pythagoricienne (points pris "
+        "moins points attendus d'après les buts), et l'opposé du sur-régime adverse. Positif = chanceux. Les "
+        "fourchettes (intervalles bootstrap à 90 %) sur la chance totale rééchantillonnent les journées : avec "
+        "{derniere_journee} journées, elles restent larges."
     ),
     "regret": (
         "**Points laissés sur le banc.** Pour chaque match, on construit le meilleur 11 possible parmi les joueurs de la "
@@ -118,10 +122,11 @@ GLOSSARY: dict[str, str] = {
         "symétrique (payer 2 fois la cote ou la moitié donne +0,69 et −0,69) et réduit le poids des gros transferts. "
         "Au niveau équipe on prend la médiane, donc un achat à 127 M n'influence pas plus le résultat qu'un achat à 30 M. "
         "Le surpaiement global (somme des enchères / somme des cotes) est affiché pour comparaison : lui est dominé par "
-        "les plus gros achats."
+        "les plus gros achats.\n\n"
+        "Dans les tableaux, cette mesure s'appelle « Prix ÷ cote » : au-dessus de 1, l'équipe a payé plus cher que la cote."
     ),
     "shrinkage": (
-        "**Note estimée.** La note MPG d'un joueur varie beaucoup d'un match à l'autre (écart-type d'environ 1,1 point "
+        "**Note estimée (note fiabilisée, shrinkage).** La note MPG d'un joueur varie beaucoup d'un match à l'autre (écart-type d'environ 1,1 point "
         "pour un titulaire), alors que les joueurs d'un même poste se ressemblent (0,2 à 0,6 point d'écart de niveau). "
         "On l'estime donc sur toutes ses notes de Premier League (fiche joueur MPG), en trois morceaux :\n\n"
         "- sa moyenne quand il est titulaire, tirée vers celle des titulaires de son poste : "
@@ -131,12 +136,13 @@ GLOSSARY: dict[str, str] = {
         "Note estimée = p × note de titulaire + (1 − p) × note de remplaçant : c'est la note attendue quand il joue. "
         "k est le rapport entre la variance d'un match à l'autre et la variance entre joueurs : un k élevé (gardiens) "
         "veut dire que dix matchs en disent peu de plus que le poste. Chaque journée prédite avec les précédentes, "
-        "cette estimation prédit mieux la note suivante que la moyenne brute ou une moyenne unique rétrécie."
+        "cette estimation prédit mieux la note suivante que la moyenne brute ou une moyenne unique fiabilisée."
     ),
     "shrinkage_compos": (
-        "**Note rétrécie.** Après quelques matchs, une note moyenne MPG est très bruitée. On la combine avec une note "
-        "a priori, la moyenne de saison du joueur en Premier League (à défaut, la médiane de son poste) :\n\n"
-        "note rétrécie = (n × moyenne MPG + k × a priori) / (n + k)\n\n"
+        "**Note fiabilisée (note rétrécie, shrinkage).** Après quelques matchs, une note moyenne MPG est très bruitée. "
+        "On la combine avec une note sur le papier (a priori), la moyenne de saison du joueur en Premier League (à "
+        "défaut, la médiane de son poste) :\n\n"
+        "note fiabilisée = (n × moyenne MPG + k × note sur le papier) / (n + k)\n\n"
         "k = {k_shrinkage:.1f} est estimé sur les données : c'est le rapport entre la variance d'un match à l'autre pour "
         "un même joueur et la variance entre joueurs (modèle à effets aléatoires). Un k élevé signifie que quelques "
         "matchs MPG apportent peu d'information de plus que la moyenne de saison."
@@ -144,10 +150,11 @@ GLOSSARY: dict[str, str] = {
     "residu_valeur": (
         "**Rendement par rapport au prix.** Dans chaque poste, on ajuste par régression de Theil–Sen (médiane des pentes, "
         "robuste aux valeurs extrêmes) la note estimée sur log(enchère). Le résidu est la note du joueur moins la note "
-        "attendue pour son prix. Positif : il rend plus que ce que son prix laissait espérer."
+        "attendue pour son prix. Positif : il rend plus que ce que son prix laissait espérer. Dans les tableaux, ce "
+        "résidu s'appelle « Écart au prix »."
     ),
     "concentration": (
-        "**Concentration du budget.** L'indice de Gini des enchères vaut 0 si tous les joueurs ont coûté pareil, et "
+        "**Concentration des dépenses (indice de Gini).** L'indice de Gini des enchères vaut 0 si tous les joueurs ont coûté pareil, et "
         "tend vers 1 si un joueur a absorbé tout le budget. Le HHI est la somme des parts au carré (1/n pour un budget "
         "parfaitement réparti). Une forte concentration rend l'équipe dépendante de la forme et de la santé d'une star."
     ),
@@ -157,9 +164,12 @@ GLOSSARY: dict[str, str] = {
     ),
     "score_mercato": (
         "**Score mercato.** Six composantes, toutes converties en z-score robuste entre les 10 équipes (signe choisi pour "
-        "que plus haut = mieux) : rendement vs prix (moyenne tronquée à 10 % des résidus, 30 %), prix payé vs cote "
+        "que plus haut = mieux) : rendement vs prix (moyenne sans les extrêmes, c'est-à-dire tronquée à 10 %, des "
+        "résidus, 30 %), prix payé vs cote "
         "(surpaiement médian, 20 %), fiabilité (temps de jeu PL pondéré par le prix, 15 %), profondeur de banc "
-        "(cote hors meilleur 11, 15 %), diversification (Gini, 10 %), équilibre par ligne (10 %).\n\n"
+        "(cote hors meilleur 11, 15 %), diversification (concentration des dépenses, Gini, 10 %), équilibre par ligne (10 %). "
+        "La carte des composantes les affiche en « écart à la médiane » : chaque case dit de combien l'équipe "
+        "s'éloigne de l'équipe du milieu, en unités robustes.\n\n"
         "**Sensibilité.** Le classement est recalculé avec cinq jeux de poids et en retirant le joueur le plus cher de "
         "chaque équipe. La plage de rangs indique la robustesse : une équipe classée entre 2e et 10e selon les hypothèses "
         "n'a pas un mercato objectivement classable."
@@ -193,14 +203,18 @@ GLOSSARY: dict[str, str] = {
         "une suspension, donc une absence probable en MPG."
     ),
     "bootstrap": (
-        "**Intervalle bootstrap à 90 %.** On rééchantillonne avec remise les unités observées (ici les journées) 5 000 fois et on "
-        "recalcule l'indicateur. L'intervalle contient 90 % des valeurs obtenues."
+        "**Fourchette à 90 % (intervalle bootstrap).** On rééchantillonne avec remise les unités observées (ici les "
+        "journées) 5 000 fois et on recalcule l'indicateur. La fourchette contient 90 % des valeurs obtenues : "
+        "« entre −1 et +5 » veut dire qu'on est sûr à 90 % que la vraie valeur est dans cet intervalle."
     ),
     "simulation_saison": (
         "**Simulation de fin de saison.** Chaque match restant est tiré au sort selon les probabilités de l'ensemble, "
         "puis un score cohérent avec l'issue est tiré dans la loi du modèle de Poisson (pour départager à la "
         "différence de buts). On répète la saison {n_saisons:,} fois. P(titre) est la part des saisons simulées que "
-        "l'équipe termine en tête ; l'intervalle de points couvre 90 % des saisons.\n\n"
+        "l'équipe termine en tête ; la fourchette de points couvre 90 % des saisons (« dans 9 cas sur 10 », "
+        "l'ancien intervalle à 90 %). Les « points prévus » sont la moyenne des points des saisons simulées. "
+        "« Chances de titre », « de podium » et « de finir dernier » sont les parts des saisons simulées où l'équipe "
+        "termine 1re, dans les 3 premières ou dernière.\n\n"
         "Les tirages incluent l'incertitude sur la force des équipes, pas seulement le hasard des matchs : une équipe "
         "dont on connaît mal le niveau a une distribution de points plus large."
     ),
@@ -209,7 +223,9 @@ GLOSSARY: dict[str, str] = {
         "les journées 1 à 3 : seul le structurel compte alors, car Elo et Poisson n'ont encore presque aucun résultat. "
         "Rejoué sur trois saisons (171 matchs), le structurel est le meilleur modèle en début de saison et le moins bon "
         "ensuite ; aucun modèle ne bat durablement la moyenne, plus robuste quand ils se trompent différemment. "
-        "Les bonus restants de chaque équipe sont ensuite répartis au hasard sur ses matchs restants."
+        "Les bonus restants de chaque équipe sont ensuite répartis au hasard sur ses matchs restants. Les chances de "
+        "titre, les points prévus et la fourchette de points viennent de la simulation de fin de saison, qui "
+        "s'appuie sur ces probabilités."
     ),
     "modele_elo": (
         "**Elo.** Chaque équipe part de 1 500 + 100 × son indice de force a priori. Après chaque match, la note bouge "
@@ -236,13 +252,16 @@ GLOSSARY: dict[str, str] = {
         "tant qu'elle a peu de matchs. C'est le seul modèle qui voit les blessures et le temps de jeu."
     ),
     "scores_prevision": (
-        "**Mesurer une prévision probabiliste.**\n\n"
+        "**Erreur de prévision (plus bas = mieux).** Trois façons de la mesurer pour une prévision en probabilités. "
+        "L'app affiche le RPS ; le log-loss et le Brier sont dans le détail.\n\n"
         "- *RPS* (ranked probability score) : écart entre les probabilités cumulées prédites et observées dans l'ordre "
         "victoire > nul > défaite. Prédire 60 % de victoire pour un nul est moins grave que pour une défaite. 0 = parfait.\n"
         "- *Log-loss* : −log de la probabilité donnée au résultat réel. Punit fort les certitudes démenties.\n"
         "- *Brier* : écart quadratique entre probabilités et résultat (0 = parfait, 2 = pire).\n\n"
-        "Plus bas = meilleur pour les trois. La référence prédit les fréquences observées domicile / nul / extérieur "
-        "pour tous les matchs : un modèle qui ne la bat pas n'apporte rien."
+        "Plus bas = meilleur pour les trois. Le « pronostic de base » est la référence : elle prédit les fréquences "
+        "observées domicile / nul / extérieur pour tous les matchs. Quand l'app affiche « 27 % d'erreur en moins que "
+        "le pronostic de base », c'est la baisse du RPS par rapport à cette référence : un modèle qui ne la bat pas "
+        "n'apporte rien."
     ),
     "fuite_backtest": (
         "**Rejeu du passé et ses limites.** Chaque journée est prédite avec un modèle ajusté uniquement sur les "
@@ -253,7 +272,7 @@ GLOSSARY: dict[str, str] = {
         "avant chaque journée, plus bas."
     ),
     "et_si": (
-        "**Mode « et si ».** Fixez l'issue de matchs à venir : ils sont imposés dans toutes les saisons simulées, les "
+        "**Mode « et si ».** Fixe l'issue de matchs à venir : ils sont imposés dans toutes les saisons simulées, les "
         "autres restent tirés au sort. L'écart avec la simulation de référence mesure l'enjeu de chaque match. "
         "Les forces des équipes ne sont pas réajustées après un résultat imposé, ce qui sous-estime légèrement l'effet "
         "d'une série de victoires."
@@ -263,7 +282,7 @@ GLOSSARY: dict[str, str] = {
         "les probabilités de chaque modèle pour la journée suivante (`J05.csv`) et un instantané de la fin de saison "
         "simulée (`saison_J05.csv`). Ces fichiers ne sont jamais réécrits. Une fois les matchs joués, l'app les note "
         "automatiquement : c'est la seule mesure de qualité sans biais, puisque le modèle ne pouvait pas connaître "
-        "le résultat. Pensez à commiter le dossier : Streamlit Cloud ne conserve pas les fichiers écrits par l'app."
+        "le résultat. Pense à commiter le dossier : Streamlit Cloud ne conserve pas les fichiers écrits par l'app."
     ),
     "bonus_restants": (
         "**Bonus restants.** Dotation de début de saison (fichier `data/bonus_stock.csv`, identique pour toutes les "
@@ -284,11 +303,23 @@ GLOSSARY: dict[str, str] = {
         "**Limites.** En vrai, les coachs gardent leurs bonus pour les matchs importants ; ici le placement est "
         "aléatoire. L'effet offensif du 4-2-4 n'est pas modélisé."
     ),
+    "ecart_achats": (
+        "**Écart entre achats moyens (IQR).** Écart entre le quart le plus bas et le quart le plus haut des enchères "
+        "d'une équipe (Q3 − Q1), sans tenir compte des extrêmes. Petit : l'équipe a payé ses joueurs à peu près le "
+        "même prix. Grand : elle mélange achats modestes et gros achats."
+    ),
+    "classe_sur_n": (
+        "**Classé Xe sur N.** Rang de l'équipe ou du joueur parmi les N comparés. Il remplace le percentile : au lieu "
+        "de dire « 80e percentile », l'app dit « classé 3e sur 10 ». 1er = le plus haut de la mesure indiquée. Pour les "
+        "calendriers, l'app dit « classé 2e sur 10 des plus faciles » ou « des plus difficiles » selon la moitié du "
+        "classement, pour toujours annoncer un petit rang."
+    ),
     "calibration": (
-        "**Calibration.** On regroupe toutes les probabilités annoncées (3 par match) par tranche et on compare à la "
+        "**Calibration (« Les pronostics à 60 % se réalisent-ils 60 % du temps ? »).** On regroupe toutes les probabilités annoncées (3 par match) par tranche et on compare à la "
         "fréquence à laquelle l'issue s'est réellement produite. Un modèle bien calibré a ses points sur la diagonale : "
         "quand il annonce 60 %, l'issue arrive environ 6 fois sur 10. Au-dessus de la diagonale, il est trop prudent ; "
-        "en dessous, trop sûr de lui. La taille du point indique le nombre de cas."
+        "en dessous, trop sûr de lui. En abscisse, la « chance annoncée » (la probabilité prévue) ; en ordonnée, la "
+        "« part réellement arrivée » (la fréquence observée). La taille du point indique le nombre de cas."
     ),
 }
 

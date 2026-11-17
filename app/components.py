@@ -246,6 +246,7 @@ def short_table(
             f"short_table accepte {MAX_SHORT_COLUMNS} colonnes au plus, {len(columns)} reçues : {', '.join(columns)}"
         )
     kwargs.setdefault("hide_index", True)
+    kwargs.setdefault("placeholder", "—")
     config = column_config or {}
 
     def config_for(cols: list[str]) -> dict | None:
@@ -271,6 +272,7 @@ def short_table(
             df[full_columns],
             column_config=full_config,
             hide_index=kwargs["hide_index"],
+            placeholder=kwargs["placeholder"],
             alt=f"{alt}, toutes les colonnes" if alt else None,
         )
 

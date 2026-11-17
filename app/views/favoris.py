@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import callout, empty_state, how, kpi_row, section, volet_title
+from app.components import as_pct, callout, empty_state, how, kpi_row, pct_column, section, short_table, volet_title
 from mpg.analysis import Analysis
 from mpg.stats import spearman
 from mpg.strength import (
@@ -251,6 +251,7 @@ def render(a: Analysis, team_id: int) -> None:
             st.dataframe(
                 fit_df,
                 hide_index=True,
+                alt="Lien de chaque scénario avec les points",
                 column_config={
                     "scenario": "Scénario",
                     "rho": st.column_config.NumberColumn(
@@ -272,29 +273,25 @@ def render(a: Analysis, team_id: int) -> None:
     idx["remarque"] = np.where(idx["effectif_incomplet"], INCOMPLETE, "")
     config = {
         "team_name": "Équipe",
-        "indice_force": st.column_config.NumberColumn("Force sur le papier", format="%+.2f"),
+        "indice_force": st.column_config.NumberColumn(
+            "Force", format="%+.2f", help="Force de l'effectif sur le papier, avant le moindre match"
+        ),
         "rang_attendu": st.column_config.NumberColumn("Rang attendu"),
         "rang": st.column_config.NumberColumn("Rang réel"),
-        "valeur_effectif_meur": st.column_config.NumberColumn("Valeur effectif", format="%d M€"),
+        "valeur_effectif_meur": st.column_config.NumberColumn("Valeur", format="%d M€", help="Valeur de l'effectif"),
         "cote_11_max": st.column_config.NumberColumn(_price_wording("Cote meilleur 11", prix), format="%d M€"),
         "formation_11_max": "Formation",
         "cote_banc": st.column_config.NumberColumn(_price_wording("Cote banc", prix), format="%d M€"),
         "note_reelle_11": st.column_config.NumberColumn("Note PL du 11", format="%.2f"),
-        "taux_titu_11": st.column_config.ProgressColumn(
-            "Titularisations PL du 11", min_value=0, max_value=1, format="percent"
-        ),
-        "disponibilite_effectif": st.column_config.ProgressColumn(
-            "Taux de jeu effectif", min_value=0, max_value=1, format="percent"
-        ),
+        "taux_titu_11": pct_column("Titularisations PL du 11", bar=True),
+        "disponibilite_effectif": pct_column("Taux de jeu effectif", bar=True),
         "ga_saison": st.column_config.NumberColumn("Buts + passes PL", format="%d"),
         "nb_joueurs": "Joueurs",
         "nb_indisponibles": "Indispos",
         "cote_11_aligne_moy": st.column_config.NumberColumn(
             _price_wording("Cote 11 aligné (moy.)", prix), format="%.0f M€"
         ),
-        "taux_utilisation_11": st.column_config.ProgressColumn(
-            "Utilisation du 11", min_value=0, max_value=1, format="percent"
-        ),
+        "taux_utilisation_11": pct_column("Utilisation du 11", bar=True),
         "remarque": "Remarque",
     }
     shown = [
@@ -320,9 +317,12 @@ def render(a: Analysis, team_id: int) -> None:
         columns.remove("nb_indisponibles")
     if incomplete.any():
         columns.append("remarque")
-    st.dataframe(
-        idx.sort_values("rang_attendu")[columns],
-        hide_index=True,
+    table = as_pct(idx.sort_values("rang_attendu"), ["taux_titu_11", "disponibilite_effectif", "taux_utilisation_11"])
+    short_table(
+        table,
+        columns[:5],
+        full=columns,
         column_config={c: config[c] for c in columns},
+        alt="Caractéristiques des effectifs",
     )
     how("cote_11_aligne", meta)

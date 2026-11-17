@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import callout, fmt_signed, how, kpi_row, section, volet_title
+from app.components import callout, fmt_signed, how, kpi_row, pct_column, section, volet_title
 from mpg.analysis import Analysis
 from mpg.glossary import explain
 from mpg.luck import schedule_permutation
@@ -233,6 +233,7 @@ def _other_measures(a: Analysis, team_id: int) -> None:
                 ]
             ],
             hide_index=True,
+            alt="Détail de la chance, équipe par équipe",
             column_config={
                 "team_name": "Équipe",
                 "indice_chance": st.column_config.NumberColumn(
@@ -253,11 +254,9 @@ def _other_measures(a: Analysis, team_id: int) -> None:
                 "chance_totale": st.column_config.NumberColumn("Chance totale", format="%+.1f"),
                 "chance_calendrier": st.column_config.NumberColumn("dont calendrier", format="%+.1f"),
                 "chance_conversion": st.column_config.NumberColumn("dont conversion", format="%+.1f"),
-                "percentile_calendrier": st.column_config.ProgressColumn(
+                "percentile_calendrier": pct_column(
                     "Facilité du calendrier",
-                    min_value=0,
-                    max_value=100,
-                    format="%.0f",
+                    bar=True,
                     help="De 0 (calendrier très dur) à 100 (très facile) : part des calendriers tirés au hasard qui "
                     "auraient rapporté moins de points.",
                 ),

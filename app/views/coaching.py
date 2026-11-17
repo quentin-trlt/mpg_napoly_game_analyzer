@@ -1,7 +1,7 @@
 import streamlit as st
 
 from app import charts
-from app.components import callout, how, kpi_row, section, table_height, volet_title
+from app.components import as_pct, callout, how, kpi_row, pct_column, section, short_table, table_height, volet_title
 from mpg.analysis import Analysis
 from mpg.coaching import bonus_effect
 
@@ -108,21 +108,20 @@ def render(a: Analysis, team_id: int) -> None:
         on=["match_id", "team_id"],
     )
     opt["score"] = opt["bp"].astype(str) + " – " + opt["bc"].astype(str)
-    st.dataframe(
-        opt.sort_values("gw")[
-            [
-                "gw",
-                "opp_name",
-                "resultat",
-                "score",
-                "formation",
-                "somme_notes_11",
-                "somme_notes_optimal",
-                "regret",
-                "oublies_sur_banc",
-            ]
+    short_table(
+        opt.sort_values("gw"),
+        ["gw", "opp_name", "score", "regret", "oublies_sur_banc"],
+        full=[
+            "gw",
+            "opp_name",
+            "resultat",
+            "score",
+            "formation",
+            "somme_notes_11",
+            "somme_notes_optimal",
+            "regret",
+            "oublies_sur_banc",
         ],
-        hide_index=True,
         column_config={
             "gw": st.column_config.NumberColumn("J", format="J%d"),
             "opp_name": "Adversaire",
@@ -131,9 +130,10 @@ def render(a: Analysis, team_id: int) -> None:
             "formation": "Formation",
             "somme_notes_11": st.column_config.NumberColumn("Notes du 11", format="%.1f"),
             "somme_notes_optimal": st.column_config.NumberColumn("Notes du 11 optimal", format="%.1f"),
-            "regret": st.column_config.NumberColumn("Laissé sur le banc", format="%.1f"),
+            "regret": st.column_config.NumberColumn("Sur le banc", format="%.1f", help="Notes laissées sur le banc"),
             "oublies_sur_banc": st.column_config.TextColumn("Auraient dû jouer", width="large"),
         },
+        alt="Le banc de mon équipe, match par match",
     )
 
     section("Capitaines")
@@ -152,15 +152,14 @@ def render(a: Analysis, team_id: int) -> None:
     left, right = st.columns([1, 1.1], gap="medium")
     with left:
         st.dataframe(
-            cap_team.sort_values("ecart_equipe", ascending=False),
+            as_pct(cap_team.sort_values("ecart_equipe", ascending=False), ["taux"]),
             hide_index=True,
+            alt="Capitaines, équipe par équipe",
             column_config={
                 "team_name": "Équipe",
                 "matchs": None,
                 "capitaine_a_joue": None,
-                "taux": st.column_config.ProgressColumn(
-                    "A joué", min_value=0, max_value=1, format="percent", help="Part des matchs où le capitaine a joué"
-                ),
+                "taux": pct_column("A joué", bar=True, help="Part des matchs où le capitaine a joué"),
                 "ecart_equipe": st.column_config.NumberColumn(
                     "vs équipe", format="%+.2f", width="small", help="Écart à la note moyenne de l'équipe"
                 ),
@@ -181,28 +180,29 @@ def render(a: Analysis, team_id: int) -> None:
             )
             .merge(a.team_match[["match_id", "team_id", "gw"]], on=["match_id", "team_id"])
         )
-        st.dataframe(
-            mine.sort_values("gw")[
-                ["gw", "cible_affiche", "note_capitaine", "meilleur_choix", "note_meilleur_choix", "capitaine_a_joue"]
-            ],
-            hide_index=True,
+        short_table(
+            mine.sort_values("gw"),
+            ["gw", "cible_affiche", "note_capitaine", "meilleur_choix", "note_meilleur_choix"],
+            full=["gw", "cible_affiche", "note_capitaine", "meilleur_choix", "note_meilleur_choix", "capitaine_a_joue"],
             column_config={
                 "gw": st.column_config.NumberColumn("J", format="J%d"),
                 "cible_affiche": "Capitaine",
                 "note_capitaine": st.column_config.TextColumn("Note"),
-                "meilleur_choix": "Meilleur choix",
+                "meilleur_choix": st.column_config.TextColumn("Meilleur", help="Le meilleur choix de capitaine"),
                 "note_meilleur_choix": st.column_config.NumberColumn("Sa note", format="%.1f"),
                 "capitaine_a_joue": st.column_config.CheckboxColumn("A joué"),
             },
+            alt="Mes capitaines, match par match",
         )
 
     section("Bonus et remplacements")
     tab_bonus, tab_subs = st.tabs(["Bonus utilisés (hors capitaine)", "Remplacements tactiques"])
     with tab_bonus:
         bu = a.bonus_usage.merge(a.team_match[["match_id", "team_id", "team_name"]], on=["match_id", "team_id"])
-        st.dataframe(
-            bu[["team_name", "gw", "bonus", "effet", "cible_affiche", "opp_name", "resultat"]],
-            hide_index=True,
+        short_table(
+            bu,
+            ["team_name", "gw", "bonus", "effet", "cible_affiche"],
+            full=["team_name", "gw", "bonus", "effet", "cible_affiche", "opp_name", "resultat"],
             column_config={
                 "team_name": "Équipe",
                 "gw": st.column_config.NumberColumn("J", format="J%d"),
@@ -213,6 +213,7 @@ def render(a: Analysis, team_id: int) -> None:
                 "resultat": "Résultat",
             },
             height=min(table_height(len(bu)), 388),
+            alt="Bonus utilisés",
         )
         eff = bonus_effect(a.team_match)
         eff["avec_bonus"] = eff["avec_bonus"].map({True: "Avec bonus", False: "Sans bonus"})
@@ -223,38 +224,39 @@ def render(a: Analysis, team_id: int) -> None:
         )
     with tab_subs:
         tac = a.substitutions[a.substitutions["type"] == "remplacement_tactique"]
-        st.dataframe(
-            tac[
-                [
-                    "team_name",
-                    "gw",
-                    "titulaire_sortant",
-                    "note_titulaire",
-                    "remplacant_entre",
-                    "note_remplacant",
-                    "gain_note",
-                ]
+        short_table(
+            tac,
+            ["team_name", "gw", "titulaire_sortant", "remplacant_entre", "gain_note"],
+            full=[
+                "team_name",
+                "gw",
+                "titulaire_sortant",
+                "note_titulaire",
+                "remplacant_entre",
+                "note_remplacant",
+                "gain_note",
             ],
-            hide_index=True,
             height=min(table_height(len(tac)), 388),
             column_config={
                 "team_name": "Équipe",
                 "gw": st.column_config.NumberColumn("J", format="J%d"),
                 "titulaire_sortant": "Sortant",
-                "note_titulaire": st.column_config.NumberColumn("Note", format="%.1f"),
+                "note_titulaire": st.column_config.NumberColumn("Note du sortant", format="%.1f"),
                 "remplacant_entre": "Entrant",
-                "note_remplacant": st.column_config.NumberColumn("Note", format="%.1f"),
+                "note_remplacant": st.column_config.NumberColumn("Note de l'entrant", format="%.1f"),
                 "gain_note": st.column_config.NumberColumn("Gain", format="%+.1f"),
             },
+            alt="Remplacements tactiques",
         )
         how("remplacements", meta)
 
     section("Formations")
     left, right = st.columns([1, 1.1], gap="medium")
     with left:
-        st.dataframe(
+        short_table(
             a.formations,
-            hide_index=True,
+            ["formation", "matchs", "pts_moy", "bp_moy", "bc_moy"],
+            full=["formation", "matchs", "pts_moy", "bp_moy", "bc_moy", "note_moy"],
             column_config={
                 "formation": "Formation",
                 "matchs": "Matchs",
@@ -263,6 +265,7 @@ def render(a: Analysis, team_id: int) -> None:
                 "bc_moy": st.column_config.NumberColumn("BC / match", format="%.2f"),
                 "note_moy": st.column_config.NumberColumn("Note moy.", format="%.2f"),
             },
+            alt="Résultats par formation",
         )
         st.caption("Peu de matchs par formation : ces moyennes sont indicatives.")
     with right:
@@ -280,4 +283,5 @@ def render(a: Analysis, team_id: int) -> None:
                     "Gain", format="%+.1f", width="small", help="Gain de note total des remplacements tactiques"
                 ),
             },
+            alt="Choix tactiques, équipe par équipe",
         )

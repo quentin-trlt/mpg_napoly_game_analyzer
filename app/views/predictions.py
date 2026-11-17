@@ -5,14 +5,18 @@ import streamlit as st
 
 from app import charts
 from app.components import (
+    PCT_FORMAT,
+    as_pct,
     callout,
     empty_state,
     fixture_grid,
     fmt_pct,
     how,
     kpi_row,
+    pct_column,
     prob_bar,
     section,
+    short_table,
     table_height,
     volet_title,
 )
@@ -51,14 +55,15 @@ def _next_gw(a: Analysis, fc: dict, team_id: int) -> None:
         by_model = by_model[by_model["gw"] == gw]
         by_model["match"] = by_model["home_team"] + " – " + by_model["away_team"]
         st.dataframe(
-            by_model[["match", "modele", "p_dom", "p_nul", "p_ext"]],
+            as_pct(by_model[["match", "modele", "p_dom", "p_nul", "p_ext"]], ["p_dom", "p_nul", "p_ext"]),
             hide_index=True,
+            alt="Probabilités de chaque modèle",
             column_config={
                 "match": "Match",
                 "modele": "Modèle",
-                "p_dom": st.column_config.ProgressColumn("Victoire dom.", min_value=0, max_value=1, format="percent"),
-                "p_nul": st.column_config.ProgressColumn("Nul", min_value=0, max_value=1, format="percent"),
-                "p_ext": st.column_config.ProgressColumn("Victoire ext.", min_value=0, max_value=1, format="percent"),
+                "p_dom": pct_column("Victoire dom.", bar=True),
+                "p_nul": pct_column("Nul", bar=True),
+                "p_ext": pct_column("Victoire ext.", bar=True),
             },
         )
         st.caption(
@@ -71,20 +76,24 @@ def _season_table(sim, names: dict[int, str], team_id: int) -> None:
     s = sim.summary.copy()
     s["team_name"] = s["team_id"].map(names)
     s["intervalle"] = s["pts_p05"].map("{:.0f}".format) + " – " + s["pts_p95"].map("{:.0f}".format)
-    st.dataframe(
-        s[["team_name", "pts_actuels", "pts_moy", "intervalle", "rang_moy", "p_titre", "p_podium", "p_dernier"]],
-        hide_index=True,
+    short_table(
+        as_pct(s, ["p_titre", "p_podium", "p_dernier"]),
+        ["team_name", "pts_moy", "p_titre", "p_podium", "p_dernier"],
+        full=["team_name", "pts_moy", "p_titre", "p_podium", "p_dernier", "intervalle", "rang_moy", "pts_actuels"],
+        alt="Prévisions de fin de saison",
         column_config={
             "team_name": "Équipe",
             "pts_actuels": "Points actuels",
-            "pts_moy": st.column_config.NumberColumn("Points prévus", format="%.1f"),
+            "pts_moy": st.column_config.NumberColumn(
+                "Pts prévus", format="%.1f", help="Points prévus en fin de saison, en moyenne"
+            ),
             "intervalle": st.column_config.TextColumn(
                 "Fourchette de points", help="Dans 9 cas sur 10, l'équipe finit entre ces deux totaux"
             ),
             "rang_moy": st.column_config.NumberColumn("Rang moyen", format="%.1f"),
-            "p_titre": st.column_config.ProgressColumn("Titre", min_value=0, max_value=1, format="percent"),
-            "p_podium": st.column_config.ProgressColumn("Podium", min_value=0, max_value=1, format="percent"),
-            "p_dernier": st.column_config.ProgressColumn("Dernier", min_value=0, max_value=1, format="percent"),
+            "p_titre": pct_column("Titre", bar=True),
+            "p_podium": pct_column("Podium", bar=True),
+            "p_dernier": pct_column("Dernier", bar=True),
         },
         height=table_height(len(s)),
     )
@@ -205,31 +214,30 @@ def _what_if(a: Analysis, fc: dict, team_id: int) -> None:
             )
         )
     with right:
-        st.dataframe(
-            comp.sort_values("titre_apres", ascending=False)[
-                [
-                    "team_name",
-                    "titre_avant",
-                    "titre_apres",
-                    "podium_avant",
-                    "podium_apres",
-                    "dernier_apres",
-                    "pts_apres",
-                ]
+        pct_cols = ["titre_avant", "titre_apres", "podium_avant", "podium_apres", "dernier_apres"]
+        short_table(
+            as_pct(comp.sort_values("titre_apres", ascending=False), pct_cols),
+            ["team_name", "titre_avant", "titre_apres", "podium_apres", "pts_apres"],
+            full=[
+                "team_name",
+                "titre_avant",
+                "titre_apres",
+                "podium_avant",
+                "podium_apres",
+                "dernier_apres",
+                "pts_apres",
             ],
-            hide_index=True,
+            alt="Fin de saison avant et après tes résultats imposés",
             column_config={
                 "team_name": "Équipe",
-                "titre_avant": st.column_config.NumberColumn("Titre avant", format="percent", width="small"),
-                "titre_apres": st.column_config.ProgressColumn(
-                    "Titre après", min_value=0, max_value=1, format="percent"
+                "titre_avant": pct_column("Titre avant", width="small"),
+                "titre_apres": pct_column("Titre après", bar=True),
+                "podium_avant": pct_column("Podium avant", width="small"),
+                "podium_apres": pct_column("Podium après", bar=True),
+                "dernier_apres": pct_column("Dernier après"),
+                "pts_apres": st.column_config.NumberColumn(
+                    "Pts prévus", format="%.1f", help="Points prévus en fin de saison, en moyenne"
                 ),
-                "podium_avant": st.column_config.NumberColumn("Podium avant", format="percent", width="small"),
-                "podium_apres": st.column_config.ProgressColumn(
-                    "Podium après", min_value=0, max_value=1, format="percent"
-                ),
-                "dernier_apres": st.column_config.NumberColumn("Dernier après", format="percent"),
-                "pts_apres": st.column_config.NumberColumn("Points prévus", format="%.1f"),
             },
             height=table_height(len(comp)),
         )
@@ -243,19 +251,18 @@ def _model_quality(a: Analysis, fc: dict, meta: dict) -> None:
         st.caption("Chaque modèle est noté par son erreur de prévision : plus elle est basse, mieux c'est.")
         with st.expander("Détail des erreurs de prévision (RPS, log-loss, Brier)"):
             st.dataframe(
-                summ,
+                as_pct(summ, ["proba_issue_reelle"]),
                 hide_index=True,
+                alt="Erreurs de prévision de chaque modèle",
                 column_config={
                     "modele": "Modèle",
                     "matchs": st.column_config.NumberColumn("Matchs", width="small"),
                     "rps": st.column_config.NumberColumn("RPS ↓", format="%.3f", width="small"),
                     "log_loss": st.column_config.NumberColumn("Log-loss ↓", format="%.3f", width="small"),
                     "brier": st.column_config.NumberColumn("Brier ↓", format="%.3f", width="small"),
-                    "proba_issue_reelle": st.column_config.ProgressColumn(
+                    "proba_issue_reelle": pct_column(
                         "Vrai résultat",
-                        min_value=0,
-                        max_value=1,
-                        format="percent",
+                        bar=True,
                         help="Probabilité moyenne donnée au résultat qui s'est produit",
                     ),
                 },
@@ -415,19 +422,21 @@ def render(a: Analysis, team_id: int) -> None:
     stakes["enjeu"] = stakes[[f"{focus}_1", f"{focus}_N", f"{focus}_2"]].max(axis=1) - stakes[
         [f"{focus}_1", f"{focus}_N", f"{focus}_2"]
     ].min(axis=1)
+    stake_columns = [f"{focus}_1", f"{focus}_N", f"{focus}_2", "enjeu"]
     st.dataframe(
-        stakes.sort_values("enjeu", ascending=False)[["match", f"{focus}_1", f"{focus}_N", f"{focus}_2", "enjeu"]],
+        as_pct(stakes.sort_values("enjeu", ascending=False)[["match", *stake_columns]], stake_columns),
         hide_index=True,
+        alt="Enjeux de la prochaine journée",
         column_config={
             "match": "Match",
-            f"{focus}_1": st.column_config.NumberColumn(f"Chances de {focus_label} si 1", format="percent"),
-            f"{focus}_N": st.column_config.NumberColumn(f"Chances de {focus_label} si N", format="percent"),
-            f"{focus}_2": st.column_config.NumberColumn(f"Chances de {focus_label} si 2", format="percent"),
+            f"{focus}_1": pct_column(f"Chances de {focus_label} si 1"),
+            f"{focus}_N": pct_column(f"Chances de {focus_label} si N"),
+            f"{focus}_2": pct_column(f"Chances de {focus_label} si 2"),
             "enjeu": st.column_config.ProgressColumn(
                 "Enjeu",
                 min_value=0,
-                max_value=float(max(stakes["enjeu"].max(), 0.01)),
-                format="percent",
+                max_value=100 * float(max(stakes["enjeu"].max(), 0.01)),
+                format=PCT_FORMAT,
                 help="Écart entre la meilleure et la pire issue",
             ),
         },

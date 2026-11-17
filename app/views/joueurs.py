@@ -5,10 +5,12 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from app import charts
-from app.components import empty_state, how, kpi_row, section, volet_title
+from app.components import as_pct, empty_state, how, kpi_row, pct_column, section, short_table, volet_title
 from app.theme import AXIS, CONTEXT_LIGHT, HIGHLIGHT, LINE_LABELS, SERIES, SURFACE
 from mpg.analysis import Analysis
 
+MAX_TICKS = 10
+MAX_NAME_CHARS = 15
 SORTS = {
     "note_retrecie": "Note fiabilisée",
     "note_moy": "Moyenne brute",
@@ -52,8 +54,45 @@ def _shrink_chart(ps, team_id: int) -> go.Figure:
         xaxis_title="Moyenne des notes observées",
         yaxis_title="Note fiabilisée",
     )
-    fig.update_xaxes(range=[lo, hi])
-    fig.update_yaxes(range=[lo + 1, hi - 1])
+    fig.update_xaxes(range=[lo, hi], nticks=6)
+    fig.update_yaxes(range=[lo + 1, hi - 1], nticks=6)
+    return fig
+
+
+def _short_name(name: str, n: int = MAX_NAME_CHARS) -> str:
+    return name if len(name) <= n else name[: n - 1].rstrip() + "…"
+
+
+def _decisive_chart(ps) -> go.Figure:
+    ga = ps[ps["ga_saison"] > 0].sort_values("ga_saison", ascending=False).head(MAX_TICKS).iloc[::-1]
+    fig = go.Figure()
+    for column, name, color, hover in (
+        ("buts_reels_saison", "Buts", SERIES[0], "Buts"),
+        ("passes_decisives_saison", "Passes décisives", SERIES[1], "Passes"),
+    ):
+        fig.add_trace(
+            go.Bar(
+                y=ga["joueur"],
+                x=ga[column],
+                name=name,
+                orientation="h",
+                marker=dict(color=color, line=dict(color=SURFACE, width=2)),
+                hovertemplate=f"<b>%{{y}}</b><br>{hover} : %{{x}}<extra></extra>",
+            )
+        )
+    fig.update_layout(
+        barmode="stack",
+        title="Les plus décisifs en Premier League (G+A)",
+        height=420,
+        legend=dict(orientation="h", x=0, xanchor="left", y=1.02, yanchor="bottom"),
+    )
+    fig.update_xaxes(nticks=6)
+    fig.update_yaxes(
+        gridcolor="rgba(0,0,0,0)",
+        tickmode="array",
+        tickvals=list(ga["joueur"]),
+        ticktext=[_short_name(n) for n in ga["joueur"]],
+    )
     return fig
 
 
@@ -206,9 +245,10 @@ def render(a: Analysis, team_id: int) -> None:
         columns = [c for c in columns if c not in PL_COLUMNS]
     if not caps.cote:
         columns.remove("cote")
-    st.dataframe(
-        d[columns],
-        hide_index=True,
+    short_table(
+        as_pct(d, ["taux_jeu"]),
+        ["joueur", "team_name", "poste", "note_moy", "enchere"],
+        full=columns,
         column_config={
             "joueur": st.column_config.TextColumn("Joueur", pinned=True),
             "team_name": "Équipe",
@@ -217,7 +257,7 @@ def render(a: Analysis, team_id: int) -> None:
             "enchere": st.column_config.NumberColumn("Enchère", format="%d M€"),
             "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
             "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note fiabilisée"),
-            "note_moy": st.column_config.NumberColumn("Moy. brute", format="%.2f", help="Moyenne de ces notes"),
+            "note_moy": st.column_config.NumberColumn("Note moy.", format="%.2f", help="Moyenne brute de ces notes"),
             "note_ecart_type": st.column_config.NumberColumn(
                 "Dispersion", format="%.2f", help="Régularité : plus c'est bas, plus ses notes se ressemblent"
             ),
@@ -233,7 +273,7 @@ def render(a: Analysis, team_id: int) -> None:
             "buts_reels_saison": st.column_config.NumberColumn("Buts PL"),
             "passes_decisives_saison": st.column_config.NumberColumn("Passes PL", format="%d"),
             "ga_par_match": st.column_config.NumberColumn("G+A / match", format="%.2f"),
-            "taux_jeu": st.column_config.ProgressColumn("Taux de jeu", min_value=0, max_value=1, format="percent"),
+            "taux_jeu": pct_column("Taux de jeu", bar=True),
             "cartons_jaunes": st.column_config.NumberColumn("Jaunes", format="%d"),
             "statut_performance": "Statut",
             "top3_match": st.column_config.NumberColumn("Top 3 match"),
@@ -241,6 +281,7 @@ def render(a: Analysis, team_id: int) -> None:
             "residu_valeur": st.column_config.NumberColumn("Écart au prix", format="%+.2f"),
         },
         height=520,
+        alt="Classement des joueurs",
     )
     shrinkage = "shrinkage" if meta.get("k_postes") else "shrinkage_compos"
     how([shrinkage, "production_pl"], meta)
@@ -265,28 +306,4 @@ def render(a: Analysis, team_id: int) -> None:
                 "Les buts et passes décisives de Premier League ne sont pas disponibles pour cette saison.",
             )
             return
-        ga = ps[ps["ga_saison"] > 0].sort_values("ga_saison", ascending=False).head(12).iloc[::-1]
-        fig = go.Figure()
-        fig.add_trace(
-            go.Bar(
-                y=ga["joueur"],
-                x=ga["buts_reels_saison"],
-                name="Buts",
-                orientation="h",
-                marker=dict(color=SERIES[0], line=dict(color=SURFACE, width=2)),
-                hovertemplate="<b>%{y}</b><br>Buts : %{x}<extra></extra>",
-            )
-        )
-        fig.add_trace(
-            go.Bar(
-                y=ga["joueur"],
-                x=ga["passes_decisives_saison"],
-                name="Passes décisives",
-                orientation="h",
-                marker=dict(color=SERIES[1], line=dict(color=SURFACE, width=2)),
-                hovertemplate="<b>%{y}</b><br>Passes : %{x}<extra></extra>",
-            )
-        )
-        fig.update_layout(barmode="stack", title="Les plus décisifs en Premier League (G+A)", height=420)
-        fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
-        charts.show(fig)
+        charts.show(_decisive_chart(ps))

@@ -46,7 +46,7 @@ def render(a: Analysis, team_id: int) -> None:
 
     if (a.league.bonus["bonus"] == "Chapron rouge").any():
         callout(
-            "Cette saison, des bonus « Chapron rouge » ont été posés : il expulse un titulaire adverse, remplacé "
+            "Cette saison, des bonus « Chapron rouge » ont été posés : il expulse un titulaire adverse, remplacé "
             "par un Rotaldo, et ce titulaire compte comme absent. Ces cas font monter les absents de l'équipe visée "
             "sans que son coach y soit pour quelque chose."
         )

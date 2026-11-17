@@ -172,7 +172,12 @@ def _merit_charts(totals: pd.DataFrame, coach: str) -> None:
     with right:
         charts.show(
             charts.diverging_bars(
-                solid, "chance_par_match", "coach", focus, "Points gagnés ou perdus à la chance, par match", x_title="Points par match"
+                solid,
+                "chance_par_match",
+                "coach",
+                focus,
+                "Points gagnés ou perdus à la chance, par match",
+                x_title="Points par match",
             ),
             height=420,
         )

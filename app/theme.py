@@ -106,11 +106,11 @@ h2 {{ font-size: 1.35rem !important; font-weight: 600; margin-top: 1.6rem !impor
 .hero .eyebrow {{ color: {ACCENT}; font-size: .9rem; font-weight: 600; }}
 .hero .title {{ font-family: {DISPLAY}; font-size: 2.9rem; font-weight: 700; line-height: 1.02; margin: .25rem 0 .55rem;
     color: {TEXT}; letter-spacing: -.005em; }}
-.hero .subtitle {{ color: {TEXT_2}; font-size: 1rem; line-height: 1.55; white-space: nowrap; }}
+.hero .subtitle {{ color: {TEXT_2}; font-size: 1rem; max-width: 72ch; line-height: 1.55; }}
 .volet-title {{ margin: .4rem 0 1.2rem; }}
 .volet-title .title {{ font-family: {DISPLAY}; font-size: 2rem; font-weight: 700; line-height: 1.1; color: {TEXT};
     letter-spacing: -.005em; overflow-wrap: anywhere; }}
-.volet-title .subtitle {{ color: {TEXT_2}; font-size: 1rem; line-height: 1.55; max-width: 72ch; margin-top: .35rem; white-space: nowrap; }}
+.volet-title .subtitle {{ color: {TEXT_2}; font-size: 1rem; line-height: 1.55; max-width: 72ch; margin-top: .35rem; }}
 
 .stats {{ --n: 4; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 1px; background: {BORDER};
     border: 1px solid {BORDER}; border-radius: {RADIUS_CARD}px; overflow: hidden; margin: .2rem 0 1.1rem; }}

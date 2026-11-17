@@ -158,7 +158,7 @@ def _hero_subtitle(team: pd.Series) -> str:
     if pd.notna(team["president"]):
         parts.append(f"Président {escape(str(team['president']))}")
     if pd.notna(team["stade"]):
-        parts.append(f"stade « {escape(str(team['stade']))} »")
+        parts.append(f"stade « {escape(str(team['stade']))} »")
     return ", ".join(parts)
 
 

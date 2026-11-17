@@ -152,6 +152,7 @@ def _merit_charts(totals: pd.DataFrame, coach: str) -> None:
         no_data(f"Aucun coach n'a encore {MIN_MATCHES} matchs : pas de comparaison possible.")
         return
     solid["team_id"] = solid.index
+    solid["chance_par_match"] = solid["chance"] / solid["matchs"]
     mine = solid.index[solid["coach"] == coach]
     focus = int(mine[0]) if len(mine) else -1
     if focus < 0:
@@ -171,15 +172,15 @@ def _merit_charts(totals: pd.DataFrame, coach: str) -> None:
     with right:
         charts.show(
             charts.diverging_bars(
-                solid, "chance", "coach", focus, "Points gagnés ou perdus à la chance, cumulés", x_title="Points"
+                solid, "chance_par_match", "coach", focus, "Points gagnés ou perdus à la chance, par match", x_title="Points par match"
             ),
             height=420,
         )
     with st.expander("Comment c'est calculé"):
         st.markdown(
             "Les points mérités comparent la note moyenne de l'équipe à celle de toutes les autres équipes de la "
-            "même journée. La chance est l'écart entre les points réellement pris et ces points mérités. "
-            "Les saisons n'ont pas la même longueur : les cumuls favorisent ceux qui ont joué le plus."
+            "même journée. La chance est l'écart entre les points réellement pris et ces points mérités, rapporté au "
+            "nombre de matchs joués pour rendre les coachs comparables quelle que soit la longueur de leur saison."
         )
 
 

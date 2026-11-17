@@ -29,16 +29,19 @@ def model_keys(draws) -> list[str]:
 
 
 def forecast_meta(a, draws) -> dict:
-    poisson = next(m for m in draws.models if isinstance(m, PoissonModel))
-    struct = next(m for m in draws.models if isinstance(m, StructuralModel))
-    return {
+    poisson = next((m for m in draws.models if isinstance(m, PoissonModel)), None)
+    struct = next((m for m in draws.models if isinstance(m, StructuralModel)), None)
+    meta = {
         **a.meta,
         "n_saisons": draws.ensemble.shape[0],
-        "tau": poisson.tau,
-        "rotaldo": struct.rotaldo_note,
-        "sigma": struct.sigma_match,
-        "note_slope": struct.link.b,
     }
+    if poisson is not None:
+        meta["tau"] = poisson.tau
+    if struct is not None:
+        meta["rotaldo"] = struct.rotaldo_note
+        meta["sigma"] = struct.sigma_match
+        meta["note_slope"] = struct.link.b
+    return meta
 
 
 def error_gain(model_rps: float, reference_rps: float) -> float | None:

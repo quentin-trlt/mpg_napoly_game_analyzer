@@ -1,23 +1,29 @@
 import re
+from contextlib import nullcontext
 from pathlib import Path
 
 import pandas as pd
 import pytest
 from streamlit.testing.v1 import AppTest
 
-from app import theme
+from app import components, theme
 from app.components import (
+    PCT_FORMAT,
+    PCT_SIGNED_FORMAT,
     alert,
     alerts,
+    as_pct,
     chip,
     chips,
     grid,
     medal,
     next_match,
+    pct_column,
     prob_bar,
     rank_list,
     rank_tone,
     result_color,
+    short_table,
 )
 
 
@@ -123,8 +129,6 @@ def test_grid_passes_template_as_variable():
 
 
 def test_short_table_rejects_more_than_five_columns():
-    from app.components import short_table
-
     df = pd.DataFrame({c: [1] for c in "abcdef"})
     with pytest.raises(ValueError, match="5 colonnes au plus"):
         short_table(df, list("abcdef"))
@@ -143,6 +147,204 @@ def test_short_table_renders_table_and_expander():
     at = AppTest.from_function(_short_table_app).run()
     assert not at.exception
     assert [e.label for e in at.expander] == ["Voir tout"]
+
+
+def test_pct_column_formats():
+    assert PCT_FORMAT == "%.0f %%"
+    assert PCT_SIGNED_FORMAT == "%+.0f %%"
+    plain = pct_column("Victoire")
+    signed = pct_column("Écart", signed=True)
+    bar = pct_column("Chances", bar=True)
+    assert plain["label"] == "Victoire"
+    assert plain["type_config"]["format"] == PCT_FORMAT
+    assert signed["type_config"]["format"] == PCT_SIGNED_FORMAT
+    assert bar["type_config"]["type"] == "progress"
+    assert (bar["type_config"]["min_value"], bar["type_config"]["max_value"]) == (0, 100)
+    assert bar["type_config"]["format"] == PCT_FORMAT
+
+
+def test_pct_column_forwards_kwargs():
+    assert pct_column("Victoire", help="Chance de gagner")["help"] == "Chance de gagner"
+
+
+def test_pct_column_rejects_bar_with_sign():
+    with pytest.raises(ValueError, match="exclusifs"):
+        pct_column("Écart", bar=True, signed=True)
+
+
+def test_as_pct_scales_copy_and_ignores_missing_columns():
+    df = pd.DataFrame({"team": ["A", "B"], "p": [0.415, 0.5], "q": [0.1, 0.2]})
+    before = df.copy()
+    out = as_pct(df, ["p", "absente"])
+    assert out is not df
+    assert out["p"].tolist() == pytest.approx([41.5, 50.0])
+    assert out["q"].tolist() == [0.1, 0.2]
+    assert out["team"].tolist() == ["A", "B"]
+    pd.testing.assert_frame_equal(df, before)
+
+
+def test_as_pct_with_no_matching_column_returns_equal_copy():
+    df = pd.DataFrame({"p": [0.5]})
+    out = as_pct(df, ["absente"])
+    assert out is not df
+    pd.testing.assert_frame_equal(out, df)
+
+
+@pytest.fixture
+def shown(monkeypatch):
+    calls: list[dict] = []
+    expanders: list[str] = []
+
+    def fake_dataframe(data, **kwargs):
+        calls.append({"data": data, **kwargs})
+
+    def fake_expander(label, *args, **kwargs):
+        expanders.append(label)
+        return nullcontext()
+
+    monkeypatch.setattr(components.st, "dataframe", fake_dataframe)
+    monkeypatch.setattr(components.st, "expander", fake_expander)
+    monkeypatch.setattr(components, "is_mobile", lambda: False)
+    return calls, expanders
+
+
+def _wide() -> pd.DataFrame:
+    return pd.DataFrame({c: [1, 2] for c in "abcdefg"})
+
+
+def test_short_table_shows_listed_columns_then_all_in_expander(shown):
+    calls, expanders = shown
+    short_table(_wide(), ["a", "b"], alt="Équipes", height=120)
+    assert [list(c["data"].columns) for c in calls] == [list("ab"), list("abcdefg")]
+    assert calls[0]["alt"] == "Équipes"
+    assert calls[0]["height"] == 120
+    assert calls[0]["hide_index"] is True
+    assert "height" not in calls[1]
+    assert calls[1]["alt"] == "Équipes, toutes les colonnes"
+    assert calls[1]["hide_index"] is True
+    assert expanders == ["Toutes les colonnes"]
+
+
+def test_short_table_without_alt_passes_none(shown):
+    calls, _ = shown
+    short_table(_wide(), ["a"])
+    assert all(c["alt"] is None for c in calls)
+
+
+def test_short_table_no_expander_when_nothing_more_to_show(shown):
+    calls, expanders = shown
+    short_table(_wide()[list("abc")], list("abc"))
+    assert len(calls) == 1
+    assert expanders == []
+
+
+def test_short_table_full_is_ordered_and_filtered(shown):
+    calls, expanders = shown
+    short_table(_wide(), ["a", "b"], full=["c", "a", "absente", "b", "e"], hide_index=False)
+    assert list(calls[1]["data"].columns) == ["c", "a", "b", "e"]
+    assert calls[1]["hide_index"] is False
+    assert expanders == ["Toutes les colonnes"]
+
+
+def test_short_table_full_not_larger_than_visible_hides_expander(shown):
+    calls, expanders = shown
+    short_table(_wide(), ["a", "b"], full=["a", "b", "absente"])
+    assert len(calls) == 1
+    assert expanders == []
+
+
+def test_short_table_pins_first_full_column_without_mutating_config(shown):
+    calls, _ = shown
+    config = {"a": "Équipe", "b": pct_column("Chances"), "e": "Cinq"}
+    snapshot = {"a": "Équipe", "b": dict(config["b"]), "e": "Cinq"}
+    short_table(_wide(), ["a", "b"], column_config=config)
+    visible, full = calls[0]["column_config"], calls[1]["column_config"]
+    assert visible == {"a": "Équipe", "b": snapshot["b"]}
+    assert full["a"] == {"label": "Équipe", "pinned": True}
+    assert full["b"] == snapshot["b"]
+    assert full["e"] == "Cinq"
+    assert config == snapshot
+    assert config["b"].get("pinned") is None
+
+
+def test_short_table_pins_first_column_given_as_dict_config(shown):
+    calls, _ = shown
+    config = {"c": pct_column("Chances")}
+    short_table(_wide(), ["a", "b"], full=["c", "a", "b"], column_config=config)
+    assert calls[0]["column_config"] is None
+    assert calls[1]["column_config"]["c"]["pinned"] is True
+    assert calls[1]["column_config"]["c"]["label"] == "Chances"
+    assert config["c"].get("pinned") is None
+
+
+def test_short_table_pins_first_column_even_without_config(shown):
+    calls, _ = shown
+    short_table(_wide(), ["a", "b"])
+    assert calls[1]["column_config"] == {"a": {"pinned": True}}
+
+
+def test_short_table_desktop_leaves_visible_config_untouched(shown):
+    calls, _ = shown
+    config = {"a": "Équipe", "b": pct_column("Chances", bar=True)}
+    short_table(_wide(), ["a", "b", "c"], column_config=config)
+    assert calls[0]["column_config"] == {"a": "Équipe", "b": config["b"]}
+
+
+def test_short_table_phone_pins_first_and_narrows_others(shown, monkeypatch):
+    calls, _ = shown
+    monkeypatch.setattr(components, "is_mobile", lambda: True)
+    config = {"a": "Équipe", "b": pct_column("Chances", bar=True), "c": "Trois"}
+    snapshot = {"a": "Équipe", "b": dict(config["b"]), "c": "Trois"}
+    short_table(_wide(), ["a", "b", "c", "d"], column_config=config)
+    visible = calls[0]["column_config"]
+    assert visible["a"] == {"label": "Équipe", "pinned": True}
+    assert visible["b"]["width"] == "small"
+    assert visible["b"]["label"] == "Chances"
+    assert visible["b"].get("pinned") is None
+    assert visible["c"] == {"label": "Trois", "width": "small"}
+    assert visible["d"] == {"width": "small"}
+    assert config == snapshot
+    assert config["b"].get("width") is None
+
+
+def test_short_table_phone_keeps_explicit_width(shown, monkeypatch):
+    calls, _ = shown
+    monkeypatch.setattr(components, "is_mobile", lambda: True)
+    config = {"a": pct_column("Nom", width="large"), "b": pct_column("Chances", width="medium")}
+    short_table(_wide(), ["a", "b"], column_config=config)
+    visible = calls[0]["column_config"]
+    assert visible["a"]["width"] == "large"
+    assert visible["a"]["pinned"] is True
+    assert visible["b"]["width"] == "medium"
+
+
+def test_short_table_phone_expander_table_is_unchanged(shown, monkeypatch):
+    calls, _ = shown
+    monkeypatch.setattr(components, "is_mobile", lambda: True)
+    short_table(_wide(), ["a", "b"], column_config={"b": "Deux"})
+    assert calls[1]["column_config"] == {"b": "Deux", "a": {"pinned": True}}
+
+
+def _short_table_config_app() -> None:
+    import pandas as pd
+    import streamlit as st
+
+    from app.components import pct_column, short_table
+
+    df = pd.DataFrame({"team": ["A", "B"], "p": [0.4, 0.6], "x": [1, 2], "y": [3, 4]})
+    short_table(
+        df.assign(p=df["p"] * 100),
+        ["team", "p"],
+        column_config={"team": "Équipe", "p": pct_column("Victoire", bar=True)},
+        alt="Équipes",
+    )
+    st.write("ok")
+
+
+def test_short_table_accepts_real_column_config_in_streamlit():
+    at = AppTest.from_function(_short_table_config_app).run()
+    assert not at.exception
+    assert len(at.dataframe) == 2
 
 
 def _limit_banner_app() -> None:

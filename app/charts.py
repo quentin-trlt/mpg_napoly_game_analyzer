@@ -1,3 +1,5 @@
+import math
+import re
 from html import escape
 
 import numpy as np
@@ -29,6 +31,13 @@ from app.theme import (
 CONFIG = {"displayModeBar": False, "scrollZoom": False}
 DEFAULT_TOP = 78
 TITLE_ROOM = 46
+MAX_TICKS = 10
+LABEL_MAX_CHARS = 15
+LABEL_SIZE = 11
+END_SHIFT = 8
+PHONE_WIDTH = 330
+PLOT_CHROME = 100
+PHASE_LABEL = re.compile(r"^(Après|Avant) (J\d+)$")
 
 
 def is_mobile() -> bool:
@@ -44,14 +53,115 @@ def _short(text: str, n: int) -> str:
     return text if len(text) <= n else text[: n - 1].rstrip() + "…"
 
 
+def _clip(text: str, n: int = LABEL_MAX_CHARS) -> str:
+    """Tronque proprement chaque ligne d'une étiquette qui dépasse `n` caractères."""
+    return "<br>".join(_short(line, n) for line in text.split("<br>"))
+
+
+def _thin(values, max_ticks: int = MAX_TICKS) -> list:
+    """Garde au plus `max_ticks` valeurs à pas régulier, la dernière étant toujours conservée."""
+    vals = list(values)
+    if len(vals) <= max_ticks:
+        return vals
+    step = math.ceil(len(vals) / max_ticks)
+    return vals[::-1][::step][::-1]
+
+
+def _gw_axis(values, labels: dict[int, str] | None = None) -> tuple[list, list[str], str]:
+    """Graduations d'un axe de journées : valeurs retenues, libellés courts (« J12 ») et titre d'axe."""
+    ticks = _thin(sorted(set(values)))
+    full = {t: (labels or {}).get(t, f"Avant J{t}") for t in ticks}
+    found = {t: PHASE_LABEL.match(text) for t, text in full.items()}
+    prefixes = [m.group(1) for m in found.values() if m]
+    if not prefixes:
+        return ticks, list(full.values()), "Journée"
+    phase = max(set(prefixes), key=prefixes.count)
+    text = [m.group(2) if m and m.group(1) == phase else full[t] for t, m in found.items()]
+    return ticks, text, f"{phase} la journée"
+
+
+def _legend_above(fig: go.Figure) -> None:
+    """Légende horizontale au-dessus de la zone de tracé ; la marge haute s'agrandit si elle passe sur deux lignes."""
+    names = [t.name for t in fig.data if t.showlegend is not False and t.name]
+    fig.update_layout(legend=dict(orientation="h", x=0, xanchor="left", y=1.02, yanchor="bottom"))
+    lines = math.ceil(sum(34 + 6.4 * len(n) for n in names) / PHONE_WIDTH)
+    if lines > 1:
+        fig.update_layout(margin_t=(fig.layout.margin.t or DEFAULT_TOP) + 20 * (lines - 1))
+
+
+def _end_margin(texts: list[str], size: int = LABEL_SIZE) -> int:
+    """Marge droite qui laisse la place aux étiquettes de fin de ligne les plus longues."""
+    width = min(max(len(line) for t in texts for line in t.split("<br>")), LABEL_MAX_CHARS)
+    return round(10 + 0.58 * size * width) + END_SHIFT
+
+
+def _y_range(values, zero: bool = False) -> tuple[float, float]:
+    """Étendue verticale approchée d'une courbe, avec la marge que Plotly ajoute de lui-même."""
+    lo, hi = float(min(values)), float(max(values))
+    pad = (hi - lo) * 0.06 or 1.0
+    return (0.0 if zero else lo - pad), hi + pad
+
+
+def _end_labels(
+    fig: go.Figure,
+    x: float,
+    items: list[tuple[str, float, str]],
+    y_range: tuple[float, float],
+    reverse: bool = False,
+    size: int = LABEL_SIZE,
+) -> None:
+    """Étiquettes de fin de ligne (texte, y, couleur) ; celles qui se chevauchent sont décalées à la verticale."""
+    if not items:
+        return
+    plot_h = max((fig.layout.height or 400) - PLOT_CHROME, 100)
+    lo, hi = y_range
+    span = (hi - lo) or 1.0
+    pos = [((hi - y) if reverse else (y - lo)) / span * plot_h for _, y, _ in items]
+    heights = [size * 1.3 * (text.count("<br>") + 1) for text, _, _ in items]
+    order = sorted(range(len(items)), key=pos.__getitem__)
+    placed: dict[int, float] = {}
+    for rank, i in enumerate(order):
+        placed[i] = pos[i]
+        if rank:
+            below = order[rank - 1]
+            placed[i] = max(pos[i], placed[below] + (heights[below] + heights[i]) / 2)
+    ceiling = plot_h
+    for i in reversed(order):
+        placed[i] = min(placed[i], ceiling - heights[i] / 2)
+        ceiling = placed[i] - heights[i] / 2
+    for i, (text, y, color) in enumerate(items):
+        fig.add_annotation(
+            x=x,
+            y=y,
+            text=_clip(text),
+            showarrow=False,
+            xanchor="left",
+            yanchor="middle",
+            xshift=END_SHIFT,
+            yshift=round(placed[i] - pos[i]),
+            font=dict(color=color, size=size),
+        )
+    fig.update_layout(margin_r=_end_margin([text for text, _, _ in items], size))
+
+
+def _rank_dtick(n: int) -> int:
+    """Pas des graduations d'un axe de rangs : une graduation sur deux ou trois au-delà de 10 équipes."""
+    return max(1, math.ceil(n / MAX_TICKS))
+
+
+def _labelled(best_first: list[int], team_id: int, n: int = 3) -> list[int]:
+    """Mon équipe et les `n` premières du graphique : au plus quatre étiquettes de fin de ligne."""
+    return list(dict.fromkeys([team_id, *best_first[:n]]))
+
+
 def _compact(fig: go.Figure) -> None:
-    """Version téléphone : moins de marge pour les étiquettes de fin de ligne, titres d'axe sur deux lignes."""
-    if (fig.layout.margin.r or 0) >= 150:
-        fig.update_layout(margin_r=104)
-        for ann in fig.layout.annotations:
-            if ann.xanchor == "left" and ann.text:
-                ann.text = _short(ann.text, 13)
-                ann.font.size = 10
+    """Version téléphone : étiquettes de fin de ligne en police réduite, titres d'axe sur deux lignes."""
+    ends = [a for a in fig.layout.annotations if a.xanchor == "left" and a.text and a.xshift]
+    if ends:
+        for ann in ends:
+            ann.text = _clip(ann.text)
+            ann.font.size = 10
+        fig.update_layout(margin_r=min(fig.layout.margin.r or 999, _end_margin([a.text for a in ends], 10)))
     for ax in (fig.layout.xaxis, fig.layout.yaxis):
         text = ax.title.text
         if text and len(text) > 28 and "<br>" not in text:
@@ -107,6 +217,7 @@ def ranked_bars(
         )
     )
     fig.update_layout(title=title, xaxis_title=x_title, showlegend=False, height=max(300, 34 * len(d) + 80))
+    fig.update_xaxes(nticks=6)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
     lo, hi = float(d[value].min()), float(d[value].max())
     if lo < 0:
@@ -156,6 +267,7 @@ def diverging_bars(
     )
     fig.add_vline(x=0, line=dict(color=AXIS, width=1))
     fig.update_layout(title=title, xaxis_title=x_title, showlegend=False, height=max(320, 34 * len(d) + 80))
+    fig.update_xaxes(nticks=6)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
     return fig
 
@@ -163,6 +275,9 @@ def diverging_bars(
 def bump_chart(sbg: pd.DataFrame, team_id: int, n_teams: int) -> go.Figure:
     fig = go.Figure()
     last_gw = sbg["gw"].max()
+    final = sbg[sbg["gw"] == last_gw].sort_values("rang")
+    labelled = _labelled(final["team_id"].tolist(), team_id)
+    items = []
     for tid, grp in sorted(sbg.groupby("team_id"), key=lambda kv: kv[0] == team_id):
         me = tid == team_id
         grp = grp.sort_values("gw")
@@ -180,18 +295,17 @@ def bump_chart(sbg: pd.DataFrame, team_id: int, n_teams: int) -> go.Figure:
             )
         )
         end = grp[grp["gw"] == last_gw]
-        fig.add_annotation(
-            x=last_gw,
-            y=end["rang"].iloc[0],
-            text=grp["team_name"].iloc[0],
-            showarrow=False,
-            xanchor="left",
-            xshift=12,
-            font=dict(color=TEXT if me else MUTED, size=12),
-        )
-    fig.update_yaxes(autorange="reversed", dtick=1, range=[n_teams + 0.5, 0.5], title="Rang")
-    fig.update_xaxes(dtick=1, tickprefix="J", range=[0.8, last_gw + 0.2], gridcolor="rgba(0,0,0,0)")
-    fig.update_layout(title="Évolution du classement", height=420, margin=dict(r=170))
+        if tid in labelled and not end.empty:
+            items.append((grp["team_name"].iloc[0], float(end["rang"].iloc[0]), TEXT if me else TEXT_2))
+    fig.update_layout(title="Évolution du classement", height=420)
+    _end_labels(fig, last_gw, items, (0.5, n_teams + 0.5), reverse=True)
+    ticks, text, x_title = _gw_axis(sbg["gw"], {int(g): f"Après J{g}" for g in sbg["gw"].unique()})
+    fig.update_yaxes(
+        autorange="reversed", tick0=1, dtick=_rank_dtick(n_teams), range=[n_teams + 0.5, 0.5], title="Rang"
+    )
+    fig.update_xaxes(
+        tickangle=0, tickvals=ticks, ticktext=text, range=[0.8, last_gw + 0.2], gridcolor="rgba(0,0,0,0)", title=x_title
+    )
     return fig
 
 
@@ -240,8 +354,8 @@ def luck_scatter(lk: pd.DataFrame, abbrev: dict[int, str], team_id: int) -> go.F
         xaxis_title="Points mérités (contre toutes les équipes de la journée)",
         yaxis_title="Points réels",
     )
-    fig.update_xaxes(range=[lo, hi])
-    fig.update_yaxes(range=[lo, hi])
+    fig.update_xaxes(range=[lo, hi], nticks=6)
+    fig.update_yaxes(range=[lo, hi], nticks=6)
     return fig
 
 
@@ -317,7 +431,9 @@ def stacked_goals(st_df: pd.DataFrame) -> go.Figure:
         xaxis_title="Buts",
         bargap=0.32,
     )
+    fig.update_xaxes(nticks=6)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
+    _legend_above(fig)
     return fig
 
 
@@ -356,9 +472,10 @@ def dumbbell_ranks(df: pd.DataFrame, a: str, b: str, a_name: str, b_name: str, t
             hovertemplate=f"<b>%{{y}}</b><br>{b_name} : %{{x}}<extra></extra>",
         )
     )
-    fig.update_xaxes(autorange="reversed", dtick=1, title="Rang (1 = premier)")
+    fig.update_xaxes(autorange="reversed", tick0=1, dtick=_rank_dtick(len(d)), title="Rang (1 = premier)")
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
     fig.update_layout(title=title, height=440)
+    _legend_above(fig)
     return fig
 
 
@@ -388,9 +505,10 @@ def rank_ranges(df: pd.DataFrame, lo: str, hi: str, cur: str, team_id: int, titl
             hovertemplate="<b>%{y}</b><br>Rang : %{x}<extra></extra>",
         )
     )
-    fig.update_xaxes(autorange="reversed", dtick=1, title="Rang")
+    fig.update_xaxes(autorange="reversed", tick0=1, dtick=_rank_dtick(len(d)), title="Rang")
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
     fig.update_layout(title=title, height=440, barcornerradius=8)
+    _legend_above(fig)
     return fig
 
 
@@ -459,7 +577,9 @@ def sim_distribution(
     fig.update_layout(
         title="Points selon 10 000 calendriers tirés au hasard", height=460, xaxis_title="Points (règle de note)"
     )
+    fig.update_xaxes(nticks=6)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
+    _legend_above(fig)
     return fig
 
 
@@ -491,7 +611,9 @@ def stacked_components(
     )
     fig.add_vline(x=0, line=dict(color=AXIS, width=1))
     fig.update_layout(barmode="relative", title=title, xaxis_title=x_title, height=max(320, 34 * len(d) + 90))
+    fig.update_xaxes(nticks=6)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
+    _legend_above(fig)
     return fig
 
 
@@ -523,6 +645,8 @@ def team_boxes(
     if log:
         vals = [v for v in (0.5, 1, 2, 5, 10, 20, 50, 100, 200) if pv[value].min() * 0.8 <= v <= pv[value].max() * 1.25]
         fig.update_xaxes(type="log", tickvals=vals, ticktext=[f"{v:g}" for v in vals])
+    else:
+        fig.update_xaxes(nticks=6)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
     return fig
 
@@ -594,7 +718,9 @@ def price_note_facets(pv: pd.DataFrame, team_id: int) -> go.Figure:
         title="Prix payé et rendement, par poste",
         height=640 if mobile else 430,
         margin=dict(t=120),
-        legend=dict(x=1, xanchor="right", y=1.12 if not mobile else 1.06, yanchor="bottom"),
+    )
+    fig.update_layout(
+        legend=dict(orientation="h", x=0, xanchor="left", y=1.12 if not mobile else 1.06, yanchor="bottom")
     )
     return fig
 
@@ -616,8 +742,9 @@ def budget_shares(m: pd.DataFrame) -> go.Figure:
     fig.update_layout(
         barmode="stack", title="Répartition du budget par ligne", xaxis_title="% des enchères", height=420, bargap=0.3
     )
-    fig.update_xaxes(range=[0, 100], ticksuffix=" %")
+    fig.update_xaxes(range=[0, 100], ticksuffix=" %", nticks=6)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
+    _legend_above(fig)
     return fig
 
 
@@ -654,7 +781,9 @@ def paired_bars(
         bargap=0.25,
         bargroupgap=0.08,
     )
+    fig.update_xaxes(nticks=6)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
+    _legend_above(fig)
     return fig
 
 
@@ -694,20 +823,21 @@ def component_heatmap(m: pd.DataFrame, comps: list[str], labels: dict[str, str])
             hovertemplate="<b>%{y}</b><br>%{x} : %{z:+.2f} (écart à la médiane)<extra></extra>",
         )
     )
-    fig.update_xaxes(side="top", gridcolor="rgba(0,0,0,0)", tickangle=-50 if mobile else 0, tickfont=dict(size=11))
+    fig.update_xaxes(side="top", gridcolor="rgba(0,0,0,0)", tickangle=-90 if mobile else 0, tickfont=dict(size=11))
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
     if mobile:
-        fig.update_traces(textfont_size=10, colorbar_thickness=8)
+        fig.update_traces(textfont_size=10, showscale=False)
     fig.update_layout(
         title="Composantes du score (écart à la médiane de la ligue, 0 = médiane)",
         height=440,
-        margin=dict(t=110),
+        margin=dict(t=120 if mobile else 110),
     )
     return fig
 
 
 def gw_points(tm: pd.DataFrame, team_id: int) -> go.Figure:
     d = tm[tm["team_id"] == team_id].sort_values("gw")
+    scores = [f"{r} {a}-{b}" for r, a, b in zip(d["resultat"], d["bp"], d["bc"])]
     fig = go.Figure(
         go.Bar(
             x=d["gw"],
@@ -715,8 +845,8 @@ def gw_points(tm: pd.DataFrame, team_id: int) -> go.Figure:
             marker=dict(color=[RESULT_COLORS[r] for r in d["resultat"]]),
             name="Note de l'équipe",
             showlegend=False,
-            customdata=np.stack([d["opp_name"], d["note_moy_adv"]], axis=1),
-            hovertemplate="J%{x} contre <b>%{customdata[0]}</b><br>Note : %{y:.2f} · adverse : %{customdata[1]:.2f}<extra></extra>",
+            customdata=np.stack([d["opp_name"], d["note_moy_adv"], scores], axis=1),
+            hovertemplate="J%{x} contre <b>%{customdata[0]}</b> (%{customdata[2]})<br>Note : %{y:.2f} · adverse : %{customdata[1]:.2f}<extra></extra>",
         )
     )
     fig.add_trace(
@@ -729,10 +859,15 @@ def gw_points(tm: pd.DataFrame, team_id: int) -> go.Figure:
             hovertemplate="Note adverse : %{y:.2f}<extra></extra>",
         )
     )
+    few = len(d) <= MAX_TICKS
+    texts = {g: f"J{g}<br><b>{score}</b>" if few else f"J{g}" for g, score in zip(d["gw"], scores)}
+    ticks = _thin(d["gw"])
     fig.update_xaxes(
-        tickvals=d["gw"],
-        ticktext=[f"J{g}<br><b>{r} {a}-{b}</b>" for g, r, a, b in zip(d["gw"], d["resultat"], d["bp"], d["bc"])],
+        tickangle=0,
+        tickvals=ticks,
+        ticktext=[texts[g] for g in ticks],
         gridcolor="rgba(0,0,0,0)",
+        title="Journée et résultat" if few else "Journée",
     )
     fig.update_yaxes(range=[3.5, max(7, d["note_moy"].max() + 0.6)], title="Note moyenne (bonus inclus)")
     fig.update_layout(
@@ -741,6 +876,7 @@ def gw_points(tm: pd.DataFrame, team_id: int) -> go.Figure:
         showlegend=True,
         bargap=0.6 if len(d) < 6 else 0.28,
     )
+    _legend_above(fig)
     return fig
 
 
@@ -760,13 +896,14 @@ def rank_heatmap(rank_probs: pd.DataFrame, names: dict[int, str], order: list[in
             textfont=dict(color=TEXT, size=12),
             xgap=2,
             ygap=2,
-            hovertemplate="<b>%{y}</b> termine %{x} : %{z:.1f} %<extra></extra>",
+            hovertemplate="<b>%{y}</b> termine %{x} : %{z:.0f} %<extra></extra>",
             colorbar=dict(
                 title=dict(text="%", font=dict(color=TEXT_2)), tickfont=dict(color=MUTED), thickness=10, outlinewidth=0
             ),
         )
     )
-    fig.update_xaxes(side="top", gridcolor="rgba(0,0,0,0)", title=None)
+    places = _thin([f"{r}e" for r in d.columns])
+    fig.update_xaxes(side="top", gridcolor="rgba(0,0,0,0)", title=None, tickvals=places, ticktext=places)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
     fig.update_layout(title="Chances de finir à chaque place (%)", height=460, margin=dict(t=100))
     return fig
@@ -782,7 +919,8 @@ def title_history(
     fig = go.Figure()
     last = history["apres_journee"].max()
     top = history[history["apres_journee"] == last].sort_values(col, ascending=False)["team_id"].tolist()
-    labelled = set(top[:3]) | {team_id}
+    labelled = _labelled(top, team_id)
+    items = []
     for tid, grp in sorted(history.groupby("team_id"), key=lambda kv: kv[0] == team_id):
         me = tid == team_id
         grp = grp.sort_values("apres_journee")
@@ -795,29 +933,20 @@ def title_history(
                 showlegend=False,
                 line=dict(color=HIGHLIGHT if me else CONTEXT, width=3 if me else 1.6),
                 marker=dict(size=8 if me else 6, color=HIGHLIGHT if me else CONTEXT, line=dict(color=SURFACE, width=2)),
-                hovertemplate=f"<b>{names[tid]}</b><br>%{{y:.1f}} %<extra></extra>",
+                hovertemplate=f"<b>{names[tid]}</b><br>%{{y:.0f}} %<extra></extra>",
             )
         )
-        if tid in labelled:
-            end = grp[grp["apres_journee"] == last]
-            fig.add_annotation(
-                x=last,
-                y=float(end[col].iloc[0]) * 100,
-                text=names[tid],
-                showarrow=False,
-                xanchor="left",
-                xshift=10,
-                font=dict(color=TEXT if me else TEXT_2, size=12),
-            )
-    ticks = sorted(history["apres_journee"].unique())
+        end = grp[grp["apres_journee"] == last]
+        if tid in labelled and not end.empty:
+            items.append((names[tid], float(end[col].iloc[0]) * 100, TEXT if me else TEXT_2))
+    fig.update_layout(title=f"{label} au fil des journées", height=400)
+    _end_labels(fig, last, items, _y_range((history[col] * 100).tolist(), zero=True))
+    steps = {t: "Avant J1" if t == 0 else f"Après J{t}" for t in history["apres_journee"].unique()}
+    ticks, text, x_title = _gw_axis(history["apres_journee"], steps)
     fig.update_xaxes(
-        tickvals=ticks,
-        ticktext=["Avant J1" if t == 0 else f"Après J{t}" for t in ticks],
-        gridcolor="rgba(0,0,0,0)",
-        range=[-0.2, last + 0.2],
+        tickangle=0, tickvals=ticks, ticktext=text, gridcolor="rgba(0,0,0,0)", range=[-0.2, last + 0.2], title=x_title
     )
-    fig.update_yaxes(title=f"{label} (%)", rangemode="tozero", ticksuffix=" %")
-    fig.update_layout(title=f"{label} au fil des journées", height=400, margin=dict(r=170))
+    fig.update_yaxes(title=f"{label} (%)", rangemode="tozero", ticksuffix=" %", nticks=6)
     return fig
 
 
@@ -862,7 +991,9 @@ def final_points_box(sim, names: dict[int, str], team_id: int) -> go.Figure:
         height=440,
         xaxis_title="Points",
     )
+    fig.update_xaxes(nticks=6)
     fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
+    _legend_above(fig)
     return fig
 
 
@@ -883,6 +1014,9 @@ def snapshot_lines(
     fig = go.Figure()
     last = df[x_col].max()
     scale = 100 if pct else 1
+    at_end = df[df[x_col] == last].sort_values(y_col, ascending=reverse)
+    labelled = _labelled(at_end["team_id"].tolist(), team_id)
+    items = []
     for tid, grp in sorted(df.groupby("team_id"), key=lambda kv: kv[0] == team_id):
         me = tid == team_id
         grp = grp.sort_values(x_col)
@@ -895,20 +1029,12 @@ def snapshot_lines(
                 showlegend=False,
                 line=dict(color=HIGHLIGHT if me else CONTEXT, width=3 if me else 1.6),
                 marker=dict(size=9 if me else 7, color=HIGHLIGHT if me else CONTEXT, line=dict(color=SURFACE, width=2)),
-                hovertemplate=f"<b>{names[tid]}</b><br>%{{y:.1f}}{' %' if pct else ''}<extra></extra>",
+                hovertemplate=f"<b>{names[tid]}</b><br>%{{y:{'.0f' if pct else '.1f'}}}{' %' if pct else ''}<extra></extra>",
             )
         )
         end = grp[grp[x_col] == last]
-        if not end.empty:
-            fig.add_annotation(
-                x=last,
-                y=float(end[y_col].iloc[0]) * scale,
-                text=names[tid],
-                showarrow=False,
-                xanchor="left",
-                xshift=10,
-                font=dict(color=TEXT if me else MUTED, size=11),
-            )
+        if tid in labelled and not end.empty:
+            items.append((names[tid], float(end[y_col].iloc[0]) * scale, TEXT if me else TEXT_2))
     if final:
         fig.add_trace(
             go.Scatter(
@@ -921,16 +1047,21 @@ def snapshot_lines(
                 hovertemplate="<b>%{customdata}</b><br>Rang final réel : %{y}<extra></extra>",
             )
         )
-    ticks = sorted(df[x_col].unique())
-    labels = x_labels or {}
+    fig.update_layout(title=title, height=440)
+    values = [v * scale for v in df[y_col]] + (list(final.values()) if final else [])
+    _end_labels(fig, last, items, _y_range(values, zero=pct and not reverse), reverse=reverse)
+    ticks, text, x_title = _gw_axis(df[x_col], x_labels)
     fig.update_xaxes(
+        tickangle=0,
         tickvals=ticks,
-        ticktext=[labels.get(t, f"Avant J{t}") for t in ticks],
+        ticktext=text,
         gridcolor="rgba(0,0,0,0)",
-        range=[min(ticks) - 0.3, last + 0.3],
+        range=[df[x_col].min() - 0.3, last + 0.3],
+        title=x_title,
     )
-    fig.update_yaxes(title=y_title, autorange="reversed" if reverse else True, ticksuffix=" %" if pct else "")
-    fig.update_layout(title=title, height=440, margin=dict(r=170))
+    fig.update_yaxes(title=y_title, autorange="reversed" if reverse else True, ticksuffix=" %" if pct else "", nticks=6)
+    if final:
+        _legend_above(fig)
     return fig
 
 
@@ -939,17 +1070,21 @@ def rps_evolution(g: pd.DataFrame) -> go.Figure:
     style = {"Ensemble": (HIGHLIGHT, 3), "Référence (fréquences)": (SERIES[1], 2)}
     shown = {"Référence (fréquences)": "Pronostic de base"}
     last = g["gw"].max()
-    for model, grp in g.groupby("modele"):
+    items = []
+    legend_done = False
+    for model, grp in sorted(g.groupby("modele"), key=lambda kv: kv[0] in style):
         color, width = style.get(model, (CONTEXT, 1.6))
         model_label = shown.get(model, model)
         grp = grp.sort_values("gw")
+        other = model not in style
         fig.add_trace(
             go.Scatter(
                 x=grp["gw"],
                 y=grp["rps_cumule"],
                 mode="lines+markers",
-                name=model,
-                showlegend=False,
+                name="Autres modèles" if other else model_label,
+                legendgroup="autres" if other else None,
+                showlegend=other and not legend_done,
                 line=dict(color=color, width=width),
                 marker=dict(size=8, color=color, line=dict(color=SURFACE, width=2)),
                 customdata=grp[["rps", "matchs"]].to_numpy(),
@@ -957,25 +1092,24 @@ def rps_evolution(g: pd.DataFrame) -> go.Figure:
                 "(%{customdata[1]} matchs)<br>Cumulé : %{y:.3f}<extra></extra>",
             )
         )
-        end = grp[grp["gw"] == grp["gw"].max()]
-        fig.add_annotation(
-            x=end["gw"].iloc[0],
-            y=end["rps_cumule"].iloc[0],
-            text=model_label,
-            showarrow=False,
-            xanchor="left",
-            xshift=10,
-            font=dict(color=TEXT if model in style else MUTED, size=11),
-        )
-    ticks = sorted(g["gw"].unique())
+        legend_done = legend_done or other
+        end = grp[grp["gw"] == last]
+        if not other and not end.empty:
+            items.append((_two_lines(model_label), float(end["rps_cumule"].iloc[0]), TEXT))
+    fig.update_layout(title="Qualité des pronostics figés au fil de la saison", height=380, showlegend=legend_done)
+    _end_labels(fig, last, items, _y_range(g["rps_cumule"].tolist(), zero=True))
+    ticks, text, x_title = _gw_axis(g["gw"], {int(t): f"Après J{t}" for t in g["gw"].unique()})
     fig.update_xaxes(
+        tickangle=0,
         tickvals=ticks,
-        ticktext=[f"J{t}" for t in ticks],
+        ticktext=text,
         gridcolor="rgba(0,0,0,0)",
-        range=[min(ticks) - 0.3, last + 0.3],
+        range=[g["gw"].min() - 0.3, last + 0.3],
+        title=x_title,
     )
-    fig.update_yaxes(title="Erreur de prévision moyenne cumulée (plus bas = mieux)", rangemode="tozero")
-    fig.update_layout(title="Qualité des pronostics figés au fil de la saison", height=380, margin=dict(r=190))
+    fig.update_yaxes(title="Erreur de prévision cumulée (bas = mieux)", rangemode="tozero", nticks=6)
+    if legend_done:
+        _legend_above(fig)
     return fig
 
 

@@ -5,6 +5,7 @@ import streamlit as st
 
 from app import charts
 from app.components import (
+    as_pct,
     callout,
     chip,
     empty_state,
@@ -12,8 +13,10 @@ from app.components import (
     fmt_pct,
     how,
     kpi_row,
+    pct_column,
     prob_bar,
     section,
+    short_table,
     table_height,
     volet_title,
 )
@@ -120,18 +123,20 @@ def _gameweek_review(fm: pd.DataFrame, team_id: int, meta: dict) -> None:
             )
         )
         st.dataframe(
-            d[["match", "score", "modele", "p_dom", "p_nul", "p_ext", "p_issue_reelle", "rps"]],
+            as_pct(
+                d[["match", "score", "modele", "p_dom", "p_nul", "p_ext", "p_issue_reelle", "rps"]],
+                ["p_dom", "p_nul", "p_ext", "p_issue_reelle"],
+            ),
             hide_index=True,
+            alt="Ce que disait chaque modèle",
             column_config={
                 "match": "Match",
                 "score": "Score",
                 "modele": "Modèle",
-                "p_dom": st.column_config.NumberColumn("Dom.", format="percent"),
-                "p_nul": st.column_config.NumberColumn("Nul", format="percent"),
-                "p_ext": st.column_config.NumberColumn("Ext.", format="percent"),
-                "p_issue_reelle": st.column_config.ProgressColumn(
-                    "Probabilité du vrai résultat", min_value=0, max_value=1, format="percent"
-                ),
+                "p_dom": pct_column("Dom."),
+                "p_nul": pct_column("Nul"),
+                "p_ext": pct_column("Ext."),
+                "p_issue_reelle": pct_column("Probabilité du vrai résultat", bar=True),
                 "rps": st.column_config.NumberColumn("Erreur de prévision ↓", format="%.3f", help="Plus bas = mieux"),
             },
         )
@@ -145,18 +150,17 @@ def _gameweek_review(fm: pd.DataFrame, team_id: int, meta: dict) -> None:
         st.caption("Chaque modèle est noté par son erreur de prévision : plus elle est basse, mieux c'est.")
         with st.expander("Détail des erreurs de prévision (RPS, log-loss, Brier)"):
             st.dataframe(
-                summ,
+                as_pct(summ, ["proba_issue_reelle", "favoris_gagnants"]),
                 hide_index=True,
+                alt="Erreurs de prévision de chaque modèle",
                 column_config={
                     "modele": "Modèle",
                     "matchs": "Matchs",
                     "rps": st.column_config.NumberColumn("RPS ↓", format="%.3f"),
                     "log_loss": st.column_config.NumberColumn("Log-loss ↓", format="%.3f"),
                     "brier": st.column_config.NumberColumn("Brier ↓", format="%.3f"),
-                    "proba_issue_reelle": st.column_config.ProgressColumn(
-                        "Probabilité du vrai résultat", min_value=0, max_value=1, format="percent"
-                    ),
-                    "favoris_gagnants": st.column_config.NumberColumn("Favoris vainqueurs", format="percent"),
+                    "proba_issue_reelle": pct_column("Probabilité du vrai résultat", bar=True),
+                    "favoris_gagnants": pct_column("Favoris vainqueurs"),
                 },
             )
         how(["scores_prevision", "pronostics_figes"], meta)
@@ -246,20 +250,20 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
 
     latest = df[df[x_col] == df[x_col].max()].sort_values("rang_moy")
     st.markdown(f"**Classement final prédit, {labels[df[x_col].max()][0].lower()}{labels[df[x_col].max()][1:]}**")
-    st.dataframe(
-        latest.assign(rang_predit=range(1, len(latest) + 1))[
-            ["rang_predit", "team_name", "pts_actuels", "pts_moy", "rang_moy", "p_titre", "p_podium", "p_dernier"]
-        ],
-        hide_index=True,
+    short_table(
+        as_pct(latest.assign(rang_predit=range(1, len(latest) + 1)), ["p_titre", "p_podium", "p_dernier"]),
+        ["rang_predit", "team_name", "p_titre", "p_podium", "p_dernier"],
+        full=["rang_predit", "team_name", "p_titre", "p_podium", "p_dernier", "pts_actuels", "pts_moy", "rang_moy"],
+        alt="Classement final prédit",
         column_config={
             "rang_predit": st.column_config.NumberColumn("#", width="small"),
             "team_name": "Équipe",
             "pts_actuels": "Points à cette date",
             "pts_moy": st.column_config.NumberColumn("Points prévus", format="%.1f"),
             "rang_moy": st.column_config.NumberColumn("Rang moyen", format="%.1f"),
-            "p_titre": st.column_config.ProgressColumn("Titre", min_value=0, max_value=1, format="percent"),
-            "p_podium": st.column_config.ProgressColumn("Podium", min_value=0, max_value=1, format="percent"),
-            "p_dernier": st.column_config.ProgressColumn("Dernier", min_value=0, max_value=1, format="percent"),
+            "p_titre": pct_column("Titre", bar=True),
+            "p_podium": pct_column("Podium", bar=True),
+            "p_dernier": pct_column("Dernier", bar=True),
         },
         height=table_height(len(latest)),
     )
@@ -285,19 +289,19 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
                     )
                 )
             with right:
-                st.dataframe(
-                    moves[
-                        [
-                            "team_name",
-                            "resultats",
-                            "delta_pts_moy",
-                            "delta_rang_moy",
-                            "delta_p_titre",
-                            "delta_p_podium",
-                            "delta_p_dernier",
-                        ]
+                short_table(
+                    as_pct(moves, ["delta_p_titre", "delta_p_podium", "delta_p_dernier"]),
+                    ["team_name", "resultats", "delta_p_titre", "delta_p_podium", "delta_p_dernier"],
+                    full=[
+                        "team_name",
+                        "resultats",
+                        "delta_p_titre",
+                        "delta_p_podium",
+                        "delta_p_dernier",
+                        "delta_pts_moy",
+                        "delta_rang_moy",
                     ],
-                    hide_index=True,
+                    alt="Variations depuis le dernier instantané",
                     column_config={
                         "team_name": "Équipe",
                         "resultats": st.column_config.TextColumn("Résultat(s)", width="medium"),
@@ -305,9 +309,13 @@ def _season_evolution(a: Analysis, fc: dict, team_id: int, meta: dict) -> None:
                         "delta_rang_moy": st.column_config.NumberColumn(
                             "Rang moyen (variation)", format="%+.1f", help="Négatif = l'équipe monte"
                         ),
-                        "delta_p_titre": st.column_config.NumberColumn("Titre (variation)", format="percent"),
-                        "delta_p_podium": st.column_config.NumberColumn("Podium (variation)", format="percent"),
-                        "delta_p_dernier": st.column_config.NumberColumn("Dernier (variation)", format="percent"),
+                        "delta_p_titre": pct_column("Titre +/-", signed=True, help="Variation de la chance de titre"),
+                        "delta_p_podium": pct_column(
+                            "Podium +/-", signed=True, help="Variation de la chance de podium"
+                        ),
+                        "delta_p_dernier": pct_column(
+                            "Dernier +/-", signed=True, help="Variation de la chance de finir dernier"
+                        ),
                     },
                 )
     else:

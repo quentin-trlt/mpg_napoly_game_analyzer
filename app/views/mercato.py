@@ -1,7 +1,19 @@
 import streamlit as st
 
 from app import charts
-from app.components import callout, empty_state, fmt_m, how, kpi_row, section, table_height, volet_title
+from app.components import (
+    as_pct,
+    callout,
+    empty_state,
+    fmt_m,
+    how,
+    kpi_row,
+    pct_column,
+    section,
+    short_table,
+    table_height,
+    volet_title,
+)
 from mpg.analysis import Analysis
 
 PLAYER_COLS = {
@@ -14,16 +26,19 @@ PLAYER_COLS = {
     "surpaiement_x": st.column_config.NumberColumn("× cote", format="%.2f"),
     "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note fiabilisée"),
     "note_retrecie": st.column_config.NumberColumn(
-        "Note fiabilisée", format="%.2f", help="Note attendue quand il joue, rapprochée de la moyenne de son poste"
+        "Note fiable", format="%.2f", help="Note attendue quand il joue, rapprochée de la moyenne de son poste"
     ),
     "note_attendue": st.column_config.NumberColumn("Attendue pour le prix", format="%.2f"),
-    "residu_valeur": st.column_config.NumberColumn("Écart au prix", format="%+.2f"),
+    "residu_valeur": st.column_config.NumberColumn(
+        "Écart prix", format="%+.2f", help="Écart entre sa note fiabilisée et la note attendue pour son prix"
+    ),
     "ga_saison": st.column_config.NumberColumn("G+A PL", format="%d"),
     "cout_par_ga_saison": st.column_config.NumberColumn("M€ par G+A", format="%.1f"),
-    "taux_jeu": st.column_config.ProgressColumn("Taux de jeu PL", min_value=0, max_value=1, format="percent"),
+    "taux_jeu": pct_column("Taux de jeu PL", bar=True),
 }
 
 
+FIABILITE_PCT = ["part_budget_titulaires_pl", "part_budget_indisponible"]
 NO_COTE = "Sans la cote MPG, on ne peut pas comparer ce que chacun a payé à ce que valait le joueur."
 NO_STATS_PL = "Les statistiques de Premier League (temps de jeu, buts, passes décisives) ne sont pas disponibles."
 
@@ -134,22 +149,27 @@ def render(a: Analysis, team_id: int) -> None:
     charts.show(charts.price_note_facets(pv, team_id))
     how(["residu_valeur", "shrinkage" if meta.get("k_postes") else "shrinkage_compos"], meta)
     cols = ["joueur", "team_name", "poste", "enchere", "n_notes", "note_retrecie", "note_attendue", "residu_valeur"]
+    shown = ["joueur", "team_name", "enchere", "note_retrecie", "residu_valeur"]
     rated = pv[pv["n_notes"] >= 2]
     st.caption("Joueurs avec au moins 2 matchs notés.")
     tab_good, tab_bad = st.tabs(["Les bonnes affaires", "Les déceptions"])
     with tab_good:
-        st.dataframe(
-            rated.sort_values("residu_valeur", ascending=False).head(10)[cols],
-            hide_index=True,
+        short_table(
+            rated.sort_values("residu_valeur", ascending=False).head(10),
+            shown,
+            full=cols,
             column_config=PLAYER_COLS,
             height=table_height(10),
+            alt="Les 10 meilleures affaires",
         )
     with tab_bad:
-        st.dataframe(
-            rated.sort_values("residu_valeur").head(10)[cols],
-            hide_index=True,
+        short_table(
+            rated.sort_values("residu_valeur").head(10),
+            shown,
+            full=cols,
             column_config=PLAYER_COLS,
             height=table_height(10),
+            alt="Les 10 plus grosses déceptions",
         )
 
     section("Fiabilité : a-t-on acheté des joueurs qui jouent ?")
@@ -167,33 +187,34 @@ def render(a: Analysis, team_id: int) -> None:
             height=380,
         )
         how("fiabilite", meta)
-        st.dataframe(
-            m.sort_values("part_budget_indisponible", ascending=False)[
-                [
-                    "team_name",
-                    "part_budget_titulaires_pl",
-                    "part_budget_indisponible",
-                    "nb_indisponibles",
-                    "nb_incertains_pl",
-                    "cartons_jaunes",
-                    "cartons_rouges",
-                ]
+        short_table(
+            as_pct(m.sort_values("part_budget_indisponible", ascending=False), FIABILITE_PCT),
+            [
+                "team_name",
+                "part_budget_titulaires_pl",
+                "part_budget_indisponible",
+                "nb_indisponibles",
+                "nb_incertains_pl",
             ],
-            hide_index=True,
+            full=[
+                "team_name",
+                "part_budget_titulaires_pl",
+                "part_budget_indisponible",
+                "nb_indisponibles",
+                "nb_incertains_pl",
+                "cartons_jaunes",
+                "cartons_rouges",
+            ],
             column_config={
                 "team_name": "Équipe",
-                "part_budget_titulaires_pl": st.column_config.ProgressColumn(
-                    "Sur titulaires PL",
-                    min_value=0,
-                    max_value=1,
-                    format="percent",
+                "part_budget_titulaires_pl": pct_column(
+                    "Titulaires",
+                    bar=True,
                     help="Part des enchères sur des joueurs titulaires dans au moins la moitié des matchs de leur club",
                 ),
-                "part_budget_indisponible": st.column_config.ProgressColumn(
-                    "À l'infirmerie",
-                    min_value=0,
-                    max_value=1,
-                    format="percent",
+                "part_budget_indisponible": pct_column(
+                    "Infirmerie",
+                    bar=True,
                     help="Part du budget blessé ou suspendu",
                 ),
                 "nb_indisponibles": st.column_config.NumberColumn(
@@ -204,6 +225,7 @@ def render(a: Analysis, team_id: int) -> None:
                 "cartons_rouges": st.column_config.NumberColumn("CR", width="small", help="Cartons rouges"),
             },
             height=table_height(len(m)),
+            alt="Fiabilité des achats, équipe par équipe",
         )
         how("discipline", meta)
     else:
@@ -252,9 +274,10 @@ def render(a: Analysis, team_id: int) -> None:
         *(() if caps.cote else ("surpaiement_global_x",)),
         *(() if caps.stats_pl else ("ga_saison",)),
     }
-    st.dataframe(
-        m[[c for c in board if c not in hidden]],
-        hide_index=True,
+    short_table(
+        as_pct(m, ["part_top3"]),
+        ["team_name", "enchere_totale", "enchere_mediane", "enchere_max", "part_top3"],
+        full=[c for c in board if c not in hidden],
         column_config={
             "team_name": "Équipe",
             "enchere_totale": st.column_config.NumberColumn("Dépensé", format="%d M€"),
@@ -272,10 +295,11 @@ def render(a: Analysis, team_id: int) -> None:
             ),
             "enchere_max": st.column_config.NumberColumn("Max", format="%d M€"),
             "joueur_plus_cher": "Plus cher",
-            "part_top3": st.column_config.ProgressColumn("Part top 3", min_value=0, max_value=1, format="percent"),
+            "part_top3": pct_column("Part top 3", bar=True),
             "surpaiement_global_x": st.column_config.NumberColumn("Surpaiement global", format="× %.2f"),
             "ga_saison": st.column_config.NumberColumn("G+A PL", format="%d"),
         },
+        alt="Tableau de bord du mercato",
     )
 
     section(f"Clubs PL dans l'effectif de {a.league.team_names[team_id]}")

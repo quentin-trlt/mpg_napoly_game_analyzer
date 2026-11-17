@@ -4,7 +4,17 @@ from pathlib import Path
 import streamlit as st
 
 from app import charts
-from app.components import callout, empty_state, how, section, table_height, volet_title
+from app.components import (
+    as_pct,
+    callout,
+    empty_state,
+    how,
+    pct_column,
+    section,
+    short_table,
+    table_height,
+    volet_title,
+)
 from mpg.analysis import Analysis
 from mpg.mercato import ALT_WEIGHTS, COMPONENT_LABELS, DEFAULT_WEIGHTS, mercato_ranking
 
@@ -171,20 +181,23 @@ def render(a: Analysis, team_id: int) -> None:
         *(() if caps.stats_pl else ("disponibilite_ponderee",)),
         *(() if incomplete else ("remarque",)),
     }
-    st.dataframe(
-        table.drop(columns=["rang_min", "rang_max", *hidden]),
-        hide_index=True,
-        column_order=[c for c in order if c not in hidden],
+    ordered = [c for c in order if c not in hidden]
+    short_table(
+        as_pct(table.drop(columns=["rang_min", "rang_max", *hidden]), ["disponibilite_ponderee"]),
+        ordered[:5],
+        full=["team_name", *(c for c in ordered if c != "team_name")],
         column_config={
             "rang": st.column_config.NumberColumn("#", width="small"),
             "team_name": "Équipe",
             "score": st.column_config.NumberColumn("Score", format="%+.2f"),
-            "plage": st.column_config.TextColumn("Plage de rangs", help="Rang minimal et maximal selon les scénarios"),
-            "residu_moy_tronque": st.column_config.NumberColumn("Rendement vs prix", format="%+.3f"),
-            "surpaiement_median_x": st.column_config.NumberColumn("Surpaiement médian", format="× %.2f"),
-            "disponibilite_ponderee": st.column_config.ProgressColumn(
-                "Fiabilité", min_value=0, max_value=1, format="percent"
+            "plage": st.column_config.TextColumn("Plage rangs", help="Rang minimal et maximal selon les scénarios"),
+            "residu_moy_tronque": st.column_config.NumberColumn(
+                "Rendement",
+                format="%+.3f",
+                help="Rendement par rapport au prix : écart moyen entre la note et celle attendue pour le prix",
             ),
+            "surpaiement_median_x": st.column_config.NumberColumn("Surpaiement médian", format="× %.2f"),
+            "disponibilite_ponderee": pct_column("Fiabilité", bar=True),
             "gini_enchere": st.column_config.NumberColumn(
                 "Concentration",
                 format="%.2f",
@@ -193,6 +206,7 @@ def render(a: Analysis, team_id: int) -> None:
             "remarque": "Remarque",
         },
         height=table_height(len(table)),
+        alt="Classement des mercatos",
     )
     how("score_mercato", meta)
 

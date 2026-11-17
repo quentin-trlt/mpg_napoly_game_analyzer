@@ -1,5 +1,6 @@
 from html import escape
 
+import pandas as pd
 import streamlit as st
 
 from app import charts
@@ -11,12 +12,14 @@ from app.components import (
     kpi_row,
     limit_banner,
     names_list,
+    rank_list,
     section,
     table_height,
     volet_title,
 )
 from app.navigation import page_link
 from mpg.analysis import Analysis, key_figures
+from mpg.seasons import coach_by_team
 
 SORT_OPTIONS = {"globale": "Globale", "G": "Gardiens", "D": "Défense", "M": "Milieu", "A": "Attaque"}
 
@@ -25,9 +28,16 @@ def _standings_table(a: Analysis, team_id: int) -> None:
     st_df = a.standings.copy()
     st_df["moi"] = st_df["team_id"] == team_id
     st_df["diff"] = st_df["diff"].map(lambda d: f"{d:+d}")
+    st.html(rank_list(a.standings, team_id, coach_by_team(a.league)))
+    with st.expander("Toutes les colonnes"):
+        _full_standings(st_df)
+
+
+def _full_standings(st_df: pd.DataFrame) -> None:
     st.dataframe(
         st_df,
         hide_index=True,
+        alt="Classement, toutes les colonnes",
         column_order=[
             "rang",
             "team_name",
@@ -47,7 +57,7 @@ def _standings_table(a: Analysis, team_id: int) -> None:
         ],
         column_config={
             "rang": st.column_config.NumberColumn("#", width="small"),
-            "team_name": st.column_config.TextColumn("Équipe", width="medium"),
+            "team_name": st.column_config.TextColumn("Équipe", width="medium", pinned=True),
             "coach": st.column_config.TextColumn("Coach"),
             "pts": st.column_config.ProgressColumn(
                 "Pts", min_value=0, max_value=int(3 * st_df["j"].max()), format="%d"

@@ -3,11 +3,14 @@ from html import escape
 import pandas as pd
 import streamlit as st
 
+from app.charts import is_mobile
 from app.theme import RESULT_COLORS, TEXT_2
 from mpg.glossary import explain
 
 ROW_PX = 35
 MAX_SHORT_COLUMNS = 5
+PCT_FORMAT = "%.0f %%"
+PCT_SIGNED_FORMAT = "%+.0f %%"
 DEFAULT_PROB_LABELS = ("Dom.", "Nul", "Ext.")
 CHIP_TONES = (None, "good", "bad")
 ALERT_TONES = ("good", "warn", "bad", "mid")
@@ -187,12 +190,55 @@ def grid(cells: list[str], template: str) -> str:
     return f'<div class="grid" style="--tpl:{escape(template)}">{"".join(cells)}</div>'
 
 
+def pct_column(label: str, *, bar: bool = False, signed: bool = False, **kwargs):
+    if bar and signed:
+        raise ValueError(
+            "pct_column : une barre de progression ne peut pas afficher un signe (bar et signed exclusifs)"
+        )
+    if bar:
+        return st.column_config.ProgressColumn(label, min_value=0, max_value=100, format=PCT_FORMAT, **kwargs)
+    return st.column_config.NumberColumn(label, format=PCT_SIGNED_FORMAT if signed else PCT_FORMAT, **kwargs)
+
+
+def as_pct(df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
+    out = df.copy()
+    present = [c for c in columns if c in out.columns]
+    out[present] = out[present] * 100
+    return out
+
+
+def _pinned(config_value: str | dict | None) -> dict | None:
+    if config_value is None:
+        return None
+    base = {"label": config_value} if isinstance(config_value, str) else dict(config_value)
+    return {**base, "pinned": True}
+
+
+def _narrow(config_value: str | dict | None) -> dict:
+    base = (
+        {} if config_value is None else {"label": config_value} if isinstance(config_value, str) else dict(config_value)
+    )
+    return base if base.get("width") is not None else {**base, "width": "small"}
+
+
+def _phone_config(config: dict | None, columns: list[str]) -> dict | None:
+    if not columns:
+        return config
+    first, *others = columns
+    given = config or {}
+    fitted = {first: _pinned(given.get(first)) or {"pinned": True}}
+    fitted.update({c: _narrow(given.get(c)) for c in others})
+    return {**given, **fitted}
+
+
 def short_table(
     df: pd.DataFrame,
     columns: list[str],
     *,
     more: str = "Toutes les colonnes",
+    full: list[str] | None = None,
     column_config: dict | None = None,
+    alt: str | None = None,
     **kwargs,
 ) -> None:
     if len(columns) > MAX_SHORT_COLUMNS:
@@ -201,10 +247,32 @@ def short_table(
         )
     kwargs.setdefault("hide_index", True)
     config = column_config or {}
-    st.dataframe(df[columns], column_config={c: config[c] for c in columns if c in config} or None, **kwargs)
-    if len(df.columns) > len(columns):
-        with st.expander(more):
-            st.dataframe(df, hide_index=kwargs["hide_index"], column_config=config or None)
+
+    def config_for(cols: list[str]) -> dict | None:
+        return {c: config[c] for c in cols if c in config} or None
+
+    visible_config = config_for(columns)
+    if is_mobile():
+        visible_config = _phone_config(visible_config, columns)
+    st.dataframe(df[columns], column_config=visible_config, alt=alt, **kwargs)
+
+    candidates = list(df.columns) if full is None else full
+    full_columns = [c for c in candidates if c in df.columns]
+    if len(full_columns) <= len(columns):
+        return
+    full_config = config_for(full_columns) or {}
+    first = full_columns[0]
+    if first in full_config:
+        full_config[first] = _pinned(full_config[first])
+    else:
+        full_config[first] = {"pinned": True}
+    with st.expander(more):
+        st.dataframe(
+            df[full_columns],
+            column_config=full_config,
+            hide_index=kwargs["hide_index"],
+            alt=f"{alt}, toutes les colonnes" if alt else None,
+        )
 
 
 def limit_banner(caps: list[str], title: str = "Saison passée, données partielles") -> None:

@@ -130,6 +130,7 @@ def _head_to_head(season_list: list[Season], h2h: pd.DataFrame, coach: str) -> N
     st.dataframe(
         games[["journee", "lieu", "opp_name", "score", "resultat"]],
         hide_index=True,
+        alt="Matchs contre ce coach",
         column_config={
             "journee": st.column_config.TextColumn("Journée", width="small"),
             "lieu": st.column_config.TextColumn("Lieu", width="small"),

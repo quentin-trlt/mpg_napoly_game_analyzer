@@ -5,14 +5,17 @@ import streamlit as st
 
 from app import charts
 from app.components import (
+    as_pct,
     fmt_m,
     fmt_pct,
     form_badges,
     how,
     kpi_row,
     limit_banner,
+    pct_column,
     rank_tone,
     section,
+    short_table,
     stat_grid,
     table_height,
     volet_title,
@@ -45,6 +48,8 @@ SQUAD_COLUMNS = [
     "choisi_titulaire",
     "residu_valeur",
 ]
+SQUAD_VISIBLE = ["joueur", "poste", "note_moy", "enchere"]
+SQUAD_EXTRA_VISIBLE = ["prochain_match", "buts_mpg", "statut_performance"]
 SQUAD_CONFIG = {
     "joueur": st.column_config.TextColumn("Joueur", pinned=True),
     "poste": "Poste",
@@ -52,16 +57,14 @@ SQUAD_CONFIG = {
     "forme_club": st.column_config.TextColumn(
         "Forme du club", help="5 derniers résultats du club en PL, du plus ancien au plus récent"
     ),
-    "prochain_match": st.column_config.TextColumn(
-        "Prochain match", help="Adversaire du club, lieu et date (heure de Paris)"
-    ),
+    "prochain_match": st.column_config.TextColumn("Prochain", help="Adversaire du club, lieu et date (heure de Paris)"),
     "enchere": st.column_config.NumberColumn("Prix", format="%d M€"),
     "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
     "surpaiement_x": st.column_config.NumberColumn(
         "Prix ÷ cote", format="%.2f", help="Au-dessus de 1, tu as payé plus cher que la cote"
     ),
     "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note fiabilisée"),
-    "note_moy": st.column_config.NumberColumn("Moy. brute", format="%.2f", help="Moyenne de ces notes"),
+    "note_moy": st.column_config.NumberColumn("Note moy.", format="%.2f", help="Moyenne des notes MPG du joueur"),
     "note_retrecie": st.column_config.NumberColumn(
         "Note fiabilisée",
         format="%.2f",
@@ -74,7 +77,7 @@ SQUAD_CONFIG = {
     "passes_decisives_saison": st.column_config.NumberColumn("Passes PL", format="%d"),
     "cartons_jaunes": st.column_config.NumberColumn("Jaunes", format="%d"),
     "cartons_rouges": st.column_config.NumberColumn("Rouges", format="%d"),
-    "taux_jeu": st.column_config.ProgressColumn("Taux de jeu PL", min_value=0, max_value=1, format="percent"),
+    "taux_jeu": pct_column("Taux de jeu PL", bar=True),
     "statut_performance": "Statut",
     "choisi_titulaire": st.column_config.NumberColumn("Titularisé (MPG)"),
     "residu_valeur": st.column_config.NumberColumn("Écart au prix", format="%+.2f"),
@@ -244,10 +247,14 @@ def effectif(a: Analysis, team_id: int) -> None:
     section("Effectif")
     squad = _with_club_form(roster, a.league.club_results)
     columns = [c for c in SQUAD_COLUMNS if squad[c].replace("", pd.NA).notna().any()]
-    st.dataframe(
-        squad.sort_values(["poste_groupe", "enchere"], ascending=[True, False])[columns],
-        hide_index=True,
-        column_config={c: SQUAD_CONFIG[c] for c in columns if c in SQUAD_CONFIG},
+    shown = as_pct(squad.sort_values(["poste_groupe", "enchere"], ascending=[True, False])[columns], ["taux_jeu"])
+    extra = next((c for c in SQUAD_EXTRA_VISIBLE if c in columns), None)
+    short_table(
+        shown,
+        [c for c in SQUAD_VISIBLE if c in columns] + ([extra] if extra else []),
+        full=columns,
+        column_config=SQUAD_CONFIG,
+        alt="Effectif",
         height=table_height(len(roster)),
     )
     explained = [
@@ -373,8 +380,9 @@ def _bonus_section(a: Analysis, team_id: int, meta: dict) -> None:
         pivot.insert(0, "Total", pivot.clip(lower=0).sum(axis=1))
         pivot.insert(0, "Équipe", pivot.index.map(a.league.team_names))
         st.dataframe(
-            pivot.sort_values("Total", ascending=False),
+            pivot.sort_values("Total", ascending=False).reset_index(drop=True),
             hide_index=True,
+            alt="Bonus de toutes les équipes",
             column_config={
                 "Total": st.column_config.ProgressColumn(
                     "Total",
@@ -415,16 +423,18 @@ def _bonus_effect(fc: dict, team_id: int, meta: dict) -> None:
         )
     with right:
         st.dataframe(
-            be[["team_name", "restants", "effet_pts", "effet_titre", "effet_dernier"]],
+            as_pct(
+                be[["team_name", "restants", "effet_pts", "effet_titre", "effet_dernier"]],
+                ["effet_titre", "effet_dernier"],
+            ),
             hide_index=True,
+            alt="Effet des bonus restants",
             column_config={
                 "team_name": "Équipe",
                 "restants": st.column_config.NumberColumn("Restants", width="small"),
                 "effet_pts": st.column_config.NumberColumn("Points", format="%+.2f", width="small"),
-                "effet_titre": st.column_config.NumberColumn("Chances de titre", format="percent", width="small"),
-                "effet_dernier": st.column_config.NumberColumn(
-                    "Chances de finir dernier", format="percent", width="small"
-                ),
+                "effet_titre": pct_column("Chances de titre", signed=True, width="small"),
+                "effet_dernier": pct_column("Chances de finir dernier", signed=True, width="small"),
             },
             height=table_height(len(be)),
         )

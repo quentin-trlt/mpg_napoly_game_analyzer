@@ -110,13 +110,14 @@ def render(a: Analysis, team_id: int) -> None:
         )
         todo["rang_adv"] = todo["opp_id"].map(rank)
         todo["force_adv"] = todo["opp_id"].map(force)
+        todo["journee"] = "J" + todo["gw"].astype(str) + todo["date"].dt.strftime(", %d/%m").fillna("")
         st.dataframe(
-            todo[["gw", "date", "lieu", "adversaire", "rang_adv", "force_adv"]],
+            todo[["journee", "lieu", "adversaire", "rang_adv", "force_adv"]],
             hide_index=True,
             height=470,
+            alt="Calendrier restant",
             column_config={
-                "gw": st.column_config.NumberColumn("J", format="J%d"),
-                "date": st.column_config.DateColumn("Date", format="DD/MM"),
+                "journee": "Journée",
                 "lieu": "Lieu",
                 "adversaire": "Adversaire",
                 "rang_adv": st.column_config.NumberColumn("Rang actuel"),

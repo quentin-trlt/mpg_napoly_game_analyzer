@@ -6,7 +6,7 @@
 uv run streamlit run streamlit_app.py
 ```
 
-L'app lit les CSV de `data/` et de `data/history/`. Le coach, `coach_app.py`, est une app séparée, à lancer en local avec `uv run streamlit run coach_app.py`. Il conseille la compo du prochain match MPG, garde ses réglages dans `.coach/` et télécharge les données FPL dans `data/fpl_cache/` (les deux sont listés dans `.gitignore`, mais `.coach/settings.json` et les fichiers de `data/fpl_cache/` sont déjà suivis par git : lancer le coach réécrit `data/fpl_cache/bootstrap-static.json`, que `git restore data/fpl_cache/bootstrap-static.json` annule si tu ne veux pas le commiter).
+L'app lit les CSV de `data/` et de `data/history/`. Le coach, `coach_app.py`, est une app séparée, à lancer en local avec `uv run streamlit run coach_app.py`. Il conseille la compo du prochain match MPG, garde ses réglages dans `.coach/` (listé dans `.gitignore`, mais `.coach/settings.json` est déjà suivi par git) et lit le même instantané FPL que l'app (`fpl_players.csv`, `fpl_history.csv`) : il ne télécharge plus rien lui-même. Son bouton « Rafraîchir les données FPL » relance `build_fpl.py`, ce qui met à jour les CSV pour les deux apps. Ce script écrit encore dans `data/fpl_cache/` (fichiers suivis par git : `git restore data/fpl_cache/bootstrap-static.json` annule la réécriture si tu ne veux pas la commiter).
 
 ### Navigation
 
@@ -95,7 +95,7 @@ players.club ──< club_results (home_club / away_club) ──< pl_goals (pl_m
 | `fpl_history.csv` | 1 ligne par joueur et par match FPL | Minutes, titularisation, buts, CSC et xG de chaque match de PL joué (`round` = journée PL) |
 | `player_match_notes.csv` | 1 ligne par joueur de la ligue et par journée de PL jouée (196 × 10) | Fiche joueur MPG : `pl_gw`, `pl_match_id` (vide si `pas_encore_au_club`), club à cette date, note MPG du match (vide s'il n'a pas joué), `a_joue`, `titulaire`, minutes, buts, passes, csc, `statut` (vide s'il a joué, `non_entre`, `blesse`, `suspendu`, `non_convoque`, `pas_encore_au_club`). Cartons toujours vides |
 
-Les deux fichiers FPL se régénèrent après chaque export MPG avec `uv run python build_fpl.py`. Le script archive aussi `fpl_players.csv` dans `fpl_snapshots/fpl_players_PL<journée>.csv` : `chance_next` n'est plus consultable une fois la journée passée, et ces copies permettront de mesurer ce qu'elle apporte.
+Les deux fichiers FPL sont la source commune de l'app et du coach. Ils se régénèrent après chaque export MPG avec `uv run python build_fpl.py`, ou avec le bouton de rafraîchissement du coach, qui relance le même script (appariement forcé par `.coach/fpl_overrides.csv` s'il existe). Le script archive aussi `fpl_players.csv` dans `fpl_snapshots/fpl_players_PL<journée>.csv` : `chance_next` n'est plus consultable une fois la journée passée, et ces copies permettront de mesurer ce qu'elle apporte.
 
 ## Saisons passées
 

@@ -126,16 +126,6 @@ def get_title_history(data_dir: Path = DEFAULT_DATA_DIR) -> pd.DataFrame:
     return _title_history(_data_signature(data_dir), str(data_dir))
 
 
-def get_forecast(data_dir: Path = DEFAULT_DATA_DIR) -> dict:
-    signature = _current_season_signature(data_dir)
-    return {
-        **_forecast_light(signature, str(data_dir)),
-        "history": _title_history(signature, str(data_dir)),
-        **_forecast_heavy(signature, str(data_dir)),
-        **_frozen(signature, _frozen_signature(), str(data_dir)),
-    }
-
-
 @st.cache_resource(max_entries=1)
 def seasons() -> list[Season]:
     return list_seasons()

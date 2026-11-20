@@ -205,14 +205,6 @@ def test_entrypoint_loads_a_season_only_when_selected():
     state._cached.clear()
 
 
-def test_forecast_refused_on_a_past_season():
-    from app.state import get_forecast
-
-    past = next(path for name, path in season_dirs().items() if name != "en cours")
-    with pytest.raises(ValueError, match="saison en cours"):
-        get_forecast(past)
-
-
 @pytest.mark.parametrize("season", SEASONS)
 def test_analysis_meta_carries_the_season_contract(season):
     from mpg.analysis import run

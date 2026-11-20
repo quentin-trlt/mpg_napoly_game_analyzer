@@ -215,7 +215,7 @@ short_table(
 `table_height(n_rows: int) -> int` : la hauteur en pixels pour afficher `n_rows` lignes sans défilement interne (`ROW_PX = 35` par ligne, plus l'en-tête).
 
 ```python
-height=table_height(len(table)),
+st.dataframe(table, hide_index=True, height=table_height(len(table)))
 ```
 
 ### Graphiques

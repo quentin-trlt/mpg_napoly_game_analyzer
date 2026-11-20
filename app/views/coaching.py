@@ -163,7 +163,7 @@ def render(a: Analysis, team_id: int) -> None:
     )
     st.caption(
         "Le meilleur 11 est rejoué avec la même formation, le même capitaine et les mêmes bonus que ceux que tu as "
-        "joués. Les remplacements en cours de match ne sont pas rejoués. "
+        "posés. Les remplacements en cours de match ne sont pas rejoués. "
         "Quand le capitaine devrait sortir, le match n'est pas rejoué."
     )
 

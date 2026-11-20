@@ -1,9 +1,25 @@
+import pandas as pd
 import streamlit as st
 
 from app import charts
 from app.components import as_pct, callout, how, kpi_row, pct_column, section, short_table, table_height, volet_title
 from mpg.analysis import Analysis
 from mpg.coaching import bonus_effect
+
+
+def _replay_sentence(replayed: pd.DataFrame, skipped: int) -> str:
+    """Points gagnés ou perdus si l'équipe avait aligné son meilleur 11, sur les matchs rejoués."""
+    gain, real, best = (int(x) for x in (replayed["gain_pts"].sum(), replayed["pts"].sum(), replayed["pts_opt"].sum()))
+    unit = "point" if abs(gain) == 1 else "points"
+    if gain > 0:
+        text = f"Avec ton meilleur 11 à chaque match, tu aurais {gain} {unit} de plus ({best} au lieu de {real})."
+    elif gain < 0:
+        text = f"Avec ton meilleur 11 à chaque match, tu aurais {-gain} {unit} de moins ({best} au lieu de {real})."
+    else:
+        text = f"Avec ton meilleur 11 à chaque match, tu aurais le même nombre de points ({real}) : le banc ne t'a rien coûté."
+    played = f"{len(replayed)} match{'s' if len(replayed) > 1 else ''} rejoué{'s' if len(replayed) > 1 else ''}"
+    suffix = f" {played}" + (f", {skipped} non rejoué{'s' if skipped > 1 else ''}." if skipped else ".")
+    return text + suffix
 
 
 def render(a: Analysis, team_id: int) -> None:
@@ -107,15 +123,23 @@ def render(a: Analysis, team_id: int) -> None:
         a.team_match[["match_id", "team_id", "gw", "opp_name", "resultat", "bp", "bc", "formation"]],
         on=["match_id", "team_id"],
     )
+    opt = opt.merge(a.optimal_replay.drop(columns=["bp", "bc"]), on=["match_id", "team_id"], how="left")
     opt["score"] = opt["bp"].astype(str) + " – " + opt["bc"].astype(str)
+    opt["meilleur_11"] = opt["bp_opt"].astype("Int64").astype(str) + " – " + opt["bc_opt"].astype("Int64").astype(str)
+    opt["meilleur_11"] = opt["meilleur_11"].where(opt["bp_opt"].notna())
+    opt["gain_pts"] = opt["pts_opt"] - opt["pts"]
+    replayed = opt.dropna(subset=["pts_opt"])
+    callout(_replay_sentence(replayed, len(opt) - len(replayed)))
     short_table(
         opt.sort_values("gw"),
-        ["gw", "opp_name", "score", "regret", "oublies_sur_banc"],
+        ["gw", "opp_name", "score", "meilleur_11", "regret"],
         full=[
             "gw",
             "opp_name",
             "resultat",
             "score",
+            "meilleur_11",
+            "gain_pts",
             "formation",
             "somme_notes_11",
             "somme_notes_optimal",
@@ -127,6 +151,8 @@ def render(a: Analysis, team_id: int) -> None:
             "opp_name": "Adversaire",
             "resultat": "Rés.",
             "score": "Score",
+            "meilleur_11": st.column_config.TextColumn("Meilleur 11", help="Score rejoué avec le meilleur 11 possible"),
+            "gain_pts": st.column_config.NumberColumn("Points gagnés", format="%+d", help="Points en plus ou en moins"),
             "formation": "Formation",
             "somme_notes_11": st.column_config.NumberColumn("Notes du 11", format="%.1f"),
             "somme_notes_optimal": st.column_config.NumberColumn("Notes du 11 optimal", format="%.1f"),
@@ -134,6 +160,11 @@ def render(a: Analysis, team_id: int) -> None:
             "oublies_sur_banc": st.column_config.TextColumn("Auraient dû jouer", width="large"),
         },
         alt="Le banc de mon équipe, match par match",
+    )
+    st.caption(
+        "Le meilleur 11 est rejoué avec la même formation, le même capitaine et les mêmes bonus que ceux que tu as "
+        "joués. Les remplacements en cours de match ne sont pas rejoués. "
+        "Quand le capitaine devrait sortir, le match n'est pas rejoué."
     )
 
     section("Capitaines")

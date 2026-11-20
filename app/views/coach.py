@@ -8,6 +8,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+import build_fpl
 from app.components import callout, hero, kpi_row, prob_bar, section, table_height
 from app.state import data_signature, get_analysis
 from mpg import fpl
@@ -16,6 +17,8 @@ from mpg.coach.projection import OVERRIDE_LEVELS
 from mpg.coach.recommend import Recommendation, naive_lineup, recommend
 from mpg.coach.rules import Lineup, slots_of
 from mpg.forecast.bonus import F424, MCDO, MIROIR, TONTON
+from mpg.loader import DEFAULT_DATA_DIR
+from mpg.playing_time import split_history
 
 STATE_DIR = Path(__file__).resolve().parents[2] / ".coach"
 SETTINGS = "settings.json"
@@ -40,36 +43,23 @@ def _write_json(name: str, data) -> Path:
     return path
 
 
-def _fpl_overrides() -> dict[str, int]:
-    path = STATE_DIR / FPL_OVERRIDES
-    if not path.exists():
-        return {}
-    df = pd.read_csv(path)
-    return dict(zip(df["player_key"], df["element_id"].astype(int)))
-
-
-@st.cache_resource(show_spinner="Téléchargement des données FPL (environ 200 joueurs la première fois)…", max_entries=2)
-def _load_fpl(signature: tuple, token: int) -> dict:
+@st.cache_resource(show_spinner=False, max_entries=2)
+def _load_fpl(signature: tuple) -> dict:
     league = get_analysis().league
-    client = fpl.FplClient(refresh=token > 0)
-    try:
-        els = fpl.elements(client.bootstrap())
-        mapping = fpl.match_players(league.players, els, _fpl_overrides())
-        players = mapping[["player_key", "element_id"]].merge(els, on="element_id", how="left")
-        history = {int(e): fpl.history(client.element_summary(int(e))) for e in players["element_id"].dropna()}
-    except fpl.FplError as exc:
-        return {"players": None, "history": {}, "mapping": None, "error": str(exc), "fetched_at": None}
+    if league.fpl_players is None or league.fpl_history is None:
+        return {"players": None, "history": {}, "mapping": None, "fetched_at": None}
+    players = league.fpl_players
+    fetched = pd.to_datetime(players["recupere_le"], utc=True, errors="coerce").max()
     return {
         "players": players,
-        "history": history,
-        "mapping": mapping,
-        "error": None,
-        "fetched_at": client.fetched_at(),
+        "history": split_history(league.fpl_history),
+        "mapping": players,
+        "fetched_at": None if pd.isna(fetched) else fetched.to_pydatetime(),
     }
 
 
 @st.cache_resource(show_spinner="Optimisation de la compo et du plan de bonus…", max_entries=6)
-def _recommend(signature: tuple, team_id: int, overrides: str, token: int, n_draws: int, _fpl: dict) -> Recommendation:
+def _recommend(signature: tuple, team_id: int, overrides: str, n_draws: int, _fpl: dict) -> Recommendation:
     return recommend(get_analysis(), team_id, _fpl["players"], _fpl["history"], json.loads(overrides), n_draws=n_draws)
 
 
@@ -237,24 +227,27 @@ def render(a: Analysis) -> None:
     with st.sidebar:
         team_id = _team_selector(a)
         n_draws = st.select_slider("Tirages Monte Carlo", options=DRAW_CHOICES, value=4000)
-        if "fpl_token" not in st.session_state:
-            st.session_state["fpl_token"] = 0
         if st.button("Rafraîchir les données FPL", icon=":material/refresh:", width="stretch"):
-            st.session_state["fpl_token"] += 1
+            try:
+                with st.spinner("Téléchargement des données FPL (environ 200 joueurs)…"):
+                    build_fpl.refresh(DEFAULT_DATA_DIR, STATE_DIR / FPL_OVERRIDES)
+            except fpl.FplError as exc:
+                st.warning(f"Rafraîchissement impossible, instantané conservé. {exc}")
         st.caption(f"Données MPG jusqu'à la J{a.league.last_gw}.")
 
-    token = st.session_state["fpl_token"]
     signature = data_signature()
-    fpl_data = _load_fpl(signature, token)
+    fpl_data = _load_fpl(signature)
     with st.sidebar:
-        if fpl_data["error"]:
-            st.warning(f"FPL indisponible, projection sur les seules données MPG. {fpl_data['error']}")
+        if fpl_data["players"] is None:
+            st.warning(
+                "Pas d'instantané FPL (lance `build_fpl.py` ou rafraîchis), projection sur les seules données MPG."
+            )
         elif fpl_data["fetched_at"] is not None:
-            st.caption(f"FPL mis à jour le {fpl_data['fetched_at'].astimezone():%d/%m à %H:%M}.")
+            st.caption(f"Instantané FPL du {fpl_data['fetched_at'].astimezone():%d/%m à %H:%M}.")
 
     overrides = {k: float(v) for k, v in _read_json(OVERRIDES, {}).items()}
     try:
-        rec = _recommend(signature, team_id, json.dumps(overrides, sort_keys=True), token, n_draws, fpl_data)
+        rec = _recommend(signature, team_id, json.dumps(overrides, sort_keys=True), n_draws, fpl_data)
     except ValueError as exc:
         st.info(str(exc))
         return

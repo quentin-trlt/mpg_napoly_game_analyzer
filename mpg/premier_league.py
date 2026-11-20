@@ -45,11 +45,33 @@ def last_results(results: pd.DataFrame, club: str, n: int | None = None) -> pd.D
     return done if n is None else done.head(n)
 
 
-def next_match(results: pd.DataFrame, club: str) -> pd.Series | None:
-    """Prochain match à venir d'un club, None s'il n'en reste aucun."""
+def next_matches(results: pd.DataFrame, club: str, n: int = 3) -> pd.DataFrame:
+    """Les `n` prochains matchs à venir d'un club, du plus proche au plus lointain (vide s'il n'en reste plus)."""
     v = club_view(results)
     todo = v[(v["club"] == club) & (v["statut"] == "a_venir")].sort_values("date")
+    return todo.head(n).reset_index(drop=True)
+
+
+def next_match(results: pd.DataFrame, club: str) -> pd.Series | None:
+    """Prochain match à venir d'un club, None s'il n'en reste aucun."""
+    todo = next_matches(results, club, 1)
     return None if todo.empty else todo.iloc[0]
+
+
+def pl_table(results: pd.DataFrame) -> pd.DataFrame:
+    """Classement de PL des matchs joués : j, pts (3/1/0), diff, rang (départage : diff, buts marqués, nom)."""
+    done = club_view(results).query("statut == 'joue'")
+    pts = done["resultat"].map({"V": 3, "N": 1, "D": 0})
+    table = (
+        done.assign(pts=pts, diff=done["bp"] - done["bc"])
+        .groupby("club")
+        .agg(j=("pts", "size"), pts=("pts", "sum"), diff=("diff", "sum"), bp=("bp", "sum"))
+        .reset_index()
+        .sort_values(["pts", "diff", "bp", "club"], ascending=[False, False, False, True])
+        .reset_index(drop=True)
+    )
+    table["rang"] = table.index + 1
+    return table.drop(columns="bp")
 
 
 def club_form(results: pd.DataFrame, n: int = 5) -> pd.DataFrame:

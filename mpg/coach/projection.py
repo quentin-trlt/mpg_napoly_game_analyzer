@@ -140,6 +140,9 @@ def forecast_calibration(results: pd.DataFrame) -> float:
     return float(np.clip(slope, 0.0, 1.0))
 
 
+MIN_SIGMA_INDIV = 0.3
+
+
 @dataclass
 class NoteModel:
     """Paramètres de note estimés sur les matchs joués de la ligue.
@@ -309,6 +312,7 @@ def project_players(
     mixture = "note_titulaire" in pv
     if mixture:
         cols += ["note_titulaire", "note_titulaire_sd", "p_titulaire_si_joue", "note_remplacant", "sigma_remplacant"]
+        cols += ["sigma_titulaire"]
     p = pv.loc[pv["team_id"].isin(team_ids), cols].copy()
     if fpl_players is not None:
         fcols = ["player_key", "element_id", "status", "chance_next", "news", "xg90", "minutes", "web_name"]
@@ -403,7 +407,9 @@ def sample_draws(proj: pd.DataFrame, model: NoteModel, n_draws: int = 4000, seed
 
     Un joueur qui joue est titulaire en PL avec la probabilité `p_titulaire` : note de titulaire (moyenne tirée
     selon son incertitude, choc de club, bruit individuel), sinon note de remplaçant de son poste. Les deux reçoivent
-    le décalage des buteurs.
+    le décalage des buteurs. Avec `sigma_titulaire` (écart-type d'un titulaire par poste, `mpg.notes`), le bruit
+    individuel est celui qui complète choc de club et lien aux buts pour atteindre cet écart-type, jamais sous
+    `MIN_SIGMA_INDIV` ; sinon c'est `model.sigma_player`.
     """
     rng = np.random.default_rng(seed)
     n_p = len(proj)
@@ -411,13 +417,19 @@ def sample_draws(proj: pd.DataFrame, model: NoteModel, n_draws: int = 4000, seed
     lam = proj["lambda_buts"].clip(lower=0).to_numpy(float)
     mu = proj["note_titulaire_attendue"].to_numpy(float)
     q = proj["p_titulaire"].clip(0, 1).to_numpy(float)
-    sd = np.sqrt(proj["note_sd_mean"].to_numpy(float) ** 2 + model.sigma_player**2)
     field = (proj["poste_groupe"] != "G").to_numpy()
     club_codes, clubs = pd.factorize(proj["club"])
 
     plays = rng.random((n_p, n_draws)) < p_play[:, None]
     goals = rng.poisson(lam[:, None], size=(n_p, n_draws))
     p_score = 1 - np.exp(-lam)
+    indiv = np.full(n_p, model.sigma_player)
+    if "sigma_titulaire" in proj:
+        total = proj["sigma_titulaire"].to_numpy(float)
+        goal_var = model.goal_bump**2 * p_score * (1 - p_score) * field
+        fitted = np.sqrt(np.maximum(total**2 - model.sigma_club**2 - goal_var, MIN_SIGMA_INDIV**2))
+        indiv = np.where(np.isnan(total), indiv, fitted)
+    sd = np.sqrt(proj["note_sd_mean"].to_numpy(float) ** 2 + indiv**2)
     shock = model.sigma_club * rng.standard_normal((len(clubs), n_draws))
     raw = mu[:, None] + sd[:, None] * rng.standard_normal((n_p, n_draws)) + shock[club_codes]
     if (q < 1).any():

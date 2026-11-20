@@ -1,9 +1,11 @@
+import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
 import pandas as pd
 
 from mpg import coaching, luck, mercato, players, standings, strength
+from mpg.coach.replay import optimal_replay
 from mpg.facts import line_ratings, lineups_enriched, team_match
 from mpg.loader import DEFAULT_DATA_DIR, League, load_league
 from mpg.stats import spearman
@@ -21,6 +23,7 @@ class Analysis:
     luck: pd.DataFrame
     coaching: pd.DataFrame
     optimal_lineups: pd.DataFrame
+    optimal_replay: pd.DataFrame
     captains: pd.DataFrame
     bonus_usage: pd.DataFrame
     substitutions: pd.DataFrame
@@ -40,6 +43,26 @@ class Analysis:
     meta: dict = field(default_factory=dict)
 
 
+def _season_meta(league: League, data_dir: Path) -> dict:
+    """Saison du dossier, son statut et ce que ses données permettent (voir `mpg.seasons`).
+
+    `mpg.seasons` importe `mpg.forecast.evaluation`, qui importe ce module : l'import se fait ici, à l'appel, pour
+    rompre le cycle sans déplacer de code.
+    """
+    from mpg.seasons import capabilities, limits, list_seasons
+
+    meta_file = data_dir / "meta.json"
+    meta_json = json.loads(meta_file.read_text(encoding="utf-8")) if meta_file.exists() else {}
+    seasons = list_seasons()
+    known = next((s for s in seasons if s.path == data_dir), None)
+    if known is not None:
+        key, current = known.key, known.current
+    else:
+        key, current = meta_json.get("saison") or seasons[-1].key, not meta_json
+    caps = capabilities(league, meta_json)
+    return {"saison": key, "saison_en_cours": current, "capacites": caps, "limites": limits(caps)}
+
+
 def run(data_dir: Path | str = DEFAULT_DATA_DIR, n_sim: int = 10_000, seed: int = 0) -> Analysis:
     league = load_league(data_dir)
     lu = lineups_enriched(league)
@@ -54,6 +77,7 @@ def run(data_dir: Path | str = DEFAULT_DATA_DIR, n_sim: int = 10_000, seed: int 
     scen_ranks, scen_fit = strength.strength_scenarios(fav, fav.set_index("team_id")["pts"])
     scen_ranks.insert(1, "team_name", scen_ranks["team_id"].map(names))
     lines = line_ratings(lu).assign(team_name=lambda d: d["team_id"].map(names))
+    optimal = coaching.optimal_lineups(lu, tm)
     coach = coaching.coaching_table(lu, tm, league.bonus, league.substitutions)
     absents = coach.set_index("team_id")["absents_total"]
     corr_fiab = spearman(merc.set_index("team_id")["disponibilite_ponderee"], absents)
@@ -76,7 +100,8 @@ def run(data_dir: Path | str = DEFAULT_DATA_DIR, n_sim: int = 10_000, seed: int 
         correlations=strength.strength_correlations(fav),
         luck=lk,
         coaching=coach,
-        optimal_lineups=coaching.optimal_lineups(lu, tm).assign(team_name=lambda d: d["team_id"].map(names)),
+        optimal_lineups=optimal.assign(team_name=lambda d: d["team_id"].map(names)),
+        optimal_replay=optimal_replay(league, lu, tm, optimal),
         captains=coaching.captain_report(lu, league.bonus).assign(team_name=lambda d: d["team_id"].map(names)),
         bonus_usage=coaching.bonus_usage(league.bonus, tm),
         substitutions=coaching.substitution_report(league.substitutions).assign(
@@ -108,27 +133,53 @@ def run(data_dir: Path | str = DEFAULT_DATA_DIR, n_sim: int = 10_000, seed: int 
             if ps.attrs.get("k_postes")
             else None,
             "n_sim": n_sim,
+            "prix": strength.price_column(league.players),
             "corr_fiabilite_absents": f"corrélation avec les absences MPG {corr_fiab}",
             "corr_absents_attendus": f"corrélation entre absences attendues et réelles {corr_abs}",
             "rmse_note_reelle": rmse["note_moy_reelle"],
             "rmse_points_mpg": rmse["points_mpg_moy"],
+            **_season_meta(league, Path(data_dir).resolve()),
         },
     )
 
 
 def _ties(df: pd.DataFrame, col: str, label: str) -> tuple[list[str], float]:
-    best = df[col].max()
+    values = df[col].dropna()
+    if values.empty:
+        raise ValueError(f"Aucune valeur renseignée dans la colonne {col!r}")
+    best = values.max()
     return df.loc[df[col] == best, label].tolist(), float(best)
 
 
-def key_figures(a: Analysis) -> dict[str, dict]:
-    """Chiffres clés de la ligue. Les ex aequo sont tous renvoyés."""
+def _league_scorers(league: League) -> pd.DataFrame:
+    """Buts marqués par joueur dans les matchs MPG (buts réels et accordés par MPG, hors buts bloqués)."""
+    goals = league.scored_goals
+    goals = goals[goals["type_but"].isin(["reel", "mpg"])]
+    goals = goals.assign(key=goals["player_key"].fillna(goals["buteur_affiche"]))
+    names = league.players.set_index("player_key")["joueur"]
+    counts = goals.groupby("key").agg(buts=("key", "size"), affiche=("buteur_affiche", "first")).reset_index()
+    counts["joueur"] = counts["key"].map(names).fillna(counts["affiche"])
+    return counts
+
+
+def key_figures(a: Analysis) -> dict[str, dict | None]:
+    """Chiffres clés de la ligue. Les ex aequo sont tous renvoyés.
+
+    `buteur_pl` vaut `None` quand les buts de Premier League ne sont pas renseignés (saison passée).
+    """
     st = a.standings
     leader = st.iloc[0]
     ps = a.player_stats
-    pl_names, pl_goals = _ties(ps, "buts_reels_saison", "joueur")
-    mpg_names, mpg_goals = _ties(ps.assign(b=ps["buts_reels"] + ps["buts_mpg"]), "b", "joueur")
+    mpg_names, mpg_goals = _ties(_league_scorers(a.league), "buts", "joueur")
     rot_names, rot_n = _ties(st, "rotaldos", "team_name")
+    buteur_pl = None
+    if ps["buts_reels_saison"].notna().any():
+        pl_names, pl_goals = _ties(ps, "buts_reels_saison", "joueur")
+        buteur_pl = {
+            "joueurs": pl_names,
+            "buts": int(pl_goals),
+            "equipes": ps.loc[ps["joueur"].isin(pl_names), "team_name"].tolist(),
+        }
     return {
         "leader": {
             "equipe": leader["team_name"],
@@ -136,36 +187,41 @@ def key_figures(a: Analysis) -> dict[str, dict]:
             "pts": int(leader["pts"]),
             "ecart_2e": int(leader["pts"] - st.iloc[1]["pts"]) if len(st) > 1 else 0,
         },
-        "buteur_pl": {
-            "joueurs": pl_names,
-            "buts": int(pl_goals),
-            "equipes": ps.loc[ps["joueur"].isin(pl_names), "team_name"].tolist(),
-        },
+        "buteur_pl": buteur_pl,
         "buteur_mpg": {"joueurs": mpg_names, "buts": int(mpg_goals)},
         "roi_rotaldos": {"equipes": rot_names, "rotaldos": int(rot_n)},
     }
 
 
-def team_card(a: Analysis, team_id: int) -> dict[str, float | int | str]:
-    """Tuiles d'une équipe : rang, budget payé, valeur actuelle, concentration, niveau de l'effectif."""
+def team_card(a: Analysis, team_id: int) -> dict[str, float | int | str | None]:
+    """Tuiles d'une équipe : rang, budget payé, valeur actuelle, concentration, niveau de l'effectif.
+
+    Une donnée absente vaut `None`, jamais un chiffre de remplacement. Sans cote MPG (saison passée, `meta["prix"]`
+    vaut « enchere ») : `valeur_actuelle`, `valeur_effectif` et `ratio_valeur_prix`. Sans statistiques de Premier League
+    (`buts_reels_saison` vide) : `note_reelle_mediane`, `disponibilite`, `indisponibles` et `ga_saison`. `rang_attendu`
+    vaut `None` quand l'effectif de l'équipe est incomplet.
+    """
     st = a.standings.set_index("team_id").loc[team_id]
     fav = a.favourites.set_index("team_id").loc[team_id]
     merc = a.mercato.set_index("team_id").loc[team_id]
     roster = a.player_stats[a.player_stats["team_id"] == team_id]
+    has_cote = a.meta.get("prix", "cote") == "cote"
+    has_pl_stats = a.league.players["buts_reels_saison"].notna().any()
+    budget = float(merc["enchere_totale"])
     return {
         "rang": int(st["rang"]),
         "pts": int(st["pts"]),
         "serie": st["serie"],
-        "budget_paye": float(merc["enchere_totale"]),
-        "valeur_actuelle": float(fav["total_cote"]),
-        "valeur_effectif": float(fav["valeur_effectif_meur"]),
-        "ratio_valeur_prix": float(fav["total_cote"] / merc["enchere_totale"]),
+        "budget_paye": budget,
+        "valeur_actuelle": float(fav["total_cote"]) if has_cote else None,
+        "valeur_effectif": float(fav["valeur_effectif_meur"]) if has_cote else None,
+        "ratio_valeur_prix": float(fav["total_cote"] / budget) if has_cote else None,
         "part_top3": float(merc["part_top3"]),
-        "note_reelle_mediane": float(roster["note_moy_reelle"].median()),
+        "note_reelle_mediane": float(roster["note_moy_reelle"].median()) if has_pl_stats else None,
         "note_mpg_moy": float(st["note_moy"]),
-        "disponibilite": float(merc["disponibilite_ponderee"]),
-        "indisponibles": int(merc["nb_indisponibles"]),
-        "ga_saison": float(merc["ga_saison"]),
-        "rang_attendu": int(fav["rang_attendu"]),
+        "disponibilite": float(merc["disponibilite_ponderee"]) if has_pl_stats else None,
+        "indisponibles": int(merc["nb_indisponibles"]) if has_pl_stats else None,
+        "ga_saison": float(merc["ga_saison"]) if has_pl_stats else None,
+        "rang_attendu": None if bool(fav.get("effectif_incomplet", False)) else int(fav["rang_attendu"]),
         "rang_mercato": int(merc["rang"]),
     }

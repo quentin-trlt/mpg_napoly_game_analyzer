@@ -8,15 +8,17 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+import build_fpl
 from app.components import callout, hero, kpi_row, prob_bar, section, table_height
 from app.state import data_signature, get_analysis
-from app.theme import BORDER, DISPLAY, LINE_COLORS, MUTED, SURFACE, SURFACE_2, TEXT, TEXT_2
 from mpg import fpl
 from mpg.analysis import Analysis
 from mpg.coach.projection import OVERRIDE_LEVELS
 from mpg.coach.recommend import Recommendation, naive_lineup, recommend
 from mpg.coach.rules import Lineup, slots_of
 from mpg.forecast.bonus import F424, MCDO, MIROIR, TONTON
+from mpg.loader import DEFAULT_DATA_DIR
+from mpg.playing_time import split_history
 
 STATE_DIR = Path(__file__).resolve().parents[2] / ".coach"
 SETTINGS = "settings.json"
@@ -25,37 +27,6 @@ FPL_OVERRIDES = "fpl_overrides.csv"
 AUTO = "auto"
 DRAW_CHOICES = (2000, 4000, 8000)
 LINE_ORDER = ("A", "M", "D", "G")
-
-CSS = f"""
-<style>
-.pitch {{ background: linear-gradient(180deg, rgba(25,158,112,0.10), rgba(25,158,112,0.04)); border: 1px solid {BORDER};
-    border-radius: 14px; padding: 14px 12px; display: flex; flex-direction: column; gap: 12px; }}
-.pitch .line {{ display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }}
-.pp {{ background: {SURFACE}; border: 1px solid {BORDER}; border-radius: 12px; padding: 8px 10px 7px; width: 132px;
-    min-width: 0; border-top: 3px solid var(--tone); position: relative; }}
-.pp .nm {{ color: {TEXT}; font-weight: 600; font-size: .86rem; line-height: 1.2; overflow: hidden; text-overflow: ellipsis;
-    white-space: nowrap; }}
-.pp .mt {{ color: {MUTED}; font-size: .72rem; line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
-.pp .nb {{ display: flex; justify-content: space-between; align-items: baseline; margin-top: 3px; }}
-.pp .nt {{ font-family: {DISPLAY}; font-size: 1.25rem; font-weight: 600; color: {TEXT}; font-variant-numeric: tabular-nums; }}
-.pp .pj {{ font-size: .74rem; font-weight: 600; color: var(--tone); }}
-.pp .badge {{ position: absolute; top: -9px; right: 8px; font-size: .68rem; font-weight: 700; border-radius: 999px;
-    padding: 1px 7px; background: {TEXT}; color: #0B1120; }}
-.pp .badge.mcdo {{ background: #FAB219; right: auto; left: 8px; }}
-.bench {{ background: {SURFACE}; border: 1px solid {BORDER}; border-radius: 14px; padding: 6px 16px; }}
-.bench .b {{ display: grid; grid-template-columns: 22px 30px minmax(0, 1fr) auto auto; gap: 10px; align-items: center;
-    padding: 8px 0; border-top: 1px solid {BORDER}; font-size: .86rem; color: {TEXT}; }}
-.bench .b:first-child {{ border-top: none; }}
-.bench .ix {{ color: {MUTED}; font-variant-numeric: tabular-nums; }}
-.bench .ln {{ font-size: .7rem; font-weight: 700; border-radius: 5px; text-align: center; padding: 1px 0; color: #0B1120; }}
-.bench .sub {{ color: {MUTED}; font-size: .74rem; }}
-.bench .v {{ font-variant-numeric: tabular-nums; color: {TEXT_2}; font-size: .8rem; }}
-.tac {{ background: {SURFACE_2}; border: 1px solid {BORDER}; border-radius: 10px; padding: 8px 12px; margin-top: 8px;
-    font-size: .85rem; color: {TEXT}; }}
-.tac b {{ font-family: {DISPLAY}; font-size: 1rem; }}
-@media (max-width: 640px) {{ .pp {{ width: 104px; padding: 7px 8px 6px; }} .pp .nt {{ font-size: 1.1rem; }} }}
-</style>
-"""
 
 
 def _read_json(name: str, default):
@@ -72,36 +43,23 @@ def _write_json(name: str, data) -> Path:
     return path
 
 
-def _fpl_overrides() -> dict[str, int]:
-    path = STATE_DIR / FPL_OVERRIDES
-    if not path.exists():
-        return {}
-    df = pd.read_csv(path)
-    return dict(zip(df["player_key"], df["element_id"].astype(int)))
-
-
-@st.cache_resource(show_spinner="Téléchargement des données FPL (environ 200 joueurs la première fois)…", max_entries=2)
-def _load_fpl(signature: tuple, token: int) -> dict:
+@st.cache_resource(show_spinner=False, max_entries=2)
+def _load_fpl(signature: tuple) -> dict:
     league = get_analysis().league
-    client = fpl.FplClient(refresh=token > 0)
-    try:
-        els = fpl.elements(client.bootstrap())
-        mapping = fpl.match_players(league.players, els, _fpl_overrides())
-        players = mapping[["player_key", "element_id"]].merge(els, on="element_id", how="left")
-        history = {int(e): fpl.history(client.element_summary(int(e))) for e in players["element_id"].dropna()}
-    except fpl.FplError as exc:
-        return {"players": None, "history": {}, "mapping": None, "error": str(exc), "fetched_at": None}
+    if league.fpl_players is None or league.fpl_history is None:
+        return {"players": None, "history": {}, "mapping": None, "fetched_at": None}
+    players = league.fpl_players
+    fetched = pd.to_datetime(players["recupere_le"], utc=True, errors="coerce").max()
     return {
         "players": players,
-        "history": history,
-        "mapping": mapping,
-        "error": None,
-        "fetched_at": client.fetched_at(),
+        "history": split_history(league.fpl_history),
+        "mapping": players,
+        "fetched_at": None if pd.isna(fetched) else fetched.to_pydatetime(),
     }
 
 
 @st.cache_resource(show_spinner="Optimisation de la compo et du plan de bonus…", max_entries=6)
-def _recommend(signature: tuple, team_id: int, overrides: str, token: int, n_draws: int, _fpl: dict) -> Recommendation:
+def _recommend(signature: tuple, team_id: int, overrides: str, n_draws: int, _fpl: dict) -> Recommendation:
     return recommend(get_analysis(), team_id, _fpl["players"], _fpl["history"], json.loads(overrides), n_draws=n_draws)
 
 
@@ -110,7 +68,7 @@ def _fmt(x: float, digits: int = 2) -> str:
 
 
 def _tone(p: float) -> str:
-    return "#22C55E" if p >= 0.85 else "#FAB219" if p >= 0.5 else "#E66767"
+    return "tone-good" if p >= 0.85 else "tone-warn" if p >= 0.5 else "tone-bad"
 
 
 def _short(name: str) -> str:
@@ -131,7 +89,7 @@ def _card(rec: Recommendation, r: int, lu: Lineup) -> str:
         else f"{row['club']} · sans match"
     )
     return (
-        f'<div class="pp" style="--tone:{_tone(row["p_joue"])}" title="{escape(str(row["joueur"]))}">{badges}'
+        f'<div class="pp {_tone(row["p_joue"])}" title="{escape(str(row["joueur"]))}">{badges}'
         f'<div class="nm">{escape(_short(str(row["joueur"])))}</div><div class="mt">{escape(vs)}</div>'
         f'<div class="nb"><span class="nt">{_fmt(row["note_attendue"], 1)}</span>'
         f'<span class="pj">{row["p_joue"]:.0%}</span></div></div>'
@@ -154,10 +112,10 @@ def _bench(rec: Recommendation, lu: Lineup) -> str:
         line = p["poste_groupe"]
         rows.append(
             f'<div class="b"><span class="ix">{i}</span>'
-            f'<span class="ln" style="background:{LINE_COLORS[line]}">{line}</span>'
+            f'<span class="ln {line}">{line}</span>'
             f'<span>{escape(str(p["joueur"]))}<div class="sub">{escape(str(p["club"]))}</div></span>'
             f'<span class="v">{_fmt(p["note_attendue"], 1)}</span>'
-            f'<span class="v" style="color:{_tone(p["p_joue"])}">{p["p_joue"]:.0%}</span></div>'
+            f'<span class="v {_tone(p["p_joue"])}">{p["p_joue"]:.0%}</span></div>'
         )
     return f'<div class="bench">{"".join(rows)}</div>'
 
@@ -265,29 +223,31 @@ def _freeze(rec: Recommendation, a: Analysis) -> Path:
 
 
 def render(a: Analysis) -> None:
-    st.html(CSS)
     names = a.league.team_names
     with st.sidebar:
         team_id = _team_selector(a)
         n_draws = st.select_slider("Tirages Monte Carlo", options=DRAW_CHOICES, value=4000)
-        if "fpl_token" not in st.session_state:
-            st.session_state["fpl_token"] = 0
         if st.button("Rafraîchir les données FPL", icon=":material/refresh:", width="stretch"):
-            st.session_state["fpl_token"] += 1
+            try:
+                with st.spinner("Téléchargement des données FPL (environ 200 joueurs)…"):
+                    build_fpl.refresh(DEFAULT_DATA_DIR, STATE_DIR / FPL_OVERRIDES)
+            except fpl.FplError as exc:
+                st.warning(f"Rafraîchissement impossible, instantané conservé. {exc}")
         st.caption(f"Données MPG jusqu'à la J{a.league.last_gw}.")
 
-    token = st.session_state["fpl_token"]
     signature = data_signature()
-    fpl_data = _load_fpl(signature, token)
+    fpl_data = _load_fpl(signature)
     with st.sidebar:
-        if fpl_data["error"]:
-            st.warning(f"FPL indisponible, projection sur les seules données MPG. {fpl_data['error']}")
+        if fpl_data["players"] is None:
+            st.warning(
+                "Pas d'instantané FPL (lance `build_fpl.py` ou rafraîchis), projection sur les seules données MPG."
+            )
         elif fpl_data["fetched_at"] is not None:
-            st.caption(f"FPL mis à jour le {fpl_data['fetched_at'].astimezone():%d/%m à %H:%M}.")
+            st.caption(f"Instantané FPL du {fpl_data['fetched_at'].astimezone():%d/%m à %H:%M}.")
 
     overrides = {k: float(v) for k, v in _read_json(OVERRIDES, {}).items()}
     try:
-        rec = _recommend(signature, team_id, json.dumps(overrides, sort_keys=True), token, n_draws, fpl_data)
+        rec = _recommend(signature, team_id, json.dumps(overrides, sort_keys=True), n_draws, fpl_data)
     except ValueError as exc:
         st.info(str(exc))
         return
@@ -327,7 +287,7 @@ def render(a: Analysis) -> None:
             {"label": "Formation", "value": lu.formation, "sub": f"Capitaine : {rec.name(lu.captain)}"},
         ]
     )
-    st.html(prob_bar(s["p_v"], s["p_n"], s["p_d"]) if rec.home else prob_bar(s["p_d"], s["p_n"], s["p_v"]))
+    st.html(prob_bar(s["p_v"], s["p_n"], s["p_d"], labels=("Toi", "Nul", "Adversaire")))
 
     section("Feuille de match", "Note attendue si le joueur joue · probabilité qu'il joue (au moins une minute en PL).")
     left, right = st.columns([3, 2], gap="medium")

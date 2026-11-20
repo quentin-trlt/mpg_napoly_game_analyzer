@@ -44,6 +44,7 @@ PLAYER_COLUMNS = [
 HISTORY_COLUMNS = ["player_key", "element_id", "round", "minutes", "starts", "goals_scored", "own_goals", "xg"]
 HISTORY_COLUMNS += ["kickoff_time"]
 SNAPSHOT_DIR = "fpl_snapshots"
+DEFAULT_OVERRIDES = Path(__file__).resolve().parent / ".coach" / "fpl_overrides.csv"
 
 log = logging.getLogger(__name__)
 
@@ -91,21 +92,31 @@ def write(players: pd.DataFrame, history: pd.DataFrame, data_dir: Path) -> list[
     return paths
 
 
+def refresh(data_dir: Path = DEFAULT_DATA_DIR, overrides_path: Path | None = DEFAULT_OVERRIDES) -> list[Path]:
+    """Relance tout : requêtes FPL, appariement (avec les surcharges), écriture des CSV. Appelé par `main` et par le coach."""
+    data_dir = Path(data_dir)
+    league = load_league(data_dir)
+    client = fpl.FplClient(cache_dir=data_dir / "fpl_cache", refresh=True)
+    players, history = build(league, client, read_overrides(overrides_path))
+    paths = write(players, history, data_dir)
+    matched = players["element_id"].notna().sum()
+    log.info("%d/%d joueurs appariés, %d matchs FPL", matched, len(players), len(history))
+    return paths
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR)
     parser.add_argument(
-        "--overrides", type=Path, default=None, help="CSV player_key,element_id pour forcer des appariements"
+        "--overrides",
+        type=Path,
+        default=DEFAULT_OVERRIDES,
+        help="CSV player_key,element_id pour forcer des appariements",
     )
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
-    league = load_league(args.data_dir)
-    client = fpl.FplClient(cache_dir=args.data_dir / "fpl_cache", refresh=True)
-    players, history = build(league, client, read_overrides(args.overrides))
-    paths = write(players, history, args.data_dir)
-    matched = players["element_id"].notna().sum()
-    log.info("%d/%d joueurs appariés, %d matchs FPL", matched, len(players), len(history))
+    paths = refresh(args.data_dir, args.overrides)
     for p in paths:
         log.info("écrit : %s", p)
 

@@ -4,7 +4,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Coach · Napoly Game",
-    page_icon=":material/sports:",
+    page_icon="assets/icon.svg",
     layout="wide",
     initial_sidebar_state="expanded",
 )

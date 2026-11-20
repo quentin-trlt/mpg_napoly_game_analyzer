@@ -37,6 +37,7 @@ GOLD = "#E0B341"
 SILVER = "#B8C4D6"
 BRONZE = "#C58A5A"
 
+BADGE_COLORS = ("#2563C9", "#B8480F", "#0F766E", "#7C3AED", "#BE185D", "#4D7C0F", "#A16207", "#0E7490")
 SERIES = ["#3987E5", "#D95926", "#199E70", "#9085E9"]
 HIGHLIGHT = ME
 CONTEXT = "#59687F"
@@ -168,6 +169,12 @@ h2 {{ font-size: 1.35rem !important; font-weight: 600; margin-top: 1.6rem !impor
 .res.N {{ background: {RES_N}; }}
 .res.D {{ background: {RES_D}; color: {WHITE}; }}
 
+.coach-badge {{ display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 1.5rem;
+    height: 1.5rem; border-radius: 50%; border: 1px solid {BORDER}; color: {WHITE};
+    font-family: {DISPLAY}; font-size: {FONT_FLOOR_REM}rem; font-weight: 600; line-height: 1; letter-spacing: .02em;
+    margin-right: 6px; vertical-align: middle; text-transform: uppercase; }}
+
+{"".join(f".coach-badge.c{i} {{ background: {c}; }}" + chr(10) for i, c in enumerate(BADGE_COLORS))}
 .fixtures {{ --cols: 5; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 12px;
     margin: .2rem 0 .8rem; }}
 .fixture {{ display: flex; flex-direction: column; background: {SURFACE}; border: 1px solid {BORDER};
@@ -285,7 +292,7 @@ h2 {{ font-size: 1.35rem !important; font-weight: 600; margin-top: 1.6rem !impor
 .grid .c {{ justify-content: center; font-variant-numeric: tabular-nums; }}
 .grid .name {{ display: block; }}
 .grid .name b {{ display: block; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
-.grid .name span {{ color: {MUTED}; font-size: {FONT_FLOOR_REM}rem; display: block; overflow: hidden; text-overflow: ellipsis;
+.grid .name > span {{ color: {MUTED}; font-size: {FONT_FLOOR_REM}rem; display: block; overflow: hidden; text-overflow: ellipsis;
     white-space: nowrap; }}
 .grid .me {{ background: {ME_BG}; }}
 .grid .me b {{ color: {ME_TINT}; }}

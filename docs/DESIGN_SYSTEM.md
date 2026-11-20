@@ -38,6 +38,7 @@ Toutes les couleurs sont dans `app/theme.py`. Les rapports de contraste ci-desso
 | `RES_V`, `RES_N`, `RES_D` | `#15803D`, `#FAB219`, `#C53030` | pastilles Victoire, Nul, Défaite (`RESULT_COLORS`) | texte blanc sur V : 5,0 ; sur D : 5,5 |
 | `P_HOME`, `P_DRAW`, `P_AWAY` | `#2563C9`, `#5A6B86`, `#B8480F` | barre de probabilité domicile, nul, extérieur | texte blanc : 5,7 ; 5,4 ; 5,3 |
 | `GOLD`, `SILVER`, `BRONZE` | `#E0B341`, `#B8C4D6`, `#C58A5A` | médailles (texte `BG` dessus) | |
+| `BADGE_COLORS` | huit couleurs sobres : `#2563C9`, `#B8480F`, `#0F766E`, `#7C3AED`, `#BE185D`, `#4D7C0F`, `#A16207`, `#0E7490` | fond des pastilles de coach (`coach_badge`) | texte blanc : 4,9 à 6,0 |
 | `SERIES` | `#3987E5`, `#D95926`, `#199E70`, `#9085E9` | couleurs de séries dans les graphiques | |
 | `HIGHLIGHT` | `ME` | mise en avant d'une équipe dans un graphique | |
 | `CONTEXT`, `CONTEXT_DIM`, `CONTEXT_LIGHT` | `#59687F`, `#2A3A55`, `#8FA3BF` | les autres équipes, en gris | `CONTEXT` : 3,0 |
@@ -155,6 +156,12 @@ chip("Favori vainqueur", tone="good") if ok else chip("Surprise", tone="bad")
 `medal(rank: float | None, n: int | None = None) -> str` : une pastille de rang, or, argent et bronze pour 1, 2 et 3. Un rang absent ou NaN donne « · ».
 
 `form_badges(results: str) -> str` : la série de résultats, une lettre `V`, `N` ou `D` par pastille.
+
+`coach_badge(coach: str) -> str` : une pastille ronde aux initiales du coach, à placer devant son nom. Initiales : celles des deux premiers mots (« Jean Pierre » : JP, « vincentMouly » : VM), sinon les deux premières lettres (« Emilinho_ » : EM). La couleur vient d'un hachage stable de `coach_key(coach)` dans `BADGE_COLORS` : un coach qui a changé de pseudo garde sa couleur. La pastille est `aria-hidden`, le nom doit rester écrit à côté.
+
+```python
+f"{coach_badge(row.coach)}{escape(row.coach)}"
+```
 
 `rank_list(table: pd.DataFrame, team_id: int | None, coach_by_team: dict[int, str]) -> str` : le classement en liste. La ligne de `team_id` est mise en avant ; la forme est masquée sous 640 px.
 

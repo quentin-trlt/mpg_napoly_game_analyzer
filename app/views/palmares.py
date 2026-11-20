@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import callout, fmt_signed, form_badges, grid, hero, kpi_row, medal, no_data, section
+from app.components import callout, coach_badge, fmt_signed, form_badges, grid, hero, kpi_row, medal, no_data, section
 from app.state import get_analysis, seasons, selected_coach
 from mpg.analysis import Analysis
 from mpg.history import career, head_to_head, honours
@@ -42,7 +42,7 @@ def _champions(season_list: list[Season], car: pd.DataFrame, coach: str) -> str:
         cards.append(
             f'<div class="champ"><div><div class="season">{escape(s.key)}</div><div class="meta">{state}</div></div>'
             f'<div><div class="team">{escape(first["equipe"])}</div>'
-            f'<div class="meta">{"leader" if s.current else "champion"}, coach {escape(first["coach"])}, '
+            f'<div class="meta">{"leader" if s.current else "champion"}, coach {coach_badge(first["coach"])}{escape(first["coach"])}, '
             f"{int(first['pts'])} pts</div></div>"
             f'<div class="mine">{escape(mine)}</div></div>'
         )
@@ -59,7 +59,7 @@ def _coach_grid(season_list: list[Season], car: pd.DataFrame, totals: pd.DataFra
     for row in totals.itertuples():
         me = " me" if row.coach == coach else ""
         cells.append(
-            f'<div class="name{me}"><b>{escape(row.coach)}</b><span>{escape(last_team[row.coach])}</span></div>'
+            f'<div class="name{me}"><b>{coach_badge(row.coach)}{escape(row.coach)}</b><span>{escape(last_team[row.coach])}</span></div>'
         )
         for s in season_list:
             cells.append(f'<div class="c{me}">{medal(ranks.at[row.coach, s.key], int(sizes[s.key]))}</div>')

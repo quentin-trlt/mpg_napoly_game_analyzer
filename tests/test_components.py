@@ -15,6 +15,8 @@ from app.components import (
     as_pct,
     chip,
     chips,
+    coach_badge,
+    coach_initials,
     grid,
     medal,
     next_match,
@@ -25,6 +27,7 @@ from app.components import (
     result_color,
     short_table,
 )
+from mpg.seasons import COACH_ALIASES
 
 
 def _table() -> pd.DataFrame:
@@ -397,3 +400,49 @@ def test_css_source_uses_tokens_only():
     css_source = source[source.index('CSS = f"""') : source.index("def inject_css")]
     assert not re.search(r"#[0-9A-Fa-f]{3,8}\b", css_source)
     assert not re.search(r"rgba?\(\s*\d", css_source)
+
+
+@pytest.mark.parametrize(
+    ("pseudo", "initials"),
+    [("Emilinho_", "EM"), ("vincentMouly", "VM"), ("Jean Pierre", "JP"), ("R2D2", "R2"), ("", "?")],
+)
+def test_coach_initials(pseudo: str, initials: str):
+    assert coach_initials(pseudo) == initials
+
+
+def test_coach_badge_color_is_stable_and_follows_aliases():
+    assert coach_badge("vincentmouly") == coach_badge("vincentmouly")
+    for alias, main in COACH_ALIASES.items():
+        assert coach_badge(alias) == coach_badge(main)
+
+
+def test_coach_badge_colors_have_white_text_contrast():
+    def luminance(color: str) -> float:
+        channels = [int(color[i : i + 2], 16) / 255 for i in (1, 3, 5)]
+        lin = [c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4 for c in channels]
+        return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2]
+
+    assert len(theme.BADGE_COLORS) == 8
+    for color in theme.BADGE_COLORS:
+        assert 1.05 / (luminance(color) + 0.05) >= 4.5, color
+
+
+def test_coach_badge_escapes_and_is_hidden_from_screen_readers():
+    html = coach_badge("<b>x")
+    assert "<b>" not in html
+    assert 'aria-hidden="true"' in html
+
+
+def test_rank_list_shows_badge_only_for_known_coach():
+    html = rank_list(_table(), 10, {10: "Emilinho_"})
+    assert html.count("coach-badge") == html.count("Emilinho_") == 1
+
+
+def test_every_badge_color_has_a_css_class():
+    for i in range(len(theme.BADGE_COLORS)):
+        assert f".coach-badge.c{i} {{ background: {theme.BADGE_COLORS[i]}; }}" in theme.CSS
+
+
+def test_grid_name_rule_does_not_reach_the_badge():
+    assert ".grid .name > span {" in theme.CSS
+    assert ".grid .name span {" not in theme.CSS

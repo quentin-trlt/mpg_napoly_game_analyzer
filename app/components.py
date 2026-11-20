@@ -1,11 +1,14 @@
+import hashlib
+import re
 from html import escape
 
 import pandas as pd
 import streamlit as st
 
 from app.charts import is_mobile
-from app.theme import RESULT_COLORS, TEXT_2
+from app.theme import BADGE_COLORS, RESULT_COLORS, TEXT_2
 from mpg.glossary import explain
+from mpg.seasons import coach_key
 
 ROW_PX = 35
 MAX_SHORT_COLUMNS = 5
@@ -52,6 +55,19 @@ def stat_grid(cells: list[str], per_row: int = 4) -> str:
 
 def fixture_grid(cards: list[str], cols: int) -> None:
     st.html(f'<div class="fixtures" style="--cols:{cols}">{"".join(cards)}</div>')
+
+
+def coach_initials(coach: str) -> str:
+    """Initiales des deux premiers mots (majuscule interne comprise), sinon les deux premiers caractères."""
+    words = re.findall(r"[^\W_]+", re.sub(r"(?<=[a-z])(?=[A-Z])", " ", coach))
+    letters = "".join(w[0] for w in words[:2]) if len(words) > 1 else "".join(words)[:2]
+    return letters.upper() or "?"
+
+
+def coach_badge(coach: str) -> str:
+    digest = hashlib.sha256(coach_key(coach).encode()).digest()
+    i = int.from_bytes(digest[:4]) % len(BADGE_COLORS)
+    return f'<span class="coach-badge c{i}" aria-hidden="true">{escape(coach_initials(coach))}</span>'
 
 
 def rank_tone(rank: int, n: int) -> str:
@@ -132,7 +148,8 @@ def rank_list(table: pd.DataFrame, team_id: int | None, coach_by_team: dict[int,
     for r in table.itertuples():
         me = " me" if r.team_id == team_id else ""
         diff = f"{int(r.diff):+d}".replace("-", "−")
-        coach = escape(str(coach_by_team.get(r.team_id, "")))
+        name = str(coach_by_team.get(r.team_id, ""))
+        coach = f"{coach_badge(name)}{escape(name)}" if name else ""
         forme = r.forme if isinstance(r.forme, str) else ""
         rows.append(
             f'<div class="r{me}"><div class="pos">{int(r.rang)}</div>'

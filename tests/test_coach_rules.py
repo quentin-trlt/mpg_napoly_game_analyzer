@@ -1,7 +1,7 @@
 import numpy as np
-import pandas as pd
 import pytest
 
+from mpg.coach.replay import play_match
 from mpg.coach.rules import (
     FORMATION_424,
     Draws,
@@ -10,57 +10,27 @@ from mpg.coach.rules import (
     Tactic,
     mpg_goals,
     resolve_bonuses,
-    score_sheets,
     simulate,
 )
 from mpg.forecast.bonus import CHEAT, F424, MCDO, MIROIR, SUAREZ, TONTON, VALISE, ZAHIA
 from mpg.forecast.evaluation import season_dirs
-from mpg.loader import load_league
-
-FIELD_LINE = {0: "G", 1: "D", 2: "M", 3: "M", 4: "A"}
-
-
-def _sheet_from_rows(rows: pd.DataFrame, goals: dict[str, int], own_goals: int) -> Sheet:
-    """`ligne_terrain` est la rangée à l'écran : la plus haute est l'attaque (rangée 3 en 4-2-4, 4 sinon)."""
-    rows = rows.sort_values("ligne_terrain")
-    level = rows["ligne_terrain"].astype(int)
-    top = level.max()
-    return Sheet(
-        line=tuple("A" if r == top and r >= 3 else FIELD_LINE[r] for r in level),
-        note=rows["note_avec_bonus"].to_numpy(float)[:, None],
-        goals=np.array([goals.get(k, 0) if isinstance(k, str) else 0 for k in rows["player_key"]])[:, None],
-        rotaldo=(rows["statut"] == "rotaldo").to_numpy()[:, None],
-        own_goals=np.array([own_goals]),
-    )
+from mpg.loader import ON_PITCH, load_league
 
 
 @pytest.mark.parametrize("data_dir", list(season_dirs().values()), ids=list(season_dirs()))
 def test_replay_matches_every_played_score(data_dir):
     league = load_league(data_dir)
     lu = league.lineups
-    pitch = lu[lu["statut"].isin(["titulaire", "remplacant_entre", "rotaldo"])]
-    g = league.goals
-    real = g[g["type_but"].isin(["reel", "bloque"])]
-    csc = g[g["type_but"] == "csc"]
-    bonus = league.bonus
-    valise = bonus[bonus["bonus"].str.contains("valise", case=False) & bonus["effet"].notna()]
+    pitch = lu[lu["statut"].isin(ON_PITCH)]
     mismatches = []
     for fx in league.played.itertuples():
-        sheets = {}
-        for team, opp in ((fx.home_team_id, fx.away_team_id), (fx.away_team_id, fx.home_team_id)):
-            rows = pitch[(pitch["match_id"] == fx.match_id) & (pitch["team_id"] == team)]
-            mine = real[(real["match_id"] == fx.match_id) & (real["team_id"] == team)]
-            own = int(((csc["match_id"] == fx.match_id) & (csc["team_id"] == opp)).sum())
-            sheets[team] = _sheet_from_rows(rows, mine["player_key"].value_counts().to_dict(), own)
-        posed = set(valise.loc[valise["match_id"] == fx.match_id, "team_id"])
-        hg, ag = score_sheets(
-            sheets[fx.home_team_id],
-            sheets[fx.away_team_id],
-            valise_home=fx.home_team_id in posed,
-            valise_away=fx.away_team_id in posed,
-        )
-        if (int(hg[0]), int(ag[0])) != (fx.home_goals, fx.away_goals):
-            mismatches.append((fx.match_id, (int(hg[0]), int(ag[0])), (fx.home_goals, fx.away_goals)))
+        rows = {
+            t: pitch[(pitch["match_id"] == fx.match_id) & (pitch["team_id"] == t)]
+            for t in (fx.home_team_id, fx.away_team_id)
+        }
+        score = play_match(fx, rows, league.goals, league.bonus)
+        if score != (fx.home_goals, fx.away_goals):
+            mismatches.append((fx.match_id, score, (fx.home_goals, fx.away_goals)))
     assert not mismatches
 
 

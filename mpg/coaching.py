@@ -1,5 +1,6 @@
 import re
 import unicodedata
+from collections.abc import Iterator
 
 import pandas as pd
 
@@ -9,6 +10,17 @@ KEYS = ["match_id", "team_id"]
 def _slots(formation: str) -> dict[str, int]:
     d, m, a = (int(x) for x in formation.split("-"))
     return {"G": 1, "D": d, "M": m, "A": a}
+
+
+def best_by_line(sheet: pd.DataFrame, formation: str) -> Iterator[tuple[str, int, pd.DataFrame]]:
+    """Pour chaque poste de la formation : (poste, places, meilleurs joueurs de la feuille de match à ce poste).
+
+    Ne retient que les joueurs notés en vrai ; moins de joueurs que de places signifie des postes à pourvoir.
+    """
+    pool = sheet[sheet["a_joue_irl"] & sheet["poste_groupe"].notna()]
+    for g, n in _slots(formation).items():
+        ranked = pool[pool["poste_groupe"] == g].sort_values("note_brute", ascending=False)
+        yield g, n, ranked.head(n)
 
 
 def optimal_lineups(lu: pd.DataFrame, tm: pd.DataFrame) -> pd.DataFrame:
@@ -25,13 +37,10 @@ def optimal_lineups(lu: pd.DataFrame, tm: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for (match_id, team_id), sheet in lu.groupby(KEYS):
         actual = sheet.loc[sheet["sur_terrain"], "note_brute"].sum()
-        pool = sheet[sheet["a_joue_irl"] & sheet["poste_groupe"].notna()]
         formation = formations.get((match_id, team_id))
         optimal = 0.0
         swaps = []
-        for g, n in _slots(formation).items():
-            ranked = pool[pool["poste_groupe"] == g].sort_values("note_brute", ascending=False)
-            chosen = ranked.head(n)
+        for _, n, chosen in best_by_line(sheet, formation):
             optimal += chosen["note_brute"].sum() + max(0, n - len(chosen)) * rotaldo_note
             swaps += chosen.loc[~chosen["sur_terrain"], "joueur_affiche"].tolist()
         optimal = max(optimal, actual)

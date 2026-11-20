@@ -5,6 +5,7 @@ from pathlib import Path
 import pandas as pd
 
 from mpg import coaching, luck, mercato, players, standings, strength
+from mpg.coach.replay import optimal_replay
 from mpg.facts import line_ratings, lineups_enriched, team_match
 from mpg.loader import DEFAULT_DATA_DIR, League, load_league
 from mpg.stats import spearman
@@ -22,6 +23,7 @@ class Analysis:
     luck: pd.DataFrame
     coaching: pd.DataFrame
     optimal_lineups: pd.DataFrame
+    optimal_replay: pd.DataFrame
     captains: pd.DataFrame
     bonus_usage: pd.DataFrame
     substitutions: pd.DataFrame
@@ -75,6 +77,7 @@ def run(data_dir: Path | str = DEFAULT_DATA_DIR, n_sim: int = 10_000, seed: int 
     scen_ranks, scen_fit = strength.strength_scenarios(fav, fav.set_index("team_id")["pts"])
     scen_ranks.insert(1, "team_name", scen_ranks["team_id"].map(names))
     lines = line_ratings(lu).assign(team_name=lambda d: d["team_id"].map(names))
+    optimal = coaching.optimal_lineups(lu, tm)
     coach = coaching.coaching_table(lu, tm, league.bonus, league.substitutions)
     absents = coach.set_index("team_id")["absents_total"]
     corr_fiab = spearman(merc.set_index("team_id")["disponibilite_ponderee"], absents)
@@ -97,7 +100,8 @@ def run(data_dir: Path | str = DEFAULT_DATA_DIR, n_sim: int = 10_000, seed: int 
         correlations=strength.strength_correlations(fav),
         luck=lk,
         coaching=coach,
-        optimal_lineups=coaching.optimal_lineups(lu, tm).assign(team_name=lambda d: d["team_id"].map(names)),
+        optimal_lineups=optimal.assign(team_name=lambda d: d["team_id"].map(names)),
+        optimal_replay=optimal_replay(league, lu, tm, optimal),
         captains=coaching.captain_report(lu, league.bonus).assign(team_name=lambda d: d["team_id"].map(names)),
         bonus_usage=coaching.bonus_usage(league.bonus, tm),
         substitutions=coaching.substitution_report(league.substitutions).assign(

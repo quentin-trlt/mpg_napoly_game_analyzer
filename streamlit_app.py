@@ -2,70 +2,65 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Napoly Game · Analyse MPG",
-    page_icon=":material/sports_soccer:",
+    page_icon="assets/icon.svg",
     layout="wide",
     initial_sidebar_state="auto",
 )
 
 from app import theme  # noqa: E402
-from app.state import get_analysis, team_selector  # noqa: E402
-from app.views import (  # noqa: E402
-    analyse_mercato,
-    chance,
-    coaching,
-    equipe,
-    favoris,
-    joueurs,
-    ligue,
-    matchs,
-    mercato,
-    predictions,
-    suivi,
-)
+from app.navigation import register  # noqa: E402
+from app.pages import joueurs_mercato, ma_journee, mon_equipe, page_ligue, palmares, pourquoi, pronostics  # noqa: E402
+from app.state import coach_selector, get_analysis, season_selector  # noqa: E402
 from mpg.loader import DataSchemaError  # noqa: E402
 
 theme.inject_css()
 st.logo("assets/logo.svg", size="large", icon_image="assets/icon.svg")
 
+with st.sidebar:
+    season = season_selector()
+
 try:
-    analysis = get_analysis()
+    analysis = get_analysis(season.path)
 except DataSchemaError as exc:
-    st.error(f"Les fichiers de `data/` ne sont pas au format attendu : {exc}")
+    st.error(f"Les fichiers de `{season.path.name}/` ne sont pas au format attendu : {exc}")
     st.stop()
 
 with st.sidebar:
-    team_id = team_selector(analysis)
-    st.caption(
-        f"Données jusqu'à la J{analysis.meta['derniere_journee']}, "
-        f"{analysis.meta['matchs_joues']} matchs joués sur {len(analysis.league.fixtures)}"
-    )
+    team_id = coach_selector(analysis, season)
+    if analysis.meta["saison_en_cours"]:
+        st.caption(
+            f"Données jusqu'à la J{analysis.meta['derniere_journee']}, "
+            f"{analysis.meta['matchs_joues']} matchs joués sur {len(analysis.league.fixtures)}"
+        )
+    else:
+        st.caption(f"Saison terminée : {analysis.meta['nb_journees']} journées, {analysis.meta['matchs_joues']} matchs")
 
 
-def page(module, title: str, icon: str, url: str, default: bool = False) -> st.Page:
+def page(render, title: str, icon: str, url: str, default: bool = False) -> st.Page:
     return st.Page(
-        lambda: module.render(analysis, team_id), title=title, icon=f":material/{icon}:", url_path=url, default=default
+        lambda: render(analysis, team_id), title=title, icon=f":material/{icon}:", url_path=url, default=default
     )
 
+
+pages = {
+    "mon-equipe": page(mon_equipe, "Mon équipe", "shield", "mon-equipe"),
+    "ligue": page(page_ligue, "Ligue", "leaderboard", "ligue", default=not season.current),
+    "pronostics": page(pronostics, "Pronostics", "query_stats", "pronostics"),
+    "pourquoi": page(pourquoi, "Pourquoi ce classement ?", "balance", "pourquoi"),
+    "joueurs-mercato": page(joueurs_mercato, "Joueurs et mercato", "payments", "joueurs-mercato"),
+    "palmares": page(palmares, "Palmarès", "emoji_events", "palmares"),
+}
+my_season = [pages["mon-equipe"]]
+if season.current:
+    pages["ma-journee"] = page(ma_journee, "Ma journée", "today", "ma-journee", default=True)
+    my_season.insert(0, pages["ma-journee"])
+register(pages)
 
 nav = st.navigation(
     pages={
-        "La ligue": [
-            page(ligue, "Ligue", "leaderboard", "ligue", default=True),
-            page(matchs, "Matchs et calendrier", "calendar_month", "matchs"),
-            page(equipe, "Fiche équipe", "shield", "equipe"),
-            page(predictions, "Prédictions", "query_stats", "predictions"),
-            page(suivi, "Suivi des pronostics", "fact_check", "suivi"),
-        ],
-        "Analyses": [
-            page(favoris, "Favoris vs réalité", "balance", "favoris"),
-            page(chance, "Chance", "casino", "chance"),
-            page(coaching, "Coaching", "sports", "coaching"),
-            page(joueurs, "Joueurs", "person_search", "joueurs"),
-        ],
-        "Mercato": [
-            page(mercato, "Mercato", "payments", "mercato"),
-            page(analyse_mercato, "Analyse des mercatos", "military_tech", "analyse-mercato"),
-        ],
+        "Ma saison": my_season,
+        "La ligue": [pages["ligue"], pages["pronostics"], pages["pourquoi"], pages["joueurs-mercato"]],
+        "Histoire": [pages["palmares"]],
     },
 )
 nav.run()

@@ -1,10 +1,25 @@
 from html import escape
 
+import pandas as pd
 import streamlit as st
 
 from app import charts
-from app.components import callout, fixture_grid, form_badges, hero, how, kpi_row, names_list, section, table_height
+from app.components import (
+    fixture_grid,
+    fmt_signed,
+    form_badges,
+    how,
+    kpi_row,
+    limit_banner,
+    names_list,
+    rank_list,
+    section,
+    table_height,
+    volet_title,
+)
+from app.navigation import page_link
 from mpg.analysis import Analysis, key_figures
+from mpg.seasons import coach_by_team
 
 SORT_OPTIONS = {"globale": "Globale", "G": "Gardiens", "D": "Défense", "M": "Milieu", "A": "Attaque"}
 
@@ -13,9 +28,16 @@ def _standings_table(a: Analysis, team_id: int) -> None:
     st_df = a.standings.copy()
     st_df["moi"] = st_df["team_id"] == team_id
     st_df["diff"] = st_df["diff"].map(lambda d: f"{d:+d}")
+    st.html(rank_list(a.standings, team_id, coach_by_team(a.league)))
+    with st.expander("Toutes les colonnes"):
+        _full_standings(st_df)
+
+
+def _full_standings(st_df: pd.DataFrame) -> None:
     st.dataframe(
         st_df,
         hide_index=True,
+        alt="Classement, toutes les colonnes",
         column_order=[
             "rang",
             "team_name",
@@ -35,7 +57,7 @@ def _standings_table(a: Analysis, team_id: int) -> None:
         ],
         column_config={
             "rang": st.column_config.NumberColumn("#", width="small"),
-            "team_name": st.column_config.TextColumn("Équipe", width="medium"),
+            "team_name": st.column_config.TextColumn("Équipe", width="medium", pinned=True),
             "coach": st.column_config.TextColumn("Coach"),
             "pts": st.column_config.ProgressColumn(
                 "Pts", min_value=0, max_value=int(3 * st_df["j"].max()), format="%d"
@@ -59,8 +81,7 @@ def _standings_table(a: Analysis, team_id: int) -> None:
 
 def _next_fixtures(a: Analysis, team_id: int) -> None:
     nf = a.next_fixtures
-    if nf.empty:
-        callout("La saison est terminée : plus aucun match à venir.")
+    if a.meta["capacites"].terminee or nf.empty:
         return
     gw = int(nf["gw"].iloc[0])
     section(f"Journée {gw} : les affiches", "Triées de la plus serrée (écart de rang minimal) à la plus déséquilibrée.")
@@ -77,44 +98,74 @@ def _next_fixtures(a: Analysis, team_id: int) -> None:
         ]
         cards.append(
             f'<div class="fixture{" me" if me else ""}"><div class="meta">{date}{heure}</div>'
-            f'<div class="pair" style="margin-top:8px">{sides[0]}<div class="vs">contre</div>{sides[1]}</div></div>'
+            f'<div class="pair mt-8">{sides[0]}<div class="vs">contre</div>{sides[1]}</div></div>'
         )
-    fixture_grid(cards, min(len(cards), 5))
+    fixture_grid(cards, len(cards))
+
+
+def _hero(a: Analysis, leader: dict) -> None:
+    meta = a.meta
+    if meta["capacites"].terminee:
+        volet_title(
+            f"Saison {meta['saison']}, terminée",
+            f"{escape(leader['equipe'])} a gagné la ligue, coach {escape(leader['coach'])}. "
+            f"{len(a.standings)} équipes, {meta['nb_journees']} journées, {meta['matchs_joues']} matchs.",
+        )
+        return
+    volet_title(
+        f"Journée {meta['derniere_journee']} sur {meta['nb_journees']}",
+        f"{meta['matchs_joues']} matchs joués. Le classement et les statistiques se mettent à jour après chaque "
+        "journée jouée.",
+    )
+
+
+def _leader_cell(leader: dict, finished: bool) -> dict:
+    lead = leader["ecart_2e"]
+    gap = f"{lead} d'avance" if lead else "à égalité de points avec le 2e"
+    return {
+        "label": "Champion" if finished else "Leader",
+        "value": leader["equipe"],
+        "small": True,
+        "sub": f"{leader['pts']} pts, {gap}. Coach {leader['coach']}",
+    }
+
+
+def _scorer_cell(kf: dict) -> dict:
+    pl, mpg = kf["buteur_pl"], kf["buteur_mpg"]
+    if pl is None:
+        return {
+            "label": "Meilleur buteur de la ligue",
+            "value": names_list(mpg["joueurs"]),
+            "small": True,
+            "sub": f"{mpg['buts']} buts dans la ligue",
+        }
+    return {
+        "label": "Meilleur buteur PL de la ligue",
+        "value": names_list(pl["joueurs"]),
+        "small": True,
+        "sub": f"{pl['buts']} buts ({names_list(pl['equipes'])}). En MPG : {names_list(mpg['joueurs'])}, "
+        f"{mpg['buts']} buts",
+    }
 
 
 def render(a: Analysis, team_id: int) -> None:
     meta = a.meta
+    finished = meta["capacites"].terminee
     kf = key_figures(a)
     mine = a.standings.set_index("team_id").loc[team_id]
-    hero(
-        "Ligue Napoly Game, Premier League",
-        f"Journée {meta['derniere_journee']} sur {meta['nb_journees']}",
-        f"{meta['matchs_joues']} matchs joués. Tout est recalculé à partir des fichiers de <code>data/</code> : "
-        "remplacez-les pour mettre l'app à jour.",
-    )
+    _hero(a, kf["leader"])
+    limit_banner(meta["limites"])
 
-    leader, pl, mpg = kf["leader"], kf["buteur_pl"], kf["buteur_mpg"]
     kpi_row(
         [
-            {
-                "label": "Leader",
-                "value": leader["equipe"],
-                "small": True,
-                "sub": f"{leader['pts']} pts, {leader['ecart_2e']} d'avance. Coach {leader['coach']}",
-            },
+            _leader_cell(kf["leader"], finished),
             {
                 "label": mine["team_name"],
                 "value": f"{int(mine['rang'])}e",
                 "sub": f"{int(mine['pts'])} pts, série {mine['serie']}",
                 "me": True,
             },
-            {
-                "label": "Meilleur buteur PL de la ligue",
-                "value": names_list(pl["joueurs"]),
-                "small": True,
-                "sub": f"{pl['buts']} buts ({names_list(pl['equipes'])}). En MPG : {names_list(mpg['joueurs'])}, "
-                f"{mpg['buts']} buts",
-            },
+            _scorer_cell(kf),
             {
                 "label": "Roi des Rotaldos",
                 "value": names_list(kf["roi_rotaldos"]["equipes"]),
@@ -124,16 +175,17 @@ def render(a: Analysis, team_id: int) -> None:
         ]
     )
 
-    section("Classement")
+    section("Classement final" if finished else "Classement")
     _standings_table(a, team_id)
 
-    left, right = st.columns(2, gap="medium")
-    with left:
-        charts.show(charts.bump_chart(a.standings_by_gw, team_id, len(a.league.teams)), height=440)
-    with right:
-        abbrev = dict(zip(a.league.teams["team_id"], a.league.teams["abrev"]))
-        charts.show(charts.luck_scatter(a.luck.copy(), abbrev, team_id))
-    how(["points_vs_niveau", "all_play"], meta)
+    charts.show(charts.bump_chart(a.standings_by_gw, team_id, len(a.league.teams)), height=440)
+    luck = a.luck.set_index("team_id").loc[team_id]
+    st.markdown(
+        f"**{mine['team_name']}** : tu as {int(luck['pts'])} points, tes notes en méritaient "
+        f"{luck['xpts_allplay']:.1f} ({fmt_signed(luck['pts'] - luck['xpts_allplay'])} pts de chance)."
+    )
+    page_link("pourquoi", "Comprendre ce classement : mérite ou chance ?", icon=":material/casino:", volet="chance")
+    how("all_play", meta)
 
     section("Force par ligne et attaque")
     sort_by = st.segmented_control(

@@ -5,12 +5,14 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from app import charts
-from app.components import hero, how, kpi_row, section
-from app.theme import AXIS, HIGHLIGHT, LINE_LABELS, SERIES, SURFACE
+from app.components import as_pct, empty_state, how, kpi_row, pct_column, section, short_table, volet_title
+from app.theme import AXIS, CONTEXT_LIGHT, HIGHLIGHT, LINE_LABELS, SERIES, SURFACE
 from mpg.analysis import Analysis
 
+MAX_TICKS = 10
+MAX_NAME_CHARS = 15
 SORTS = {
-    "note_retrecie": "Note estimée",
+    "note_retrecie": "Note fiabilisée",
     "note_moy": "Moyenne brute",
     "buts_total": "Buts dans la ligue",
     "ga_saison": "G+A en PL",
@@ -36,24 +38,61 @@ def _shrink_chart(ps, team_id: int) -> go.Figure:
             mode="markers",
             marker=dict(
                 size=np.clip(d["n_notes"] * 3 + 3, 5, 16),
-                color=[HIGHLIGHT if m else "#8FA3BF" for m in me],
+                color=[HIGHLIGHT if m else CONTEXT_LIGHT for m in me],
                 opacity=[1 if m else 0.55 for m in me],
                 line=dict(color=SURFACE, width=1),
             ),
             customdata=np.stack([d["joueur"], d["team_name"], d["n_notes"], d["note_prior"]], axis=1),
             showlegend=False,
             hovertemplate="<b>%{customdata[0]}</b>, %{customdata[1]}<br>Moyenne brute : %{x:.2f} sur %{customdata[2]} "
-            "matchs<br>A priori : %{customdata[3]:.2f}<br>Note estimée : %{y:.2f}<extra></extra>",
+            "matchs<br>Sur le papier : %{customdata[3]:.2f}<br>Note fiabilisée : %{y:.2f}<extra></extra>",
         )
     )
     fig.update_layout(
-        title="Moyenne observée et note retenue",
+        title="Moyenne observée et note fiabilisée",
         height=420,
         xaxis_title="Moyenne des notes observées",
-        yaxis_title="Note estimée",
+        yaxis_title="Note fiabilisée",
     )
-    fig.update_xaxes(range=[lo, hi])
-    fig.update_yaxes(range=[lo + 1, hi - 1])
+    fig.update_xaxes(range=[lo, hi], nticks=6)
+    fig.update_yaxes(range=[lo + 1, hi - 1], nticks=6)
+    return fig
+
+
+def _short_name(name: str, n: int = MAX_NAME_CHARS) -> str:
+    return name if len(name) <= n else name[: n - 1].rstrip() + "…"
+
+
+def _decisive_chart(ps) -> go.Figure:
+    ga = ps[ps["ga_saison"] > 0].sort_values("ga_saison", ascending=False).head(MAX_TICKS).iloc[::-1]
+    fig = go.Figure()
+    for column, name, color, hover in (
+        ("buts_reels_saison", "Buts", SERIES[0], "Buts"),
+        ("passes_decisives_saison", "Passes décisives", SERIES[1], "Passes"),
+    ):
+        fig.add_trace(
+            go.Bar(
+                y=ga["joueur"],
+                x=ga[column],
+                name=name,
+                orientation="h",
+                marker=dict(color=color, line=dict(color=SURFACE, width=2)),
+                hovertemplate=f"<b>%{{y}}</b><br>{hover} : %{{x}}<extra></extra>",
+            )
+        )
+    fig.update_layout(
+        barmode="stack",
+        title="Les plus décisifs en Premier League (G+A)",
+        height=420,
+        legend=dict(orientation="h", x=0, xanchor="left", y=1.02, yanchor="bottom"),
+    )
+    fig.update_xaxes(nticks=6)
+    fig.update_yaxes(
+        gridcolor="rgba(0,0,0,0)",
+        tickmode="array",
+        tickvals=list(ga["joueur"]),
+        ticktext=[_short_name(n) for n in ga["joueur"]],
+    )
     return fig
 
 
@@ -62,7 +101,7 @@ def _top5_panel(ps, team_id: int) -> str:
     for g in "GDMA":
         top = ps[(ps["poste_groupe"] == g) & (ps["n_notes"] >= 2)].sort_values("note_retrecie", ascending=False).head(5)
         rows = "".join(
-            f'<div class="p{" me" if r.team_id == team_id else ""}"><div style="min-width:0">'
+            f'<div class="p{" me" if r.team_id == team_id else ""}"><div class="minw0">'
             f'<div class="who">{escape(r.joueur)}</div><div class="club">{escape(r.team_name)}</div></div>'
             f'<div class="note">{r.note_retrecie:.2f}</div></div>'
             for r in top.itertuples()
@@ -71,27 +110,59 @@ def _top5_panel(ps, team_id: int) -> str:
     return f'<div class="top5">{"".join(blocks)}</div>'
 
 
+PL_SORTS = ("ga_saison",)
+PL_COLUMNS = (
+    "note_moy_reelle",
+    "points_mpg_moy",
+    "buts_reels_saison",
+    "passes_decisives_saison",
+    "ga_par_match",
+    "taux_jeu",
+    "cartons_jaunes",
+    "statut_performance",
+)
+
+
+def _passer_or_captain(ps, stats_pl: bool) -> dict:
+    """Meilleur passeur PL ; sans statistiques PL, le joueur le plus souvent capitaine (donnée de la ligue)."""
+    if stats_pl:
+        passer = ps.sort_values("passes_decisives_saison", ascending=False).iloc[0]
+        return {
+            "label": "Meilleur passeur PL",
+            "value": passer["joueur"],
+            "small": True,
+            "sub": f"{passer['passes_decisives_saison']:.0f} passes décisives, {passer['team_name']}",
+        }
+    captain = ps.sort_values("capitanats", ascending=False).iloc[0]
+    return {
+        "label": "Capitaine le plus souvent",
+        "value": captain["joueur"],
+        "small": True,
+        "sub": f"{int(captain['capitanats'])} fois capitaine, {captain['team_name']}",
+    }
+
+
 def render(a: Analysis, team_id: int) -> None:
     meta = a.meta
+    caps = meta["capacites"]
+    season = meta["saison"]
     ps = a.player_value
-    hero(
-        "Joueurs",
+    volet_title(
         "Les classements individuels",
         f"{len(ps)} joueurs achetés. Les notes sont tirées vers la moyenne du poste pour ne pas récompenser un seul "
         "gros match."
         if meta.get("k_postes")
-        else f"{len(ps)} joueurs achetés. Les notes MPG sont rétrécies vers la "
+        else f"{len(ps)} joueurs achetés. Les notes MPG sont fiabilisées : on les rapproche de la "
         "moyenne de saison PL pour ne pas récompenser un seul gros match.",
     )
 
     mvp = ps.sort_values(["mvp_match", "top3_match"], ascending=False).iloc[0]
     scorer = ps.sort_values("buts_total", ascending=False).iloc[0]
-    passer = ps.sort_values("passes_decisives_saison", ascending=False).iloc[0]
     best = ps[ps["n_notes"] >= 2].sort_values("note_retrecie", ascending=False).iloc[0]
     kpi_row(
         [
             {
-                "label": "Meilleure note estimée",
+                "label": "Meilleure note fiabilisée",
                 "value": best["joueur"],
                 "small": True,
                 "sub": f"{best['note_retrecie']:.2f}, {best['team_name']}",
@@ -102,12 +173,7 @@ def render(a: Analysis, team_id: int) -> None:
                 "small": True,
                 "sub": f"{int(scorer['buts_reels'])} réels + {int(scorer['buts_mpg'])} MPG, {scorer['team_name']}",
             },
-            {
-                "label": "Meilleur passeur PL",
-                "value": passer["joueur"],
-                "small": True,
-                "sub": f"{passer['passes_decisives_saison']:.0f} passes décisives, {passer['team_name']}",
-            },
+            _passer_or_captain(ps, caps.stats_pl),
             {
                 "label": "Homme du match le plus souvent",
                 "value": mvp["joueur"],
@@ -126,7 +192,7 @@ def render(a: Analysis, team_id: int) -> None:
                 default="Tous",
                 required=True,
                 format_func=lambda g: LINE_LABELS.get(g, g),
-                key="pl_poste",
+                key=f"pl_poste_{season}",
             )
         with c2:
             teams = st.multiselect(
@@ -134,13 +200,14 @@ def render(a: Analysis, team_id: int) -> None:
                 options=a.standings["team_id"].tolist(),
                 format_func=a.league.team_names.get,
                 placeholder="Toutes",
-                key="pl_teams",
+                key=f"pl_teams_{season}",
             )
         with c3:
-            sort = st.selectbox("Trier par", options=list(SORTS), format_func=SORTS.get, key="pl_sort")
+            sorts = [k for k in SORTS if caps.stats_pl or k not in PL_SORTS]
+            sort = st.selectbox("Trier par", options=sorts, format_func=SORTS.get, key=f"pl_sort_{season}")
         with c4:
             min_n = st.number_input(
-                "Matchs notés min.", min_value=0, max_value=int(ps["n_notes"].max()), value=2, key="pl_min"
+                "Matchs notés min.", min_value=0, max_value=int(ps["n_notes"].max()), value=2, key=f"pl_min_{season}"
             )
     d = ps[ps["n_notes"] >= min_n]
     if poste != "Tous":
@@ -149,35 +216,39 @@ def render(a: Analysis, team_id: int) -> None:
         d = d[d["team_id"].isin(teams)]
     d = d.sort_values(sort, ascending=False)
     st.caption(f"{len(d)} joueurs affichés.")
-    st.dataframe(
-        d[
-            [
-                "joueur",
-                "team_name",
-                "poste",
-                "club",
-                "enchere",
-                "cote",
-                "n_notes",
-                "note_moy",
-                "note_ecart_type",
-                "note_retrecie",
-                "note_moy_reelle",
-                "points_mpg_moy",
-                "buts_reels",
-                "buts_mpg",
-                "buts_reels_saison",
-                "passes_decisives_saison",
-                "ga_par_match",
-                "taux_jeu",
-                "cartons_jaunes",
-                "statut_performance",
-                "top3_match",
-                "capitanats",
-                "residu_valeur",
-            ]
-        ],
-        hide_index=True,
+    columns = [
+        "joueur",
+        "team_name",
+        "poste",
+        "club",
+        "enchere",
+        "cote",
+        "n_notes",
+        "note_moy",
+        "note_ecart_type",
+        "note_retrecie",
+        "note_moy_reelle",
+        "points_mpg_moy",
+        "buts_reels",
+        "buts_mpg",
+        "buts_reels_saison",
+        "passes_decisives_saison",
+        "ga_par_match",
+        "taux_jeu",
+        "cartons_jaunes",
+        "statut_performance",
+        "top3_match",
+        "capitanats",
+        "residu_valeur",
+    ]
+    if not caps.stats_pl:
+        columns = [c for c in columns if c not in PL_COLUMNS]
+    if not caps.cote:
+        columns.remove("cote")
+    short_table(
+        as_pct(d, ["taux_jeu"]),
+        ["joueur", "team_name", "poste", "note_moy", "enchere"],
+        full=columns,
         column_config={
             "joueur": st.column_config.TextColumn("Joueur", pinned=True),
             "team_name": "Équipe",
@@ -185,11 +256,15 @@ def render(a: Analysis, team_id: int) -> None:
             "club": "Club",
             "enchere": st.column_config.NumberColumn("Enchère", format="%d M€"),
             "cote": st.column_config.NumberColumn("Cote", format="%d M€"),
-            "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note estimée"),
-            "note_moy": st.column_config.NumberColumn("Moy. brute", format="%.2f", help="Moyenne de ces notes"),
-            "note_ecart_type": st.column_config.NumberColumn("Écart-type", format="%.2f", help="Régularité"),
+            "n_notes": st.column_config.NumberColumn("Notes", help="Matchs notés retenus pour la note fiabilisée"),
+            "note_moy": st.column_config.NumberColumn("Note moy.", format="%.2f", help="Moyenne brute de ces notes"),
+            "note_ecart_type": st.column_config.NumberColumn(
+                "Dispersion", format="%.2f", help="Régularité : plus c'est bas, plus ses notes se ressemblent"
+            ),
             "note_retrecie": st.column_config.NumberColumn(
-                "Note estimée", format="%.2f", help="Note attendue quand il joue, tirée vers son poste"
+                "Note fiabilisée",
+                format="%.2f",
+                help="Note attendue quand il joue, rapprochée de la moyenne de son poste",
             ),
             "note_moy_reelle": st.column_config.NumberColumn("Moy. PL", format="%.1f"),
             "points_mpg_moy": st.column_config.NumberColumn("Pts MPG moy.", format="%.2f"),
@@ -198,7 +273,7 @@ def render(a: Analysis, team_id: int) -> None:
             "buts_reels_saison": st.column_config.NumberColumn("Buts PL"),
             "passes_decisives_saison": st.column_config.NumberColumn("Passes PL", format="%d"),
             "ga_par_match": st.column_config.NumberColumn("G+A / match", format="%.2f"),
-            "taux_jeu": st.column_config.ProgressColumn("Taux de jeu", min_value=0, max_value=1, format="percent"),
+            "taux_jeu": pct_column("Taux de jeu", bar=True),
             "cartons_jaunes": st.column_config.NumberColumn("Jaunes", format="%d"),
             "statut_performance": "Statut",
             "top3_match": st.column_config.NumberColumn("Top 3 match"),
@@ -206,46 +281,29 @@ def render(a: Analysis, team_id: int) -> None:
             "residu_valeur": st.column_config.NumberColumn("Écart au prix", format="%+.2f"),
         },
         height=520,
+        alt="Classement des joueurs",
     )
     shrinkage = "shrinkage" if meta.get("k_postes") else "shrinkage_compos"
     how([shrinkage, "production_pl"], meta)
 
-    section("Top 5 par poste", "Note estimée, au moins 2 matchs notés.")
+    section("Top 5 par poste", "Note fiabilisée, au moins 2 matchs notés.")
     st.html(_top5_panel(ps, team_id))
 
     left, right = st.columns([1.3, 1], gap="medium")
     with left:
         charts.show(_shrink_chart(ps, team_id))
         st.caption(
-            f"k = {meta['k_postes']} selon le poste : chaque titulaire reçoit l'équivalent de k matchs à la moyenne "
-            "des titulaires de son poste. Taille du point = nombre de matchs notés."
+            f"Chaque titulaire reçoit en plus l'équivalent de k matchs à la moyenne des titulaires de son poste "
+            f"(k = {meta['k_postes']} selon le poste). Taille du point = nombre de matchs notés."
             if meta.get("k_postes")
-            else f"k = {meta['k_shrinkage']:.1f} : chaque joueur reçoit l'équivalent de {meta['k_shrinkage']:.0f} "
-            "matchs à sa moyenne PL. Taille du point = nombre de matchs notés."
+            else f"Chaque joueur reçoit en plus l'équivalent de k = {meta['k_shrinkage']:.1f} matchs à sa moyenne PL. "
+            "Taille du point = nombre de matchs notés."
         )
     with right:
-        ga = ps[ps["ga_saison"] > 0].sort_values("ga_saison", ascending=False).head(12).iloc[::-1]
-        fig = go.Figure()
-        fig.add_trace(
-            go.Bar(
-                y=ga["joueur"],
-                x=ga["buts_reels_saison"],
-                name="Buts",
-                orientation="h",
-                marker=dict(color=SERIES[0], line=dict(color=SURFACE, width=2)),
-                hovertemplate="<b>%{y}</b><br>Buts : %{x}<extra></extra>",
+        if not caps.stats_pl:
+            empty_state(
+                "Les plus décisifs en Premier League (G+A)",
+                "Les buts et passes décisives de Premier League ne sont pas disponibles pour cette saison.",
             )
-        )
-        fig.add_trace(
-            go.Bar(
-                y=ga["joueur"],
-                x=ga["passes_decisives_saison"],
-                name="Passes décisives",
-                orientation="h",
-                marker=dict(color=SERIES[1], line=dict(color=SURFACE, width=2)),
-                hovertemplate="<b>%{y}</b><br>Passes : %{x}<extra></extra>",
-            )
-        )
-        fig.update_layout(barmode="stack", title="Les plus décisifs en Premier League (G+A)", height=420)
-        fig.update_yaxes(gridcolor="rgba(0,0,0,0)")
-        charts.show(fig)
+            return
+        charts.show(_decisive_chart(ps))

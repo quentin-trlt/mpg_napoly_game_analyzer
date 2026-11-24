@@ -74,6 +74,50 @@ def test_draws_are_consistent(analysis):
     assert not d.plays[injured].any()
 
 
+def _model() -> pr.NoteModel:
+    return pr.NoteModel(
+        sigma_player=0.7,
+        sigma_club=0.6,
+        goal_bump=1.5,
+        own_goal_rate=0.0,
+        beta_for={},
+        beta_against={},
+        goals_mean=1.3,
+        k_shrink=1.0,
+    )
+
+
+def _titulaires(sigma: float | None) -> pd.DataFrame:
+    n = 8
+    proj = pd.DataFrame(
+        {
+            "player_key": [f"p{i}" for i in range(n)],
+            "club": [f"c{i}" for i in range(n)],
+            "poste_groupe": ["G", "D", "M", "A"] * 2,
+            "p_joue": 1.0,
+            "lambda_buts": [0.0, 0.05, 0.2, 0.4] * 2,
+            "note_titulaire_attendue": 6.0,
+            "note_sd_mean": 0.0,
+            "p_titulaire": 1.0,
+        }
+    )
+    if sigma is not None:
+        proj["sigma_titulaire"] = sigma
+    return proj
+
+
+def test_starter_noise_matches_sigma_titulaire():
+    model = _model()
+    d = pr.sample_draws(_titulaires(1.1), model, n_draws=40000, seed=2)
+    assert d.note.std(axis=1) == pytest.approx(1.1, abs=0.06)
+
+
+def test_starter_noise_falls_back_without_sigma_titulaire():
+    model = _model()
+    d = pr.sample_draws(_titulaires(None), model, n_draws=40000, seed=2)
+    assert d.note[0].std() == pytest.approx(np.hypot(model.sigma_player, model.sigma_club), abs=0.06)
+
+
 def test_optimised_lineup_is_valid_and_beats_naive(rec):
     best = rec.lineups[0]
     best.validate(rec.draws.line)

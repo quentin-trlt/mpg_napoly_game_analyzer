@@ -288,3 +288,33 @@ mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Aston Villa,ext,but,5
 mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Aston Villa,ext,penalty,48',mpg_championship_player_122806,McGinn,,,john_mcginn__aston_villa,
 mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Aston Villa,ext,but,4',mpg_championship_player_517052,Jackson,,,nicolas_jackson__aston_villa,
 mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Aston Villa,ext,but,1',mpg_championship_player_653481,Alysson,mpg_championship_player_122806,McGinn,,john_mcginn__aston_villa
+mpg_championship_match_2645302,11,2026-11-21T12:30:00.000Z,Man. City,dom,but,57',mpg_championship_player_215379,Anderson,,,elliot_anderson__man_city,
+mpg_championship_match_2645302,11,2026-11-21T12:30:00.000Z,Fulham,ext,but,16',mpg_championship_player_244042,Rodrigo Muniz,mpg_championship_player_477555,Bobb,,oscar_bobb__fulham
+mpg_championship_match_2645295,11,2026-11-21T15:00:00.000Z,Bournemouth,dom,but,45' +3,mpg_championship_player_222683,Kluivert,mpg_championship_player_201658,Tavernier,justin_kluivert__bournemouth,marcus_tavernier__bournemouth
+mpg_championship_match_2645295,11,2026-11-21T15:00:00.000Z,Bournemouth,dom,but,19',mpg_championship_player_444102,Evanilson,mpg_championship_player_463981,Hill,evanilson__bournemouth,
+mpg_championship_match_2645298,11,2026-11-21T15:00:00.000Z,Chelsea,dom,but,25',mpg_championship_player_503037,Emegha,mpg_championship_player_244850,Rogers,,morgan_rogers__chelsea
+mpg_championship_match_2645298,11,2026-11-21T15:00:00.000Z,Leeds,ext,but,90' +1,mpg_championship_player_427637,Aaronson,mpg_championship_player_153682,Wilson,,harry_wilson__leeds
+mpg_championship_match_2645298,11,2026-11-21T15:00:00.000Z,Leeds,ext,but,58',mpg_championship_player_435997,Okafor,,,noah_okafor__leeds,
+mpg_championship_match_2645298,11,2026-11-21T15:00:00.000Z,Leeds,ext,penalty,53',mpg_championship_player_177815,Calvert-Lewin,,,dominic_calvert_lewin__leeds,
+mpg_championship_match_2645298,11,2026-11-21T15:00:00.000Z,Leeds,ext,but,28',mpg_championship_player_435997,Okafor,mpg_championship_player_177815,Calvert-Lewin,noah_okafor__leeds,dominic_calvert_lewin__leeds
+mpg_championship_match_2645299,11,2026-11-21T15:00:00.000Z,Coventry City,dom,csc,85',mpg_championship_player_433154,McNeil,,,,
+mpg_championship_match_2645299,11,2026-11-21T15:00:00.000Z,Coventry City,dom,but,30',mpg_championship_player_501459,Sakamoto,mpg_championship_player_480457,Rudoni,,
+mpg_championship_match_2645299,11,2026-11-21T15:00:00.000Z,Coventry City,dom,but,5',mpg_championship_player_210156,Awoniyi,mpg_championship_player_480457,Rudoni,,
+mpg_championship_match_2645299,11,2026-11-21T15:00:00.000Z,Crystal Palace,ext,but,45' +1,mpg_championship_player_247412,Strand Larsen,mpg_championship_player_488024,Pino,j_rgen_strand_larsen__crystal_palace,yeremy_pino__crystal_palace
+mpg_championship_match_2645299,11,2026-11-21T15:00:00.000Z,Crystal Palace,ext,but,13',mpg_championship_player_488024,Pino,mpg_championship_player_247412,Strand Larsen,yeremy_pino__crystal_palace,j_rgen_strand_larsen__crystal_palace
+mpg_championship_match_2645304,11,2026-11-21T15:00:00.000Z,Tottenham,dom,but,51',mpg_championship_player_154566,Solanke,,,dominic_solanke__tottenham,
+mpg_championship_match_2645304,11,2026-11-21T15:00:00.000Z,Tottenham,dom,but,15',mpg_championship_player_611917,Williams-Barnett,mpg_championship_player_441164,Porro,,
+mpg_championship_match_2645303,11,2026-11-21T17:30:00.000Z,Newcastle,dom,but,62',mpg_championship_player_465642,Thiaw,mpg_championship_player_200089,Willock,malick_thiaw__newcastle,joe_willock__newcastle
+mpg_championship_match_2645303,11,2026-11-21T17:30:00.000Z,Newcastle,dom,but,49',mpg_championship_player_201666,Barnes,mpg_championship_player_538207,Osula,harvey_barnes__newcastle,william_osula__newcastle
+mpg_championship_match_2645303,11,2026-11-21T17:30:00.000Z,Arsenal,ext,but,78',mpg_championship_player_248857,Madueke,mpg_championship_player_184029,Ødegaard,,martin_degaard__arsenal
+mpg_championship_match_2645303,11,2026-11-21T17:30:00.000Z,Arsenal,ext,but,33',mpg_championship_player_232413,Eze,mpg_championship_player_219847,Havertz,eberechi_eze__arsenal,kai_havertz__arsenal
+mpg_championship_match_2645300,11,2026-11-22T14:00:00.000Z,Hull City,dom,but,90' +5,mpg_championship_player_169432,McBurnie,mpg_championship_player_540324,Belloumi,oliver_mcburnie__hull_city,mohamed_belloumi__hull_city
+mpg_championship_match_2645300,11,2026-11-22T14:00:00.000Z,Hull City,dom,but,90' +2,mpg_championship_player_169432,McBurnie,mpg_championship_player_469266,Gourna-Douath,oliver_mcburnie__hull_city,
+mpg_championship_match_2645301,11,2026-11-22T16:30:00.000Z,Liverpool,dom,but,82',mpg_championship_player_551499,Muñoz,mpg_championship_player_494595,Wirtz,victor_munoz__liverpool,florian_wirtz__liverpool
+mpg_championship_match_2645301,11,2026-11-22T16:30:00.000Z,Liverpool,dom,but,66',mpg_championship_player_611922,Ngumoha,mpg_championship_player_482616,Barcola,,bradley_barcola__liverpool
+mpg_championship_match_2645301,11,2026-11-22T16:30:00.000Z,Liverpool,dom,but,13',mpg_championship_player_494595,Wirtz,mpg_championship_player_611922,Ngumoha,florian_wirtz__liverpool,
+mpg_championship_match_2645301,11,2026-11-22T16:30:00.000Z,Liverpool,dom,but,10',mpg_championship_player_424876,Szoboszlai,,,dominik_szoboszlai__liverpool,
+mpg_championship_match_2645297,11,2026-11-23T20:00:00.000Z,Brentford,dom,but,90',mpg_championship_player_244858,Fábio Carvalho,mpg_championship_player_207283,Jensen,fabio_fabio_carvalho__brentford,mathias_jensen__brentford
+mpg_championship_match_2645297,11,2026-11-23T20:00:00.000Z,Brentford,dom,but,67',mpg_championship_player_204580,Janelt,mpg_championship_player_444180,Anthony,vitaly_janelt__brentford,
+mpg_championship_match_2645297,11,2026-11-23T20:00:00.000Z,Brentford,dom,but,25',mpg_championship_player_249231,Lewis-Potter,,,keane_lewis_potter__brentford,
+mpg_championship_match_2645297,11,2026-11-23T20:00:00.000Z,Brentford,dom,but,23',mpg_championship_player_249231,Lewis-Potter,mpg_championship_player_444180,Anthony,keane_lewis_potter__brentford,

@@ -1,111 +1,111 @@
 team_id,slot,poste,note_moy,joueur_affiche,prochain_adversaire_club,player_key
-0,1,G,5.9,Kelleher,EVE,caoimhin_kelleher__brentford
-0,2,DC,5.4,Guéhi,FUL,marc_guehi__man_city
-0,3,DL,6.3,De Cuyper,HUL,maxim_de_cuyper__brighton
-0,4,DL,5.2,Giles,BHA,ryan_giles__hull_city
-0,5,MO,6.1,Tavernier,NFO,marcus_tavernier__bournemouth
-0,6,MO,6.2,Groß,HUL,pascal_gro__brighton
-0,7,MO,5.9,Bruno Fernandes,LIV,bruno_fernandes__man_united
-0,8,MO,5.3,Willock,ARS,joe_willock__newcastle
-0,9,A,5.5,Schade,EVE,kevin_schade__brentford
-0,10,A,5.4,Mbeumo,LIV,bryan_mbeumo__man_united
-0,11,A,5.3,Elanga,ARS,anthony_elanga__newcastle
-1,1,G,4.9,Sels,BOU,matz_sels__nottingham_forest
-1,2,DC,5.7,Tarkowski,BRE,james_tarkowski__everton
-1,3,DL,5.4,Calafiori,NEW,riccardo_calafiori__arsenal
-1,4,DL,5.4,Mykolenko,BRE,vitalii_mykolenko__everton
-1,5,MO,5.8,Ødegaard,NEW,martin_degaard__arsenal
-1,6,MO,5.9,Iwobi,MCI,alex_iwobi__fulham
-1,7,MO,5.7,Gibbs-White,BOU,morgan_gibbs_white__nottingham_forest
-1,8,MO,5.2,Rayan,NFO,rayan__bournemouth
-1,9,A,6.3,João Pedro,LEE,joao_pedro__chelsea
-1,10,A,5.0,Havertz,NEW,kai_havertz__arsenal
-1,11,A,4.8,Akpom,TOT,chuba_akpom__ipswich_town
-2,1,G,5.2,Donnarumma,FUL,gianluigi_donnarumma__man_city
-2,2,DL,4.8,O'Reilly,FUL,nico_o_reilly__man_city
-2,3,DL,5.2,Hume,AVL,trai_hume__sunderland
-2,4,DL,5.6,Mendy,BHA,nobel_mendy__hull_city
-2,5,MO,5.4,Ouattara,EVE,dango_ouattara__brentford
-2,6,MD,5.0,Gravenberch,MUN,ryan_gravenberch__liverpool
-2,7,MO,6.0,Palmer,LEE,cole_palmer__chelsea
-2,8,MD,4.8,Zubimendi,NEW,martin_zubimendi__arsenal
-2,9,A,5.8,Isak,MUN,alexander_isak__liverpool
-2,10,A,4.8,Gyökeres,NEW,viktor_gyokeres__arsenal
-2,11,A,4.9,Solanke,IPS,dominic_solanke__tottenham
-3,1,G,5.6,Suzuki,SUN,zion_suzuki__aston_villa
-3,2,DL,4.6,Mitchell,COV,tyrick_mitchell__crystal_palace
-3,3,DC,4.7,Thiaw,ARS,malick_thiaw__newcastle
-3,4,DC,5.1,Gvardiol,FUL,josko_gvardiol__man_city
-3,5,MO,5.8,Le Fée,AVL,enzo_le_fee__sunderland
-3,6,MO,5.1,Buendía,SUN,emiliano_buendia__aston_villa
-3,7,MO,5.8,Szoboszlai,MUN,dominik_szoboszlai__liverpool
-3,8,MO,5.7,Doku,FUL,jeremy_doku__man_city
-3,9,A,4.6,García,MCI,gonzalo_garcia__fulham
-3,10,A,5.4,Pino,COV,yeremy_pino__crystal_palace
-3,11,A,6.2,Evanilson,NFO,evanilson__bournemouth
-4,1,G,5.0,Lammens,LIV,senne_lammens__man_united
-4,2,DL,5.3,Lewis-Potter,EVE,keane_lewis_potter__brentford
-4,3,DC,5.6,Ajer,EVE,kristoffer_ajer__brentford
-4,4,DC,5.8,Vuskovic,HUL,luka_vuskovic__brighton
-4,5,MO,5.5,Barnes,ARS,harvey_barnes__newcastle
-4,6,MD,5.7,Mainoo,LIV,kobbie_mainoo__man_united
-4,7,MO,5.5,Matheus Cunha,LIV,matheus_cunha__man_united
-4,8,MO,5.5,Kluivert,NFO,justin_kluivert__bournemouth
-4,9,A,6.2,Haaland,FUL,erling_haaland__man_city
-4,10,A,4.9,Calvert-Lewin,CHE,dominic_calvert_lewin__leeds
-4,11,A,5.6,Kostoulas,HUL,charalampos_kostoulas__brighton
-5,1,G,5.6,Pickford,BRE,jordan_pickford__everton
-5,2,DC,5.6,van Dijk,MUN,virgil_van_dijk__liverpool
-5,3,DC,5.6,Muharemovic,CHE,tarik_muharemovic__leeds
-5,4,DC,5.4,Dunk,HUL,lewis_dunk__brighton
-5,5,MO,5.4,Foden,FUL,phil_foden__man_city
-5,6,MO,5.5,Ndiaye,FUL,iliman_ndiaye__man_city
-5,7,MD,5.7,Rice,NEW,declan_rice__arsenal
-5,8,MO,4.8,Wilson,CHE,harry_wilson__leeds
-5,9,A,4.9,Sesko,LIV,benjamin_sesko__man_united
-5,10,A,5.1,Rashford,LIV,marcus_rashford__man_united
-5,11,A,3.0,Richarlison,IPS,richarlison__tottenham
-6,1,G,5.8,Raya,NEW,david_raya__arsenal
-6,2,DL,5.7,Justin,CHE,james_justin__leeds
-6,3,DL,4.8,Muñoz,BOU,daniel_munoz__nottingham_forest
-6,4,DL,5.0,Truffert,NFO,adrien_truffert__bournemouth
-6,5,MO,6.2,Ayari,HUL,yasin_ayari__brighton
-6,6,MO,5.7,King,MCI,josh_king__fulham
-6,7,MD,5.4,Garner,BRE,james_garner__everton
-6,8,MD,5.4,Xhaka,AVL,granit_xhaka__sunderland
-6,9,A,4.9,Igor Thiago,EVE,igor_thiago__brentford
-6,10,A,5.0,Brobbey,AVL,brian_brobbey__sunderland
-6,11,A,5.1,Okafor,CHE,noah_okafor__leeds
-7,1,G,6.1,Trafford,CHE,james_trafford__leeds
-7,2,DL,4.9,Davis,TOT,leif_davis__ipswich_town
-7,3,DC,5.5,van Hecke,IPS,jan_paul_van_hecke__tottenham
-7,4,DL,5.1,Bogle,CHE,jayden_bogle__leeds
-7,5,MO,6.2,Rogers,LEE,morgan_rogers__chelsea
-7,6,MD,5.1,Fernández,FUL,enzo_fernandez__man_city
-7,7,MO,5.9,Semenyo,FUL,antoine_semenyo__man_city
-7,8,MO,5.4,Mac Allister,MUN,alexis_mac_allister__liverpool
-7,9,A,4.8,Strand Larsen,COV,j_rgen_strand_larsen__crystal_palace
-7,10,A,4.8,Igor Jesus,BOU,igor_jesus__nottingham_forest
-7,11,A,5.0,Kroupi,NFO,junior_kroupi__bournemouth
-8,1,G,5.4,Alisson Becker,MUN,alisson_becker__liverpool
-8,2,DC,5.6,Gabriel Magalhães,NEW,gabriel_magalhaes__arsenal
-8,3,DL,5.4,Kadioglu,HUL,ferdi_kadioglu__brighton
-8,4,DC,5.3,Ajayi,BHA,semi_ajayi__hull_city
-8,5,MO,5.7,Wirtz,MUN,florian_wirtz__liverpool
-8,6,MD,5.7,Scott,NFO,alex_scott__bournemouth
-8,7,MO,6.1,Dewsbury-Hall,BRE,kiernan_dewsbury_hall__everton
-8,8,MD,5.5,Bruno Guimarães,NEW,bruno_guimaraes__arsenal
-8,9,A,5.4,Barcola,MUN,bradley_barcola__liverpool
-8,10,A,3.8,Mateta,COV,jean_philippe_mateta__crystal_palace
-8,11,A,5.0,Osula,ARS,william_osula__newcastle
-9,1,G,6.1,Tzolakis,BHA,konstantinos_tzolakis__hull_city
-9,2,DC,4.8,Rúben Dias,FUL,ruben_dias__man_city
-9,3,DL,5.1,Kayode,EVE,michael_kayode__brentford
-9,4,DC,5.3,Jacquet,MUN,jeremy_jacquet__liverpool
-9,5,MO,6.2,Cherki,FUL,rayan_cherki__man_city
-9,6,MO,6.3,Gómez,HUL,diego_gomez__brighton
-9,7,MO,6.1,Saka,NEW,bukayo_saka__arsenal
-9,8,MO,6.2,Belloumi,BHA,mohamed_belloumi__hull_city
-9,9,A,5.8,Gakpo,MUN,cody_gakpo__liverpool
-9,10,A,5.7,Barry,BRE,thierno_barry__everton
-9,11,A,5.1,McBurnie,BHA,oliver_mcburnie__hull_city
+0,1,G,5.9,Kelleher,MUN,caoimhin_kelleher__brentford
+0,2,DL,6.1,De Cuyper,NEW,maxim_de_cuyper__brighton
+0,3,DC,5.4,Guéhi,ARS,marc_guehi__man_city
+0,4,DL,5.1,Giles,CRY,ryan_giles__hull_city
+0,5,MO,5.9,Bruno Fernandes,BRE,bruno_fernandes__man_united
+0,6,MO,6.0,Groß,NEW,pascal_gro__brighton
+0,7,MO,6.2,Tavernier,FUL,marcus_tavernier__bournemouth
+0,8,MO,5.4,McGinn,IPS,john_mcginn__aston_villa
+0,9,A,5.4,Mbeumo,BRE,bryan_mbeumo__man_united
+0,10,A,5.5,Schade,MUN,kevin_schade__brentford
+0,11,A,5.1,Elanga,BHA,anthony_elanga__newcastle
+1,1,G,5.0,Sels,CHE,matz_sels__nottingham_forest
+1,2,DC,5.5,Tarkowski,LIV,james_tarkowski__everton
+1,3,DL,5.3,Calafiori,MCI,riccardo_calafiori__arsenal
+1,4,DC,5.8,Konsa,MCI,ezri_konsa__arsenal
+1,5,MO,5.7,Ødegaard,MCI,martin_degaard__arsenal
+1,6,MO,5.8,Iwobi,BOU,alex_iwobi__fulham
+1,7,MO,5.7,Gibbs-White,CHE,morgan_gibbs_white__nottingham_forest
+1,8,MO,5.2,Rayan,FUL,rayan__bournemouth
+1,9,A,6.3,João Pedro,NFO,joao_pedro__chelsea
+1,10,A,5.7,Jackson,IPS,nicolas_jackson__aston_villa
+1,11,A,5.0,Havertz,MCI,kai_havertz__arsenal
+2,1,G,5.2,Donnarumma,ARS,gianluigi_donnarumma__man_city
+2,2,DL,5.3,Robertson,SUN,andy_robertson__tottenham
+2,3,DL,4.8,O'Reilly,ARS,nico_o_reilly__man_city
+2,4,DL,5.2,Hume,TOT,trai_hume__sunderland
+2,5,MO,5.5,Ouattara,MUN,dango_ouattara__brentford
+2,6,MO,5.3,Pedro Neto,NFO,pedro_neto__chelsea
+2,7,MO,5.8,Palmer,NFO,cole_palmer__chelsea
+2,8,MD,5.0,Gravenberch,EVE,ryan_gravenberch__liverpool
+2,9,A,5.9,Isak,EVE,alexander_isak__liverpool
+2,10,A,4.7,Gyökeres,MCI,viktor_gyokeres__arsenal
+2,11,A,5.0,Solanke,SUN,dominic_solanke__tottenham
+3,1,G,5.6,Suzuki,IPS,zion_suzuki__aston_villa
+3,2,DC,5.3,van de Ven,SUN,micky_van_de_ven__tottenham
+3,3,DC,4.9,Thiaw,BHA,malick_thiaw__newcastle
+3,4,DC,5.1,Gvardiol,ARS,josko_gvardiol__man_city
+3,5,MO,5.7,Le Fée,TOT,enzo_le_fee__sunderland
+3,6,MO,5.6,Doku,ARS,jeremy_doku__man_city
+3,7,MO,6.1,Szoboszlai,EVE,dominik_szoboszlai__liverpool
+3,8,MO,5.5,Bobb,BOU,oscar_bobb__fulham
+3,9,A,6.2,Evanilson,FUL,evanilson__bournemouth
+3,10,A,5.5,Pino,HUL,yeremy_pino__crystal_palace
+3,11,A,4.5,García,BOU,gonzalo_garcia__fulham
+4,1,G,5.0,Lammens,BRE,senne_lammens__man_united
+4,2,DL,5.5,Lewis-Potter,MUN,keane_lewis_potter__brentford
+4,3,DC,5.6,Ajer,MUN,kristoffer_ajer__brentford
+4,4,DC,5.5,Vuskovic,NEW,luka_vuskovic__brighton
+4,5,MO,5.6,Barnes,BHA,harvey_barnes__newcastle
+4,6,MD,5.4,Tielemans,BRE,youri_tielemans__man_united
+4,7,MO,5.4,Matheus Cunha,BRE,matheus_cunha__man_united
+4,8,MD,5.6,Mainoo,BRE,kobbie_mainoo__man_united
+4,9,A,6.0,Haaland,ARS,erling_haaland__man_city
+4,10,A,5.0,Calvert-Lewin,COV,dominic_calvert_lewin__leeds
+4,11,A,5.5,Kostoulas,NEW,charalampos_kostoulas__brighton
+5,1,G,5.4,Pickford,LIV,jordan_pickford__everton
+5,2,DC,5.6,van Dijk,EVE,virgil_van_dijk__liverpool
+5,3,DC,5.5,Muharemovic,COV,tarik_muharemovic__leeds
+5,4,DC,5.3,Dunk,NEW,lewis_dunk__brighton
+5,5,MO,5.4,Foden,ARS,phil_foden__man_city
+5,6,MO,5.5,Ndiaye,ARS,iliman_ndiaye__man_city
+5,7,MD,5.7,Rice,MCI,declan_rice__arsenal
+5,8,MO,4.8,Wilson,COV,harry_wilson__leeds
+5,9,A,5.1,Rashford,BRE,marcus_rashford__man_united
+5,10,A,4.5,Fofana,TOT,malick_fofana__sunderland
+5,11,A,4.9,Sesko,BRE,benjamin_sesko__man_united
+6,1,G,5.7,Raya,MCI,david_raya__arsenal
+6,2,DL,5.7,Justin,COV,james_justin__leeds
+6,3,DL,5.0,Truffert,FUL,adrien_truffert__bournemouth
+6,4,DC,5.4,Egan,CRY,john_egan__hull_city
+6,5,MD,5.4,Garner,LIV,james_garner__everton
+6,6,MO,5.5,King,BOU,josh_king__fulham
+6,7,MO,6.1,Ayari,NEW,yasin_ayari__brighton
+6,8,MD,5.4,Xhaka,TOT,granit_xhaka__sunderland
+6,9,A,4.9,Igor Thiago,MUN,igor_thiago__brentford
+6,10,A,5.4,Okafor,COV,noah_okafor__leeds
+6,11,A,5.0,Brobbey,TOT,brian_brobbey__sunderland
+7,1,G,6.0,Trafford,COV,james_trafford__leeds
+7,2,DC,5.5,van Hecke,SUN,jan_paul_van_hecke__tottenham
+7,3,DL,5.1,Bogle,COV,jayden_bogle__leeds
+7,4,DL,4.8,Davis,AVL,leif_davis__ipswich_town
+7,5,MD,5.1,Fernández,ARS,enzo_fernandez__man_city
+7,6,MO,5.9,Semenyo,ARS,antoine_semenyo__man_city
+7,7,MO,5.9,Rogers,NFO,morgan_rogers__chelsea
+7,8,MO,5.5,Mac Allister,EVE,alexis_mac_allister__liverpool
+7,9,A,4.7,Delap,CHE,liam_delap__nottingham_forest
+7,10,A,4.9,Strand Larsen,HUL,j_rgen_strand_larsen__crystal_palace
+7,11,A,4.8,Kroupi,FUL,junior_kroupi__bournemouth
+8,1,G,5.9,Verbruggen,NEW,bart_verbruggen__brighton
+8,2,DC,5.5,Gabriel Magalhães,MCI,gabriel_magalhaes__arsenal
+8,3,DC,5.3,Ajayi,CRY,semi_ajayi__hull_city
+8,4,DL,5.2,Kadioglu,NEW,ferdi_kadioglu__brighton
+8,5,MD,5.3,Bruno Guimarães,MCI,bruno_guimaraes__arsenal
+8,6,MO,6.0,Wirtz,EVE,florian_wirtz__liverpool
+8,7,MO,5.8,Dewsbury-Hall,LIV,kiernan_dewsbury_hall__everton
+8,8,MO,5.5,Hinshelwood,NEW,jack_hinshelwood__brighton
+8,9,A,5.4,Barcola,EVE,bradley_barcola__liverpool
+8,10,A,5.0,Osula,BHA,william_osula__newcastle
+8,11,A,3.8,Mateta,HUL,jean_philippe_mateta__crystal_palace
+9,1,G,6.3,Tzolakis,CRY,konstantinos_tzolakis__hull_city
+9,2,DC,4.8,Rúben Dias,ARS,ruben_dias__man_city
+9,3,DL,5.0,Williams,CHE,neco_williams__nottingham_forest
+9,4,DC,5.3,Jacquet,EVE,jeremy_jacquet__liverpool
+9,5,MO,6.2,Gómez,NEW,diego_gomez__brighton
+9,6,MO,6.1,Saka,MCI,bukayo_saka__arsenal
+9,7,MO,6.1,Cherki,ARS,rayan_cherki__man_city
+9,8,MO,6.3,Belloumi,CRY,mohamed_belloumi__hull_city
+9,9,A,5.5,Barry,LIV,thierno_barry__everton
+9,10,A,5.8,Gakpo,EVE,cody_gakpo__liverpool
+9,11,A,5.3,McBurnie,CRY,oliver_mcburnie__hull_city

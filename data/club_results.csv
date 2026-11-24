@@ -99,16 +99,16 @@ mpg_championship_match_2645287,10,2026-11-08T14:00:00.000Z,Crystal Palace,Liverp
 mpg_championship_match_2645290,10,2026-11-08T14:00:00.000Z,Ipswich Town,Bournemouth,IPS,BOU,1,2,joue
 mpg_championship_match_2645294,10,2026-11-08T14:00:00.000Z,Sunderland,Chelsea,SUN,CHE,1,0,joue
 mpg_championship_match_2645292,10,2026-11-08T16:30:00.000Z,Man. United,Aston Villa,MUN,AVL,4,4,joue
-mpg_championship_match_2645302,11,2026-11-21T12:30:00.000Z,Man. City,Fulham,MCI,FUL,,,a_venir
-mpg_championship_match_2645295,11,2026-11-21T15:00:00.000Z,Bournemouth,Nottingham Forest,BOU,NFO,,,a_venir
-mpg_championship_match_2645296,11,2026-11-21T15:00:00.000Z,Aston Villa,Sunderland,AVL,SUN,,,a_venir
-mpg_championship_match_2645298,11,2026-11-21T15:00:00.000Z,Chelsea,Leeds,CHE,LEE,,,a_venir
-mpg_championship_match_2645299,11,2026-11-21T15:00:00.000Z,Coventry City,Crystal Palace,COV,CRY,,,a_venir
-mpg_championship_match_2645304,11,2026-11-21T15:00:00.000Z,Tottenham,Ipswich Town,TOT,IPS,,,a_venir
-mpg_championship_match_2645303,11,2026-11-21T17:30:00.000Z,Newcastle,Arsenal,NEW,ARS,,,a_venir
-mpg_championship_match_2645300,11,2026-11-22T14:00:00.000Z,Hull City,Brighton,HUL,BHA,,,a_venir
-mpg_championship_match_2645301,11,2026-11-22T16:30:00.000Z,Liverpool,Man. United,LIV,MUN,,,a_venir
-mpg_championship_match_2645297,11,2026-11-23T20:00:00.000Z,Brentford,Everton,BRE,EVE,,,a_venir
+mpg_championship_match_2645302,11,2026-11-21T12:30:00.000Z,Man. City,Fulham,MCI,FUL,1,1,joue
+mpg_championship_match_2645295,11,2026-11-21T15:00:00.000Z,Bournemouth,Nottingham Forest,BOU,NFO,2,0,joue
+mpg_championship_match_2645296,11,2026-11-21T15:00:00.000Z,Aston Villa,Sunderland,AVL,SUN,0,0,joue
+mpg_championship_match_2645298,11,2026-11-21T15:00:00.000Z,Chelsea,Leeds,CHE,LEE,1,4,joue
+mpg_championship_match_2645299,11,2026-11-21T15:00:00.000Z,Coventry City,Crystal Palace,COV,CRY,3,2,joue
+mpg_championship_match_2645304,11,2026-11-21T15:00:00.000Z,Tottenham,Ipswich Town,TOT,IPS,2,0,joue
+mpg_championship_match_2645303,11,2026-11-21T17:30:00.000Z,Newcastle,Arsenal,NEW,ARS,2,2,joue
+mpg_championship_match_2645300,11,2026-11-22T14:00:00.000Z,Hull City,Brighton,HUL,BHA,2,0,joue
+mpg_championship_match_2645301,11,2026-11-22T16:30:00.000Z,Liverpool,Man. United,LIV,MUN,4,0,joue
+mpg_championship_match_2645297,11,2026-11-23T20:00:00.000Z,Brentford,Everton,BRE,EVE,4,0,joue
 mpg_championship_match_2645313,12,2026-11-27T20:00:00.000Z,Nottingham Forest,Chelsea,NFO,CHE,,,a_venir
 mpg_championship_match_2645311,12,2026-11-28T15:00:00.000Z,Leeds,Coventry City,LEE,COV,,,a_venir
 mpg_championship_match_2645312,12,2026-11-28T15:00:00.000Z,Man. United,Brentford,MUN,BRE,,,a_venir

@@ -49,7 +49,7 @@ Les tests qui portent sur plusieurs saisons sont paramétrés sur `season_dirs()
 
 ## Les données
 
-Premier League, 10 équipes, 18 journées. L'export courant s'arrête après la J5 : 5 journées jouées, soit 25 matchs. Côté Premier League, 10 des 38 journées sont jouées.
+Premier League, 10 équipes, 18 journées. L'export courant s'arrête après la J6 : 6 journées jouées, soit 30 matchs. Côté Premier League, 11 des 38 journées sont jouées.
 
 Les fichiers par match grossissent à chaque journée et contiennent toujours tout l'historique. Le code ne fige aucun nombre de journées : la dernière journée MPG jouée est `fixtures.loc[fixtures.statut == "joue", "gw"].max()` (`League.last_gw`), la dernière journée PL jouée `club_results.loc[club_results.statut == "joue", "pl_gw"].max()` (`League.pl_last_gw`).
 
@@ -93,7 +93,7 @@ players.club ──< club_results (home_club / away_club) ──< pl_goals (pl_m
 | `pl_goals.csv` | 1 ligne par but de PL | Match, journée, club bénéficiaire, côté (`dom`/`ext`), type (`but`, `penalty`, `csc`, `annule_var`), minute, buteur et passeur (id MPG, nom, `player_key` vide si le joueur n'est dans aucune équipe de la ligue) |
 | `fpl_players.csv` | 1 ligne par joueur de la ligue (196) | Instantané Fantasy Premier League écrit par `build_fpl.py` : `element_id` FPL apparié au `player_key`, statut (`a`, `d`, `i`, `s`, `u`), `chance_next` (chance de jouer la prochaine journée, %), news, minutes, titularisations, buts, xG et xG/90 de la saison, prochaine journée PL, date de récupération |
 | `fpl_history.csv` | 1 ligne par joueur et par match FPL | Minutes, titularisation, buts, CSC et xG de chaque match de PL joué (`round` = journée PL) |
-| `player_match_notes.csv` | 1 ligne par joueur de la ligue et par journée de PL jouée (196 × 10) | Fiche joueur MPG : `pl_gw`, `pl_match_id` (vide si `pas_encore_au_club`), club à cette date, note MPG du match (vide s'il n'a pas joué), `a_joue`, `titulaire`, minutes, buts, passes, csc, `statut` (vide s'il a joué, `non_entre`, `blesse`, `suspendu`, `non_convoque`, `pas_encore_au_club`). Cartons toujours vides |
+| `player_match_notes.csv` | 1 ligne par joueur de la ligue et par journée de PL jouée (196 × 11) | Fiche joueur MPG : `pl_gw`, `pl_match_id` (vide si `pas_encore_au_club`), club à cette date, note MPG du match (vide s'il n'a pas joué), `a_joue`, `titulaire`, minutes, buts, passes, csc, `statut` (vide s'il a joué, `non_entre`, `blesse`, `suspendu`, `non_convoque`, `pas_encore_au_club`). Cartons toujours vides |
 
 Les deux fichiers FPL sont la source commune de l'app et du coach. Ils se régénèrent après chaque export MPG avec `uv run python build_fpl.py`, ou avec le bouton de rafraîchissement du coach, qui relance le même script (appariement forcé par `.coach/fpl_overrides.csv` s'il existe). Le script archive aussi `fpl_players.csv` dans `fpl_snapshots/fpl_players_PL<journée>.csv` : `chance_next` n'est plus consultable une fois la journée passée, et ces copies permettront de mesurer ce qu'elle apporte.
 
@@ -112,6 +112,8 @@ Les deux fichiers FPL sont la source commune de l'app et du coach. Ils se régé
 
 - **Deux notes différentes.** `note_avec_bonus` (lineups) est la note du match MPG, bonus inclus : sa moyenne par équipe retombe exactement sur la colonne « +B. » du site. `note_moy_reelle` (players) est la moyenne sur la saison réelle de Premier League.
 - **Valeur de l'effectif.** `valeur_effectif_meur` = somme des cotes + budget non dépensé. Seuls USPionvillePusitanos (5 M) et Tractou'pelle (25 M) n'ont pas dépensé tout leur budget. L'hypothèse d'un budget de 500 M vient des données, pas d'une règle lue sur le site.
+- **La valise à Nanard.** L'équipe qui la subit reçoit le montant affiché dans `bonus.effet` (+5 M) : il s'ajoute à son `budget_restant`, et la valeur de l'effectif du site le compte (Pictor FC et Nouvelle Energie à la J6). Le but annulé par la valise est un but `bloque` dans `goals.csv`, avec le nom du buteur affiché par MPG.
+- **Correction manuelle.** MPG compte Chuba Akpom « non entré » en PL J9 alors qu'il a une note (4,5) dans les compos MPG de la J4. `player_match_notes.csv` et `players.matchs_joues` sont corrigés à chaque export pour rester cohérents avec les compos.
 - **Rang dans `teams.csv`.** `forme` donne les 5 derniers résultats (V/N/D, ordre chronologique), probablement plafonnés par MPG. Pour une autre fenêtre, la recalculer depuis `fixtures.csv` (`mpg.standings`). `variation_rang` est la variation de place affichée sur le classement.
 - **Buts bloqués.** Un but `bloque` est affiché par MPG mais ne compte pas. Tout comptage passe par `League.scored_goals`, qui l'exclut ; le volet Matchs et calendrier de la page Ligue l'affiche avec la mention « bloqué ».
 - **Buts de Premier League.** Un `csc` est rangé du côté du club qui en profite, son buteur est le joueur adverse. `annule_var` ne compte pas. Les buts d'un joueur sont les lignes `but` et `penalty` avec son `buteur_player_key`, ses passes décisives les mêmes lignes avec son `passeur_player_key` (`mpg.premier_league.player_totals`).

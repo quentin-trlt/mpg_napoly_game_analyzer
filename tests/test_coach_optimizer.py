@@ -143,6 +143,17 @@ def test_opponent_modes(analysis, rec):
         assert [r.draws.line[x] for x in lu.starters] == list(slots_of(lu.formation))
 
 
+def test_optimal_views_are_mirrored(analysis, rec):
+    kw = dict(n_draws=600, seed=3, with_plan=False, typical_opponent=False)
+    mine = recommend(analysis, rec.team_id, **kw)
+    theirs = recommend(analysis, mine.opp_id, **kw)
+    assert theirs.opp_id == mine.team_id
+    assert list(theirs.proj["player_key"]) == list(mine.proj["player_key"])
+    a = mine.summary(mine.best, theirs.best)
+    b = theirs.summary(theirs.best, mine.best)
+    assert np.allclose([a["p_v"], a["p_n"], a["p_d"]], [b["p_d"], b["p_n"], b["p_v"]])
+
+
 def test_summary_probabilities(rec):
     s = rec.summary(rec.best)
     assert np.isclose(s["p_v"] + s["p_n"] + s["p_d"], 1)

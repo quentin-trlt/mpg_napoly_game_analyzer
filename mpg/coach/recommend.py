@@ -85,8 +85,11 @@ class Recommendation:
         row = self.gains_now[self.gains_now["bonus"] == key]
         return row["lineup"].iloc[0] if not row.empty else self.lineups[0]
 
-    def summary(self, lu: Lineup) -> dict[str, float]:
-        r = self.ev_holdout.result(lu)
+    def summary(self, lu: Lineup, opponent: Lineup | None = None) -> dict[str, float]:
+        """Valeurs de `lu` contre `opponent` (par défaut `self.opponent`) sur les tirages indépendants. `opponent` doit
+        être indexé sur les mêmes tirages, comme la recommandation de l'adversaire pour ce match."""
+        ev = self.ev_holdout if opponent is None else self.ev_holdout.against(opponent)
+        r = ev.result(lu)
         p = r.outcome_probs(self.home)
         return {
             "e_pts": r.expected_points(self.home),
@@ -94,7 +97,7 @@ class Recommendation:
             "p_v": p[0],
             "p_n": p[1],
             "p_d": p[2],
-            "e_pts_bonus_adverses": op.expected_vs_opponent_bonus(lu, self.ev_holdout, self.opp_probs),
+            "e_pts_bonus_adverses": op.expected_vs_opponent_bonus(lu, ev, self.opp_probs),
         }
 
     def name(self, row: int) -> str:

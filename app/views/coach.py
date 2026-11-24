@@ -210,9 +210,9 @@ def _player_editor(rec: Recommendation, team_id: int, overrides: dict[str, float
     return new
 
 
-def _freeze(rec: Recommendation, a: Analysis) -> Path:
+def _freeze(rec: Recommendation, a: Analysis, opponent: Lineup) -> Path:
     lu = rec.best
-    s = rec.summary(lu)
+    s = rec.summary(lu, opponent)
     payload = {
         "gele_le": datetime.now().isoformat(timespec="seconds"),
         "journee": rec.gw,
@@ -266,17 +266,24 @@ def render(a: Analysis) -> None:
             st.caption(f"Instantané FPL du {fpl_data['fetched_at'].astimezone():%d/%m à %H:%M}.")
 
     overrides = {k: float(v) for k, v in _read_json(OVERRIDES, {}).items()}
+    overrides_key = json.dumps(overrides, sort_keys=True)
     try:
-        rec = _recommend(signature, team_id, json.dumps(overrides, sort_keys=True), n_draws, typical, fpl_data)
+        rec = _recommend(signature, team_id, overrides_key, n_draws, typical, fpl_data)
     except ValueError as exc:
         st.info(str(exc))
         return
-    lu = rec.best
-    s = rec.summary(lu)
-    base = rec.summary(rec.lineups[0])
-    naive = rec.summary(naive_lineup(rec))
     opp_name = names[rec.opp_id]
     where = "à domicile" if rec.home else "à l'extérieur"
+    # mode optimal : l'adversaire est la recommandation faite de son point de vue (mêmes joueurs, mêmes tirages), ce
+    # qui donne les mêmes probabilités dans les deux vues du match
+    opp_rec = None
+    if not typical:
+        try:
+            opp_rec = _recommend(signature, rec.opp_id, overrides_key, n_draws, False, fpl_data)
+        except ValueError:
+            opp_rec = None
+        if opp_rec is not None and list(opp_rec.proj["player_key"]) != list(rec.proj["player_key"]):
+            opp_rec = None
 
     hero(
         f"Coach · J{rec.gw}",
@@ -284,20 +291,45 @@ def render(a: Analysis) -> None:
         f"Match {where}. Les remplacements tactiques sont figés au coup d'envoi du premier match de la journée "
         f"{rec.pl_gw} de Premier League, le {rec.deadline:%d/%m à %H:%M}.",
     )
+    with_bonus = opp_rec is None or st.toggle(
+        "Bonus prévus des deux équipes",
+        value=True,
+        help="Désactivé : les deux compos optimales s'affrontent sans aucun bonus.",
+    )
+    if opp_rec is None:
+        lu, opp_lu = rec.best, rec.opponent
+    elif with_bonus:
+        lu, opp_lu = rec.best, opp_rec.best
+    else:
+        lu, opp_lu = rec.lineups[0], opp_rec.lineups[0]
+    s = rec.summary(lu, opp_lu)
+    if opp_rec is None:
+        risk = f"{_fmt(s['e_pts_bonus_adverses'])} si l'adversaire pose ses bonus au rythme attendu"
+    elif with_bonus:
+        risk = f"{opp_name} pose : {_bonus_label(opp_rec, opp_rec.bonus)}"
+    else:
+        risk = "sans bonus des deux côtés"
+    base = rec.summary(rec.lineups[0], opp_lu)
+    naive = rec.summary(naive_lineup(rec), opp_lu)
+    if not rec.bonus:
+        bonus_sub = "Mieux vaut le garder"
+    elif with_bonus:
+        bonus_sub = f"+{_fmt(s['e_pts'] - base['e_pts'])} pt espéré"
+    else:
+        bonus_sub = "Non compté dans cet affichage"
     kpi_row(
         [
             {
                 "label": "Points espérés",
                 "value": _fmt(s["e_pts"]),
-                "sub": f"± {_fmt(1.96 * s['se'])} · {_fmt(s['e_pts_bonus_adverses'])} si l'adversaire pose ses bonus "
-                "au rythme attendu",
+                "sub": f"± {_fmt(1.96 * s['se'])} · {risk}",
                 "me": True,
             },
             {
                 "label": "Bonus conseillé",
                 "value": _bonus_label(rec, rec.bonus),
                 "small": True,
-                "sub": f"+{_fmt(s['e_pts'] - base['e_pts'])} pt espéré" if rec.bonus else "Mieux vaut le garder",
+                "sub": bonus_sub,
             },
             {
                 "label": "Gain de l'optimisation",
@@ -365,7 +397,7 @@ def render(a: Analysis) -> None:
         [
             {
                 "Formation": x.formation,
-                "Points espérés": (sx := rec.summary(x))["e_pts"],
+                "Points espérés": (sx := rec.summary(x, opp_lu))["e_pts"],
                 "Écart": sx["e_pts"] - base["e_pts"],
                 "P(victoire)": sx["p_v"],
                 "Tactiques": len(x.tactics),
@@ -386,14 +418,21 @@ def render(a: Analysis) -> None:
         },
     )
 
-    section(
-        f"Compo probable de {opp_name}",
-        "Sa dernière compo, corrigée des absences prévues par ses remplaçants habituels, sans remplacements "
-        "tactiques ni bonus."
-        if rec.typical_opponent
-        else "Supposée optimale contre ma compo de référence, sans bonus.",
-    )
-    st.html(_pitch(rec, rec.opponent))
+    if rec.typical_opponent:
+        opp_caption = (
+            "Sa dernière compo, corrigée des absences prévues par ses remplaçants habituels, sans remplacements "
+            "tactiques ni bonus."
+        )
+    elif opp_rec is None:
+        opp_caption = "Supposée optimale contre ma compo de référence, sans bonus."
+    else:
+        opp_caption = "Sa meilleure compo, calculée de son point de vue comme la tienne, tactiques comprises" + (
+            f", avec le bonus que son propre plan lui conseille : {_bonus_label(opp_rec, opp_rec.bonus)}."
+            if with_bonus
+            else ", sans bonus."
+        )
+    section(f"Compo probable de {opp_name}", opp_caption)
+    st.html(_pitch(rec, opp_lu))
 
     section(
         "Joueurs", "La surcharge remplace la probabilité de jouer calculée (sûr 100 %, probable 80 %, incertain 50 %)."
@@ -419,7 +458,7 @@ def render(a: Analysis) -> None:
     col_a, col_b = st.columns([1, 3])
     with col_a:
         if st.button("Geler la recommandation", icon=":material/lock:", width="stretch"):
-            path = _freeze(rec, a)
+            path = _freeze(rec, a, opp_rec.best if opp_rec is not None else rec.opponent)
             st.toast(f"Recommandation enregistrée : {path.name}")
     with col_b:
         frozen = sorted(STATE_DIR.glob("reco_J*.json")) if STATE_DIR.exists() else []
@@ -463,7 +502,9 @@ sont retirés.
 **Compo adverse.** La compo type reprend ses choix des journées passées, chacune pesant moitié moins tous les quarts
 de journée d'écart : la dernière décide, les précédentes départagent ses remplaçants. Chaque joueur est pondéré par
 sa probabilité de jouer. Rejouée sur trois saisons (`experiments/backtest_opponent.py`), elle retrouve 9,8 de ses 11
-titulaires réels contre 8,0 pour la compo optimale, et prédit l'issue du match au moins aussi bien.
+titulaires réels contre 8,0 pour la compo optimale, et prédit l'issue du match au moins aussi bien. La compo
+optimale est la recommandation faite du point de vue de l'adversaire (compo, tactiques et bonus de son propre plan),
+sur les mêmes tirages : les deux vues d'un match affichent les mêmes probabilités.
 
 **Limite connue.** Rejoué sur J1-J5 sans information postérieure (`experiments/backtest_engine.py`), le moteur
 simule 2,2 buts par équipe et par match contre 2,0 observés (2,3 avec les compos réellement posées), et prédit moins

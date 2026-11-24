@@ -95,7 +95,8 @@ def point_in_time_fpl(mapping: pd.DataFrame, hist: dict[int, pd.DataFrame], r: i
     return pd.DataFrame(rows), pd.Series(rate)
 
 
-def snapshot(a: Analysis, g: int, mapping: pd.DataFrame, hist: dict[int, pd.DataFrame]) -> Snapshot:
+def snapshot(a: Analysis, g: int, mapping: pd.DataFrame | None, hist: dict[int, pd.DataFrame]) -> Snapshot:
+    """Sans `mapping` (saisons passées, sans FPL), P(joue) vient du seul taux de jeu MPG d'avant la journée."""
     league = a.league
     r = pl_gw_for(league, g)
     kickoff = league.club_results.loc[league.club_results["pl_gw"] == r, "date"].min()
@@ -104,10 +105,12 @@ def snapshot(a: Analysis, g: int, mapping: pd.DataFrame, hist: dict[int, pd.Data
     cr.loc[later, "statut"] = "a_venir"
     cr.loc[later, ["home_score", "away_score"]] = pd.NA
 
-    fpl_pit, rate = point_in_time_fpl(mapping, hist, r)
     players = pit.players_before(league, g)
     players = league.players.copy() if players is None else players
-    players["taux_jeu"] = players["player_key"].map(rate).fillna(rate.median())
+    fpl_pit = None
+    if mapping is not None:
+        fpl_pit, rate = point_in_time_fpl(mapping, hist, r)
+        players["taux_jeu"] = players["player_key"].map(rate).fillna(rate.median())
     players["statut_performance"] = "ok"
     sub_league = dataclasses.replace(
         league,
@@ -133,7 +136,11 @@ def snapshot(a: Analysis, g: int, mapping: pd.DataFrame, hist: dict[int, pd.Data
     )
     model = pr.fit_note_model(sub, notes=notes) if notes is not None or g >= 3 else PRIOR_MODEL
     strength = pr.fit_club_strength(cr)
-    play_model = pt.fit_play_model(fpl_pit, hist, players.set_index("player_key")["taux_jeu"], r)
+    play_model = (
+        pt.fit_play_model(fpl_pit, hist, players.set_index("player_key")["taux_jeu"], r)
+        if mapping is not None
+        else None
+    )
     proj = pr.project_players(sub, sorted(league.team_names), r, model, strength, fpl_pit, hist, play_model=play_model)
     return Snapshot(g, r, sub, fpl_pit, hist, model, strength, play_model, proj)
 

@@ -3,7 +3,8 @@
 Pour chaque match restant et chaque bonus, le gain est la hausse des points espérés qu'il apporte. Le match à venir
 utilise la compo optimisée ; les suivants une compo projetée (meilleure formation de départ, capitaine optimisé,
 sans remplacements tactiques) et des disponibilités génériques, puisque les blessures au-delà de deux journées
-sont inconnues. L'affectation (un bonus par match, dans la limite du stock) est un problème d'affectation linéaire.
+sont inconnues. L'adversaire y aligne sa compo type, ou sa compo projetée de la même façon contre mon 11 naïf.
+L'affectation (un bonus par match, dans la limite du stock) est un problème d'affectation linéaire.
 Le bonus recommandé pour le prochain match est celui que l'affectation lui attribue : un bonus n'est posé
 maintenant que si ce match fait partie de ses meilleures occasions.
 """
@@ -16,6 +17,7 @@ from mpg.analysis import Analysis
 from mpg.coach import optimizer as op
 from mpg.coach.projection import ClubStrength, NoteModel, project_players, sample_draws
 from mpg.coach.rules import FORMATIONS
+from mpg.coach.typical import typical_lineup, usage
 from mpg.coaching import bonus_key
 from mpg.playing_time import PlayModel
 from mpg.premier_league import pl_gw_for
@@ -66,6 +68,7 @@ def future_gains(
     play_model: PlayModel | None = None,
     seed: int = 0,
     n_draws: int = FUTURE_DRAWS,
+    typical_opponent: bool = True,
 ) -> pd.DataFrame:
     """Gain de chaque bonus sur chaque match après `next_gw` (une ligne par match et par bonus)."""
     rows_out = []
@@ -91,12 +94,15 @@ def future_gains(
         d = sample_draws(proj, model, n_draws, seed=seed + int(m.gw))
         mine = [d.row(k) for k in proj.loc[proj["team_id"] == team_id, "player_key"]]
         theirs = [d.row(k) for k in proj.loc[proj["team_id"] == opp, "player_key"]]
-        value = op.contribution(d)
-        my_naive = max(
-            (lu for f in FORMATIONS if (lu := op.initial_lineup(mine, d, f, value)) is not None),
-            key=lambda lu: sum(value[r] for r in lu.starters),
-        )
-        opp_lu = _projected_lineup(theirs, op.Evaluator(d, my_naive, home=not m.domicile))
+        if typical_opponent:
+            opp_lu = typical_lineup(theirs, d, usage(a, opp, next_gw))
+        else:
+            value = op.contribution(d)
+            my_naive = max(
+                (lu for f in FORMATIONS if (lu := op.initial_lineup(mine, d, f, value)) is not None),
+                key=lambda lu: sum(value[r] for r in lu.starters),
+            )
+            opp_lu = _projected_lineup(theirs, op.Evaluator(d, my_naive, home=not m.domicile))
         ev = op.Evaluator(d, opp_lu, home=bool(m.domicile))
         my_lu = _projected_lineup(mine, ev)
         probs = op.opponent_bonus_probs(remaining, opp, n_left - i - 1)

@@ -134,6 +134,15 @@ def test_recommendation_is_reproducible(analysis, rec):
     assert again.lineups[0] == rec.lineups[0]
 
 
+def test_opponent_modes(analysis, rec):
+    theirs = set(rec.proj.index[rec.proj["team_id"] == rec.opp_id])
+    assert rec.typical_opponent and not rec.opponent.tactics
+    optimal = recommend(analysis, rec.team_id, n_draws=600, seed=3, with_plan=False, typical_opponent=False)
+    for lu, r in ((rec.opponent, rec), (optimal.opponent, optimal)):
+        assert set(lu.starters) <= theirs
+        assert [r.draws.line[x] for x in lu.starters] == list(slots_of(lu.formation))
+
+
 def test_summary_probabilities(rec):
     s = rec.summary(rec.best)
     assert np.isclose(s["p_v"] + s["p_n"] + s["p_d"], 1)

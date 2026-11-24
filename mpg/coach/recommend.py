@@ -3,6 +3,9 @@
 Les compos sont choisies sur un premier jeu de tirages et toutes les valeurs affichées (points espérés, gains des
 bonus, probabilités) sont recalculées sur un second jeu indépendant, pour ne pas surestimer le gain des choix
 retenus parmi beaucoup de candidats.
+
+L'adversaire aligne par défaut sa compo type (`mpg.coach.typical`), sinon la compo que le moteur juge optimale contre
+mon 11 naïf.
 """
 
 from dataclasses import dataclass
@@ -23,6 +26,7 @@ from mpg.coach.projection import (
     sample_draws,
 )
 from mpg.coach.rules import Draws, Lineup, slots_of
+from mpg.coach.typical import typical_lineup, usage
 from mpg.forecast.bonus import MCDO, MIROIR
 from mpg.playing_time import PlayModel, fit_play_model
 from mpg.premier_league import pl_gw_for
@@ -55,6 +59,7 @@ class Recommendation:
     holdout: Draws
     lineups: list[Lineup]
     opponent: Lineup
+    typical_opponent: bool
     ev: op.Evaluator
     ev_holdout: op.Evaluator
     opp_probs: dict[str, float]
@@ -143,6 +148,7 @@ def recommend(
     seed: int = 0,
     future_draws: int = FUTURE_DRAWS,
     with_plan: bool = True,
+    typical_opponent: bool = True,
 ) -> Recommendation:
     league = a.league
     gw, opp, home = next_match(a, team_id)
@@ -160,13 +166,16 @@ def recommend(
     mine = [draws.row(k) for k in proj.loc[proj["team_id"] == team_id, "player_key"]]
     theirs = [draws.row(k) for k in proj.loc[proj["team_id"] == opp, "player_key"]]
 
-    value = op.contribution(draws)
-    naive = max(
-        (lu for f in op.FORMATIONS if (lu := op.initial_lineup(mine, draws, f, value)) is not None),
-        key=lambda lu: sum(value[r] for r in lu.starters),
-    )
-    opp_lu = op.optimise(theirs, op.Evaluator(draws, naive, home=not home))[0]
-    opp_lu = op.prune_tactics(opp_lu, op.Evaluator(holdout, naive, home=not home))
+    if typical_opponent:
+        opp_lu = typical_lineup(theirs, draws, usage(a, opp, gw))
+    else:
+        value = op.contribution(draws)
+        naive = max(
+            (lu for f in op.FORMATIONS if (lu := op.initial_lineup(mine, draws, f, value)) is not None),
+            key=lambda lu: sum(value[r] for r in lu.starters),
+        )
+        opp_lu = op.optimise(theirs, op.Evaluator(draws, naive, home=not home))[0]
+        opp_lu = op.prune_tactics(opp_lu, op.Evaluator(holdout, naive, home=not home))
 
     ev = op.Evaluator(draws, opp_lu, home=home)
     ev_h = op.Evaluator(holdout, opp_lu, home=home)
@@ -188,7 +197,18 @@ def recommend(
 
     if with_plan and stock:
         future = future_gains(
-            a, team_id, gw, model, strength, fpl_players, stock, fpl_history, play_model, seed, future_draws
+            a,
+            team_id,
+            gw,
+            model,
+            strength,
+            fpl_players,
+            stock,
+            fpl_history,
+            play_model,
+            seed,
+            future_draws,
+            typical_opponent,
         )
         table = pd.concat([gains_now[["gw", "bonus", "gain"]], future[["gw", "bonus", "gain"]]], ignore_index=True)
         by_bonus = table.pivot_table(index="gw", columns="bonus", values="gain")
@@ -212,6 +232,7 @@ def recommend(
         holdout=holdout,
         lineups=lineups,
         opponent=opp_lu,
+        typical_opponent=typical_opponent,
         ev=ev,
         ev_holdout=ev_h,
         opp_probs=probs,

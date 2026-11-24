@@ -26,6 +26,7 @@ OVERRIDES = "overrides.json"
 FPL_OVERRIDES = "fpl_overrides.csv"
 AUTO = "auto"
 DRAW_CHOICES = (2000, 4000, 8000)
+OPPONENT_CHOICES = {True: "Compo type", False: "Compo optimale"}
 LINE_ORDER = ("A", "M", "D", "G")
 
 
@@ -59,8 +60,18 @@ def _load_fpl(signature: tuple) -> dict:
 
 
 @st.cache_resource(show_spinner="Optimisation de la compo et du plan de bonus…", max_entries=6)
-def _recommend(signature: tuple, team_id: int, overrides: str, n_draws: int, _fpl: dict) -> Recommendation:
-    return recommend(get_analysis(), team_id, _fpl["players"], _fpl["history"], json.loads(overrides), n_draws=n_draws)
+def _recommend(
+    signature: tuple, team_id: int, overrides: str, n_draws: int, typical: bool, _fpl: dict
+) -> Recommendation:
+    return recommend(
+        get_analysis(),
+        team_id,
+        _fpl["players"],
+        _fpl["history"],
+        json.loads(overrides),
+        n_draws=n_draws,
+        typical_opponent=typical,
+    )
 
 
 def _fmt(x: float, digits: int = 2) -> str:
@@ -213,6 +224,7 @@ def _freeze(rec: Recommendation, a: Analysis) -> Path:
         "tactiques": rec.tactics_table(lu).to_dict(orient="records"),
         "capitaine": rec.name(lu.captain) if lu.captain is not None else None,
         "bonus": _bonus_label(rec, lu.bonus),
+        "compo_adverse": OPPONENT_CHOICES[rec.typical_opponent],
         "cible_mcdo": rec.name(lu.mcdo_target) if lu.mcdo_target is not None else None,
         "points_esperes": round(s["e_pts"], 3),
         "p_victoire": round(float(s["p_v"]), 3),
@@ -227,6 +239,14 @@ def render(a: Analysis) -> None:
     with st.sidebar:
         team_id = _team_selector(a)
         n_draws = st.select_slider("Tirages Monte Carlo", options=DRAW_CHOICES, value=4000)
+        typical = st.radio(
+            "Compo adverse",
+            options=list(OPPONENT_CHOICES),
+            format_func=OPPONENT_CHOICES.get,
+            horizontal=True,
+            help="Type : sa dernière compo, corrigée des absences prévues. Optimale : la meilleure compo possible "
+            "selon le moteur, que les adversaires alignent rarement.",
+        )
         if st.button("Rafraîchir les données FPL", icon=":material/refresh:", width="stretch"):
             try:
                 with st.spinner("Téléchargement des données FPL (environ 200 joueurs)…"):
@@ -247,7 +267,7 @@ def render(a: Analysis) -> None:
 
     overrides = {k: float(v) for k, v in _read_json(OVERRIDES, {}).items()}
     try:
-        rec = _recommend(signature, team_id, json.dumps(overrides, sort_keys=True), n_draws, fpl_data)
+        rec = _recommend(signature, team_id, json.dumps(overrides, sort_keys=True), n_draws, typical, fpl_data)
     except ValueError as exc:
         st.info(str(exc))
         return
@@ -327,8 +347,11 @@ def render(a: Analysis) -> None:
     )
     if TONTON in rec.stock:
         st.caption(
-            "Tonton Pat ne vaut que ce que rapportent les remplacements tactiques adverses : la compo adverse projetée "
-            "n'en prévoit qu'au prochain match, son gain est donc nul ou presque sur les suivants."
+            "Tonton Pat ne vaut que ce que rapportent les remplacements tactiques adverses : la compo type n'en prévoit "
+            "aucun, son gain est donc nul. Passe en compo optimale pour l'estimer."
+            if rec.typical_opponent
+            else "Tonton Pat ne vaut que ce que rapportent les remplacements tactiques adverses : la compo adverse "
+            "projetée n'en prévoit qu'au prochain match, son gain est donc nul ou presque sur les suivants."
         )
     if MIROIR in rec.stock and rec.opp_probs:
         probs = ", ".join(
@@ -363,7 +386,13 @@ def render(a: Analysis) -> None:
         },
     )
 
-    section(f"Compo probable de {opp_name}", "Supposée optimale contre ma compo de référence, sans bonus.")
+    section(
+        f"Compo probable de {opp_name}",
+        "Sa dernière compo, corrigée des absences prévues par ses remplaçants habituels, sans remplacements "
+        "tactiques ni bonus."
+        if rec.typical_opponent
+        else "Supposée optimale contre ma compo de référence, sans bonus.",
+    )
     st.html(_pitch(rec, rec.opponent))
 
     section(
@@ -430,6 +459,11 @@ difficulté de l'adversaire (Poisson attaque/défense sur les résultats de PL).
 **Optimisation.** {rec.draws.n} tirages communs à toutes les compos ; toutes les valeurs affichées sont recalculées
 sur {rec.holdout.n} autres tirages. Les remplacements tactiques qui ne rapportent rien sur ces tirages indépendants
 sont retirés.
+
+**Compo adverse.** La compo type reprend ses choix des journées passées, chacune pesant moitié moins tous les quarts
+de journée d'écart : la dernière décide, les précédentes départagent ses remplaçants. Chaque joueur est pondéré par
+sa probabilité de jouer. Rejouée sur trois saisons (`experiments/backtest_opponent.py`), elle retrouve 9,8 de ses 11
+titulaires réels contre 8,0 pour la compo optimale, et prédit l'issue du match au moins aussi bien.
 
 **Limite connue.** Rejoué sur J1-J5 sans information postérieure (`experiments/backtest_engine.py`), le moteur
 simule 2,2 buts par équipe et par match contre 2,0 observés (2,3 avec les compos réellement posées), et prédit moins

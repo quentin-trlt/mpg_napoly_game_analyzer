@@ -22,7 +22,9 @@ from mpg.coaching import bonus_key
 from mpg.playing_time import PlayModel
 from mpg.premier_league import pl_gw_for
 
-FUTURE_DRAWS = 1500
+# mesuré le 24/11/2026 sur le prochain match des 10 équipes : à 6000, la perte du plan est divisée par deux par
+# rapport à 1500, pour ~1 s de plus
+FUTURE_DRAWS = 6000
 UNAVAILABLE_GAIN = -1e6
 
 

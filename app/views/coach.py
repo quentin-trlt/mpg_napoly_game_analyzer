@@ -25,7 +25,6 @@ SETTINGS = "settings.json"
 OVERRIDES = "overrides.json"
 FPL_OVERRIDES = "fpl_overrides.csv"
 AUTO = "auto"
-DRAW_CHOICES = (2000, 4000, 8000)
 OPPONENT_CHOICES = {True: "Compo type", False: "Compo optimale"}
 LINE_ORDER = ("A", "M", "D", "G")
 
@@ -60,17 +59,9 @@ def _load_fpl(signature: tuple) -> dict:
 
 
 @st.cache_resource(show_spinner="Optimisation de la compo et du plan de bonus…", max_entries=6)
-def _recommend(
-    signature: tuple, team_id: int, overrides: str, n_draws: int, typical: bool, _fpl: dict
-) -> Recommendation:
+def _recommend(signature: tuple, team_id: int, overrides: str, typical: bool, _fpl: dict) -> Recommendation:
     return recommend(
-        get_analysis(),
-        team_id,
-        _fpl["players"],
-        _fpl["history"],
-        json.loads(overrides),
-        n_draws=n_draws,
-        typical_opponent=typical,
+        get_analysis(), team_id, _fpl["players"], _fpl["history"], json.loads(overrides), typical_opponent=typical
     )
 
 
@@ -238,7 +229,6 @@ def render(a: Analysis) -> None:
     names = a.league.team_names
     with st.sidebar:
         team_id = _team_selector(a)
-        n_draws = st.select_slider("Tirages Monte Carlo", options=DRAW_CHOICES, value=4000)
         typical = st.radio(
             "Compo adverse",
             options=list(OPPONENT_CHOICES),
@@ -268,7 +258,7 @@ def render(a: Analysis) -> None:
     overrides = {k: float(v) for k, v in _read_json(OVERRIDES, {}).items()}
     overrides_key = json.dumps(overrides, sort_keys=True)
     try:
-        rec = _recommend(signature, team_id, overrides_key, n_draws, typical, fpl_data)
+        rec = _recommend(signature, team_id, overrides_key, typical, fpl_data)
     except ValueError as exc:
         st.info(str(exc))
         return
@@ -279,7 +269,7 @@ def render(a: Analysis) -> None:
     opp_rec = None
     if not typical:
         try:
-            opp_rec = _recommend(signature, rec.opp_id, overrides_key, n_draws, False, fpl_data)
+            opp_rec = _recommend(signature, rec.opp_id, overrides_key, False, fpl_data)
         except ValueError:
             opp_rec = None
         if opp_rec is not None and list(opp_rec.proj["player_key"]) != list(rec.proj["player_key"]):
